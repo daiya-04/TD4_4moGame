@@ -6,7 +6,7 @@ on:
       - master
 env:
   # リポジトリのルートディレクトリを基点としたソリューションファイルのパス
-  SOLUTION_FILE_PATH: DirectXGame/DaiEngine.sln
+  SOLUTION_FILE_PATH: DirectXGame/TD4_4moGame.sln
   # Visual Studio の構成(Debug / Release)
   CONFIGURATION: Release
 jobs:
