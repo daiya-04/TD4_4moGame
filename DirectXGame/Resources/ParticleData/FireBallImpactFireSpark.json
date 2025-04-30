@@ -1,0 +1,88 @@
+{
+    "FireBallImpactFireSpark": {
+        "Emitter": {
+            "BillboardType": 0,
+            "Color": [
+                0.7107843160629272,
+                0.16017241775989532,
+                0.017421172931790352,
+                0.0
+            ],
+            "Count": 300,
+            "EmitterType": 2,
+            "Frequency": 0.0,
+            "LifeTime": 1.5,
+            "Radius": 2.0,
+            "Rotate": 0.0,
+            "Scale": 0.05999999865889549,
+            "Size": [
+                4.0,
+                4.0,
+                4.0
+            ],
+            "Speed": 0.20000000298023224,
+            "Translate": [
+                0.0,
+                0.0,
+                0.0
+            ]
+        },
+        "OverLifeTime": {
+            "Gravity": 0.0,
+            "Velocity": [
+                0.0,
+                6.0,
+                0.0
+            ],
+            "density": 0.5,
+            "endAlpha": 0.0,
+            "endColor": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "endScale": 0.0,
+            "endSpeed": 0.0,
+            "endVelocity": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "isAlpha": 1,
+            "isColor": 0,
+            "isConstantVelocity": 0,
+            "isNoise": 1,
+            "isRoring": 0,
+            "isScale": 0,
+            "isTransSpeed": 0,
+            "isTransVelocity": 0,
+            "maxRoringSpeed": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "midAlpha": 1.0,
+            "minRoringSpeed": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "startAlpha": 1.0,
+            "startColor": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "startScale": 0.20000000298023224,
+            "startSpeed": 0.0,
+            "startVelocity": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "strength": 0.20000000298023224
+        },
+        "isLoop": false,
+        "textureName": "circle.png"
+    }
+}
