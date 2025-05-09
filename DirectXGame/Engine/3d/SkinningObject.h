@@ -67,7 +67,7 @@ namespace DaiEngine {
 
 		void SetParent(const WorldTransform* parent) { worldTransform_.parent_ = parent; }
 
-		void SetModelHandle(std::shared_ptr<Model> model) { model_ = model; }
+		void SetModel(std::shared_ptr<Model> model) { model_ = model; }
 
 		void SetSkinCluster(SkinCluster* skinCluster) { skinCluster_ = skinCluster; }
 

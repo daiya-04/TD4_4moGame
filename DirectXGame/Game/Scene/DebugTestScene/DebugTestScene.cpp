@@ -89,7 +89,7 @@ void DebugTestScene::Update() {
 #endif // _DEBUG
 	
 	if (DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-		human_->SetModelHandle(sneakModel_);
+		human_->SetModel(sneakModel_);
 		animation_ = DaiEngine::AnimationManager::Load(sneakModel_->name_);
 		skeleton_ = DaiEngine::Skeleton::Create(sneakModel_->rootNode_);
 		skinCluster_.Create(skeleton_, sneakModel_);
@@ -97,7 +97,7 @@ void DebugTestScene::Update() {
 		animation_.SetAnimationSpeed(1.0f / 30.0f);
 	}
 	else if(DaiEngine::Input::GetInstance()->ReleaseKey(DIK_SPACE)){
-		human_->SetModelHandle(humanModel_);
+		human_->SetModel(humanModel_);
 		animation_ = DaiEngine::AnimationManager::Load(standingModel_->name_);
 		skeleton_ = DaiEngine::Skeleton::Create(standingModel_->rootNode_);
 		skinCluster_.Create(skeleton_, standingModel_);

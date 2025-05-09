@@ -82,7 +82,7 @@ namespace DaiEngine {
 
 		void SetParent(const WorldTransform* parent) { worldTransform_.parent_ = parent; }
 
-		void SetModelHandle(std::shared_ptr<Model> model) { model_ = model; }
+		void SetModel(std::shared_ptr<Model> model) { model_ = model; }
 
 		Vector3 GetWorldPos() const;
 		std::shared_ptr<Model> GetModel() const { return model_; }

@@ -26,6 +26,18 @@ namespace Object3dParam {
 	};
 }
 
+namespace InstancingObject3dParam {
+	enum class RootParameter {
+		kMaterial,
+		kObjectGPU,
+		kCamera,
+		kTexture,
+		kDirectionLight,
+
+		kParamNum,
+	};
+}
+
 namespace SkinningObjParam {
 	enum class RootParameter {
 		kMaterial,

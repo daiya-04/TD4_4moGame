@@ -524,6 +524,12 @@
     <ClCompile Include="Game\GameTime.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\3d\InstancingObject3d.cpp">
+      <Filter>Engine\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GraphicsPipeline\InstancingObject3dGraphicsPipeline.cpp">
+      <Filter>Engine\GraphicsPipeline</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -903,6 +909,12 @@
     </ClInclude>
     <ClInclude Include="Game\GameTime.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\3d\InstancingObject3d.h">
+      <Filter>Engine\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\GraphicsPipeline\InstancingObject3dGraphicsPipeline.h">
+      <Filter>Engine\GraphicsPipeline</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

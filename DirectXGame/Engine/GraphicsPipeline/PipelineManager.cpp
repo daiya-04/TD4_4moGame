@@ -10,6 +10,7 @@
 #include "ParticleEmitComputePipeline.h"
 #include "ParticleUpdateComputePipeline.h"
 #include "ParticleGraphicsPipeline.h"
+#include "InstancingObject3dGraphicsPipeline.h"
 
 namespace DaiEngine {
 	PipelineManager* PipelineManager::GetInstance() {
@@ -28,6 +29,9 @@ namespace DaiEngine {
 		//3Dオブジェクト
 		graphicsPipelines_["Object3d"] = std::make_unique<Object3dGraphicsPipeline>();
 		graphicsPipelines_["Object3d"]->Init();
+		//
+		graphicsPipelines_["InstancingObject3d"] = std::make_unique<InstancingObject3dGraphicsPipeline>();
+		graphicsPipelines_["InstancingObject3d"]->Init();
 		//スキニングオブジェクト
 		graphicsPipelines_["Skinning"] = std::make_unique<SkinningGraphicsPipeline>();
 		graphicsPipelines_["Skinning"]->Init();
