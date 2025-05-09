@@ -27,8 +27,9 @@
 #include "SpotLight.h"
 #include "SkyBox.h"
 
-#pragma region プレイヤ
-#include"GameObject.h"
+#pragma region キクチ
+#include"Player/Player.h"
+#include"GlobalVariable/Manager/GlobalVaribleManager.h"
 #pragma endregion
 
 
@@ -94,8 +95,12 @@ private:
 	DaiEngine::SpotLight spotLight_;
 
 private://**キクチ
+	
+	//デバッグパラメータマネージャ
+	GlobalVariableManager* globalVariableManager_ = nullptr;
 
-	std::unique_ptr<GameObject>obj_;
+	//プレイヤー
+	std::unique_ptr<Player> player_ = nullptr;
 
 };
 

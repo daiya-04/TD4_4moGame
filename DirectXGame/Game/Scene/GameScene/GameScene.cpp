@@ -13,7 +13,11 @@
 #include <algorithm>
 #include "ColliderManager.h"
 
+
+
+
 GameScene::GameScene() {
+	globalVariableManager_ = globalVariableManager_->GetInstance();
 }
 
 GameScene::~GameScene() {
@@ -33,12 +37,17 @@ void GameScene::Init(){
 
 	///
 
-	GameObject::GetCamera(&camera_);
-	obj_ = std::make_unique<GameObject>();
 
+
+	GameObject::GetCamera(&camera_);
+	//プレイヤー生成
+	player_ = std::make_unique<Player>();
 
 	///
 
+	//全ての初期化の後に処理
+	globalVariableManager_->LoadAllSaveData();
+	globalVariableManager_->SetLoadAllData();
 }
 
 void GameScene::Update() {
@@ -66,7 +75,8 @@ void GameScene::Update() {
 	camera_.UpdateViewMatrix();
 	camera_.UpdateCameraPos();
 	
-	obj_->Update();
+	//プレイヤー更新
+	player_->Update();
 }
 
 void GameScene::DrawBackGround(){
@@ -77,8 +87,8 @@ void GameScene::DrawBackGround(){
 
 void GameScene::DrawModel(){
 
-	obj_->Draw();
-
+	//プレイヤー描画
+	player_->Draw();
 }
 
 void GameScene::DrawParticleModel(){
@@ -108,7 +118,8 @@ void GameScene::DrawRenderTexture() {
 void GameScene::DebugGUI(){
 #ifdef _DEBUG
   
-	
+	//デバッグマネージャの更新
+	globalVariableManager_->Update();
 
 
 #endif // _DEBUG

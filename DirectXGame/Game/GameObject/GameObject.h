@@ -11,6 +11,10 @@ protected:
 
 public:
 
+	DaiEngine::WorldTransform* world_=nullptr;
+
+public:
+
 	/// <summary>
 	/// カメラのポインタ取得
 	/// </summary>
@@ -18,17 +22,26 @@ public:
 	static void GetCamera(DaiEngine::Camera* camera) { camera_ = camera; }
 
 
-	GameObject(std::string modelName);
+	GameObject()=default;
+	~GameObject() = default;
+
+	void Init(const std::string& modelName);
 
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update();
+	virtual void Update();
 
 	/// <summary>
 	/// 描画
 	/// </summary>
-	void Draw();
+	virtual void Draw();
+
+	/// <summary>
+	/// ワールド座標取得
+	/// </summary>
+	/// <returns></returns>
+	DaiEngine::WorldTransform GetWorld() {return model_->worldTransform_; }
 
 private:
 
