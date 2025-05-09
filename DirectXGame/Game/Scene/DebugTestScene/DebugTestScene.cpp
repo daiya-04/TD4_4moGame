@@ -55,21 +55,12 @@ void DebugTestScene::Init() {
 	postEffect_ = PostEffect::GetInstance();
 	postEffect_->Init();
 
-	burnScars_.reset(BurnScar::Create(burnScarsTex_));
-	burnScars_->EffectStart(Vector3());
-
-	iceScar_.reset(IceScar::Create(burnScarsTex_));
-	iceScar_->EffectStart(Vector3());
-
 	human_->worldTransform_.rotation_.y = 3.14f;
 	human_->worldTransform_.translation_.z = 10.0f;
 
 	ParticleEditor::GetInstance()->Init();
 
 	effect_ = ParticleManager::Load("FireBallImpact");
-
-	gameTime_ = std::make_unique<GameTime>();
-	gameTime_->Init();
 	
 }
 
@@ -113,9 +104,6 @@ void DebugTestScene::Update() {
 
 	ParticleEditor::GetInstance()->Update();
 
-	gameTime_->Update();
-	gameTime_->PrepareTime();
-
 	human_->worldTransform_.UpdateMatrix();
 	animation_.Play(skeleton_);
 	
@@ -157,12 +145,6 @@ void DebugTestScene::DrawModel() {
 	//ShapesDraw::DrawPlane(Shapes::Plane({ 0.0f,0.0f,1.0f }, 10.0f), camera_);
 	//ShapesDraw::DrawAABB(Shapes::AABB({ -1.0,-1.0,-1.0f }, { 1.0f,1.0f,1.0f }), camera_);
 
-	BurnScar::preDraw();
-	//burnScars_->Draw(camera_);
-
-	IceScar::preDraw();
-	//iceScar_->Draw(camera_);
-
 }
 
 void DebugTestScene::DrawParticleModel() {
@@ -187,7 +169,7 @@ void DebugTestScene::DrawUI() {
 
 	DaiEngine::Sprite::preDraw();
 	sprite_->Draw();
-	gameTime_->Draw();
+	
 
 }
 

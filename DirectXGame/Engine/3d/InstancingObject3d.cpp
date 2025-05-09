@@ -30,9 +30,10 @@ namespace DaiEngine {
 		D3D12_SHADER_RESOURCE_VIEW_DESC instancingSrvDesc{};
 		instancingSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
 		instancingSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+		instancingSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
 		instancingSrvDesc.Buffer.FirstElement = 0;
 		instancingSrvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
-		instancingSrvDesc.Buffer.NumElements = drawNum_;
+		instancingSrvDesc.Buffer.NumElements = drawMaxNum_;
 		instancingSrvDesc.Buffer.StructureByteStride = sizeof(ObjectGPU);
 		UINT handleSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 		srvHandle_.first = DirectXCommon::GetInstance()->GetCPUDescriptorHandle(DirectXCommon::GetInstance()->GetSrvHeap(), handleSize, DirectXCommon::GetInstance()->GetSrvHeapCount());

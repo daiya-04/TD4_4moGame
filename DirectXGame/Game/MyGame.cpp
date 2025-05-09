@@ -7,8 +7,6 @@
 #include "Object3d.h"
 #include "Particle.h"
 #include "SceneFactory.h"
-#include "BurnScar.h"
-#include "IceScar.h"
 
 void MyGame::Init(){
 	//エンジン層の初期化
@@ -18,10 +16,6 @@ void MyGame::Init(){
 	sceneFactory_ = std::make_unique<SceneFactory>();
 	DaiEngine::SceneManager::GetInstance()->SetSceneFactory(sceneFactory_.get());
 	DaiEngine::SceneManager::GetInstance()->Init();
-
-	//ゲーム固有のパイプラインの生成
-	BurnScar::StaticInit(DaiEngine::DirectXCommon::GetInstance()->GetDevice(), DaiEngine::DirectXCommon::GetInstance()->GetCommandList());
-	IceScar::StaticInit(DaiEngine::DirectXCommon::GetInstance()->GetDevice(), DaiEngine::DirectXCommon::GetInstance()->GetCommandList());
 
 }
 

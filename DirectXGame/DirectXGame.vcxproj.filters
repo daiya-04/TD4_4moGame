@@ -59,9 +59,6 @@
     <Filter Include="Engine\Easing">
       <UniqueIdentifier>{4bd20e2c-9833-48f9-b7e3-ec84d2465f35}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Charactor">
-      <UniqueIdentifier>{f0ddd313-3b86-42d0-a5c8-921747744e38}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Line">
       <UniqueIdentifier>{4cdc3d87-ca5a-4b43-b7b9-91e46240f6d3}</UniqueIdentifier>
     </Filter>
@@ -71,27 +68,6 @@
     <Filter Include="Engine\3d\Model">
       <UniqueIdentifier>{09a5243c-6ffc-4d31-9229-9c39d87bd460}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Charactor\Player">
-      <UniqueIdentifier>{7bbaccff-a584-43bb-b2b2-cf59682098ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Boss">
-      <UniqueIdentifier>{e96c1dfa-b868-45f9-a794-eecee36d27a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Boss\Icicle">
-      <UniqueIdentifier>{6e09ea25-6bdd-4a7f-8e4e-736d36fa79b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Boss\PlasmaShot">
-      <UniqueIdentifier>{18c28a70-f928-4246-b56e-1f13741f557f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Boss\ElementBall">
-      <UniqueIdentifier>{bc8f0de4-103d-4155-99fc-fe2ced55c7ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\GameObject">
-      <UniqueIdentifier>{257adb4a-7718-4a6e-8a94-f4eb14d52e76}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Effects">
-      <UniqueIdentifier>{5b67c19d-7414-4be2-abf2-073291c60a33}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\GraphicsPipeline">
       <UniqueIdentifier>{108b8350-d3a9-4003-8307-bd0d8326e8e5}</UniqueIdentifier>
     </Filter>
@@ -100,42 +76,6 @@
     </Filter>
     <Filter Include="Engine\3d\Animation">
       <UniqueIdentifier>{ed94aa1d-7784-4b1e-978a-e3bf889eb516}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Boss\Behavior">
-      <UniqueIdentifier>{5a54c480-bf69-469a-9bb8-98b34cbbc7fb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Boss\Behavior\Idel">
-      <UniqueIdentifier>{9b6f1872-5b5b-4f17-b578-961e5999f616}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Boss\Behavior\Attack">
-      <UniqueIdentifier>{63dd1c23-d9f8-4cc3-8d36-b589189432a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Boss\Behavior\Dead">
-      <UniqueIdentifier>{ad862d1c-b5c6-4b59-bfd2-07c3aeb9db0d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Boss\Behavior\Appear">
-      <UniqueIdentifier>{85c4d18b-9eed-4f92-957d-42895a4fc9ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Player\Behavior">
-      <UniqueIdentifier>{a0f9ea71-bd70-4bb9-b5f6-329436e5ad4f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Player\Behavior\Attack">
-      <UniqueIdentifier>{417ff748-f27b-452c-ba29-97e50fb6b967}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Player\Behavior\Dash">
-      <UniqueIdentifier>{d85f18d8-a75b-4774-a9c4-d1adeab2a8c1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Player\Behavior\Dead">
-      <UniqueIdentifier>{defda373-a9c3-449e-9c80-0844531439ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Player\Behavior\Idel">
-      <UniqueIdentifier>{a47c9477-5490-4852-b087-17f40811e839}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Player\Behavior\Jog">
-      <UniqueIdentifier>{d878d9ff-6fb4-4923-bae6-b4f414fcbd58}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Player\Behavior\KnockBack">
-      <UniqueIdentifier>{05c8b22b-63d2-4990-8257-46ad351d9d7a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Collision\Collider">
       <UniqueIdentifier>{190b78bf-70cd-41d5-800d-dbda524a7239}</UniqueIdentifier>
@@ -148,54 +88,6 @@
     </Filter>
     <Filter Include="Game\Scene\TitleScene">
       <UniqueIdentifier>{0e431317-84ed-467f-bf9d-6ab0225ef911}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scene\GameScene\State">
-      <UniqueIdentifier>{9365be3e-7056-46d6-ac80-880d7cd35208}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scene\GameScene\State\Battle">
-      <UniqueIdentifier>{8faf1a20-79c0-46b4-8686-fd73fa88a914}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scene\GameScene\State\PlayerDead">
-      <UniqueIdentifier>{b2a317c0-b332-48bf-9949-490d31566686}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scene\GameScene\State\BossDead">
-      <UniqueIdentifier>{e1485c61-85b4-4262-adcf-d40cda0923df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scene\GameScene\State\Clear">
-      <UniqueIdentifier>{6815b269-13c4-43a3-b17b-b877f460a784}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scene\GameScene\State\GameOver">
-      <UniqueIdentifier>{359e451b-ef74-4481-a50b-af22b62f39eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Player\MagicBall">
-      <UniqueIdentifier>{9748132f-0bfb-4c26-9b0e-46b28608e2e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Boss\GroundFlare">
-      <UniqueIdentifier>{960db93f-bd31-41f8-8feb-0b089be92cca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Player\GroundBurst">
-      <UniqueIdentifier>{6d5ee438-ed03-411d-ae6b-e2ad3a2ec033}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Boss\Behavior\Move">
-      <UniqueIdentifier>{fc351a0c-10a7-4e27-959c-7d4dc1ab887e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Player\Behavior\Avoid">
-      <UniqueIdentifier>{218c19ad-d8b1-4c19-8be3-5bfe1aba997c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Boss\IceImpact">
-      <UniqueIdentifier>{1f873148-b364-4776-a7c1-315a67e50a49}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Player\State">
-      <UniqueIdentifier>{3269e30a-28aa-43f9-baef-ab543bbf857a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Player\State\BurnState">
-      <UniqueIdentifier>{853ea377-39f0-48d0-8cd5-22edbad8b2cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Player\State\ChilledState">
-      <UniqueIdentifier>{06fc00cf-3787-4699-8717-0a1617531aed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Charactor\Player\State\NormalState">
-      <UniqueIdentifier>{c53dda80-0b31-4621-bc63-493b5113bd61}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -305,48 +197,6 @@
     <ClCompile Include="Engine\PostEffect\HSVFilter.cpp">
       <Filter>Engine\PostEffect</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Charactor\Boss\Boss.cpp">
-      <Filter>Game\Charactor\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\Player.cpp">
-      <Filter>Game\Charactor\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Boss\Icicle\Icicle.cpp">
-      <Filter>Game\Charactor\Boss\Icicle</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Boss\Icicle\IcicleManager.cpp">
-      <Filter>Game\Charactor\Boss\Icicle</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Boss\PlasmaShot\PlasmaShot.cpp">
-      <Filter>Game\Charactor\Boss\PlasmaShot</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Boss\PlasmaShot\PlasmaShotManager.cpp">
-      <Filter>Game\Charactor\Boss\PlasmaShot</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Boss\ElementBall\ElementBall.cpp">
-      <Filter>Game\Charactor\Boss\ElementBall</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Boss\ElementBall\ElementBallManager.cpp">
-      <Filter>Game\Charactor\Boss\ElementBall</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GameObject\Rock.cpp">
-      <Filter>Game\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GameObject\Ground.cpp">
-      <Filter>Game\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\FollowCamera.cpp">
-      <Filter>Game\Charactor\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Effects\BurnScar.cpp">
-      <Filter>Game\Effects</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Effects\BaseScar.cpp">
-      <Filter>Game\Effects</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Effects\IceScar.cpp">
-      <Filter>Game\Effects</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\3d\Particle\ParticleManager.cpp">
       <Filter>Engine\3d\Particle</Filter>
     </ClCompile>
@@ -404,39 +254,6 @@
     <ClCompile Include="Engine\3d\Animation\Animation.cpp">
       <Filter>Engine\3d\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Charactor\BaseCharactor.cpp">
-      <Filter>Game\Charactor</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Boss\Behavior\Idel\BossIdel.cpp">
-      <Filter>Game\Charactor\Boss\Behavior\Idel</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Boss\Behavior\Attack\BossAttack.cpp">
-      <Filter>Game\Charactor\Boss\Behavior\Attack</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Boss\Behavior\Dead\BossDead.cpp">
-      <Filter>Game\Charactor\Boss\Behavior\Dead</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Boss\Behavior\Appear\BossAppear.cpp">
-      <Filter>Game\Charactor\Boss\Behavior\Appear</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\Behavior\Idel\PlayerIdel.cpp">
-      <Filter>Game\Charactor\Player\Behavior\Idel</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\Behavior\Dead\PlayerDead.cpp">
-      <Filter>Game\Charactor\Player\Behavior\Dead</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\Behavior\Attack\PlayerAttack.cpp">
-      <Filter>Game\Charactor\Player\Behavior\Attack</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\Behavior\Dash\PlayerDash.cpp">
-      <Filter>Game\Charactor\Player\Behavior\Dash</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\Behavior\Jog\PlayerJog.cpp">
-      <Filter>Game\Charactor\Player\Behavior\Jog</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\Behavior\KnockBack\PlayerKnockBack.cpp">
-      <Filter>Game\Charactor\Player\Behavior\KnockBack</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Collision\Collider\SphereCollider.cpp">
       <Filter>Engine\Collision\Collider</Filter>
     </ClCompile>
@@ -457,72 +274,6 @@
     </ClCompile>
     <ClCompile Include="Game\Scene\TitleScene\TitleScene.cpp">
       <Filter>Game\Scene\TitleScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Scene\GameScene\State\Battle\BattleState.cpp">
-      <Filter>Game\Scene\GameScene\State\Battle</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Scene\GameScene\State\PlayerDead\PlayerDeadState.cpp">
-      <Filter>Game\Scene\GameScene\State\PlayerDead</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Scene\GameScene\State\BossDead\BossDeadState.cpp">
-      <Filter>Game\Scene\GameScene\State\BossDead</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Scene\GameScene\State\Clear\ClearState.cpp">
-      <Filter>Game\Scene\GameScene\State\Clear</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Scene\GameScene\State\GameOver\GameOverState.cpp">
-      <Filter>Game\Scene\GameScene\State\GameOver</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\LockOn.cpp">
-      <Filter>Game\Charactor\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\MasicBall\MagicBall.cpp">
-      <Filter>Game\Charactor\Player\MagicBall</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\MasicBall\MagicBallManager.cpp">
-      <Filter>Game\Charactor\Player\MagicBall</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Boss\GroundFlare\GroundFlare.cpp">
-      <Filter>Game\Charactor\Boss\GroundFlare</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Boss\GroundFlare\GroundFlareManager.cpp">
-      <Filter>Game\Charactor\Boss\GroundFlare</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\GroundBurst\GroundBurst.cpp">
-      <Filter>Game\Charactor\Player\GroundBurst</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\GroundBurst\GroundBurstManager.cpp">
-      <Filter>Game\Charactor\Player\GroundBurst</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Boss\Behavior\Move\BossMove.cpp">
-      <Filter>Game\Charactor\Boss\Behavior\Move</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\HP.cpp">
-      <Filter>Game\Charactor</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\Behavior\Avoid\PlayerAvoid.cpp">
-      <Filter>Game\Charactor\Player\Behavior\Avoid</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Boss\IceImpact\IceImpactManager.cpp">
-      <Filter>Game\Charactor\Boss\IceImpact</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Boss\IceImpact\IceImpact.cpp">
-      <Filter>Game\Charactor\Boss\IceImpact</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\Stamina.cpp">
-      <Filter>Game\Charactor\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\State\BurnState\BurnState.cpp">
-      <Filter>Game\Charactor\Player\State\BurnState</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\State\ChilledState\ChilledState.cpp">
-      <Filter>Game\Charactor\Player\State\ChilledState</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Charactor\Player\State\NormalState\NormalState.cpp">
-      <Filter>Game\Charactor\Player\State\NormalState</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GameTime.cpp">
-      <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Engine\3d\InstancingObject3d.cpp">
       <Filter>Engine\3d</Filter>
@@ -664,48 +415,6 @@
     <ClInclude Include="Engine\PostEffect\HSVFilter.h">
       <Filter>Engine\PostEffect</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\Boss.h">
-      <Filter>Game\Charactor\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\Player.h">
-      <Filter>Game\Charactor\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\Icicle\Icicle.h">
-      <Filter>Game\Charactor\Boss\Icicle</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\Icicle\IcicleManager.h">
-      <Filter>Game\Charactor\Boss\Icicle</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\PlasmaShot\PlasmaShot.h">
-      <Filter>Game\Charactor\Boss\PlasmaShot</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\PlasmaShot\PlasmaShotManager.h">
-      <Filter>Game\Charactor\Boss\PlasmaShot</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\ElementBall\ElementBall.h">
-      <Filter>Game\Charactor\Boss\ElementBall</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\ElementBall\ElementBallManager.h">
-      <Filter>Game\Charactor\Boss\ElementBall</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\GameObject\Rock.h">
-      <Filter>Game\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\GameObject\Ground.h">
-      <Filter>Game\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\FollowCamera.h">
-      <Filter>Game\Charactor\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Effects\BurnScar.h">
-      <Filter>Game\Effects</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Effects\BaseScar.h">
-      <Filter>Game\Effects</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Effects\IceScar.h">
-      <Filter>Game\Effects</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\3d\Particle\ParticleManager.h">
       <Filter>Engine\3d\Particle</Filter>
     </ClInclude>
@@ -766,45 +475,6 @@
     <ClInclude Include="Engine\3d\Animation\Animation.h">
       <Filter>Engine\3d\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Charactor\BaseCharactor.h">
-      <Filter>Game\Charactor</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\Behavior\IBossBehavior.h">
-      <Filter>Game\Charactor\Boss\Behavior</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\Behavior\Idel\BossIdel.h">
-      <Filter>Game\Charactor\Boss\Behavior\Idel</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\Behavior\Attack\BossAttack.h">
-      <Filter>Game\Charactor\Boss\Behavior\Attack</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\Behavior\Dead\BossDead.h">
-      <Filter>Game\Charactor\Boss\Behavior\Dead</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\Behavior\Appear\BossAppear.h">
-      <Filter>Game\Charactor\Boss\Behavior\Appear</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\Behavior\IPlayerBehavior.h">
-      <Filter>Game\Charactor\Player\Behavior</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\Behavior\Idel\PlayerIdel.h">
-      <Filter>Game\Charactor\Player\Behavior\Idel</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\Behavior\Dead\PlayerDead.h">
-      <Filter>Game\Charactor\Player\Behavior\Dead</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\Behavior\Attack\PlayerAttack.h">
-      <Filter>Game\Charactor\Player\Behavior\Attack</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\Behavior\Dash\PlayerDash.h">
-      <Filter>Game\Charactor\Player\Behavior\Dash</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\Behavior\Jog\PlayerJog.h">
-      <Filter>Game\Charactor\Player\Behavior\Jog</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\Behavior\KnockBack\PlayerKnockBack.h">
-      <Filter>Game\Charactor\Player\Behavior\KnockBack</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Collision\Collider\SphereCollider.h">
       <Filter>Engine\Collision\Collider</Filter>
     </ClInclude>
@@ -826,89 +496,8 @@
     <ClInclude Include="Game\Scene\TitleScene\TitleScene.h">
       <Filter>Game\Scene\TitleScene</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Scene\GameScene\State\ISceneState.h">
-      <Filter>Game\Scene\GameScene\State</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Scene\GameScene\State\Battle\BattleState.h">
-      <Filter>Game\Scene\GameScene\State\Battle</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Scene\GameScene\State\PlayerDead\PlayerDeadState.h">
-      <Filter>Game\Scene\GameScene\State\PlayerDead</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Scene\GameScene\State\BossDead\BossDeadState.h">
-      <Filter>Game\Scene\GameScene\State\BossDead</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Scene\GameScene\State\Clear\ClearState.h">
-      <Filter>Game\Scene\GameScene\State\Clear</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Scene\GameScene\State\GameOver\GameOverState.h">
-      <Filter>Game\Scene\GameScene\State\GameOver</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\LockOn.h">
-      <Filter>Game\Charactor\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\MasicBall\MagicBall.h">
-      <Filter>Game\Charactor\Player\MagicBall</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\MasicBall\MagicBallManager.h">
-      <Filter>Game\Charactor\Player\MagicBall</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\GroundFlare\GroundFlare.h">
-      <Filter>Game\Charactor\Boss\GroundFlare</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\GroundFlare\GroundFlareManager.h">
-      <Filter>Game\Charactor\Boss\GroundFlare</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\BaseAttack.h">
-      <Filter>Game\Charactor</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\GroundBurst\GroundBurst.h">
-      <Filter>Game\Charactor\Player\GroundBurst</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\GroundBurst\GroundBurstManager.h">
-      <Filter>Game\Charactor\Player\GroundBurst</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\BasePlayerAttackManager.h">
-      <Filter>Game\Charactor\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\BaseBossAttackManager.h">
-      <Filter>Game\Charactor\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\Behavior\Move\BossMove.h">
-      <Filter>Game\Charactor\Boss\Behavior\Move</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Base\RandomEngine.h">
       <Filter>Engine\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\HP.h">
-      <Filter>Game\Charactor</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\Behavior\Avoid\PlayerAvoid.h">
-      <Filter>Game\Charactor\Player\Behavior\Avoid</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\IceImpact\IceImpactManager.h">
-      <Filter>Game\Charactor\Boss\IceImpact</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Boss\IceImpact\IceImpact.h">
-      <Filter>Game\Charactor\Boss\IceImpact</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\Stamina.h">
-      <Filter>Game\Charactor\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\State\IPlayerState.h">
-      <Filter>Game\Charactor\Player\State</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\State\BurnState\BurnState.h">
-      <Filter>Game\Charactor\Player\State\BurnState</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\State\ChilledState\ChilledState.h">
-      <Filter>Game\Charactor\Player\State\ChilledState</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Charactor\Player\State\NormalState\NormalState.h">
-      <Filter>Game\Charactor\Player\State\NormalState</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\GameTime.h">
-      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Engine\3d\InstancingObject3d.h">
       <Filter>Engine\3d</Filter>

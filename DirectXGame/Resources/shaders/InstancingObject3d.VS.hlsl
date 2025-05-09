@@ -1,4 +1,4 @@
-#include"InstacingObject3d.hlsli"
+#include "InstancingObject3d.hlsli"
 
 struct ObjectGPU {
 	float32_t4x4 matWorld;
