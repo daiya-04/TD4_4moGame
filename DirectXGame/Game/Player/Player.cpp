@@ -127,13 +127,16 @@ Vector3 Player::SetBody2Input()
 	//ｙの量を無視する
 	velocity.y = 0.0f;
 
-	//正規化
-	velocity = velocity.Normalize();
+	if (velocity.Length() != 0)
+	{
+		//正規化
+		velocity = velocity.Normalize();
+	}
 
 	//入力がある場合
 	if (velocity != Vector3(0, 0, 0)) {
 		//向きを指定
-		//world_->rotation_.y = GetYRotate({ velocity.x,velocity.z }) + ((float)std::numbers::pi);
+		world_->rotation_.y = GetYRotate({ velocity.x,velocity.z }) + ((float)std::numbers::pi);
 	}
 
 	return velocity;

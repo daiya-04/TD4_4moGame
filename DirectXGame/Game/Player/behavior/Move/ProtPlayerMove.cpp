@@ -5,6 +5,7 @@
 PlayerMove::PlayerMove()
 {
 	tree_.name_ = "Move";
+	tree_.SetMonitorValue("MoveVelo", &debugInputMove);
 	tree_.SetValue("speed",&moveSpped_);
 
 }
@@ -18,6 +19,8 @@ void PlayerMove::Update()
 
 	//移動入力取得
 	Vector3 move = player_->SetBody2Input();
+
+	debugInputMove = move;
 
 	//移動する
 	player_->GetWorld().translation_ += move * moveSpped_;

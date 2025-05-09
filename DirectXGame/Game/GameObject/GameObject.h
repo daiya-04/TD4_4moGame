@@ -41,7 +41,7 @@ public:
 	/// ワールド座標取得
 	/// </summary>
 	/// <returns></returns>
-	DaiEngine::WorldTransform GetWorld() {return model_->worldTransform_; }
+	DaiEngine::WorldTransform& GetWorld() {return *world_; }
 
 private:
 

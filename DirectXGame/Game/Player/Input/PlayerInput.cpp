@@ -12,8 +12,8 @@ Vector3 PlayerInput::GetMoveInput()
 	Vector3 ans;
 
 	//矢印キーの入力チェック
-	ans.x =(float) (input_->TriggerKey(DIK_UP)	 + input_->TriggerKey(DIK_DOWN));
-	ans.z = (float)(input_->TriggerKey(DIK_LEFT) + input_->TriggerKey(DIK_RIGHT));
+	ans.x =-(float)input_->PushKey(DIK_LEFT) + (float)input_->PushKey(DIK_RIGHT);
+	ans.z = (float) input_->PushKey(DIK_UP)	 - (float)input_->PushKey(DIK_DOWN);
 
 
 	//コントローラー入力取得

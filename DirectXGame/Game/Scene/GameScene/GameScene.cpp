@@ -37,8 +37,7 @@ void GameScene::Init(){
 
 	///
 
-
-
+	//ゲームオブジェクトにカメラ設定
 	GameObject::GetCamera(&camera_);
 	//プレイヤー生成
 	player_ = std::make_unique<Player>();

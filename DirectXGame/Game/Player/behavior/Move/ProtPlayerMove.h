@@ -26,4 +26,6 @@ private://**プライベート変数**//
 	//移動速度
 	float moveSpped_ = 1.0f;
 
+	Vector3 debugInputMove;
+
 };
