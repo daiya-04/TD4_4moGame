@@ -281,6 +281,7 @@
     <ClCompile Include="Engine\GraphicsPipeline\InstancingObject3dGraphicsPipeline.cpp">
       <Filter>Engine\GraphicsPipeline</Filter>
     </ClCompile>
+    <ClCompile Include="Game\GameObject\GameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -505,5 +506,6 @@
     <ClInclude Include="Engine\GraphicsPipeline\InstancingObject3dGraphicsPipeline.h">
       <Filter>Engine\GraphicsPipeline</Filter>
     </ClInclude>
+    <ClInclude Include="Game\GameObject\GameObject.h" />
   </ItemGroup>
 </Project>

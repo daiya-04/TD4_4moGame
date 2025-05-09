@@ -116,6 +116,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\GraphicsPipeline\BaseGraphicsPipeline.cpp" />
     <ClCompile Include="Engine\3d\Animation\AnimationManager.cpp" />
     <ClCompile Include="Engine\PostEffect\Dissolve.cpp" />
+    <ClCompile Include="Game\GameObject\GameObject.cpp" />
     <ClCompile Include="Game\Scene\DebugTestScene\DebugTestScene.cpp" />
     <ClCompile Include="Engine\3d\Animation\Animation.cpp" />
     <ClCompile Include="Engine\3d\Light\PointLight.cpp" />
@@ -182,6 +183,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\GraphicsPipeline\BaseGraphicsPipeline.h" />
     <ClInclude Include="Engine\3d\Animation\AnimationManager.h" />
     <ClInclude Include="Engine\PostEffect\Dissolve.h" />
+    <ClInclude Include="Game\GameObject\GameObject.h" />
     <ClInclude Include="Game\Scene\DebugTestScene\DebugTestScene.h" />
     <ClInclude Include="Engine\Collision\CollisionShapes.h" />
     <ClInclude Include="Engine\3d\Animation\Animation.h" />

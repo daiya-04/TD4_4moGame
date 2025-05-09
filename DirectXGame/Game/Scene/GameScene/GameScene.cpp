@@ -14,7 +14,6 @@
 #include "ColliderManager.h"
 
 GameScene::GameScene() {
-	
 }
 
 GameScene::~GameScene() {
@@ -25,7 +24,6 @@ GameScene::~GameScene() {
 void GameScene::Init(){
 	//カメラ初期化
 	camera_.Init();
-	camera_.SetFOV(60.0f);
 	//ライト初期化
 	pointLight_.Init();
 	spotLight_.Init();
@@ -35,7 +33,8 @@ void GameScene::Init(){
 
 	///
 
-	
+	GameObject::GetCamera(&camera_);
+	obj_ = std::make_unique<GameObject>();
 
 
 	///
@@ -67,6 +66,7 @@ void GameScene::Update() {
 	camera_.UpdateViewMatrix();
 	camera_.UpdateCameraPos();
 	
+	obj_->Update();
 }
 
 void GameScene::DrawBackGround(){
@@ -77,7 +77,7 @@ void GameScene::DrawBackGround(){
 
 void GameScene::DrawModel(){
 
-	
+	obj_->Draw();
 
 }
 

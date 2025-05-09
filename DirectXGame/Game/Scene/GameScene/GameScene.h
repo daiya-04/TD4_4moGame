@@ -27,6 +27,11 @@
 #include "SpotLight.h"
 #include "SkyBox.h"
 
+#pragma region プレイヤ
+#include"GameObject.h"
+#pragma endregion
+
+
 //ゲームシーンクラス
 class GameScene : public DaiEngine::IScene {
 public:
@@ -87,6 +92,10 @@ private:
 	DaiEngine::PointLight pointLight_;
 	//スポットライト
 	DaiEngine::SpotLight spotLight_;
+
+private://**キクチ
+
+	std::unique_ptr<GameObject>obj_;
 
 };
 
