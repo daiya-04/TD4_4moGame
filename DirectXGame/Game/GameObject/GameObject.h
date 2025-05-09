@@ -18,12 +18,7 @@ public:
 	static void GetCamera(DaiEngine::Camera* camera) { camera_ = camera; }
 
 
-	GameObject();
-
-	/// <summary>
-	/// 初期化
-	/// </summary>
-	void Init();
+	GameObject(std::string modelName);
 
 	/// <summary>
 	/// 更新

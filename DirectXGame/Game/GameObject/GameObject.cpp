@@ -4,10 +4,10 @@
 //初期化
 DaiEngine::Camera* GameObject::camera_ = nullptr;
 
-GameObject::GameObject()
+GameObject::GameObject(std::string modelName)
 {
 	//モデルクラスの初期化
-	model_.reset(DaiEngine::SkinningObject::Create(DaiEngine::ModelManager::LoadGLTF("Standing")));
+	model_.reset(DaiEngine::SkinningObject::Create(DaiEngine::ModelManager::LoadGLTF(modelName)));
 	
 	//スケルトン生成
 	skeleton_ = DaiEngine::Skeleton::Create(model_.get()->GetModel()->rootNode_);
@@ -18,10 +18,6 @@ GameObject::GameObject()
 
 	//スキンクラスターをモデルにセット
 	model_->SetSkinCluster(skinCluster_.get());
-}
-
-void GameObject::Init()
-{
 }
 
 void GameObject::Update()
