@@ -41,6 +41,8 @@ void GameScene::Init(){
 	GameObject::GetCamera(&camera_);
 	//プレイヤー生成
 	player_ = std::make_unique<Player>();
+	//追従カメラ処理生成
+	followCamera_ = std::make_unique<FollowCamera>(&camera_, player_->GetWorld().translation_);
 
 	///
 
@@ -69,6 +71,9 @@ void GameScene::Update() {
 	//ライト更新
 	pointLight_.Update();
 	spotLight_.Update();
+
+	//追従カメラ更新
+	followCamera_->Update();
 
 	//カメラ更新
 	camera_.UpdateViewMatrix();

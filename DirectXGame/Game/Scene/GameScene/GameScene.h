@@ -30,6 +30,7 @@
 #pragma region キクチ
 #include"Player/Player.h"
 #include"GlobalVariable/Manager/GlobalVaribleManager.h"
+#include"FollowCamera/FollowCamera.h"
 #pragma endregion
 
 
@@ -101,6 +102,9 @@ private://**キクチ
 
 	//プレイヤー
 	std::unique_ptr<Player> player_ = nullptr;
+
+	//追従カメラ
+	std::unique_ptr<FollowCamera> followCamera_ = nullptr;
 
 };
 
