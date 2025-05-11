@@ -8,13 +8,13 @@ IPlayerAttack::IPlayerAttack()
 	input_ = std::make_unique<PlayerInput>();
 
 	std::vector<std::string> behaviorName_ = {
-		"予備動作",
-		"攻撃",
-		"硬直"
+		"PreAttack",
+		"Attack",
+		"EndAttack"
 	};
 
-	tree_.SetMonitorValue("経過時間", &currentCount_);
-	tree_.SetMonitorCombo("状態",&behavior_,behaviorName_);
+	tree_.SetMonitorValue("CurrentCount", &currentCount_);
+	tree_.SetMonitorCombo("Behavior",&behavior_,behaviorName_);
 	//各最大時間パラメータを設定
 	for (int i = 0; i < Count; i++) {
 		tree_.SetValue(behaviorName_[i], &maxCounts_[i]);

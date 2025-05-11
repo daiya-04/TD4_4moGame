@@ -34,7 +34,7 @@ void PlayerAttackManager::Update()
 	if (behaviorRequest_){
 		behavior_ = behaviorRequest_.value();
 		behaviorRequest_ = std::nullopt;
-		attacks_[behavior_]->Init();
+	 	attacks_[behavior_]->Init();
 	}
 
 	//攻撃の更新

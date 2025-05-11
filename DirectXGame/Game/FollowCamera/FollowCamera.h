@@ -26,4 +26,7 @@ private://**プライベート変数**//
 
 	//カメラのオフセット座標
 	Vector3 offset_ = { 0, 0, -10 };
+
+	//追従処理フラグ
+	bool isFollow_ = true;
 };

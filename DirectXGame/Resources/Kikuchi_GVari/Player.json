@@ -2,25 +2,25 @@
     "Player": {
         "AttackManager": {
             "Com1": {
-                "予備動作": 1.0,
-                "攻撃": 0.0,
-                "硬直": 0.0
+                "Attack": 60.0,
+                "EndAttack": 60.0,
+                "PreAttack": 60.0
             },
             "Com2": {
-                "予備動作": 1.0,
-                "攻撃": 0.0,
-                "硬直": 0.0
+                "Attack": 60.0,
+                "EndAttack": 60.0,
+                "PreAttack": 60.0
             },
             "Com3": {
-                "予備動作": 1.0,
-                "攻撃": 0.0,
-                "硬直": 0.0
+                "Attack": 60.0,
+                "EndAttack": 60.0,
+                "PreAttack": 60.0
             }
         },
         "HP": 10,
         "Hit": {
-            "MaxNoHitSec": 1.0,
-            "TenmetuNum": 3
+            "MaxNoHitSec": 60.0,
+            "TenmetuNum": 9
         },
         "Move": {
             "speed": 0.10000000149011612

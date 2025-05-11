@@ -75,7 +75,7 @@ void Player::Update()
 	behaviors_[(int)behaviorName_]->Update();
 
 	//点滅更新
-	//Tenmetu();
+	Tenmetu();
 
 	//行列更新
 	GameObject::Update();
@@ -84,7 +84,9 @@ void Player::Update()
 void Player::Draw()
 {
 	//描画
-	GameObject::Draw();
+	if (isDraw_) {
+		GameObject::Draw();
+	}
 }
 
 void Player::SetWorldTranslate(const Vector3& translate)
@@ -149,27 +151,29 @@ void Player::Tenmetu()
 		currentHitCount_ ++;
 
 		////時間内での点滅処理
-		//if (currentHitCount_ >= (hitCount_/maxTenmetuNum_)*tenmetuCount_) {
-		//	tenmetuCount_++;
+		if (currentHitCount_ >= (hitCount_/maxTenmetuNum_)*tenmetuCount_) {
+			tenmetuCount_++;
 
-		//	//透明度を変更
-		//	if (model_->materialData_->color.w == 1.0f) {
-		//		model_->materialData_->color.w = 0.1f;
-		//	}
-		//	else {
-		//		model_->materialData_->color.w = 1.0f;
-		//	}
-		//}
-		//	
-		////時間経過で終了
-		//if (currentHitCount_ >= hitCount_) {
-		//	parameters_.isHit = true;
-		//	model_->materialData_->color.w = 1.0f;
+			//透明度を変更
+			if (isDraw_) {
+				isDraw_ = false;
+			}
+			else {
+				isDraw_ = true;
+			}
 
-		//	//カウント初期化
-		//	currentHitCount_ = 0;
-		//	//点滅回数初期化
-		//	tenmetuCount_ = 0;
-		//}
+			
+		}
+			
+		//時間経過で終了
+		if (currentHitCount_ >= hitCount_) {
+			parameters_.isHit = true;
+			isDraw_ = true;
+
+			//カウント初期化
+			currentHitCount_ = 0;
+			//点滅回数初期化
+			tenmetuCount_ = 0;
+		}
 	}
 }

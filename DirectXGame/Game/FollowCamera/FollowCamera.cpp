@@ -10,10 +10,14 @@ FollowCamera::FollowCamera(DaiEngine::Camera* camera, const Vector3& targetTrans
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("FollowCamera");
 	gvg->SetValue("offset", &offset_);
 	gvg->SetValue("rotation", &camera_->rotation_);
+	gvg->SetMonitorValue("isFollow", &isFollow_);
 }
 
 void FollowCamera::Update()
 {
-	//カメラの位置をターゲットの位置にオフセットを加えた位置にする
-	camera_->translation_ = *target_ + offset_;
+	//追従ONの場合
+	if (isFollow_) {
+		//カメラの位置をターゲットの位置にオフセットを加えた位置にする
+		camera_->translation_ = *target_ + offset_;
+	}
 }

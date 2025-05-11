@@ -107,4 +107,7 @@ private://**ヒット時処理*//
 
 	//点滅回数
 	int maxTenmetuNum_ = 3;
+
+	//描画フラグ
+	bool isDraw_ = true;
 };
