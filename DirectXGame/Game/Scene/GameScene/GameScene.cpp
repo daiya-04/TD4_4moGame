@@ -38,12 +38,17 @@ void GameScene::Init(){
 	///
 
 	//ゲームオブジェクトにカメラ設定
-	GameObject::GetCamera(&camera_);
+	GameObject::SetCamera(&camera_);
+	//陰士単シングオブジェクトにカメラ設定
+	InstancingGameObject::SetCamera(&camera_);
+
 	//プレイヤー生成
 	player_ = std::make_unique<Player>();
 	//追従カメラ処理生成
 	followCamera_ = std::make_unique<FollowCamera>(&camera_, player_->GetWorld().translation_);
-
+	//地面生成
+	field_ = std::make_unique<Field>();
+	field_->Initialize();
 	///
 
 	//全ての初期化の後に処理
@@ -81,6 +86,14 @@ void GameScene::Update() {
 	
 	//プレイヤー更新
 	player_->Update();
+
+	//地面更新
+	field_->Update();
+
+	DaiEngine::InstancingObjData data;
+	data.worldTransform_.Init();
+	data.worldTransform_.translation_.x = 10;
+
 }
 
 void GameScene::DrawBackGround(){
@@ -91,8 +104,12 @@ void GameScene::DrawBackGround(){
 
 void GameScene::DrawModel(){
 
+	//地面描画
+	field_->Draw();
+
 	//プレイヤー描画
 	player_->Draw();
+
 }
 
 void GameScene::DrawParticleModel(){

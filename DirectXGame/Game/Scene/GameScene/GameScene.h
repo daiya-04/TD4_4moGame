@@ -31,6 +31,7 @@
 #include"Player/Player.h"
 #include"GlobalVariable/Manager/GlobalVaribleManager.h"
 #include"FollowCamera/FollowCamera.h"
+#include"Field/Field.h"
 #pragma endregion
 
 
@@ -105,6 +106,8 @@ private://**キクチ
 
 	//追従カメラ
 	std::unique_ptr<FollowCamera> followCamera_ = nullptr;
-
+	
+	//地面
+	std::unique_ptr<Field> field_ = nullptr;
 };
 

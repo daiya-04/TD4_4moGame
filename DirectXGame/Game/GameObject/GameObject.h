@@ -16,10 +16,10 @@ public:
 public:
 
 	/// <summary>
-	/// カメラのポインタ取得
+	/// カメラのポインタを設定
 	/// </summary>
 	/// <param name="camera"></param>
-	static void GetCamera(DaiEngine::Camera* camera) { camera_ = camera; }
+	static void SetCamera(DaiEngine::Camera* camera) { camera_ = camera; }
 
 
 	GameObject()=default;

@@ -296,6 +296,8 @@
     <ClCompile Include="Game\Player\behavior\Roll\ProtPlayerRoll.cpp" />
     <ClCompile Include="Game\Player\behavior\Attacks\Combo3\PlayerAttackCombo3.cpp" />
     <ClCompile Include="Game\FollowCamera\FollowCamera.cpp" />
+    <ClCompile Include="Game\InstancingGameObject\InstancingGameObject.cpp" />
+    <ClCompile Include="Game\Field\Field.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -536,5 +538,7 @@
     <ClInclude Include="Game\Player\behavior\Roll\ProtPlayerRoll.h" />
     <ClInclude Include="Game\Player\behavior\Attacks\Combo3\PlayerAttackCombo3.h" />
     <ClInclude Include="Game\FollowCamera\FollowCamera.h" />
+    <ClInclude Include="Game\InstancingGameObject\InstancingGameObject.h" />
+    <ClInclude Include="Game\Field\Field.h" />
   </ItemGroup>
 </Project>
