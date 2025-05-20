@@ -1,0 +1,113 @@
+#pragma once
+#include"GameObject.h"
+#include"Boss/Behavior/IBossBehavior.h"
+#include"BossBulletManager/BossBulletManager.h"
+#include"Boss/DangerZoneManager/DangerZoneManager.h"
+
+#include<optional>
+#include<string>
+
+//ボスクラス
+class Boss :public GameObject {
+
+public://**パブリック変数**//
+
+	//パラメータ
+	struct Parameters {
+		//カウント時間
+		float currentSec = 0;
+	}parameters_;
+
+
+public://**パブリック関数**//
+
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	Boss();
+	~Boss()=default;
+
+	/// <summary>
+	/// 更新
+	/// </summary>
+	void Update();
+
+	/// <summary>
+	/// 描画
+	/// </summary>
+	void Draw();
+
+	/// <summary>
+	/// 警告エリア生成
+	/// </summary>
+	void SpawnDangerZone();
+
+	/// <summary>
+	/// 弾の発射処理
+	/// </summary>
+	void SpawnBullet(const Vector3& pos);
+
+public://**セッター**//
+
+	/// <summary>
+	/// プレイヤーのワールド座標取得
+	/// </summary>
+	/// <param name="world"></param>
+	void SetPlayerWorld(const DaiEngine::WorldTransform* world) { playerWorld_ = world; };
+
+	/// <summary>
+	/// プレイヤー方向を向く
+	/// </summary>
+	/// <returns></returns>
+	Vector3 SetDirection2Player();
+
+public://ゲッター**//
+
+private://**プライベート関数**//
+
+
+
+
+
+public://**状態
+
+	//状態
+	enum Behavior {
+		Idle,
+		Attack1,
+		Attack2,
+		Count
+	}behavior_=Idle;
+
+	//状態リクエスト
+	std::optional<Behavior>behaviorRequest_ = Behavior::Idle;
+
+private://**プライベート変数**//
+
+	//状態
+	std::vector<std::unique_ptr<IBossBehavior>>behaviors_;
+
+	//プレイヤー座標
+	const DaiEngine::WorldTransform* playerWorld_=nullptr;
+
+	//弾マネージャ
+	std::unique_ptr<BossBulletManager>bulletManager_ = nullptr;
+	//警戒エリアマネージャ
+	std::unique_ptr<DangerZoneManager>dangerZoneManager_ = nullptr;
+
+private://**パラメータ変数**//
+
+
+
+private://**デバッグ用変数**//
+	
+	//攻撃指定
+	std::string debugBehavior_="None";
+
+	std::vector<std::string> behaviorNames_ = {
+	"None",
+	"Idle",
+	"Attack1",
+	"Attack2"
+	};
+};

@@ -44,6 +44,9 @@ void GameScene::Init(){
 
 	//プレイヤー生成
 	player_ = std::make_unique<Player>();
+	//ボス生成
+	boss_ = std::make_unique<Boss>();
+	boss_->SetPlayerWorld(&player_->GetWorld());
 	//追従カメラ処理生成
 	followCamera_ = std::make_unique<FollowCamera>(&camera_, player_->GetWorld().translation_);
 	//地面生成
@@ -87,6 +90,9 @@ void GameScene::Update() {
 	//プレイヤー更新
 	player_->Update();
 
+	//ボス更新
+	boss_->Update();
+
 	//地面更新
 	field_->Update();
 
@@ -106,6 +112,9 @@ void GameScene::DrawModel(){
 
 	//地面描画
 	field_->Draw();
+
+	//ボス描画
+	boss_->Draw();
 
 	//プレイヤー描画
 	player_->Draw();

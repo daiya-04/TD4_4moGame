@@ -1,0 +1,27 @@
+{
+    "Boss": {
+        "DangerZone": {
+            "radius": 2.0,
+            "warningCount": 60.0,
+            "warningSphereHeight": 0.5
+        },
+        "FallingBullet": {
+            "fallSpeed": 1.0,
+            "radius": 1.0,
+            "spawnHeight": 20.0
+        },
+        "待機": {
+            "時間": 1.0
+        },
+        "武器回転攻撃": {
+            "待機時間": 1.0,
+            "攻撃時間": 3.0,
+            "硬直時間": 1.0
+        },
+        "落下物攻撃": {
+            "個数": 3,
+            "実行時間": 3.0,
+            "待機時間": 1.0
+        }
+    }
+}

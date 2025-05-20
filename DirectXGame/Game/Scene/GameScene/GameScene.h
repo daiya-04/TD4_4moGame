@@ -31,8 +31,9 @@
 #include"Player/Player.h"
 #include"GlobalVariable/Manager/GlobalVaribleManager.h"
 #include"FollowCamera/FollowCamera.h"
-#include"Field/Field.h"
+#include"Boss/Boss.h"
 #pragma endregion
+#include"Field/Field.h"
 
 
 //ゲームシーンクラス
@@ -103,6 +104,9 @@ private://**キクチ
 
 	//プレイヤー
 	std::unique_ptr<Player> player_ = nullptr;
+
+	//ボス
+	std::unique_ptr<Boss> boss_ = nullptr;
 
 	//追従カメラ
 	std::unique_ptr<FollowCamera> followCamera_ = nullptr;

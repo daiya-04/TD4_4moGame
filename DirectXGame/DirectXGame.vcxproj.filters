@@ -298,6 +298,16 @@
     <ClCompile Include="Game\FollowCamera\FollowCamera.cpp" />
     <ClCompile Include="Game\InstancingGameObject\InstancingGameObject.cpp" />
     <ClCompile Include="Game\Field\Field.cpp" />
+    <ClCompile Include="Game\Boss\Boss.cpp" />
+    <ClCompile Include="Game\Boss\DangerZone\DangerZone.cpp" />
+    <ClCompile Include="Game\Boss\BossBullet\BossBullet.cpp" />
+    <ClCompile Include="Game\Boss\Behavior\AreaAttack\BossAreaAttack.cpp" />
+    <ClCompile Include="Game\Boss\Behavior\IBossAttack\IBossAttack.cpp" />
+    <ClCompile Include="Game\Boss\Behavior\Idle\BossIdle.cpp" />
+    <ClCompile Include="Game\Boss\Behavior\WeaponRollAttack\BossWeaponRollAttack.cpp" />
+    <ClCompile Include="Game\Boss\Behavior\IBossBehavior.cpp" />
+    <ClCompile Include="Game\Boss\BossBulletManager\BossBulletManager.cpp" />
+    <ClCompile Include="Game\Boss\DangerZoneManager\DangerZoneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -540,5 +550,15 @@
     <ClInclude Include="Game\FollowCamera\FollowCamera.h" />
     <ClInclude Include="Game\InstancingGameObject\InstancingGameObject.h" />
     <ClInclude Include="Game\Field\Field.h" />
+    <ClInclude Include="Game\Boss\Boss.h" />
+    <ClInclude Include="Game\Boss\DangerZone\DangerZone.h" />
+    <ClInclude Include="Game\Boss\BossBullet\BossBullet.h" />
+    <ClInclude Include="Game\Boss\Behavior\AreaAttack\BossAreaAttack.h" />
+    <ClInclude Include="Game\Boss\Behavior\IBossAttack\IBossAttack.h" />
+    <ClInclude Include="Game\Boss\Behavior\Idle\BossIdle.h" />
+    <ClInclude Include="Game\Boss\Behavior\WeaponRollAttack\BossWeaponRollAttack.h" />
+    <ClInclude Include="Game\Boss\Behavior\IBossBehavior.h" />
+    <ClInclude Include="Game\Boss\BossBulletManager\BossBulletManager.h" />
+    <ClInclude Include="Game\Boss\DangerZoneManager\DangerZoneManager.h" />
   </ItemGroup>
 </Project>

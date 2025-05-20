@@ -13,7 +13,8 @@ void Field::Initialize() {
 	input_ = DaiEngine::Input::GetInstance();
 
 	//Instancingゲームオブジェクト
-	instancingObj_ = std::make_unique<InstancingGameObject>("Standing", 1000);
+	instancingObj_ = std::make_unique<InstancingGameObject>();
+	instancingObj_->Init("Standing", 1000);
 
 	worldTransform_.Init();
 

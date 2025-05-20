@@ -4,9 +4,8 @@
 //カメラポインタ初期化
 DaiEngine::Camera* InstancingGameObject::camera_ = nullptr;
 
-InstancingGameObject::InstancingGameObject(const std::string &modelName,int drawNum)
+void InstancingGameObject::Init(const std::string& modelName, int drawNum)
 {
-	
 	model_.reset(DaiEngine::InstancingObject3d::Create(DaiEngine::ModelManager::LoadGLTF(modelName), drawNum));
 }
 

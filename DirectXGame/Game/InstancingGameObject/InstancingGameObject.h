@@ -1,7 +1,5 @@
 #pragma once
 #include"InstancingObject3d.h"
-
-
 //インスタンシングゲームオブジェクト
 class InstancingGameObject {
 
@@ -20,10 +18,15 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
+	InstancingGameObject()=default;
+	~InstancingGameObject() = default;
+
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	/// <param name="modelName"></param>
 	/// <param name="drawNum"></param>
-	InstancingGameObject(const std::string& modelName, int drawNum);
-	~InstancingGameObject() = default;
+	void Init(const std::string& modelName, int drawNum);
 
 	/// <summary>
 	/// 更新
@@ -45,8 +48,9 @@ public:
 
 private:
 
+	//オブジェクトデータ
 	std::unique_ptr<DaiEngine::InstancingObject3d> model_;
 
+	//データ群
 	std::list<DaiEngine::InstancingObjData> datas_;
-
 };
