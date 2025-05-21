@@ -149,7 +149,7 @@ void MonitorItemImGui(const std::string name, MonitorItemData&data) {
 
 //ツリーのImGui表示処理
 void TreeImGui(const std::string& name, TreeData& treeData,size_t size) {
-
+#ifdef _DEBUG
 	//ツリー処理開始
 	if (ImGui::TreeNode(name.c_str())) {
 
@@ -254,7 +254,7 @@ void TreeImGui(const std::string& name, TreeData& treeData,size_t size) {
 
 					//子ツリーの表示
 					for (auto& key : treeData.treeKeys) {
-						TreeImGui(key, treeData.tree[key],size);
+						TreeImGui(key, treeData.tree[key], size);
 					}
 					//ツリー終わり
 					ImGui::TreePop();
@@ -265,7 +265,7 @@ void TreeImGui(const std::string& name, TreeData& treeData,size_t size) {
 				ImGui::Text("--ChildTreeー--");
 				//子ツリーの表示
 				for (auto& key : treeData.treeKeys) {
-					TreeImGui(key, treeData.tree[key],size);
+					TreeImGui(key, treeData.tree[key], size);
 				}
 			}
 		}
@@ -273,6 +273,9 @@ void TreeImGui(const std::string& name, TreeData& treeData,size_t size) {
 		//ツリー終了
 		ImGui::TreePop();
 	}
+#endif // _DEBUG
+
+	
 }
 
 GlobalVariableManager* GlobalVariableManager::GetInstance()

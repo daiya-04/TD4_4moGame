@@ -26,6 +26,8 @@ void Field::Initialize() {
 }
 
 void Field::Update() {
+
+#ifdef _DEBUG
 	ImGui::Begin("TestOperate");
 	ImGui::DragFloat("BlockWidth", &blockWidth_);
 	ImGui::DragFloat("Radius", &radius_);
@@ -56,6 +58,9 @@ void Field::Update() {
 		ResetStage();
 	}
 	ImGui::End();
+#endif // _DEBUG
+
+	
 
 	//ステージ開始/リセット演出
 	if (isAnimationReset_ == true) {
