@@ -10,18 +10,18 @@
             "radius": 1.0,
             "spawnHeight": 20.0
         },
-        "待機": {
-            "時間": 1.0
+        "Idle": {
+            "second": 60.0
         },
-        "武器回転攻撃": {
-            "待機時間": 1.0,
-            "攻撃時間": 3.0,
-            "硬直時間": 1.0
+        "ItemFallAttack": {
+            "ActiveCount": 120.0,
+            "Num": 3,
+            "WaitCount": 60.0
         },
-        "落下物攻撃": {
-            "個数": 3,
-            "実行時間": 3.0,
-            "待機時間": 1.0
+        "weaponRollAttack": {
+            "activeCount": 3.0,
+            "afterCount": 1.0,
+            "waitCount": 1.0
         }
     }
 }

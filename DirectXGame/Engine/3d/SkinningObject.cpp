@@ -159,10 +159,10 @@ namespace DaiEngine {
 
 	}
 
-	void SkinningObject::SetAnimation(const std::string& fileName) {
+	void SkinningObject::SetAnimation(const std::string& fileName,bool isLoop) {
 
 		animation_ = AnimationManager::Load(fileName);
-		animation_.Start();
+		animation_.Start(isLoop);
 
 	}
 

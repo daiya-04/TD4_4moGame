@@ -2,6 +2,8 @@
 #include"SkinningObject.h"
 #include"Camera.h"
 
+#include<string>
+
 //モデル描画に必要なデータを持つクラス
 class GameObject {
 
@@ -11,7 +13,7 @@ protected:
 
 public:
 
-	DaiEngine::WorldTransform* world_=nullptr;
+	DaiEngine::WorldTransform* world_ = nullptr;
 
 public:
 
@@ -22,7 +24,7 @@ public:
 	static void SetCamera(DaiEngine::Camera* camera) { camera_ = camera; }
 
 
-	GameObject()=default;
+	GameObject() = default;
 	~GameObject() = default;
 
 	void Init(const std::string& modelName);
@@ -41,13 +43,16 @@ public:
 	/// ワールド座標取得
 	/// </summary>
 	/// <returns></returns>
-	DaiEngine::WorldTransform& GetWorld() {return *world_; }
+	DaiEngine::WorldTransform& GetWorld() { return *world_; }
+
+	/// <summary>
+	/// アニメーションをセット
+	/// </summary>
+	/// <param name="name"></param>
+	void SetAnimationName(const std::string& name, bool isLoop=true);
 
 private:
 
 	std::unique_ptr<DaiEngine::SkinningObject> model_;
 
-	DaiEngine::Skeleton skeleton_;
-
-	std::unique_ptr<DaiEngine::SkinCluster> skinCluster_ = nullptr;
 };

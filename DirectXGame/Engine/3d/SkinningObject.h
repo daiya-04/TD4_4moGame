@@ -82,7 +82,7 @@ namespace DaiEngine {
 
 		void SetVisible(bool visible) { visible_ = visible; }
 
-		void SetAnimation(const std::string& fileName);
+		void SetAnimation(const std::string& fileName, bool isLoop=true);
 		Animation& GetAnimation() { return animation_; }
 
 		Skeleton& GetSkeleton() { return skeleton_; }

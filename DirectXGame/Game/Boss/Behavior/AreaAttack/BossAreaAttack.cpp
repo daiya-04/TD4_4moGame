@@ -12,6 +12,7 @@ BossAreaAttack::BossAreaAttack()
 void BossAreaAttack::InitBehavior0()
 {
 	//予備動作初期化
+	boss_->SetAnimationName("GingerManAttack",false);
 }
 
 void BossAreaAttack::InitBehavior1()

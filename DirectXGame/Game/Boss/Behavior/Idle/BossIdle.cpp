@@ -6,6 +6,7 @@ BossIdle::BossIdle()
 {
 	tree_.name_ = "Idle";
 	tree_.SetValue("second", &sec_);
+
 }
 
 void BossIdle::Init()
