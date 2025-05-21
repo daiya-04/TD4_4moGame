@@ -7,6 +7,7 @@
 #include "Matrix44.h"
 #include "DirectXCommon.h"
 #include "ModelManager.h"
+#include "Skeleton.h"
 
 namespace DaiEngine {
 	class SkinCluster {
@@ -15,6 +16,7 @@ namespace DaiEngine {
 	private:
 
 		static const uint32_t kNumMaxInfluence = 4;
+
 		struct VertexInfluence {
 			std::array<float, kNumMaxInfluence> weights_;
 			std::array<uint32_t, kNumMaxInfluence> jointIndices_;
@@ -27,7 +29,7 @@ namespace DaiEngine {
 
 	public:
 
-		void Create(const Skeleton& skeleton, const std::shared_ptr<Model>& model);
+		void Create(const Skeleton& skeleton, const Mesh& mesh);
 
 		void Update(const Skeleton& skeleton);
 

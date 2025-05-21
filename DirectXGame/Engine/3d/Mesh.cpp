@@ -27,8 +27,8 @@ namespace DaiEngine {
 		indexBuff_->Map(0, nullptr, reinterpret_cast<void**>(&indexData_));
 		std::memcpy(indexData_, indices_.data(), sizeof(uint32_t) * indices_.size());
 
-		material_.Init();
 
+		material_.Init();
 	}
 
 	void Mesh::SkinnedInit() {

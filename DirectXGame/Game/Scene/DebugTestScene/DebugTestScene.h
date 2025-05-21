@@ -90,15 +90,17 @@ private: //テスト用の変数
 	std::shared_ptr<DaiEngine::Model> humanModel_;
 	std::shared_ptr<DaiEngine::Model> standingModel_;
 	std::shared_ptr<DaiEngine::Model> sneakModel_;
-	DaiEngine::Animation animation_;
+	/*DaiEngine::Animation animation_;
 	DaiEngine::Skeleton skeleton_;
-	DaiEngine::SkinCluster skinCluster_;
+	DaiEngine::SkinCluster skinCluster_;*/
 
 	uint32_t skyBoxTex_ = 0;
 	std::unique_ptr<DaiEngine::SkyBox> skyBox_;
 
 	std::shared_ptr<DaiEngine::Model> model_;
 	std::unique_ptr<DaiEngine::Object3d> obj_;
+
+	DaiEngine::Animation anime_;
 
 	Dissolve* dissolve_;
 	PostEffect* postEffect_ = nullptr;

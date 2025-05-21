@@ -3,6 +3,7 @@
 #include "Matrix44.h"
 #include "Quaternion.h"
 #include "ModelManager.h"
+#include "Skeleton.h"
 #include <vector>
 #include <map>
 #include <string>

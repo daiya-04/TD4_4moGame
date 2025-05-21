@@ -27,10 +27,10 @@ void DebugTestScene::Init() {
 
 	///
 
-	humanModel_ = DaiEngine::ModelManager::LoadGLTF("Skin");
-	standingModel_ = DaiEngine::ModelManager::LoadGLTF("Standing");
-	sneakModel_ = DaiEngine::ModelManager::LoadGLTF("Running");
-	model_ = DaiEngine::ModelManager::LoadOBJ("Rock");
+	humanModel_ = DaiEngine::ModelManager::LoadGLTF("Player3");
+	standingModel_ = DaiEngine::ModelManager::LoadGLTF("Player3");
+	sneakModel_ = DaiEngine::ModelManager::LoadGLTF("Player3");
+	model_ = DaiEngine::ModelManager::LoadGLTF("MultiMeshAnime");
 
 	skyBoxTex_ = DaiEngine::TextureManager::Load("skyBox.dds");
 	tex_ = DaiEngine::TextureManager::Load("Clear_text.png");
@@ -39,13 +39,15 @@ void DebugTestScene::Init() {
 	skyBox_.reset(DaiEngine::SkyBox::Create(skyBoxTex_));
 
 	human_.reset(DaiEngine::SkinningObject::Create(humanModel_));
-	animation_ = DaiEngine::AnimationManager::Load(standingModel_->name_);
-	skeleton_ = DaiEngine::Skeleton::Create(standingModel_->rootNode_);
-	skinCluster_.Create(skeleton_, standingModel_);
-	human_->SetSkinCluster(&skinCluster_);
+	/*animation_ = DaiEngine::AnimationManager::Load(standingModel_->name_);
+	skeleton_ = DaiEngine::Skeleton::Create(humanModel_->rootNode_);
+	skinCluster_.Create(skeleton_, humanModel_);
+	human_->SetSkinCluster(&skinCluster_);*/
 
 	obj_.reset(DaiEngine::Object3d::Create(model_));
-	obj_->worldTransform_.rotation_.y = 3.14f;
+	//obj_->worldTransform_.rotation_.y = 3.14f;
+	anime_ = DaiEngine::AnimationManager::Load(model_->name_);
+	anime_.Start();
 
 	sprite_.reset(DaiEngine::Sprite::Create(tex_, { 670.0f,200.0f }));
 	
@@ -55,7 +57,7 @@ void DebugTestScene::Init() {
 	postEffect_ = PostEffect::GetInstance();
 	postEffect_->Init();
 
-	human_->worldTransform_.rotation_.y = 3.14f;
+	//human_->worldTransform_.rotation_.y = 3.14f;
 	human_->worldTransform_.translation_.z = 10.0f;
 
 	ParticleEditor::GetInstance()->Init();
@@ -80,20 +82,20 @@ void DebugTestScene::Update() {
 #endif // _DEBUG
 	
 	if (DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-		human_->SetModel(sneakModel_);
-		animation_ = DaiEngine::AnimationManager::Load(sneakModel_->name_);
+		human_->SetAnimation(sneakModel_->name_);
+		/*animation_ = DaiEngine::AnimationManager::Load(sneakModel_->name_);
 		skeleton_ = DaiEngine::Skeleton::Create(sneakModel_->rootNode_);
 		skinCluster_.Create(skeleton_, sneakModel_);
 		animation_.Start();
-		animation_.SetAnimationSpeed(1.0f / 30.0f);
+		animation_.SetAnimationSpeed(1.0f / 60.0f);*/
 	}
 	else if(DaiEngine::Input::GetInstance()->ReleaseKey(DIK_SPACE)){
-		human_->SetModel(humanModel_);
-		animation_ = DaiEngine::AnimationManager::Load(standingModel_->name_);
+		human_->SetAnimation(humanModel_->name_);
+		/*animation_ = DaiEngine::AnimationManager::Load(standingModel_->name_);
 		skeleton_ = DaiEngine::Skeleton::Create(standingModel_->rootNode_);
 		skinCluster_.Create(skeleton_, standingModel_);
 		animation_.Start();
-		animation_.SetAnimationSpeed(1.0f / 60.0f);
+		animation_.SetAnimationSpeed(1.0f / 60.0f);*/
 	}
 
 	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_H)) {
@@ -104,13 +106,16 @@ void DebugTestScene::Update() {
 
 	ParticleEditor::GetInstance()->Update();
 
-	human_->worldTransform_.UpdateMatrix();
+	/*human_->worldTransform_.UpdateMatrix();
 	animation_.Play(skeleton_);
 	
 	skeleton_.Update();
-	skinCluster_.Update(skeleton_);
+	skinCluster_.Update(skeleton_);*/
+	human_->Update();
 
 	obj_->worldTransform_.UpdateMatrix();
+	anime_.Play(model_->rootNode_);
+	obj_->worldTransform_.matWorld_ = anime_.GetLocalMatrix() * obj_->worldTransform_.matWorld_;
 
 	for (auto& [group, particle] : effect_) {
 		particle->Update();
@@ -133,8 +138,8 @@ void DebugTestScene::DrawBackGround() {
 void DebugTestScene::DrawModel() {
 
 	DaiEngine::SkinningObject::preDraw();
-	//human_->Draw(camera_);
-	//skeleton_.Draw(human_->worldTransform_, camera_);
+	human_->Draw(camera_);
+	//human_->GetSkeleton().Draw(human_->worldTransform_, camera_);
 
 
 	DaiEngine::Object3d::preDraw();
@@ -168,7 +173,7 @@ void DebugTestScene::DrawParticle() {
 void DebugTestScene::DrawUI() {
 
 	DaiEngine::Sprite::preDraw();
-	sprite_->Draw();
+	//sprite_->Draw();
 	
 
 }

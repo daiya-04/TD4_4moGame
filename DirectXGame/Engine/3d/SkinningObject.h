@@ -12,6 +12,7 @@
 #include "ModelManager.h"
 #include "Animation.h"
 #include "SkinCluster.h"
+#include "Skeleton.h"
 
 namespace DaiEngine {
 	class SkinningObject {
@@ -41,7 +42,10 @@ namespace DaiEngine {
 	private: //メンバ変数
 
 		std::shared_ptr<Model> model_;
-		SkinCluster* skinCluster_ = nullptr;
+		std::vector<SkinCluster> skinClusters_;
+		Skeleton skeleton_;
+		Animation animation_;
+
 
 		ComPtr<ID3D12Resource> skinningInfoBuff_;
 		SkinningInfoData* skinningInfoData_ = nullptr;
@@ -61,7 +65,8 @@ namespace DaiEngine {
 		//初期化
 		void Initialize(std::shared_ptr<Model> model);
 		//更新
-		//void Update();
+		void Update();
+		void Update(const Matrix4x4& rotateMat);
 		//描画
 		void Draw(const Camera& camera);
 
@@ -69,13 +74,18 @@ namespace DaiEngine {
 
 		void SetModel(std::shared_ptr<Model> model) { model_ = model; }
 
-		void SetSkinCluster(SkinCluster* skinCluster) { skinCluster_ = skinCluster; }
+		//void SetSkinCluster(SkinCluster* skinCluster) { skinCluster_ = skinCluster; }
 
 		std::shared_ptr<Model> GetModel() const { return model_; }
 
 		Vector3 GetWorldPos() const;
 
 		void SetVisible(bool visible) { visible_ = visible; }
+
+		void SetAnimation(const std::string& fileName);
+		Animation& GetAnimation() { return animation_; }
+
+		Skeleton& GetSkeleton() { return skeleton_; }
 
 	};
 }

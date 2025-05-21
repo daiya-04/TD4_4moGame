@@ -5,6 +5,7 @@
 #include "RootParameters.h"
 #include "PipelineManager.h"
 #include "DirectXCommon.h"
+#include "AnimationManager.h"
 
 using namespace Microsoft::WRL;
 using namespace SkinningObjParam;
@@ -34,6 +35,15 @@ namespace DaiEngine {
 		model_ = model;
 		worldTransform_.Init();
 
+		skeleton_ = Skeleton::Create(model_->rootNode_);
+
+		for (auto& mesh : model_->meshes_) {
+			if (mesh.isSkin_) {
+				auto& skinCluster = skinClusters_.emplace_back(SkinCluster());
+				skinCluster.Create(skeleton_, mesh);
+			}
+		}
+
 		skinningInfoBuff_ = CreateBufferResource(DirectXCommon::GetInstance()->GetDevice(), sizeof(uint32_t));
 		skinningInfoBuff_->Map(0, nullptr, reinterpret_cast<void**>(&skinningInfoData_));
 
@@ -42,6 +52,30 @@ namespace DaiEngine {
 
 		threshold_ = 0.0f;
 		visible_ = true;
+
+	}
+
+	void SkinningObject::Update() {
+
+		worldTransform_.UpdateMatrix();
+		animation_.Play(skeleton_);
+
+		skeleton_.Update();
+		for (auto& skinCluster : skinClusters_) {
+			skinCluster.Update(skeleton_);
+		}
+
+	}
+
+	void SkinningObject::Update(const Matrix4x4& rotateMat) {
+
+		worldTransform_.UpdateMatrixRotate(rotateMat);
+		animation_.Play(skeleton_);
+
+		skeleton_.Update();
+		for (auto& skinCluster : skinClusters_) {
+			skinCluster.Update(skeleton_);
+		}
 
 	}
 
@@ -55,45 +89,54 @@ namespace DaiEngine {
 
 		for (auto& mesh : model_->meshes_) {
 
-			skinningInfoData_->numVertex_ = static_cast<uint32_t>(mesh.vertices_.size());
+			if (mesh.isSkin_) {
+				skinningInfoData_->numVertex_ = static_cast<uint32_t>(mesh.vertices_.size());
+
+				D3D12_RESOURCE_BARRIER preBarrier = {};
+				preBarrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+				preBarrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+				preBarrier.Transition.pResource = mesh.GetUavResource();
+				preBarrier.Transition.StateBefore = D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER;
+				preBarrier.Transition.StateAfter = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
+				preBarrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
+				commandList->ResourceBarrier(1, &preBarrier);
+
+
+				PipelineManager::GetInstance()->preDispatch("Skinning");
+
+				commandList->SetComputeRootDescriptorTable(static_cast<UINT>(ComputeRootParam::kPalette), skinClusters_[mesh.GetSkinNumber()].paletteSrvHandle_.second);
+
+				commandList->SetComputeRootDescriptorTable(static_cast<UINT>(ComputeRootParam::kInputVertex), mesh.GetVertexSrvhandleGPU());
+
+				commandList->SetComputeRootDescriptorTable(static_cast<UINT>(ComputeRootParam::kInfluence), skinClusters_[mesh.GetSkinNumber()].influenceSrvHandle_.second);
+
+				commandList->SetComputeRootDescriptorTable(static_cast<UINT>(ComputeRootParam::kOutputVertex), mesh.GetVertexUavHandleGPU());
+
+				commandList->SetComputeRootConstantBufferView(static_cast<UINT>(ComputeRootParam::kSkinningInfo), skinningInfoBuff_->GetGPUVirtualAddress());
+
+				commandList->Dispatch(static_cast<UINT>(mesh.vertices_.size() + 1023) / 1024, 1, 1);
+
+				D3D12_RESOURCE_BARRIER postBarrier = {};
+				postBarrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+				postBarrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+				postBarrier.Transition.pResource = mesh.GetUavResource();
+				postBarrier.Transition.StateBefore = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
+				postBarrier.Transition.StateAfter = D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER;
+				postBarrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
+				commandList->ResourceBarrier(1, &postBarrier);
+			}
+
 			deadEffectData_->threshold_ = threshold_;
-
-			D3D12_RESOURCE_BARRIER preBarrier = {};
-			preBarrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-			preBarrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-			preBarrier.Transition.pResource = mesh.GetUavResource();
-			preBarrier.Transition.StateBefore = D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER;
-			preBarrier.Transition.StateAfter = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
-			preBarrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
-			commandList->ResourceBarrier(1, &preBarrier);
-
-
-			PipelineManager::GetInstance()->preDispatch("Skinning");
-
-			commandList->SetComputeRootDescriptorTable(static_cast<UINT>(ComputeRootParam::kPalette), skinCluster_->paletteSrvHandle_.second);
-
-			commandList->SetComputeRootDescriptorTable(static_cast<UINT>(ComputeRootParam::kInputVertex), mesh.GetVertexSrvhandleGPU());
-
-			commandList->SetComputeRootDescriptorTable(static_cast<UINT>(ComputeRootParam::kInfluence), skinCluster_->influenceSrvHandle_.second);
-
-			commandList->SetComputeRootDescriptorTable(static_cast<UINT>(ComputeRootParam::kOutputVertex), mesh.GetVertexUavHandleGPU());
-
-			commandList->SetComputeRootConstantBufferView(static_cast<UINT>(ComputeRootParam::kSkinningInfo), skinningInfoBuff_->GetGPUVirtualAddress());
-
-			commandList->Dispatch(static_cast<UINT>(mesh.vertices_.size() + 1023) / 1024, 1, 1);
-
-			D3D12_RESOURCE_BARRIER postBarrier = {};
-			postBarrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-			postBarrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-			postBarrier.Transition.pResource = mesh.GetUavResource();
-			postBarrier.Transition.StateBefore = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
-			postBarrier.Transition.StateAfter = D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER;
-			postBarrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
-			commandList->ResourceBarrier(1, &postBarrier);
 
 			PipelineManager::GetInstance()->preDraw("Skinning");
 
-			commandList->IASetVertexBuffers(0, 1, mesh.GetSkinnedVBV());
+			if (mesh.isSkin_) {
+				commandList->IASetVertexBuffers(0, 1, mesh.GetSkinnedVBV());
+			}
+			else {
+				commandList->IASetVertexBuffers(0, 1, mesh.GetVBV());
+			}
+			
 			commandList->IASetIndexBuffer(mesh.GetIVB());
 
 			const auto& material = mesh.GetMaterial();
@@ -113,6 +156,13 @@ namespace DaiEngine {
 
 			commandList->DrawIndexedInstanced(static_cast<UINT>(mesh.indices_.size()), 1, 0, 0, 0);
 		}
+
+	}
+
+	void SkinningObject::SetAnimation(const std::string& fileName) {
+
+		animation_ = AnimationManager::Load(fileName);
+		animation_.Start();
 
 	}
 

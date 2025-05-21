@@ -3,7 +3,7 @@
 using namespace Microsoft::WRL;
 
 namespace DaiEngine {
-	void SkinCluster::Create(const Skeleton& skeleton, const std::shared_ptr<Model>& model) {
+	void SkinCluster::Create(const Skeleton& skeleton, const Mesh& mesh) {
 
 
 		DirectXCommon* dxCommon = DirectXCommon::GetInstance();
@@ -31,15 +31,15 @@ namespace DaiEngine {
 		device->CreateShaderResourceView(paletteBuff_.Get(), &paletteSrvDesc, paletteSrvHandle_.first);
 
 		//influence用のResourceを確保。頂点ごとにinfluence情報を追加できるようにする
-		influenceBuff_ = CreateBufferResource(device, sizeof(VertexInfluence) * model->meshes_[0].vertices_.size());
+		influenceBuff_ = CreateBufferResource(device, sizeof(VertexInfluence) * mesh.vertices_.size());
 		VertexInfluence* mappedInfluence = nullptr;
 		influenceBuff_->Map(0, nullptr, reinterpret_cast<void**>(&mappedInfluence));
-		std::memset(mappedInfluence, 0, sizeof(VertexInfluence) * model->meshes_[0].vertices_.size()); //0埋め。weightを0にしておく
-		mappedInfluence_ = { mappedInfluence,model->meshes_[0].vertices_.size() };
+		std::memset(mappedInfluence, 0, sizeof(VertexInfluence) * mesh.vertices_.size()); //0埋め。weightを0にしておく
+		mappedInfluence_ = { mappedInfluence, mesh.vertices_.size() };
 
 		//influence用のVBVを作成
 		influenceBufferView_.BufferLocation = influenceBuff_->GetGPUVirtualAddress();
-		influenceBufferView_.SizeInBytes = UINT(sizeof(VertexInfluence) * model->meshes_[0].vertices_.size());
+		influenceBufferView_.SizeInBytes = UINT(sizeof(VertexInfluence) * mesh.vertices_.size());
 		influenceBufferView_.StrideInBytes = sizeof(VertexInfluence);
 
 		influenceSrvHandle_.first = dxCommon->GetCPUDescriptorHandle(dxCommon->GetSrvHeap(), srvDescSize, dxCommon->GetSrvHeapCount());
@@ -52,7 +52,7 @@ namespace DaiEngine {
 		influenceSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
 		influenceSrvDesc.Buffer.FirstElement = 0;
 		influenceSrvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
-		influenceSrvDesc.Buffer.NumElements = UINT(model->meshes_[0].vertices_.size());
+		influenceSrvDesc.Buffer.NumElements = UINT(mesh.vertices_.size());
 		influenceSrvDesc.Buffer.StructureByteStride = sizeof(VertexInfluence);
 		device->CreateShaderResourceView(influenceBuff_.Get(), &influenceSrvDesc, influenceSrvHandle_.first);
 
@@ -61,7 +61,7 @@ namespace DaiEngine {
 		std::generate(inverseBindPoseMatrices_.begin(), inverseBindPoseMatrices_.end(), MakeIdentity44);
 
 		//ModelのSkinCluster情報を解析
-		for (const auto& jointWeight : model->skinClusterData_) {
+		for (const auto& jointWeight : mesh.skinClusterData_) {
 			//JointWeight.firstはjoint名なので、skeletonに対象となるjointが含まれているか判断
 			auto it = skeleton.jointMap_.find(jointWeight.first);
 			if (it == skeleton.jointMap_.end()) { continue; } //存在しないので、次

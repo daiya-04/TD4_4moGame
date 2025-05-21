@@ -2,6 +2,8 @@
 #include <d3d12.h>
 #include <wrl.h>
 #include <vector>
+#include <map>
+#include <string>
 #include "Vec2.h"
 #include "Vec3.h"
 #include "Vec4.h"
@@ -21,6 +23,16 @@ namespace DaiEngine {
 			Vector3 normal;
 		};
 
+		struct VertexWeightData {
+			float weight_;
+			uint32_t vertexIndex_;
+		};
+
+		struct JointWeightData {
+			Matrix4x4 inverseBindPoseMatrix_;
+			std::vector<VertexWeightData> vertexWeights_;
+		};
+
 	public:
 
 		void Init();
@@ -29,9 +41,17 @@ namespace DaiEngine {
 
 		void UavInit();
 
-		void UpdateVertex();
+		//void UpdateVertex();
 
-		void SetMaterial(const Material& material) { material_ = material; }
+		void SetMaterial(Material material) { material_ = material; }
+
+		void SetSkinNumber(int32_t number) { skinNumber_ = number; }
+		int32_t GetSkinNumber() {
+			if (skinNumber_ >= 0) {
+				return skinNumber_;
+			}
+			return 0;
+		}
 
 		const D3D12_VERTEX_BUFFER_VIEW* GetVBV() const { return &vertexBufferView_; }
 		const D3D12_INDEX_BUFFER_VIEW* GetIVB() const { return &indexBufferView_; }
@@ -71,7 +91,13 @@ namespace DaiEngine {
 
 		std::vector<VertexData> vertices_;
 		std::vector<uint32_t> indices_;
-		//SkinCluster skinCluster_;
+
+		std::string name_;
+
+		std::map<std::string, JointWeightData> skinClusterData_;
+		bool isSkin_ = false;
+		int32_t skinNumber_ = -1;
+		
 
 	};
 }

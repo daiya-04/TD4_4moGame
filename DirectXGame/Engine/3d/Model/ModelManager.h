@@ -28,11 +28,6 @@ struct QuaternionTransform {
 
 namespace DaiEngine {
 	class Model {
-	private:
-		template<class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
-
-		friend class ModelManager;
-
 	public:
 
 		struct Node {
@@ -42,38 +37,21 @@ namespace DaiEngine {
 			std::vector<Node> children_;
 		};
 
-		struct VertexWeightData {
-			float weight_;
-			uint32_t vertexIndex_;
-		};
-
-		struct JointWeightData {
-			Matrix4x4 inverseBindPoseMatrix_;
-			std::vector<VertexWeightData> vertexWeights_;
-		};
-
-	public:
-
-
 	public:
 
 
 		Node rootNode_;
-
+		//メッシュ配列
 		std::vector<Mesh> meshes_;
-
+		//マテリアル配列
+		std::vector<Material> materials_;
 
 		//modelファイルの名前
 		std::string name_;
 
-		std::map<std::string, JointWeightData> skinClusterData_;
-
 	};
 
 	class ModelManager {
-	private:
-		template<class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
-
 	public:
 
 		static const size_t kNumModel = 128;
@@ -114,41 +92,5 @@ namespace DaiEngine {
 		ModelManager& operator=(const ModelManager&) = delete;
 
 	};
-
-	class Skeleton {
-	public:
-
-		struct Joint {
-			QuaternionTransform transform_;
-			Matrix4x4 localMat_;
-			Matrix4x4 skeletonSpaceMat_;
-			std::string name_;
-			std::vector<int32_t> children_; //子JointのIndexのリスト。いなければ空
-			int32_t index_; //自身のindex
-			std::optional<int32_t> parent_; //親Jointのindex。いなければnull
-		};
-
-	public:
-
-		static Skeleton Create(const Model::Node& rootNode);
-
-		void Update();
-
-		void Draw(const WorldTransform& worldTransform, const Camera& camera);
-
-		Vector3 GetSkeletonPos(const std::string& jointName);
-
-	private:
-		//ジョイント生成
-		static int32_t CreateJoint(const Model::Node& node, const std::optional<int32_t>& parent, std::vector<Joint>& joints);
-
-	public:
-
-		int32_t root_; //RootJointのIndex
-		std::map<std::string, int32_t> jointMap_; //Joint名とIndexとの辞書
-		std::vector<Joint> joints_;
-
-	};
-
 }
 
