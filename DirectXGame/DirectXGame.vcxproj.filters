@@ -281,6 +281,33 @@
     <ClCompile Include="Engine\GraphicsPipeline\InstancingObject3dGraphicsPipeline.cpp">
       <Filter>Engine\GraphicsPipeline</Filter>
     </ClCompile>
+    <ClCompile Include="Game\GameObject\GameObject.cpp" />
+    <ClCompile Include="Game\GlobalVariable\Manager\GlobalVaribleManager.cpp" />
+    <ClCompile Include="Game\GlobalVariable\Group\GlobalVariableGroup.cpp" />
+    <ClCompile Include="Game\GlobalVariable\Tree\GlobalVariableTree.cpp" />
+    <ClCompile Include="Game\Player\Player.cpp" />
+    <ClCompile Include="Game\Player\Input\PlayerInput.cpp" />
+    <ClCompile Include="Game\Player\behavior\IPlayerBehavior.cpp" />
+    <ClCompile Include="Game\Player\behavior\Move\ProtPlayerMove.cpp" />
+    <ClCompile Include="Game\Player\behavior\Attacks\IPlayerAttack.cpp" />
+    <ClCompile Include="Game\Player\behavior\Attacks\Combo2\PlayerAttackCombo2.cpp" />
+    <ClCompile Include="Game\Player\behavior\Attacks\Combo1\PlayerAttackCombo1.cpp" />
+    <ClCompile Include="Game\Player\behavior\AttackManager\PlayerAttackManager.cpp" />
+    <ClCompile Include="Game\Player\behavior\Roll\ProtPlayerRoll.cpp" />
+    <ClCompile Include="Game\Player\behavior\Attacks\Combo3\PlayerAttackCombo3.cpp" />
+    <ClCompile Include="Game\FollowCamera\FollowCamera.cpp" />
+    <ClCompile Include="Game\InstancingGameObject\InstancingGameObject.cpp" />
+    <ClCompile Include="Game\Field\Field.cpp" />
+    <ClCompile Include="Game\Boss\Boss.cpp" />
+    <ClCompile Include="Game\Boss\DangerZone\DangerZone.cpp" />
+    <ClCompile Include="Game\Boss\BossBullet\BossBullet.cpp" />
+    <ClCompile Include="Game\Boss\Behavior\AreaAttack\BossAreaAttack.cpp" />
+    <ClCompile Include="Game\Boss\Behavior\IBossAttack\IBossAttack.cpp" />
+    <ClCompile Include="Game\Boss\Behavior\Idle\BossIdle.cpp" />
+    <ClCompile Include="Game\Boss\Behavior\WeaponRollAttack\BossWeaponRollAttack.cpp" />
+    <ClCompile Include="Game\Boss\Behavior\IBossBehavior.cpp" />
+    <ClCompile Include="Game\Boss\BossBulletManager\BossBulletManager.cpp" />
+    <ClCompile Include="Game\Boss\DangerZoneManager\DangerZoneManager.cpp" />
     <ClCompile Include="Engine\3d\Skeleton.cpp">
       <Filter>Engine\3d</Filter>
     </ClCompile>
@@ -507,9 +534,6 @@
     </ClInclude>
     <ClInclude Include="Engine\GraphicsPipeline\InstancingObject3dGraphicsPipeline.h">
       <Filter>Engine\GraphicsPipeline</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\3d\Skeleton.h">
-      <Filter>Engine\3d</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

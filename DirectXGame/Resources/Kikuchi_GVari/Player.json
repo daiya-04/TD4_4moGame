@@ -1,0 +1,34 @@
+{
+    "Player": {
+        "AttackManager": {
+            "Com1": {
+                "Attack": 60.0,
+                "EndAttack": 60.0,
+                "PreAttack": 60.0
+            },
+            "Com2": {
+                "Attack": 60.0,
+                "EndAttack": 60.0,
+                "PreAttack": 60.0
+            },
+            "Com3": {
+                "Attack": 60.0,
+                "EndAttack": 60.0,
+                "PreAttack": 60.0
+            }
+        },
+        "HP": 10,
+        "Hit": {
+            "MaxNoHitSec": 60.0,
+            "TenmetuNum": 9
+        },
+        "Move": {
+            "speed": 0.10000000149011612
+        },
+        "Roll": {
+            "cooldownCount": 60.0,
+            "count": 10.0,
+            "speed": 1.0
+        }
+    }
+}

@@ -27,6 +27,15 @@
 #include "SpotLight.h"
 #include "SkyBox.h"
 
+#pragma region キクチ
+#include"Player/Player.h"
+#include"GlobalVariable/Manager/GlobalVaribleManager.h"
+#include"FollowCamera/FollowCamera.h"
+#include"Boss/Boss.h"
+#pragma endregion
+#include"Field/Field.h"
+
+
 //ゲームシーンクラス
 class GameScene : public DaiEngine::IScene {
 public:
@@ -88,5 +97,21 @@ private:
 	//スポットライト
 	DaiEngine::SpotLight spotLight_;
 
+private://**キクチ
+	
+	//デバッグパラメータマネージャ
+	GlobalVariableManager* globalVariableManager_ = nullptr;
+
+	//プレイヤー
+	std::unique_ptr<Player> player_ = nullptr;
+
+	//ボス
+	std::unique_ptr<Boss> boss_ = nullptr;
+
+	//追従カメラ
+	std::unique_ptr<FollowCamera> followCamera_ = nullptr;
+	
+	//地面
+	std::unique_ptr<Field> field_ = nullptr;
 };
 
