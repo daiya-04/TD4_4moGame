@@ -3,7 +3,7 @@
 BossBulletManager::BossBulletManager(Boss* boss)
 {
 	//オブジェクト生成
-	InstancingGameObject::Init("Standing", 100);
+	InstancingGameObject::Init("Sphere", 100);
 	//ボスのポインタ取得
 	boss_ = boss;
 

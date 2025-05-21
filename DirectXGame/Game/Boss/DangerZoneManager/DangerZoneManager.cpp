@@ -4,7 +4,7 @@
 DangerZoneManager::DangerZoneManager(Boss* boss)
 {
 	//オブジェクト生成
-	InstancingGameObject::Init("Standing", 100);
+	InstancingGameObject::Init("DangerZone", 100);
 
 	//ボスポインタ取得
 	boss_ = boss;

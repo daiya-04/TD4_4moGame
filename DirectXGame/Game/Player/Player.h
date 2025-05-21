@@ -94,12 +94,15 @@ private://**プライベート変数**//
 	//プレイヤー入力クラス
 	std::unique_ptr<PlayerInput>input_;
 
+	//オフセット座標
+	Vector3 offsetPos_ = {0,0,0};
+
 private://**ヒット時処理*//
 	
 	//無敵時間カウント
 	float currentHitCount_ = 0;
 
-	//点メス回数カウント
+	//点滅回数カウント
 	int tenmetuCount_ = 0;
 
 	//無敵時間

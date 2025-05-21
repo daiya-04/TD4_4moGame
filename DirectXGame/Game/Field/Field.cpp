@@ -14,7 +14,7 @@ void Field::Initialize() {
 
 	//Instancingゲームオブジェクト
 	instancingObj_ = std::make_unique<InstancingGameObject>();
-	instancingObj_->Init("Standing", 1000);
+	instancingObj_->Init("Cube", 1000);
 
 	worldTransform_.Init();
 
