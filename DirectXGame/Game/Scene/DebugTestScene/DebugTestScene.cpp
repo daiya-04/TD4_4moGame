@@ -27,9 +27,9 @@ void DebugTestScene::Init() {
 
 	///
 
-	humanModel_ = DaiEngine::ModelManager::LoadGLTF("Player3");
-	standingModel_ = DaiEngine::ModelManager::LoadGLTF("Player3");
-	sneakModel_ = DaiEngine::ModelManager::LoadGLTF("Player3");
+	humanModel_ = DaiEngine::ModelManager::LoadGLTF("Gentlman");
+	standingModel_ = DaiEngine::ModelManager::LoadGLTF("Gentlman");
+	sneakModel_ = DaiEngine::ModelManager::LoadGLTF("Gentlman");
 	model_ = DaiEngine::ModelManager::LoadGLTF("MultiMeshAnime");
 
 	skyBoxTex_ = DaiEngine::TextureManager::Load("skyBox.dds");
