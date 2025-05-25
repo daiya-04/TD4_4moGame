@@ -3,7 +3,7 @@
         "DangerZone": {
             "radius": 2.0,
             "warningCount": 60.0,
-            "warningSphereHeight": 0.5
+            "warningSphereHeight": -1.0
         },
         "FallingBullet": {
             "fallSpeed": 1.0,

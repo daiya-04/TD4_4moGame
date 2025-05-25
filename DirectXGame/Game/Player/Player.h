@@ -6,6 +6,10 @@
 
 
 struct ProtPlayerParameters {
+
+	//移動量
+	Vector3 velocity;
+
 	//体力
 	int hp = 10;
 
@@ -49,6 +53,7 @@ public://**パブリック変数**//
 	/// </summary>
 	void OnCollison();
 
+	DaiEngine::WorldTransform& GetWorld() { return *world_; };
 
 public://**ゲッター**//
 
@@ -96,6 +101,9 @@ private://**プライベート変数**//
 
 	//オフセット座標
 	Vector3 offsetPos_ = {0,0,0};
+
+	//座標
+	Vector3 position_ = { 0,0,0 };
 
 private://**ヒット時処理*//
 	

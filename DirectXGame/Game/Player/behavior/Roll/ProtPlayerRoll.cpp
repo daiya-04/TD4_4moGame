@@ -26,6 +26,8 @@ void PlayerRoll::Init()
 
 	//時間リセット
 	currentCount_ = 0;
+
+	player_->SetAnimationName("PlayerDown");
 }
 
 void PlayerRoll::Update()
@@ -48,5 +50,5 @@ void PlayerRoll::Update()
 	//時間内なので処理
 
 	//移動する
-	player_->GetWorld().translation_ += velo_ * rollSpeed_;
+	player_->parameters_.velocity += velo_ * rollSpeed_;
 }

@@ -14,7 +14,7 @@
 Player::Player()
 {
 	//オブジェクト生成
-	GameObject::Init("Standing");
+	GameObject::Init("Player");
 
 	//入力クラス生成
 	input_ = std::make_unique<PlayerInput>();
@@ -36,7 +36,7 @@ Player::Player()
 	gvg->SetMonitorValue("HitFlag", &parameters_.isHit);
 	gvg->SetMonitorValue("RollCooldown", &parameters_.currentRollCount);
 	gvg->SetValue("HP", &parameters_.hp);
-
+	gvg->SetValue("OffsetPos", &offsetPos_);
 	//全ての状態のツリーをセット
 	for (auto& behavior : behaviors_) {
 		if (behavior) {
@@ -55,6 +55,10 @@ Player::Player()
 
 void Player::Update()
 {
+
+	//移動量初期化
+	parameters_.velocity = { 0,0,0 };
+
 	//リクエストがある場合
 	if (behaviorRequest_) {
 		//リクエストの値を渡す
@@ -68,11 +72,18 @@ void Player::Update()
 	//回避のクールタイム更新
 	parameters_.currentRollCount --;
 
+
 	//もし時間が0以下なら0に
 	if (parameters_.currentRollCount < 0)parameters_.currentRollCount = 0;
 
 	//状態更新
 	behaviors_[(int)behaviorName_]->Update();
+
+	//座標更新
+	position_ += parameters_.velocity;
+
+	//オフセット分足してワールド座標更新
+	world_->translation_ =position_ + offsetPos_;
 
 	//点滅更新
 	Tenmetu();
@@ -138,7 +149,7 @@ Vector3 Player::SetBody2Input()
 	//入力がある場合
 	if (velocity != Vector3(0, 0, 0)) {
 		//向きを指定
-		world_->rotation_.y = GetYRotate({ velocity.x,velocity.z }) + ((float)std::numbers::pi);
+		world_->rotation_.y = GetYRotate({ velocity.x,velocity.z });
 	}
 
 	return velocity;

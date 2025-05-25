@@ -23,7 +23,7 @@ void PlayerMove::Update()
 	debugInputMove = move;
 
 	//移動する
-	player_->GetWorld().translation_ += move * moveSpped_;
+	player_->parameters_.velocity += move * moveSpped_;
 
 	//もし回避入力があった&クールタイムが終わっている場合
 	if (player_->GetInput()->GetInput(PlayerInput::Type::Roll)&&player_->parameters_.currentRollCount==0) {
