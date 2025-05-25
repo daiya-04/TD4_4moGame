@@ -1,4 +1,5 @@
 #include "PlayerAttackCombo3.h"
+#include"Game/Player/Player.h"
 
 PlayerAttackCombo3::PlayerAttackCombo3()
 {
@@ -7,6 +8,7 @@ PlayerAttackCombo3::PlayerAttackCombo3()
 
 void PlayerAttackCombo3::InitPreliminaryAction()
 {
+	player_->SetAnimationName("PlayerAttack1", false);
 }
 
 void PlayerAttackCombo3::InitAction()

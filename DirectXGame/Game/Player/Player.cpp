@@ -14,7 +14,7 @@
 Player::Player()
 {
 	//オブジェクト生成
-	GameObject::Init("Player");
+	GameObject::Init("PlayerEntry");
 
 	//入力クラス生成
 	input_ = std::make_unique<PlayerInput>();
