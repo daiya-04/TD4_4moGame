@@ -39,10 +39,18 @@ Boss::Boss()
 	gvg->SetTreeData(dangerZoneManager_->GetTree());
 	gvg->SetTreeData(bulletManager_->GetTree());
 
+	gvg->SetValue("StartPos", &startPosition_);
+	gvg->SetValue("OffsetPos", &offsetPosition_);
+}
+
+void Boss::Initialize() {
+	position_ = startPosition_;
 }
 
 void Boss::Update()
 {
+	//移動量初期化
+	parameters_.velocity_ = {0,0,0};
 
 	//仮でプレイヤー方向に向き続ける
 	SetDirection2Player();
@@ -83,6 +91,10 @@ void Boss::Update()
 
 	//状態更新
 	behaviors_[(int)behavior_]->Update();
+
+	position_ += parameters_.velocity_;
+
+	world_->translation_ = position_+offsetPosition_;
 
 	//行列更新
 	GameObject::Update();

@@ -57,6 +57,9 @@ void GameScene::Init(){
 	//全ての初期化の後に処理
 	globalVariableManager_->LoadAllSaveData();
 	globalVariableManager_->SetLoadAllData();
+
+	//セットされたデータで初期化
+	boss_->Initialize();
 }
 
 void GameScene::Update() {

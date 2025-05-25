@@ -18,6 +18,16 @@
             "Num": 3,
             "WaitCount": 60.0
         },
+        "OffsetPos": [
+            0.0,
+            1.159999966621399,
+            0.3100000023841858
+        ],
+        "StartPos": [
+            0.0,
+            0.0,
+            10.0
+        ],
         "weaponRollAttack": {
             "activeCount": 3.0,
             "afterCount": 1.0,
