@@ -173,6 +173,12 @@
     <Filter Include="Game\Player\behavior\Attacks\Combo3">
       <UniqueIdentifier>{b2f56701-13bc-46ed-b0f0-22564ee44f01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Scene\ClearScene">
+      <UniqueIdentifier>{67fcf31a-acbd-4c28-a2b4-6cf098a8c355}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\GameOverScene">
+      <UniqueIdentifier>{647a37c1-5bb1-46c2-b721-b20037459f70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -448,6 +454,15 @@
     </ClCompile>
     <ClCompile Include="Game\Player\behavior\Roll\ProtPlayerRoll.cpp">
       <Filter>Game\Player\behavior\Roll</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Audio\AudioManager.cpp">
+      <Filter>Engine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="ClearScene.cpp">
+      <Filter>Game\Scene\ClearScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverScene.cpp">
+      <Filter>Game\Scene\GameOverScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -759,6 +774,15 @@
     </ClInclude>
     <ClInclude Include="Engine\3d\Skeleton.h">
       <Filter>Engine\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Audio\AudioManager.h">
+      <Filter>Engine\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearScene.h">
+      <Filter>Game\Scene\ClearScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverScene.h">
+      <Filter>Game\Scene\GameOverScene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

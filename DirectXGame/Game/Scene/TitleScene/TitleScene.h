@@ -21,6 +21,7 @@
 #include "SpotLight.h"
 #include "Vec2.h"
 #include "GPUParticle.h"
+#include "Audio.h"
 
 
 //タイトルシーンクラス
@@ -42,10 +43,6 @@ public:
 	/// モデル描画
 	/// </summary>
 	void DrawModel()override;
-	/// <summary>
-	/// パーティクル3dモデル描画
-	/// </summary>
-	void DrawParticleModel()override;
 	/// <summary>
 	/// パーティクル描画
 	/// </summary>
@@ -89,6 +86,9 @@ private:
 	DaiEngine::PointLight pointLight_;
 	//スポットライト
 	DaiEngine::SpotLight spotLight_;
+
+	//タイトル用BGM
+	DaiEngine::Audio* bgm_ = nullptr;
 
 	//タイトルロゴ
 	std::unique_ptr<DaiEngine::Sprite> titleLogo_;

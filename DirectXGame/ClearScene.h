@@ -1,45 +1,20 @@
 #pragma once
-///---------------------------------------------------------------------------------------------
-// 
-// ゲームシーン
-// 
-///---------------------------------------------------------------------------------------------
-
-
 #include "IScene.h"
 #include <memory>
-#include <list>
 #include <vector>
-#include <optional>
-#include <map>
 #include <string>
-#include <functional>
 
 #include "Sprite.h"
 #include "Object3d.h"
-#include "SkinningObject.h"
-#include "InstancingObject3d.h"
-#include "Particle.h"
-#include "GPUParticle.h"
 #include "Camera.h"
-#include "WorldTransform.h"
 #include "PointLight.h"
 #include "SpotLight.h"
-#include "SkyBox.h"
 #include "Audio.h"
 
-#pragma region キクチ
-#include"Player/Player.h"
-#include"GlobalVariable/Manager/GlobalVaribleManager.h"
-#include"FollowCamera/FollowCamera.h"
-#include"Boss/Boss.h"
-#pragma endregion
-#include"Field/Field.h"
 
-
-//ゲームシーンクラス
-class GameScene : public DaiEngine::IScene {
+class ClearScene : public DaiEngine::IScene {
 public:
+	
 	/// <summary>
 	/// 初期化
 	/// </summary>
@@ -79,12 +54,7 @@ public:
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~GameScene()override;
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	GameScene();
-
+	~ClearScene()override;
 
 private:
 	//カメラ
@@ -94,25 +64,7 @@ private:
 	//スポットライト
 	DaiEngine::SpotLight spotLight_;
 
-private://**キクチ
-	
-	//デバッグパラメータマネージャ
-	GlobalVariableManager* globalVariableManager_ = nullptr;
-
-	//プレイヤー
-	std::unique_ptr<Player> player_ = nullptr;
-
-	//ボス
-	std::unique_ptr<Boss> boss_ = nullptr;
-
-	//追従カメラ
-	std::unique_ptr<FollowCamera> followCamera_ = nullptr;
-	
-	//地面
-	std::unique_ptr<Field> field_ = nullptr;
-
-private:
-
+	//クリア用BGM
 	DaiEngine::Audio* bgm_ = nullptr;
 
 };

@@ -9,8 +9,11 @@
 #include "WinApp.h"
 #include "ParticleManager.h"
 #include "Easing.h"
+#include "AudioManager.h"
 
-TitleScene::~TitleScene() {}
+TitleScene::~TitleScene() {
+	bgm_->StopSound();
+}
 
 void TitleScene::SetGlobalVariables() {
 	DaiEngine::GlobalVariables* globalVariables = DaiEngine::GlobalVariables::GetInstance();
@@ -69,6 +72,9 @@ void TitleScene::Init() {
 	uint32_t gameFinifhTex = DaiEngine::TextureManager::Load("GameFinish.png");
 	///
 
+	bgm_ = DaiEngine::AudioManager::Load("BGM/Title.mp3");
+	bgm_->Play();
+
 	titleLogo_.reset(DaiEngine::Sprite::Create(titleLogoTex, {}));
 
 	gameStartUI_.reset(DaiEngine::Sprite::Create(gameStartTex, {}));
@@ -99,6 +105,13 @@ void TitleScene::Update() {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
 	}
 	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_3)) {
+		DaiEngine::SceneManager::GetInstance()->ChangeScene("Clear");
+	}
+	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_4)) {
+		DaiEngine::SceneManager::GetInstance()->ChangeScene("GameOver");
+	}
+
+	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_0)) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Debug");
 	}
 	
@@ -148,12 +161,6 @@ void TitleScene::DrawBackGround(){
 void TitleScene::DrawModel(){
 
 	
-
-}
-
-void TitleScene::DrawParticleModel(){
-
-
 
 }
 
