@@ -2,7 +2,7 @@
     "Boss": {
         "DangerZone": {
             "radius": 2.5,
-            "warningCount": 8.0,
+            "warningCount": 5.5,
             "warningSphereHeight": -1.0
         },
         "FallingBullet": {

@@ -32,8 +32,8 @@
         ],
         "Roll": {
             "cooldownCount": 16.5,
-            "count": 6.0,
-            "speed": 1.5
+            "count": 10.0,
+            "speed": 1.2000000476837158
         }
     }
 }
