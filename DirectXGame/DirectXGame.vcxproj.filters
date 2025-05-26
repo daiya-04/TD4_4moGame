@@ -89,6 +89,90 @@
     <Filter Include="Game\Scene\TitleScene">
       <UniqueIdentifier>{0e431317-84ed-467f-bf9d-6ab0225ef911}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Boss">
+      <UniqueIdentifier>{4b1f1493-8fbe-41b0-a363-e6b53aa8a4c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player">
+      <UniqueIdentifier>{d97a80da-fb3f-48f2-91c9-8abab9631653}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\InstancingGameObject">
+      <UniqueIdentifier>{28ec8657-331f-41da-8c73-b7f8e5dac9b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Field">
+      <UniqueIdentifier>{fde12440-7828-471b-8173-d9371d99bb3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\FollowCamera">
+      <UniqueIdentifier>{fdab6a66-4cd3-421a-9fb1-6d0786ba34c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameObject">
+      <UniqueIdentifier>{ecd1ae71-ba65-4765-a3c4-e91dbc76589a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GlobalVariable">
+      <UniqueIdentifier>{ecdac635-5f34-4d5e-8ee5-02b50510e420}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Boss\Behavior">
+      <UniqueIdentifier>{e6087a2e-6e45-491f-a3e0-da7ddefcc91b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Boss\BossBullet">
+      <UniqueIdentifier>{759e68e3-adfd-4476-a7c7-4e8073196359}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Boss\BossBulletManager">
+      <UniqueIdentifier>{6334f4bd-d483-4379-8634-287fcbbe09d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Boss\DangerZone">
+      <UniqueIdentifier>{321bea67-9446-45b8-8985-93db0417acff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Boss\DangerZoneManager">
+      <UniqueIdentifier>{a125cc26-7a13-4ac4-891d-55f938ed6379}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Boss\Behavior\AreaAttack">
+      <UniqueIdentifier>{26c7dd6c-1130-4f6a-9d46-2c0148431f0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Boss\Behavior\IBossAttack">
+      <UniqueIdentifier>{9bc8f732-6e4a-4170-8952-0440df838535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Boss\Behavior\Idle">
+      <UniqueIdentifier>{6c3b17ab-8407-4eda-8b81-a2a48bf7ba32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Boss\Behavior\WeaponRollAttack">
+      <UniqueIdentifier>{7d7bf22a-47c1-4a31-a102-ecef86060baf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GlobalVariable\Group">
+      <UniqueIdentifier>{3932661f-2087-42bb-a3d2-1789c9be1868}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GlobalVariable\Manager">
+      <UniqueIdentifier>{aebb39e4-827f-45f6-8db3-ba37c14b160c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GlobalVariable\Tree">
+      <UniqueIdentifier>{7c34d56d-dc9e-4ce5-a5c6-4043182ea3f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player\behavior">
+      <UniqueIdentifier>{ddbf2fb8-3f1b-45a1-91e0-8c2ad1c6ff5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player\Input">
+      <UniqueIdentifier>{07e5b51e-0c05-4b6d-893a-eb6c522776b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player\behavior\AttackManager">
+      <UniqueIdentifier>{c61bd0c8-b643-4f5b-ba1b-1b943d86f3c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player\behavior\Attacks">
+      <UniqueIdentifier>{51e2a41a-2e4c-482a-ba3b-d1e50db894ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player\behavior\Move">
+      <UniqueIdentifier>{89ee4cfe-fa58-40b0-bd59-bbc12ee1d18a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player\behavior\Roll">
+      <UniqueIdentifier>{847ea4ce-c9c3-4f2c-9f63-5f6ba1c84a60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player\behavior\Attacks\Combo1">
+      <UniqueIdentifier>{3420add2-44c9-441d-961b-6ac0d06b0eb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player\behavior\Attacks\Combo2">
+      <UniqueIdentifier>{1d03fcf4-2bd9-4dc3-b69c-59a56f900c8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player\behavior\Attacks\Combo3">
+      <UniqueIdentifier>{b2f56701-13bc-46ed-b0f0-22564ee44f01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -281,35 +365,89 @@
     <ClCompile Include="Engine\GraphicsPipeline\InstancingObject3dGraphicsPipeline.cpp">
       <Filter>Engine\GraphicsPipeline</Filter>
     </ClCompile>
-    <ClCompile Include="Game\GameObject\GameObject.cpp" />
-    <ClCompile Include="Game\GlobalVariable\Manager\GlobalVaribleManager.cpp" />
-    <ClCompile Include="Game\GlobalVariable\Group\GlobalVariableGroup.cpp" />
-    <ClCompile Include="Game\GlobalVariable\Tree\GlobalVariableTree.cpp" />
-    <ClCompile Include="Game\Player\Player.cpp" />
-    <ClCompile Include="Game\Player\Input\PlayerInput.cpp" />
-    <ClCompile Include="Game\Player\behavior\IPlayerBehavior.cpp" />
-    <ClCompile Include="Game\Player\behavior\Move\ProtPlayerMove.cpp" />
-    <ClCompile Include="Game\Player\behavior\Attacks\IPlayerAttack.cpp" />
-    <ClCompile Include="Game\Player\behavior\Attacks\Combo2\PlayerAttackCombo2.cpp" />
-    <ClCompile Include="Game\Player\behavior\Attacks\Combo1\PlayerAttackCombo1.cpp" />
-    <ClCompile Include="Game\Player\behavior\AttackManager\PlayerAttackManager.cpp" />
-    <ClCompile Include="Game\Player\behavior\Roll\ProtPlayerRoll.cpp" />
-    <ClCompile Include="Game\Player\behavior\Attacks\Combo3\PlayerAttackCombo3.cpp" />
-    <ClCompile Include="Game\FollowCamera\FollowCamera.cpp" />
-    <ClCompile Include="Game\InstancingGameObject\InstancingGameObject.cpp" />
-    <ClCompile Include="Game\Field\Field.cpp" />
-    <ClCompile Include="Game\Boss\Boss.cpp" />
-    <ClCompile Include="Game\Boss\DangerZone\DangerZone.cpp" />
-    <ClCompile Include="Game\Boss\BossBullet\BossBullet.cpp" />
-    <ClCompile Include="Game\Boss\Behavior\AreaAttack\BossAreaAttack.cpp" />
-    <ClCompile Include="Game\Boss\Behavior\IBossAttack\IBossAttack.cpp" />
-    <ClCompile Include="Game\Boss\Behavior\Idle\BossIdle.cpp" />
-    <ClCompile Include="Game\Boss\Behavior\WeaponRollAttack\BossWeaponRollAttack.cpp" />
-    <ClCompile Include="Game\Boss\Behavior\IBossBehavior.cpp" />
-    <ClCompile Include="Game\Boss\BossBulletManager\BossBulletManager.cpp" />
-    <ClCompile Include="Game\Boss\DangerZoneManager\DangerZoneManager.cpp" />
     <ClCompile Include="Engine\3d\Skeleton.cpp">
       <Filter>Engine\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Boss\Boss.cpp">
+      <Filter>Game\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Boss\Behavior\IBossBehavior.cpp">
+      <Filter>Game\Boss\Behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Boss\Behavior\AreaAttack\BossAreaAttack.cpp">
+      <Filter>Game\Boss\Behavior\AreaAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Boss\Behavior\IBossAttack\IBossAttack.cpp">
+      <Filter>Game\Boss\Behavior\IBossAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Boss\Behavior\Idle\BossIdle.cpp">
+      <Filter>Game\Boss\Behavior\Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Boss\Behavior\WeaponRollAttack\BossWeaponRollAttack.cpp">
+      <Filter>Game\Boss\Behavior\WeaponRollAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Boss\BossBullet\BossBullet.cpp">
+      <Filter>Game\Boss\BossBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Boss\BossBulletManager\BossBulletManager.cpp">
+      <Filter>Game\Boss\BossBulletManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Boss\DangerZone\DangerZone.cpp">
+      <Filter>Game\Boss\DangerZone</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Boss\DangerZoneManager\DangerZoneManager.cpp">
+      <Filter>Game\Boss\DangerZoneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Field\Field.cpp">
+      <Filter>Game\Field</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\FollowCamera\FollowCamera.cpp">
+      <Filter>Game\FollowCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameObject\GameObject.cpp">
+      <Filter>Game\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GlobalVariable\Group\GlobalVariableGroup.cpp">
+      <Filter>Game\GlobalVariable\Group</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GlobalVariable\Tree\GlobalVariableTree.cpp">
+      <Filter>Game\GlobalVariable\Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GlobalVariable\Manager\GlobalVaribleManager.cpp">
+      <Filter>Game\GlobalVariable\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\InstancingGameObject\InstancingGameObject.cpp">
+      <Filter>Game\InstancingGameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Player\Player.cpp">
+      <Filter>Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Player\Input\PlayerInput.cpp">
+      <Filter>Game\Player\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Player\behavior\IPlayerBehavior.cpp">
+      <Filter>Game\Player\behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Player\behavior\AttackManager\PlayerAttackManager.cpp">
+      <Filter>Game\Player\behavior\AttackManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Player\behavior\Attacks\IPlayerAttack.cpp">
+      <Filter>Game\Player\behavior\Attacks</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Player\behavior\Attacks\Combo1\PlayerAttackCombo1.cpp">
+      <Filter>Game\Player\behavior\Attacks\Combo1</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Player\behavior\Attacks\Combo2\PlayerAttackCombo2.cpp">
+      <Filter>Game\Player\behavior\Attacks\Combo2</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Player\behavior\Attacks\Combo3\PlayerAttackCombo3.cpp">
+      <Filter>Game\Player\behavior\Attacks\Combo3</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Player\behavior\Move\ProtPlayerMove.cpp">
+      <Filter>Game\Player\behavior\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Player\behavior\Roll\ProtPlayerRoll.cpp">
+      <Filter>Game\Player\behavior\Roll</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -534,6 +672,93 @@
     </ClInclude>
     <ClInclude Include="Engine\GraphicsPipeline\InstancingObject3dGraphicsPipeline.h">
       <Filter>Engine\GraphicsPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Boss\Boss.h">
+      <Filter>Game\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Boss\Behavior\IBossBehavior.h">
+      <Filter>Game\Boss\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Boss\Behavior\AreaAttack\BossAreaAttack.h">
+      <Filter>Game\Boss\Behavior\AreaAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Boss\Behavior\IBossAttack\IBossAttack.h">
+      <Filter>Game\Boss\Behavior\IBossAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Boss\Behavior\Idle\BossIdle.h">
+      <Filter>Game\Boss\Behavior\Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Boss\Behavior\WeaponRollAttack\BossWeaponRollAttack.h">
+      <Filter>Game\Boss\Behavior\WeaponRollAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Boss\BossBullet\BossBullet.h">
+      <Filter>Game\Boss\BossBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Boss\BossBulletManager\BossBulletManager.h">
+      <Filter>Game\Boss\BossBulletManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Boss\DangerZone\DangerZone.h">
+      <Filter>Game\Boss\DangerZone</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Boss\DangerZoneManager\DangerZoneManager.h">
+      <Filter>Game\Boss\DangerZoneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Field\Field.h">
+      <Filter>Game\Field</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\FollowCamera\FollowCamera.h">
+      <Filter>Game\FollowCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameObject\GameObject.h">
+      <Filter>Game\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GlobalVariable\GlobalVariableDatas.h">
+      <Filter>Game\GlobalVariable</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GlobalVariable\Group\GlobalVariableGroup.h">
+      <Filter>Game\GlobalVariable\Group</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GlobalVariable\Tree\GlobalVariableTree.h">
+      <Filter>Game\GlobalVariable\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GlobalVariable\Manager\GlobalVaribleManager.h">
+      <Filter>Game\GlobalVariable\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\InstancingGameObject\InstancingGameObject.h">
+      <Filter>Game\InstancingGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Player\Player.h">
+      <Filter>Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Player\Input\PlayerInput.h">
+      <Filter>Game\Player\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Player\behavior\IPlayerBehavior.h">
+      <Filter>Game\Player\behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Player\behavior\AttackManager\PlayerAttackManager.h">
+      <Filter>Game\Player\behavior\AttackManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Player\behavior\Attacks\IPlayerAttack.h">
+      <Filter>Game\Player\behavior\Attacks</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Player\behavior\Attacks\Combo1\PlayerAttackCombo1.h">
+      <Filter>Game\Player\behavior\Attacks\Combo1</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Player\behavior\Attacks\Combo2\PlayerAttackCombo2.h">
+      <Filter>Game\Player\behavior\Attacks\Combo2</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Player\behavior\Attacks\Combo3\PlayerAttackCombo3.h">
+      <Filter>Game\Player\behavior\Attacks\Combo3</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Player\behavior\Move\ProtPlayerMove.h">
+      <Filter>Game\Player\behavior\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Player\behavior\Roll\ProtPlayerRoll.h">
+      <Filter>Game\Player\behavior\Roll</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\3d\Skeleton.h">
+      <Filter>Engine\3d</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
