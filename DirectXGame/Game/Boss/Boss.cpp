@@ -20,7 +20,6 @@ Boss::Boss()
 	behaviors_[(size_t)Behavior::Attack1] = std::make_unique<BossAreaAttack>();
 	behaviors_[(size_t)Behavior::Attack2] = std::make_unique<BossWeaponRollAttack>();
 
-
 	std::unique_ptr<GlobalVariableGroup> gvg = std::make_unique<GlobalVariableGroup>("Boss");
 	gvg->SetMonitorValue("currentCount", &parameters_.currentSec);
 
@@ -122,7 +121,7 @@ void Boss::SpawnDangerZone()
     dangerZoneManager_->SpawnDangerZone(pos);
 }
 
-void Boss::SpawnBullet(const Vector3&position)
+void Boss::SpawnBullet(const DaiEngine::WorldTransform&position)
 {
 	bulletManager_->SpawnBullet(position);
 }

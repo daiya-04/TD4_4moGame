@@ -4,6 +4,10 @@ BossBulletManager::BossBulletManager(Boss* boss)
 {
 	//オブジェクト生成
 	InstancingGameObject::Init("Sphere", 100);
+	//警告円の生成
+	dangerZone_ = std::make_unique<InstancingGameObject>();
+	dangerZone_->Init("DangerZone", 100);
+
 	//ボスのポインタ取得
 	boss_ = boss;
 
@@ -28,6 +32,12 @@ void BossBulletManager::Update()
 			objData.worldTransform_.UpdateMatrix();
 			//データセット
 			SetData(objData);
+
+			//警告円の更新
+			DaiEngine::InstancingObjData dangerData;
+			dangerData.worldTransform_ = data->GetWarningWorld();
+			dangerData.worldTransform_.UpdateMatrix();
+			dangerZone_->SetData(dangerData);
 		}
 	}
 
@@ -37,9 +47,18 @@ void BossBulletManager::Update()
 		});
 }
 
-void BossBulletManager::SpawnBullet(const Vector3& pos)
+void BossBulletManager::Draw()
 {
-	Vector3 position = pos;
+	//描画
+	InstancingGameObject::Draw();
+
+	//警告円の描画
+	dangerZone_->Draw();
+}
+
+void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos)
+{
+	Vector3 position = pos.translation_;
 	//指定値高くする
 	position.y = bulletStartHeight_;
 
@@ -47,10 +66,15 @@ void BossBulletManager::SpawnBullet(const Vector3& pos)
 	BossBulletData data;
 	data.world.Init();
 	data.velocity = Vector3{ 0,-1.0f,0 }*fallSpeed_;
-	data.radius = radius_;
+	data.radius = pos.scale_.x;
 
 	//座標設定
 	data.world.translation_ = position;
+
+	//警告円
+	data.warningWorld.Init();
+	data.warningWorld = pos;;
+
 	//生成
 	std::unique_ptr<BossBullet>bullet = std::make_unique<BossBullet>(data);
 

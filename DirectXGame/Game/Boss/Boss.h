@@ -51,7 +51,7 @@ public://**パブリック関数**//
 	/// <summary>
 	/// 弾の発射処理
 	/// </summary>
-	void SpawnBullet(const Vector3& pos);
+	void SpawnBullet(const DaiEngine::WorldTransform& pos);
 
 public://**セッター**//
 
