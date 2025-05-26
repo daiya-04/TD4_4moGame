@@ -11,7 +11,7 @@
 Boss::Boss()
 {
 	//オブジェクト生成
-	GameObject::Init("GingerManAttack");
+	GameObject::Init("GentlmanGuard");
 
 	IBossBehavior::SetBoss(this);
 

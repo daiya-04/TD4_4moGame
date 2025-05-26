@@ -29,9 +29,9 @@
             10.0
         ],
         "weaponRollAttack": {
-            "activeCount": 3.0,
-            "afterCount": 1.0,
-            "waitCount": 1.0
+            "activeCount": 60.0,
+            "afterCount": 60.0,
+            "waitCount": 60.0
         }
     }
 }

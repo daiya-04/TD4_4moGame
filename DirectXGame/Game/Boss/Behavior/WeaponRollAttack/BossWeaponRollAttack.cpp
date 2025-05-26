@@ -12,6 +12,8 @@ BossWeaponRollAttack::BossWeaponRollAttack()
 
 void BossWeaponRollAttack::InitBehavior0()
 {
+	//予備動作初期化
+	boss_->SetAnimationName("GentlmanAttack2", false);
 }
 
 void BossWeaponRollAttack::InitBehavior1()
