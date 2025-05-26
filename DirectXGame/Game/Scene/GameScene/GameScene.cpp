@@ -12,7 +12,7 @@
 #include <random>
 #include <algorithm>
 #include "ColliderManager.h"
-
+#include "AudioManager.h"
 
 
 
@@ -21,7 +21,7 @@ GameScene::GameScene() {
 }
 
 GameScene::~GameScene() {
-	
+	bgm_->StopSound();
 }
 
 
@@ -36,6 +36,9 @@ void GameScene::Init(){
 	DaiEngine::Object3d::SetSpotLight(&spotLight_);
 
 	///
+
+	bgm_ = DaiEngine::AudioManager::Load("BGM/Game.mp3");
+	bgm_->Play();
 
 	//ゲームオブジェクトにカメラ設定
 	GameObject::SetCamera(&camera_);
@@ -72,6 +75,13 @@ void GameScene::Update() {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Title");
 	}
 	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_3)) {
+		DaiEngine::SceneManager::GetInstance()->ChangeScene("Clear");
+	}
+	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_4)) {
+		DaiEngine::SceneManager::GetInstance()->ChangeScene("GameOver");
+	}
+
+	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_0)) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Debug");
 	}
 
@@ -121,12 +131,6 @@ void GameScene::DrawModel(){
 
 	//プレイヤー描画
 	player_->Draw();
-
-}
-
-void GameScene::DrawParticleModel(){
-
-
 
 }
 
