@@ -39,7 +39,7 @@ void DangerZoneManager::Update()
 		//死んでいる場合
 		if (data->GetDead()) {
 			//弾を出現させて削除
-			boss_->SpawnBullet(data->GetWorld().translation_);
+			boss_->SpawnBullet(data->GetWorld());
 
 			return true;
 		}

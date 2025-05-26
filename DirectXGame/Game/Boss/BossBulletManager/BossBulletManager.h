@@ -18,10 +18,16 @@ public://**パブリック関数**//
 	/// 更新
 	/// </summary>
 	void Update();
+
+	/// <summary>
+	/// 描画
+	/// </summary>
+	void Draw();
+
 	/// <summary>
 	/// 弾を生成
 	/// </summary>
-	void SpawnBullet(const Vector3& pos);
+	void SpawnBullet(const DaiEngine::WorldTransform& pos);
 
 	/// <summary>
 	/// ツリーの取得
@@ -38,6 +44,9 @@ private:
 
 	//弾データ群
 	std::list<std::unique_ptr<BossBullet>>bullets_;
+
+	//警告円用
+	std::unique_ptr<InstancingGameObject>dangerZone_;
 
 private:
 
