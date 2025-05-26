@@ -1,0 +1,8 @@
+{
+    "Field": {
+        "BlockWidth": 2.0,
+        "DeltaY": -0.5,
+        "HeightLimit": 2.5,
+        "Radius": 5.0
+    }
+}
