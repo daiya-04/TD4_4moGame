@@ -22,6 +22,9 @@ void PlayerRoll::Init()
 	if (velo_ == Vector3{0, 0, 0}) {
 		//前に進む
 		velo_ = {0,0,1};
+		
+		//プレイヤー方向に向ける
+		velo_=TransformNormal(velo_, player_->world_->matWorld_);
 	}
 
 	//時間リセット
