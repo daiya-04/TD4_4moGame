@@ -38,6 +38,7 @@ Boss::Boss()
 	gvg->SetTreeData(dangerZoneManager_->GetTree());
 	gvg->SetTreeData(bulletManager_->GetTree());
 
+	gvg->SetValue("Scale", &world_->scale_);
 	gvg->SetValue("StartPos", &startPosition_);
 	gvg->SetValue("OffsetPos", &offsetPosition_);
 }
