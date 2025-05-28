@@ -73,7 +73,7 @@ public://**ゲッター**//
 	/// 弾データの取得
 	/// </summary>
 	/// <returns></returns>
-	std::list<std::unique_ptr<BossBullet>>GetBullets() { return bulletManager_->GetBullets(); }
+	std::list<std::unique_ptr<BossBullet>>& GetBullets(){ return bulletManager_->GetBullets(); }
 
 public://**状態
 

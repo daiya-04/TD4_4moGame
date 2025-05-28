@@ -57,11 +57,11 @@ PixelShaderOutput main(VertexShaderOutput input){
 		//ライト系の色加算
 		float32_t3 litColor = diffuseDL + specularDL;
 
-		output.color.rgb = litColor;
+		output.color.rgb = litColor * input.color.rgb;
 
         output.color.a = gMaterial.color.a * textureColor.a;
 	} else {
-	    output.color = gMaterial.color * textureColor;
+	    output.color = gMaterial.color * textureColor + input.color;
 	}
 
 	if(output.color.a == 0.0){
