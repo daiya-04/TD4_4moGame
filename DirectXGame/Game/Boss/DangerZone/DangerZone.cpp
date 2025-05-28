@@ -13,7 +13,7 @@ void DangerZone::Update()
 	//時間の割合を取得（0.0f~1.0f）
 	float t = sec_ / parameters_.maxDeadSec;
 	//イージング
-	float wide = Lerp(0.0f, parameters_.maxRadius, t);
+	float wide = Lerp(t,0.0f, parameters_.maxRadius);
 
 	//サイズ設定
 	parameters_.world.scale_ = { wide,1,wide };
@@ -24,4 +24,6 @@ void DangerZone::Update()
 		isDead_ = true;
 	}
 
+	//行列更新
+	parameters_.world.UpdateMatrix();
 }

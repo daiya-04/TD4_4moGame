@@ -34,15 +34,11 @@ public://**パブリック関数**//
 	/// <returns></returns>
 	const DaiEngine::WorldTransform& GetWorld()const { return parameters_.world; }
 
-
-
 private://**プライベート変数**//
-
-
 
 	//パラメータ
 	DangerZoneParameters parameters_;
-
+	
 	//時間
 	float sec_ = 0;
 
