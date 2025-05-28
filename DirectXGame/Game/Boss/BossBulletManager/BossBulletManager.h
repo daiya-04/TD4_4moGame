@@ -12,7 +12,7 @@ public://**パブリック関数**//
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	BossBulletManager(Boss*boss);
+	BossBulletManager(Boss* boss);
 	~BossBulletManager() = default;
 	/// <summary>
 	/// 更新
@@ -39,14 +39,14 @@ public://**パブリック関数**//
 	/// 弾丸のリストを取得
 	/// </summary>
 	/// <returns>弾のデータ群</returns>
-	std::list<std::unique_ptr<BossBullet>>GetBullets() { return bullets_; }
+	std::list<std::unique_ptr<BossBullet>>& GetBullets() { return bullets_; }
 
 private:
 
 	GvariTree tree_;
 
 	//ボスのポインタ
-	Boss* boss_=nullptr;
+	Boss* boss_ = nullptr;
 
 	//弾データ群
 	std::list<std::unique_ptr<BossBullet>>bullets_;

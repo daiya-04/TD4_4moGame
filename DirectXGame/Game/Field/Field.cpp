@@ -223,6 +223,19 @@ Vector2 Field::GetBlockAt(float x, float z) {
 	return Vector2{ -1,-1 };//見つからなければ適当な値
 }
 
+Block* Field::GetBlock(float x, float z) {
+	for (Block& block : blocks_) {
+		const Vector3& blockPos = block.world.translation_;
+		if (std::abs(blockPos.x - x) <= blockSize_ &&
+			std::abs(blockPos.z - z) <= blockSize_) {
+			return &block;
+		}
+	}
+
+	return nullptr;//見つからなければ nullptr を返す
+}
+
+
 void Field::PlayStageIntroAnimation(float deltaTime) {
 	if (!isAnimationReset_) return;
 
