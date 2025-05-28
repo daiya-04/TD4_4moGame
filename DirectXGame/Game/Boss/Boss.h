@@ -67,6 +67,14 @@ public://**セッター**//
 	/// <returns></returns>
 	Vector3 SetDirection2Player();
 
+public://**ゲッター**//
+
+	/// <summary>
+	/// 弾データの取得
+	/// </summary>
+	/// <returns></returns>
+	std::list<std::unique_ptr<BossBullet>>GetBullets() { return bulletManager_->GetBullets(); }
+
 public://**状態
 
 	//状態
