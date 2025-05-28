@@ -28,6 +28,11 @@ private:
 	//現在の数
 	int currentNum_ = 0;
 
+	//最小度
+	float minRoll_ = 0;
+	//最大度
+	float maxRoll_ = 0;
+
 private:
 
 	//待機時間
@@ -38,5 +43,8 @@ private:
 
 	//硬直時間
 	float endTime_ = 1.0f;
+
+	//回転度合
+	float rotateDegree_ = 360.0f;
 
 };
