@@ -77,8 +77,6 @@ void GameScene::Update() {
 
 #endif // _DEBUG
 
-	
-
 	//ライト更新
 	pointLight_.Update();
 	spotLight_.Update();

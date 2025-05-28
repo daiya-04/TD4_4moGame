@@ -35,6 +35,12 @@ public://**パブリック関数**//
 	/// <returns></returns>
 	GvariTree& GetTree() { return tree_; }
 
+	/// <summary>
+	/// 弾丸のリストを取得
+	/// </summary>
+	/// <returns>弾のデータ群</returns>
+	std::list<std::unique_ptr<BossBullet>>GetBullets() { return bullets_; }
+
 private:
 
 	GvariTree tree_;

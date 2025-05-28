@@ -55,20 +55,15 @@ public://**パブリック関数**//
 	/// <returns></returns>
 	const DaiEngine::WorldTransform& GetWarningWorld()const { return warningWorld_; }
 
-
 	/// <summary>
-	/// 円の半径取得
+	/// ワールドデータを取得
 	/// </summary>
 	/// <returns></returns>
-	//float GetRadius() { return colldier_->GetRadius(); };
-
-private://**プライベート変数**//
-
-	//コライダー
-	//std::unique_ptr<SphereCollider>colldier_;
+	DaiEngine::WorldTransform& GetWorld() { return world_; }
 
 private://**パラメータ変数**//
 
+	//ワールドデータ
 	DaiEngine::WorldTransform world_;
 
 	//速度
