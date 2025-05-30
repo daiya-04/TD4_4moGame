@@ -231,6 +231,31 @@ Vector2 Field::GetBlockAt(float x, float z) {
 	return Vector2{ -1,-1 };//見つからなければ適当な値
 }
 
+Vector2 Field::GetNearestBlockAt(float x, float z) {
+	float minDistanceSq = (std::numeric_limits<float>::max)();
+	Block* nearestBlock = nullptr;
+
+	for (Block& block : blocks_) {
+		const Vector3& pos = block.world.translation_;
+
+		float dx = pos.x - x;
+		float dz = pos.z - z;
+		float distSq = dx * dx + dz * dz;
+
+		if (distSq < minDistanceSq) {
+			minDistanceSq = distSq;
+			nearestBlock = &block;
+		}
+	}
+
+	if (nearestBlock) {
+		return nearestBlock->massLocation;
+	}
+	else {
+		return Vector2{ -1, -1 }; // 念のためfallback
+	}
+}
+
 Block* Field::GetBlock(float x, float z) {
 	Block* nearestBlock = nullptr;
 	float minDistanceSquared = (std::numeric_limits<float>::max)();

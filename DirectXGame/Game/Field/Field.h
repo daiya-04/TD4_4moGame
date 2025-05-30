@@ -48,6 +48,8 @@ public:
 	//座標を基にブロック位置を取得する
 	Vector2 GetBlockAt(float x, float z);
 
+	Vector2 GetNearestBlockAt(float x, float z);
+
 	Block* GetBlock(float x, float z);
 
 	//現在位置のブロックを基にプレイヤー座標Yを計算して返す
