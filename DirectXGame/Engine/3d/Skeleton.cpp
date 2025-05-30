@@ -85,24 +85,5 @@ namespace DaiEngine {
 		return jointPos;
 	}
 
-	Vector3 Skeleton::GetWorldPosition(const std::string& jointName, const WorldTransform& worldTransform) {
-		auto it = jointMap_.find(jointName);
-		if (it == jointMap_.end()) {
-			//名前が見つからない場合はゼロベクトルを返す
-			return { 0.0f, 0.0f, 0.0f };
-		}
-
-		const Joint& joint = joints_[it->second];
-
-		//スケルトン空間でのマトリクス × モデルのワールド行列
-		Matrix4x4 worldMat = joint.skeletonSpaceMat_ * worldTransform.matWorld_;
-
-		//ワールド空間での位置を抽出
-		return {
-			worldMat.m[3][0],
-			worldMat.m[3][1],
-			worldMat.m[3][2],
-		};
-	}
 
 }
