@@ -1,6 +1,8 @@
 #include "Player.h"
 
 #include"GlobalVariable/Group/GlobalVariableGroup.h"
+#include"ColliderManager.h"
+#include"ShapesDraw.h"
 
 #pragma region 状態クラス
 #include"Player/behavior/Roll/ProtPlayerRoll.h"
@@ -20,6 +22,9 @@ Player::Player()
 	input_ = std::make_unique<PlayerInput>();
 
 	//コライダークラス生成
+	collider_ = std::make_unique<DaiEngine::SphereCollider>();
+	collider_->Init("player",*world_,radius_);
+	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
 
 	//プレイヤーポインタ設定
 	IProtBehavior::SetPlayer(this);
@@ -38,6 +43,7 @@ Player::Player()
 	gvg->SetValue("HP", &parameters_.hp);
 	gvg->SetValue("OffsetPos", &offsetPos_);
 	gvg->SetValue("Limitation", &limitationXZ_);
+	gvg->SetValue("ColliderRadius", &radius_);
 	//全ての状態のツリーをセット
 	for (auto& behavior : behaviors_) {
 		if (behavior) {
@@ -56,6 +62,11 @@ Player::Player()
 
 void Player::Update()
 {
+
+#ifdef _DEBUG
+	collider_->SetRadius(radius_);
+#endif // DEBUG
+
 
 	//移動量初期化
 	parameters_.velocity = { 0,0,0 };
@@ -95,15 +106,26 @@ void Player::Update()
 	Tenmetu();
 
 	//行列更新
-	GameObject::Update();
+	UpdateMatrix();
 }
 
 void Player::Draw()
 {
+	//円コライダー描画
+#ifdef _DEBUG
+	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()),*camera_);
+#endif // _DEBUG
+
 	//描画
 	if (isDraw_) {
 		GameObject::Draw();
 	}
+}
+
+void Player::UpdateMatrix() {
+	//行列更新
+	GameObject::Update();
+	collider_->Update();
 }
 
 void Player::SetWorldTranslate(const Vector3& translate)

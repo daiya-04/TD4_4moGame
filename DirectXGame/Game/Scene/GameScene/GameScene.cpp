@@ -104,6 +104,7 @@ void GameScene::Update() {
 	Vector3 pos = player_->GetWorld().translation_;
 	pos.y = field_->GetMassLocationPosY(player_->GetWorld().translation_) + player_->GetWorld().scale_.y;
 	player_->SetWorldTranslate(pos);
+	player_->UpdateMatrix();
 
 	//ボス更新
 	boss_->Update();

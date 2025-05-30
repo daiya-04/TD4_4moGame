@@ -2,6 +2,7 @@
 #include"GameObject.h"
 #include"Player/Input/PlayerInput.h"
 #include"Player/behavior/IPlayerBehavior.h"
+#include"SphereCollider.h"
 #include<optional>
 
 
@@ -41,6 +42,11 @@ public://**パブリック変数**//
 
 	//描画
 	void Draw()override;
+
+	/// <summary>
+	/// 行列更新
+	/// </summary>
+	void UpdateMatrix();
 
 	/// <summary>
 	/// 座標をセットして更新
@@ -104,11 +110,19 @@ private://**プライベート変数**//
 	//プレイヤー入力クラス
 	std::unique_ptr<PlayerInput>input_;
 
+	//円コライダー
+	std::unique_ptr<DaiEngine::SphereCollider> collider_;
+
+	//コライダー半径
+	float radius_ = 1.0f; 
+
 	//オフセット座標
 	Vector3 offsetPos_ = {0,0,0};
 
 	//座標
 	Vector3 position_ = { 0,0,0 };
+
+	
 
 private://**ヒット時処理*//
 	
