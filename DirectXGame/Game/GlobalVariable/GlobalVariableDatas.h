@@ -18,7 +18,7 @@ struct ItemData {
 //監視アイテムのデータ
 struct MonitorItemData {
 	//値
-	std::variant<bool*, int32_t*, float*, Vector3*,std::string*> value;
+	std::variant<bool*, int32_t*, float*,Vector2*, Vector3*,std::string*> value;
 
 	//コンボ時利用
 	std::vector<std::string> items;
