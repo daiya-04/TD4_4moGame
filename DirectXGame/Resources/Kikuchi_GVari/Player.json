@@ -3,18 +3,27 @@
         "AttackManager": {
             "Com1": {
                 "Attack": 10.0,
+                "AttackTime": 0.0,
                 "EndAttack": 10.0,
-                "PreAttack": 10.0
+                "EndAttackTime": 0.0,
+                "PreAttack": 10.0,
+                "PreAttackTime": 0.0
             },
             "Com2": {
                 "Attack": 10.0,
+                "AttackTime": 0.0,
                 "EndAttack": 10.0,
-                "PreAttack": 10.0
+                "EndAttackTime": 0.0,
+                "PreAttack": 10.0,
+                "PreAttackTime": 0.0
             },
             "Com3": {
                 "Attack": 10.0,
+                "AttackTime": 0.0,
                 "EndAttack": 10.0,
-                "PreAttack": 10.0
+                "EndAttackTime": 0.0,
+                "PreAttack": 10.0,
+                "PreAttackTime": 0.0
             }
         },
         "HP": 100,
@@ -23,8 +32,8 @@
             "TenmetuNum": 10
         },
         "Limitation": [
-            10.0,
-            10.0
+            20.0,
+            20.0
         ],
         "Move": {
             "speed": 0.25
