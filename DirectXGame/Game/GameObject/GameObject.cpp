@@ -22,6 +22,11 @@ void GameObject::Draw()
 {
 	//体描画
 	model_->Draw(*camera_);
+
+#ifdef _DEBUG
+	// スケルトン描画（Debugのみ）
+	model_->GetSkeleton().Draw(model_->worldTransform_, *camera_);
+#endif
 }
 
 void GameObject::SetAnimationName(const std::string& name, bool isLoop)
@@ -36,3 +41,13 @@ void GameObject::SetAnimationLeverage(float leverage)
 	model_->GetAnimation().SetAnimationSpeed(leverage);
 }
 
+Vector3 GameObject::GetJointWorldPosition(const std::string& jointName) {
+	// スケルトンからローカル空間の位置を取得
+	Vector3 localPos = model_->GetSkeleton().GetSkeletonPos(jointName);
+
+	// ワールド変換を適用（位置ベクトルなので第4引数は1）
+	Vector4 localPos4 = { localPos.x, localPos.y, localPos.z, 1.0f };
+	Vector4 worldPos4 = world_->matWorld_ * localPos4;
+
+	return { worldPos4.x, worldPos4.y, worldPos4.z };
+}
