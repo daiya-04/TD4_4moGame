@@ -6,7 +6,7 @@
             "warningSphereHeight": -1.0
         },
         "FallingBullet": {
-            "fallSpeed": 1.2999999523162842,
+            "fallSpeed": 1.100000023841858,
             "radius": 2.0,
             "spawnHeight": 60.0
         },
@@ -14,14 +14,19 @@
             "second": 60.0
         },
         "ItemFallAttack": {
-            "ActiveCount": 120.0,
-            "Num": 5,
-            "WaitCount": 60.0
+            "ActiveCount": 200.0,
+            "Num": 2,
+            "WaitCount": 200.0
         },
         "OffsetPos": [
             0.0,
             1.159999966621399,
             0.3100000023841858
+        ],
+        "Scale": [
+            1.0,
+            1.0,
+            1.0
         ],
         "StartPos": [
             0.0,
