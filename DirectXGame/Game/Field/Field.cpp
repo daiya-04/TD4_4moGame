@@ -34,6 +34,9 @@ void Field::Initialize() {
 	gvg->SetValue("Radius", &radius_);
 	gvg->SetValue("DeltaY", &deltaY_);
 	gvg->SetValue("HeightLimit", &heightLimit_);
+	gvg->SetValue("VerticalSize", &verticalSize_);
+	gvg->SetValue("HorizontalSize", &horizontalSize_);
+	gvg->SetValue("BlockSize", &blockSize_);
 
 }
 
@@ -314,7 +317,7 @@ void Field::PlayStageIntroAnimation(float deltaTime) {
 
 		//アニメーション適用
 		pos.y = -5.0f + easedT * 5.0f;
-		scale = { easedT, easedT, easedT };
+		scale = { easedT * blockSize_, easedT * blockSize_, easedT * blockSize_ };
 
 		if (t < 1.0f) {
 			allFinished = false;//このブロックはまだ完了してない
