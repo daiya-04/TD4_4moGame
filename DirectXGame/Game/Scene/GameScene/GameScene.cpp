@@ -113,12 +113,12 @@ void GameScene::Update() {
 	field_->GetMassLocationPosY(player_->GetWorld().translation_);
 
 	for (std::unique_ptr<BossBullet>& bullet : boss_->GetBullets()) {
-		Vector2 targetBlock = field_->GetBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
+		Vector2 targetBlock = field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
 		Block* block = field_->GetBlock(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
 
 		// Y範囲にあるか判定
 		if (block->world.translation_.y >= bullet->GetWorld().translation_.y && block->world.translation_.y <= bullet->GetWorld().translation_.y + bullet->GetWorld().scale_.y) {
-			field_->RaiseBlocksAroundWithAttenuation(field_->GetBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, -0.5f);
+			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, -0.5f);
 			bullet->OnCollision();
 		}
 	}
