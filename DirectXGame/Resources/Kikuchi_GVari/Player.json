@@ -2,28 +2,22 @@
     "Player": {
         "AttackManager": {
             "Com1": {
+                "AnimationFactor": 3.799999952316284,
                 "Attack": 10.0,
-                "AttackTime": 0.0,
                 "EndAttack": 10.0,
-                "EndAttackTime": 0.0,
-                "PreAttack": 10.0,
-                "PreAttackTime": 0.0
+                "PreAttack": 10.0
             },
             "Com2": {
+                "AnimationFactor": 3.799999952316284,
                 "Attack": 10.0,
-                "AttackTime": 0.0,
                 "EndAttack": 10.0,
-                "EndAttackTime": 0.0,
-                "PreAttack": 10.0,
-                "PreAttackTime": 0.0
+                "PreAttack": 10.0
             },
             "Com3": {
+                "AnimationFactor": 3.799999952316284,
                 "Attack": 10.0,
-                "AttackTime": 0.0,
                 "EndAttack": 10.0,
-                "EndAttackTime": 0.0,
-                "PreAttack": 10.0,
-                "PreAttackTime": 0.0
+                "PreAttack": 10.0
             }
         },
         "HP": 100,
