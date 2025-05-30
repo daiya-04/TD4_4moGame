@@ -24,8 +24,9 @@ Player::Player()
 	//コライダークラス生成
 	collider_ = std::make_unique<DaiEngine::SphereCollider>();
 	collider_->Init("player",*world_,radius_);
+	collider_->ColliderOn();
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
-
+	collider_->SetEnterCallback([this](DaiEngine::Collider*) { OnCollison(); });
 	//プレイヤーポインタ設定
 	IProtBehavior::SetPlayer(this);
 
@@ -138,6 +139,8 @@ void Player::OnCollison()
 {
 	//ヒットフラグOFF
 	parameters_.isHit = false;
+	//コライダーOFF
+	collider_->ColliderOff();
 }
 
 
@@ -213,6 +216,9 @@ void Player::Tenmetu()
 			currentHitCount_ = 0;
 			//点滅回数初期化
 			tenmetuCount_ = 0;
+
+			//コライダーON
+			collider_->ColliderOn();
 		}
 	}
 }
