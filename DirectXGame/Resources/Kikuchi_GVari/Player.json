@@ -22,6 +22,10 @@
             "MaxNoHitSec": 60.0,
             "TenmetuNum": 10
         },
+        "Limitation": [
+            10.0,
+            10.0
+        ],
         "Move": {
             "speed": 0.25
         },
