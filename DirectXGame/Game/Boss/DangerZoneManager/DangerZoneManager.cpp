@@ -57,6 +57,7 @@ void DangerZoneManager::SpawnDangerZone(const Vector3& position)
 	DangerZoneParameters param;
 	param.world.Init();
 	param.world.translation_ = pos;
+	param.world.rotation_.y = (float)std::numbers::pi; //Y軸回転
 	param.maxDeadSec = warningTime_;
 	param.maxRadius = radius_;
 

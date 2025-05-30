@@ -3,7 +3,7 @@
 BossBulletManager::BossBulletManager(Boss* boss)
 {
 	//オブジェクト生成
-	InstancingGameObject::Init("Sphere", 100);
+	InstancingGameObject::Init("Candy", 100);
 	//警告円の生成
 	dangerZone_ = std::make_unique<InstancingGameObject>();
 	dangerZone_->Init("DangerZone", 100);
