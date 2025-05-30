@@ -39,4 +39,8 @@ private:
 	//個数
 	int numbers_ = 3;
 
+	//予備動作再生倍率
+	float preActionRate_ = 1.0f;
+	//実行動作再生倍率
+	float actionRate_ = 1.0f;
 };

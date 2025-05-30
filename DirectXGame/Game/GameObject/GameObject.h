@@ -49,13 +49,18 @@ public:
 	/// アニメーションをセット
 	/// </summary>
 	/// <param name="name"></param>
-	void SetAnimationName(const std::string& name, bool isLoop=true);
+	void SetAnimationName(const std::string& name, bool isLoop = true);
 
 	/// <summary>
 	/// アニメーション再生倍率
 	/// </summary>
 	/// <param name="leverage">倍率</param>
 	void SetAnimationLeverage(float leverage);
+
+	/// <summary>
+	/// 指定したジョイントのワールド座標取得
+	/// </summary>
+	Vector3 GetJointWorldPosition(const std::string& jointName);
 
 private:
 
