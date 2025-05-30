@@ -24,8 +24,9 @@ Player::Player()
 	//コライダークラス生成
 	collider_ = std::make_unique<DaiEngine::SphereCollider>();
 	collider_->Init("player",*world_,radius_);
+	collider_->ColliderOn();
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
-
+	collider_->SetEnterCallback([this](DaiEngine::Collider*) { OnCollison(); });
 	//プレイヤーポインタ設定
 	IProtBehavior::SetPlayer(this);
 
