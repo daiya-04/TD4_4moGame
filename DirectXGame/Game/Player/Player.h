@@ -78,6 +78,11 @@ private://**プライベート関数**//
 	/// </summary>
 	void Tenmetu();
 
+	/// <summary>
+	/// XZ軸の制限処理
+	/// </summary>
+	void LimitationXZ();
+
 public://**状態**//
 
 	//状態
@@ -121,4 +126,9 @@ private://**ヒット時処理*//
 
 	//描画フラグ
 	bool isDraw_ = true;
+
+private://**行動制限**//
+
+	//XZ軸の制限
+	Vector2 limitationXZ_ = { 10,10 };
 };

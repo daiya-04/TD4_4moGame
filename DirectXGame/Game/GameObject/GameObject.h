@@ -51,6 +51,8 @@ public:
 	/// <param name="name"></param>
 	void SetAnimationName(const std::string& name, bool isLoop=true);
 
+
+
 private:
 
 	std::unique_ptr<DaiEngine::SkinningObject> model_;
