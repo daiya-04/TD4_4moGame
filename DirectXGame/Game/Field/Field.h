@@ -103,8 +103,8 @@ private:
 	float blockSize_ = 1.0f;//ブロックのサイズ
 
 	std::list<Block> blocks_;//各種ブロック
-	static const int verticalSize_ = 20;//縦のブロック数
-	static const int horizontalSize_ = 20;//横のブロック数
+	int verticalSize_ = 20;//縦のブロック数
+	int horizontalSize_ = 20;//横のブロック数
 	float blockWidth_ = 2.0f;//ブロック間隔
 	float prevBlockWidth_ = blockWidth_;//前フレームのブロック間隔
 
