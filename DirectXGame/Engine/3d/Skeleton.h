@@ -34,6 +34,8 @@ namespace DaiEngine {
 
 		Vector3 GetSkeletonPos(const std::string& jointName);
 
+		Vector3 GetWorldPosition(const std::string& jointName, const WorldTransform& worldTransform);
+
 	private:
 		//ジョイント生成
 		static int32_t CreateJoint(const Model::Node& node, const std::optional<int32_t>& parent, std::vector<Joint>& joints);
