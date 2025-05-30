@@ -14,7 +14,7 @@ BossWeaponRollAttack::BossWeaponRollAttack()
 void BossWeaponRollAttack::InitBehavior0()
 {
 	//予備動作初期化
-	boss_->SetAnimationName("GentlmanAttack2", false);
+	boss_->SetAnimationName("GentlmanAttackPosture2", false);
 }
 
 void BossWeaponRollAttack::InitBehavior1()
@@ -26,6 +26,7 @@ void BossWeaponRollAttack::InitBehavior1()
 
 void BossWeaponRollAttack::InitBehavior2()
 {
+	boss_->SetAnimationName("GentlmanAttack2", false);
 }
 
 void BossWeaponRollAttack::UpdateBehavior0()

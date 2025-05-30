@@ -18,6 +18,7 @@ IPlayerAttack::IPlayerAttack()
 	//各最大時間パラメータを設定
 	for (int i = 0; i < Count; i++) {
 		tree_.SetValue(behaviorName_[i], &maxCounts_[i]);
+		tree_.SetValue(behaviorName_[i] + "Time", &playbackFactors_[i]);
 	}
 }
 
@@ -38,6 +39,8 @@ void IPlayerAttack::Update()
 		nowCount_ = maxCounts_[behavior_];
 		//初期化
 		(this->*behaviorInit[behavior_])();		
+		//再生倍率を設定
+		player_->SetAnimationLeverage(playbackFactors_[behavior_]);
 	}
 
 	//更新

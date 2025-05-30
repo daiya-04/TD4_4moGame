@@ -126,7 +126,6 @@ void TitleScene::Update() {
 				select_ = Select::Finish;
 				gStartUISwitch_ = UISwitch::Off;
 				gFinishUISwitch_ = UISwitch::On;
-
 			}
 
 			break;

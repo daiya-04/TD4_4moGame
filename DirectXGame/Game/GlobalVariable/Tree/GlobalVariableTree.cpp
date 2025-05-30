@@ -18,7 +18,7 @@ void GlobalVariableTree::SetValue(const std::string& name, std::variant<bool*,in
 	datas_.valueKeys.push_back(name);
 }
 
-void GlobalVariableTree::SetMonitorValue(const std::string& name, std::variant<bool*, int32_t*, float*, Vector3*, std::string*> value)
+void GlobalVariableTree::SetMonitorValue(const std::string& name, std::variant<bool*, int32_t*, float*,Vector2*, Vector3*, std::string*> value)
 {
 	//監視値をセット
 	datas_.monitorValue[name].value = value;

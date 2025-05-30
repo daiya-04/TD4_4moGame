@@ -22,7 +22,7 @@ public: //**パブリック関数**//
 	void SetValue(const std::string& name, std::variant<bool*, int32_t*, float*, Vector2*, Vector3*, Vector4*> value);
 
 	//監視値追加
-	void SetMonitorValue(const std::string& name, std::variant<bool*, int32_t*, float*, Vector3*, std::string*> value);
+	void SetMonitorValue(const std::string& name, std::variant<bool*, int32_t*, float*,Vector2*, Vector3*, std::string*> value);
 
 	//ImGuiのコンボでデバッグ
 	void SetMonitorCombo(const std::string& name, std::string* item, const std::vector<std::string>& items);
