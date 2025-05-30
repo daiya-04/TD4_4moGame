@@ -72,7 +72,8 @@ namespace DaiEngine {
 
 		float duration_ = 0.0f;
 		float animationTime_ = 0.0f;
-		float animationSpeed_ = 1.0f / 60.0f;
+		float animationSpeed_ = 1.0f;
+		float deltaTime_ = 1.0f / 60.0f;
 
 		bool isLoop_ = false;
 		bool isPlaying_ = false;
