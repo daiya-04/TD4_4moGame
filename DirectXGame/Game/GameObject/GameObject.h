@@ -51,6 +51,12 @@ public:
 	/// <param name="name"></param>
 	void SetAnimationName(const std::string& name, bool isLoop=true);
 
+	/// <summary>
+	/// アニメーション再生倍率
+	/// </summary>
+	/// <param name="leverage">倍率</param>
+	void SetAnimationLeverage(float leverage);
+
 private:
 
 	std::unique_ptr<DaiEngine::SkinningObject> model_;

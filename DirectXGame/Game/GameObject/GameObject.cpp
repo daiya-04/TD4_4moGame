@@ -26,6 +26,13 @@ void GameObject::Draw()
 
 void GameObject::SetAnimationName(const std::string& name, bool isLoop)
 {
+	//アニメーション名を設定
 	model_->SetAnimation(name,isLoop);
+}
+
+void GameObject::SetAnimationLeverage(float leverage)
+{
+	//倍率変更
+	model_->GetAnimation().SetAnimationSpeed(leverage);
 }
 

@@ -37,6 +37,7 @@ Player::Player()
 	gvg->SetMonitorValue("RollCooldown", &parameters_.currentRollCount);
 	gvg->SetValue("HP", &parameters_.hp);
 	gvg->SetValue("OffsetPos", &offsetPos_);
+	gvg->SetValue("Limitation", &limitationXZ_);
 	//全ての状態のツリーをセット
 	for (auto& behavior : behaviors_) {
 		if (behavior) {
@@ -82,8 +83,13 @@ void Player::Update()
 	//座標更新
 	position_ += parameters_.velocity;
 
+	//制限チェック
+	LimitationXZ();
+
 	//オフセット分足してワールド座標更新
 	world_->translation_ =position_ + offsetPos_;
+
+	
 
 	//点滅更新
 	Tenmetu();
@@ -186,5 +192,22 @@ void Player::Tenmetu()
 			//点滅回数初期化
 			tenmetuCount_ = 0;
 		}
+	}
+}
+
+void Player::LimitationXZ()
+{
+	//XZ制限チェック
+	if (position_.x <= -limitationXZ_.x) {
+		position_.x = -limitationXZ_.x;
+	}
+	else if (position_.x >= limitationXZ_.x) {
+		position_.x = limitationXZ_.x;
+	}
+	if (position_.z <= -limitationXZ_.y) {
+		position_.z = -limitationXZ_.y;
+	}
+	else if (position_.z >= limitationXZ_.y) {
+		position_.z = limitationXZ_.y;
 	}
 }
