@@ -164,7 +164,7 @@ void Field::SetBlockHeightLimit(float heightLimit) {
 
 float Field::GetMassLocationPosY(Vector3 translate) {
 	//現在のマスを確認する
-	Vector2 selected = GetBlockAt(translate.x, translate.z);
+	Vector2 selected = GetNearestBlockAt(translate.x, translate.z);
 	for (Block& block : blocks_) {
 		if (block.massLocation.x == selected.x && block.massLocation.y == selected.y) {
 			//プレイヤーの位置をnowPos_に記録
