@@ -71,7 +71,7 @@ namespace DaiEngine {
 
 	void Animation::CountingAnimationTime() {
 		if (isPlaying_) {
-			animationTime_ += animationSpeed_;
+			animationTime_ += deltaTime_ * animationSpeed_;
 		}
 		if (animationTime_ >= duration_) {
 			if (isLoop_) {
