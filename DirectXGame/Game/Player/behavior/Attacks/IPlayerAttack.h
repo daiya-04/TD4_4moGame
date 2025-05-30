@@ -71,7 +71,7 @@ private:
 	};
 
 	//再生倍率
-	float playbackFactors_[Count];
+	float playbackFactor_;
 
 	//時間
 	float currentCount_ = 0;
