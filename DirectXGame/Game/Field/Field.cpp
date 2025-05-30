@@ -10,6 +10,8 @@
 
 #include"GlobalVariable/Group/GlobalVariableGroup.h"
 
+#include <limits>
+
 void Field::Initialize() {
 	//Input
 	input_ = DaiEngine::Input::GetInstance();
@@ -230,17 +232,23 @@ Vector2 Field::GetBlockAt(float x, float z) {
 }
 
 Block* Field::GetBlock(float x, float z) {
+	Block* nearestBlock = nullptr;
+	float minDistanceSquared = (std::numeric_limits<float>::max)();
+
 	for (Block& block : blocks_) {
 		const Vector3& blockPos = block.world.translation_;
-		if (std::abs(blockPos.x - x) <= blockSize_ &&
-			std::abs(blockPos.z - z) <= blockSize_) {
-			return &block;
+		float dx = blockPos.x - x;
+		float dz = blockPos.z - z;
+		float distanceSquared = dx * dx + dz * dz;
+
+		if (distanceSquared < minDistanceSquared) {
+			minDistanceSquared = distanceSquared;
+			nearestBlock = &block;
 		}
 	}
 
-	return nullptr;//見つからなければ nullptr を返す
+	return nearestBlock;
 }
-
 
 void Field::PlayStageIntroAnimation(float deltaTime) {
 	if (!isAnimationReset_) return;

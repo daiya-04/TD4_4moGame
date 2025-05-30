@@ -7,7 +7,7 @@
 #include "DirectionalLight.h"
 #include "Line.h"
 #include "GlobalVariables.h"
-#include "Audio.h"
+#include "AudioManager.h"
 #include "DXCompiler.h"
 #include "PipelineManager.h"
 #include "RandomEngine.h"
@@ -25,7 +25,7 @@ namespace DaiEngine {
 		DXCompiler::GetInstance()->Init();
 
 		Input::GetInstance()->Initialize();
-		Audio::GetInstance()->Initialize();
+		AudioManager::GetInstance()->Init();
 
 		TextureManager::GetInstance()->Initialize();
 		TextureManager::GetInstance()->LoadAllFile();
@@ -50,7 +50,7 @@ namespace DaiEngine {
 		ImGuiManager::GetInstance()->Begin();
 
 		Input::GetInstance()->Update();
-		Audio::GetInstance()->Update();
+		AudioManager::GetInstance()->Update();
 
 		GlobalVariables::GetInstance()->Update();
 

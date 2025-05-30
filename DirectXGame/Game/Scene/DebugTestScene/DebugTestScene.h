@@ -48,10 +48,6 @@ public:
 	/// </summary>
 	void DrawModel()override;
 	/// <summary>
-	/// パーティクル3dモデル描画
-	/// </summary>
-	void DrawParticleModel()override;
-	/// <summary>
 	/// パーティクル描画
 	/// </summary>
 	void DrawParticle()override;

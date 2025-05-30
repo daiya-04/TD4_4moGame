@@ -21,6 +21,7 @@
 #include "SpotLight.h"
 #include "Vec2.h"
 #include "GPUParticle.h"
+#include "Audio.h"
 
 
 //タイトルシーンクラス
@@ -42,10 +43,6 @@ public:
 	/// モデル描画
 	/// </summary>
 	void DrawModel()override;
-	/// <summary>
-	/// パーティクル3dモデル描画
-	/// </summary>
-	void DrawParticleModel()override;
 	/// <summary>
 	/// パーティクル描画
 	/// </summary>
@@ -80,22 +77,7 @@ private:
 	/// GlobalVariablesから変数に代入
 	/// </summary>
 	void ApplyGlobalVariables();
-	/// <summary>
-	/// UIエフェクト初期化
-	/// </summary>
-	void UIEffectInit();
-	/// <summary>
-	/// UIエフェクト更新
-	/// </summary>
-	void UIEffectUpdate();
-	/// <summary>
-	/// ゲーム開始演出初期化
-	/// </summary>
-	void WarpTransitionInit();
-	/// <summary>
-	/// ゲーム開始演出更新
-	/// </summary>
-	void WarpTransitionUpdate();
+	
 
 private:
 	//カメラ
@@ -104,60 +86,34 @@ private:
 	DaiEngine::PointLight pointLight_;
 	//スポットライト
 	DaiEngine::SpotLight spotLight_;
-	//背景
-	std::unique_ptr<DaiEngine::Sprite> backGround_;
-	//AボタンUI
-	std::unique_ptr<DaiEngine::Sprite> Abutton_;
-	//AボタンUIエフェクト
-	std::unique_ptr<DaiEngine::Sprite> AbuttonEff_;
-	//ワープホールまでの道
-	std::map<std::string, std::unique_ptr<DaiEngine::GPUParticle>> runWay_;
-	//道の座標
-	Vector3 runWayPos_{ 0.0f,-1.0f,0.0f };
-	//ワープホール
-	std::map<std::string, std::unique_ptr<DaiEngine::GPUParticle>> warpHole_;
-	//ワープホールの位置座標
-	Vector3 warpHolePos_ = {};
-	//タイトル文字(3D)
-	std::unique_ptr<DaiEngine::Object3d> titleText_;
-	//開始演出に使うフェード用スプライト
-	std::unique_ptr<DaiEngine::Sprite> fadeSprite_;
+
+	//タイトル用BGM
+	DaiEngine::Audio* bgm_ = nullptr;
+
+	//タイトルロゴ
+	std::unique_ptr<DaiEngine::Sprite> titleLogo_;
+	//ゲームスタートUI
+	std::unique_ptr<DaiEngine::Sprite> gameStartUI_;
+	//ゲーム終了UI
+	std::unique_ptr<DaiEngine::Sprite> gameFinishUI_;
+	
 
 private://パラメータまとめたやつら
 
-	//ボタンのエフェクトに必要なパラメータ
-	struct WorkButtonEffect {
-		//サイクル
-		float cycle_ = 0.0f;
-		//α値
-		float alpha_ = 1.0f;
-		//開始スケール
-		float startScale_ = 0.7f;
-		//終了スケール
-		float endScale_ = 1.2f;
-		//演出スピード
-		float speed_ = 0.04f;
+	enum class Select {
+		Start,
+		Finish,
 	};
-	//Aボタンエフェクトのパラメータ
-	WorkButtonEffect AbuttonEffectParam_;
 
-	//ゲーム開始演出に必要なパラメータ
-	struct WorkWarpTransition {
-		//演出中か
-		bool isTransition_ = false;
-		//α値
-		float alpha_ = 0.0f;
-		//カメラの開始座標
-		Vector3 startCameraPos_{};
-		//カメラの終了座標
-		Vector3 endCameraPos_{};
-		//カメラの移動スピード
-		float speed_ = 0.01f;
-		//移動イージングパラメータ
-		float param_ = 0.0f;
+	Select select_ = Select::Start;
+
+	enum class UISwitch {
+		On,
+		Off,
 	};
-	//ゲーム開始演出のパラメータ
-	WorkWarpTransition warpTransitionParam_;
+
+	UISwitch gStartUISwitch_ = UISwitch::On;
+	UISwitch gFinishUISwitch_ = UISwitch::Off;
 
 };
 

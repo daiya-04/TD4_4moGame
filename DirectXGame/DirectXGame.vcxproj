@@ -110,12 +110,15 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ClearScene.cpp" />
+    <ClCompile Include="Engine\Audio\AudioManager.cpp" />
     <ClCompile Include="Engine\Collision\Collider\Collider.cpp" />
     <ClCompile Include="Engine\Collision\Collider\ColliderManager.cpp" />
     <ClCompile Include="Engine\ComputePipeline\BaseComputePipeline.cpp" />
     <ClCompile Include="Engine\GraphicsPipeline\BaseGraphicsPipeline.cpp" />
     <ClCompile Include="Engine\3d\Animation\AnimationManager.cpp" />
     <ClCompile Include="Engine\PostEffect\Dissolve.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="Game\Boss\Behavior\AreaAttack\BossAreaAttack.cpp" />
     <ClCompile Include="Game\Boss\Behavior\IBossAttack\IBossAttack.cpp" />
     <ClCompile Include="Game\Boss\Behavior\IBossBehavior.cpp" />
@@ -204,12 +207,15 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\3d\Skeleton.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClearScene.h" />
+    <ClInclude Include="Engine\Audio\AudioManager.h" />
     <ClInclude Include="Engine\Collision\Collider\Collider.h" />
     <ClInclude Include="Engine\Collision\Collider\ColliderManager.h" />
     <ClInclude Include="Engine\ComputePipeline\BaseComputePipeline.h" />
     <ClInclude Include="Engine\GraphicsPipeline\BaseGraphicsPipeline.h" />
     <ClInclude Include="Engine\3d\Animation\AnimationManager.h" />
     <ClInclude Include="Engine\PostEffect\Dissolve.h" />
+    <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="Game\Boss\Behavior\AreaAttack\BossAreaAttack.h" />
     <ClInclude Include="Game\Boss\Behavior\IBossAttack\IBossAttack.h" />
     <ClInclude Include="Game\Boss\Behavior\IBossBehavior.h" />

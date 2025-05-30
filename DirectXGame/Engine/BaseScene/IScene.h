@@ -31,10 +31,6 @@ namespace DaiEngine {
 		/// </summary>
 		virtual void DrawParticle() = 0;
 		/// <summary>
-		/// モデルパーティクル描画
-		/// </summary>
-		virtual void DrawParticleModel() = 0;
-		/// <summary>
 		/// ポストエフェクトを掛けるやつ描画
 		/// </summary>
 		virtual void DrawPostEffect() = 0;
