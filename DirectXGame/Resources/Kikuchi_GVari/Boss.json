@@ -14,8 +14,10 @@
             "second": 60.0
         },
         "ItemFallAttack": {
+            "ActionRate_": 1.0,
             "ActiveCount": 200.0,
             "Num": 2,
+            "PreActionRate_": 1.0,
             "WaitCount": 200.0
         },
         "OffsetPos": [
@@ -37,7 +39,7 @@
             "activeCount": 60.0,
             "afterCount": 60.0,
             "rotateNum": 6.0,
-            "waitCount": 60.0
+            "waitCount": 180.0
         }
     }
 }
