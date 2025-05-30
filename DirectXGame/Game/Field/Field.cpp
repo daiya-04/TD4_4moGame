@@ -8,6 +8,8 @@
 #include "Field.h"
 #include"ImGuiManager.h"
 
+#include"GlobalVariable/Group/GlobalVariableGroup.h"
+
 #include <limits>
 
 void Field::Initialize() {
@@ -25,16 +27,20 @@ void Field::Initialize() {
 
 	//ステージ開始演出
 	StartStage();
+
+	//
+	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("Field");
+	gvg->SetValue("BlockWidth", &blockWidth_);
+	gvg->SetValue("Radius", &radius_);
+	gvg->SetValue("DeltaY", &deltaY_);
+	gvg->SetValue("HeightLimit", &heightLimit_);
+
 }
 
 void Field::Update() {
 
 #ifdef _DEBUG
 	ImGui::Begin("TestOperate");
-	ImGui::DragFloat("BlockWidth", &blockWidth_);
-	ImGui::DragFloat("Radius", &radius_);
-	ImGui::DragFloat("DeltaY", &deltaY_);
-	ImGui::DragFloat("HeightLimit", &heightLimit_);
 	if (ImGui::Button("TestRaiseBlocksAround")) {
 		//現在のnowPos_の位置からradius_範囲をdeltaY_分下げる
 		RaiseBlocksAround(GetBlockAt(nowPos_.x, nowPos_.y), radius_, deltaY_);

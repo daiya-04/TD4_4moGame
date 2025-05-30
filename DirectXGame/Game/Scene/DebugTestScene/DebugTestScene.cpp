@@ -33,7 +33,7 @@ void DebugTestScene::Init() {
 	model_ = DaiEngine::ModelManager::LoadGLTF("MultiMeshAnime");
 
 	skyBoxTex_ = DaiEngine::TextureManager::Load("skyBox.dds");
-	tex_ = DaiEngine::TextureManager::Load("Clear_text.png");
+	tex_ = DaiEngine::TextureManager::Load("TitleBack.png");
 	burnScarsTex_ = DaiEngine::TextureManager::Load("BurnScars.png");
 
 	skyBox_.reset(DaiEngine::SkyBox::Create(skyBoxTex_));
@@ -77,6 +77,12 @@ void DebugTestScene::Update() {
 	}
 	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_2)) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
+	}
+	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_3)) {
+		DaiEngine::SceneManager::GetInstance()->ChangeScene("Clear");
+	}
+	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_4)) {
+		DaiEngine::SceneManager::GetInstance()->ChangeScene("GameOver");
 	}
 	
 #endif // _DEBUG
@@ -139,7 +145,7 @@ void DebugTestScene::DrawModel() {
 
 	DaiEngine::SkinningObject::preDraw();
 	human_->Draw(camera_);
-	//human_->GetSkeleton().Draw(human_->worldTransform_, camera_);
+	human_->GetSkeleton().Draw(human_->worldTransform_, camera_);
 
 
 	DaiEngine::Object3d::preDraw();
@@ -149,12 +155,6 @@ void DebugTestScene::DrawModel() {
 	//ShapesDraw::DrawSphere(Shapes::Sphere({}, 1.0f), camera_);
 	//ShapesDraw::DrawPlane(Shapes::Plane({ 0.0f,0.0f,1.0f }, 10.0f), camera_);
 	//ShapesDraw::DrawAABB(Shapes::AABB({ -1.0,-1.0,-1.0f }, { 1.0f,1.0f,1.0f }), camera_);
-
-}
-
-void DebugTestScene::DrawParticleModel() {
-
-
 
 }
 
