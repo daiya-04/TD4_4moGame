@@ -139,6 +139,10 @@ void Player::OnCollison()
 {
 	//ヒットフラグOFF
 	parameters_.isHit = false;
+
+	//HP減少
+	parameters_.hp -- ;
+
 	//コライダーOFF
 	collider_->ColliderOff();
 }

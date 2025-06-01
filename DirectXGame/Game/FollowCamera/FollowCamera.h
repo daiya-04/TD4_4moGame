@@ -16,7 +16,22 @@ public://**パブリック関数**//
 	/// </summary>
 	void Update();
 
+	enum class State {
+		None,       //何もしない
+		Follow,     //ターゲットを追従する
+		Count
+	};
+
+	/// <summary>
+	/// ステート変更
+	/// </summary>
+	/// <param name="state"></param>
+	void SetState(State state);
+
 private://**プライベート変数**//
+
+
+	State state_ = State::None;
 
 	//カメラポインタ
 	DaiEngine::Camera* camera_;
@@ -24,9 +39,30 @@ private://**プライベート変数**//
 	//ターゲット座標
 	const Vector3* target_;
 
-	//カメラのオフセット座標
-	Vector3 offset_ = { 0, 0, -10 };
+	//過去のオフセット
+	Vector3 preOffset_;
 
-	//追従処理フラグ
-	bool isFollow_ = false;
+	//過去の回転
+	Vector3 preRotation_;
+
+	//目標オフセット
+	Vector3 targetOffset_;
+	//目標回転
+	Vector3 targetRotation_;
+	//遷移して変わっているか否か
+	bool isEsing_ = false;
+	//遷移カウント
+	float esingCount_ = 0.0f;
+private://**パラメータ変数**//
+
+	//カメラのオフセット座標
+	Vector3 offset_[(int)State::Count];
+
+	//カメラの向き
+	Vector3 rotation_[(int)State::Count];
+
+	//遷移時間
+	float maxEsingCount_ = 60;
+
+
 };

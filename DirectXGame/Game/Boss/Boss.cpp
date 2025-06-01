@@ -1,5 +1,7 @@
 #include "Boss.h"
 #include"GlobalVariable/Group/GlobalVariableGroup.h"
+#include"ColliderManager.h"
+#include"ShapesDraw.h"
 
 #pragma region 状態
 #include"Boss/Behavior/Idle/BossIdle.h"
@@ -8,10 +10,13 @@
 #pragma endregion
 
 
-Boss::Boss()
+Boss::Boss(FollowCamera* camera)
 {
 	//オブジェクト生成
 	GameObject::Init("GentlmanGuard");
+
+	//カメラポインタ設定
+	followCamera_ = camera;
 
 	IBossBehavior::SetBoss(this);
 
@@ -19,6 +24,15 @@ Boss::Boss()
 	behaviors_[(size_t)Behavior::Idle] = std::make_unique<BossIdle>();
 	behaviors_[(size_t)Behavior::Attack1] = std::make_unique<BossAreaAttack>();
 	behaviors_[(size_t)Behavior::Attack2] = std::make_unique<BossWeaponRollAttack>();
+
+	//マネージャ生成
+	dangerZoneManager_ = std::make_unique<DangerZoneManager>(this);
+	bulletManager_ = std::make_unique<BossBulletManager>(this);
+	collider_ = std::make_unique<DaiEngine::SphereCollider>();
+	collider_->Init("boss", *world_, radius_);
+	collider_->ColliderOn();
+	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
+	//collider_->SetEnterCallback([this](DaiEngine::Collider*) {});
 
 	std::unique_ptr<GlobalVariableGroup> gvg = std::make_unique<GlobalVariableGroup>("Boss");
 	gvg->SetMonitorValue("currentCount", &parameters_.currentSec);
@@ -31,10 +45,6 @@ Boss::Boss()
 		gvg->SetTreeData(behavior->tree_);
 	}
 
-	//マネージャ生成
-	dangerZoneManager_ = std::make_unique<DangerZoneManager>(this);
-	bulletManager_ = std::make_unique<BossBulletManager>(this);
-
 	gvg->SetTreeData(dangerZoneManager_->GetTree());
 	gvg->SetTreeData(bulletManager_->GetTree());
 
@@ -45,6 +55,7 @@ Boss::Boss()
 
 void Boss::Initialize() {
 	position_ = startPosition_;
+	SetCameraState(FollowCamera::State::Follow);
 }
 
 void Boss::Update()
@@ -102,6 +113,7 @@ void Boss::Update()
 	//マネージャ更新
 	dangerZoneManager_->Update();
 	bulletManager_->Update();
+	collider_->Update();
 }
 
 void Boss::Draw()
@@ -113,6 +125,12 @@ void Boss::Draw()
 
 	//本体描画
 	GameObject::Draw();
+
+	//円コライダー描画
+#ifdef _DEBUG
+	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()), *camera_);
+#endif // _DEBUG
+
 }
 
 void Boss::SpawnDangerZone()
