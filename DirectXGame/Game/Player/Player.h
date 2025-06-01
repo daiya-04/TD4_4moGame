@@ -2,10 +2,15 @@
 #include"GameObject.h"
 #include"Player/Input/PlayerInput.h"
 #include"Player/behavior/IPlayerBehavior.h"
+#include"SphereCollider.h"
 #include<optional>
 
 
 struct ProtPlayerParameters {
+
+	//移動量
+	Vector3 velocity;
+
 	//体力
 	int hp = 10;
 
@@ -39,6 +44,11 @@ public://**パブリック変数**//
 	void Draw()override;
 
 	/// <summary>
+	/// 行列更新
+	/// </summary>
+	void UpdateMatrix();
+
+	/// <summary>
 	/// 座標をセットして更新
 	/// </summary>
 	/// <param name="translate">セットする座標</param>
@@ -49,6 +59,7 @@ public://**パブリック変数**//
 	/// </summary>
 	void OnCollison();
 
+	DaiEngine::WorldTransform& GetWorld() { return *world_; };
 
 public://**ゲッター**//
 
@@ -73,6 +84,11 @@ private://**プライベート関数**//
 	/// </summary>
 	void Tenmetu();
 
+	/// <summary>
+	/// XZ軸の制限処理
+	/// </summary>
+	void LimitationXZ();
+
 public://**状態**//
 
 	//状態
@@ -94,8 +110,19 @@ private://**プライベート変数**//
 	//プレイヤー入力クラス
 	std::unique_ptr<PlayerInput>input_;
 
+	//円コライダー
+	std::unique_ptr<DaiEngine::SphereCollider> collider_;
+
+	//コライダー半径
+	float radius_ = 1.0f; 
+
 	//オフセット座標
 	Vector3 offsetPos_ = {0,0,0};
+
+	//座標
+	Vector3 position_ = { 0,0,0 };
+
+	
 
 private://**ヒット時処理*//
 	
@@ -113,4 +140,9 @@ private://**ヒット時処理*//
 
 	//描画フラグ
 	bool isDraw_ = true;
+
+private://**行動制限**//
+
+	//XZ軸の制限
+	Vector2 limitationXZ_ = { 10,10 };
 };

@@ -3,7 +3,7 @@
         "DangerZone": {
             "radius": 2.0,
             "warningCount": 60.0,
-            "warningSphereHeight": 0.5
+            "warningSphereHeight": -1.0
         },
         "FallingBullet": {
             "fallSpeed": 1.0,
@@ -18,10 +18,21 @@
             "Num": 3,
             "WaitCount": 60.0
         },
+        "OffsetPos": [
+            0.0,
+            1.159999966621399,
+            0.3100000023841858
+        ],
+        "StartPos": [
+            0.0,
+            0.0,
+            10.0
+        ],
         "weaponRollAttack": {
-            "activeCount": 3.0,
-            "afterCount": 1.0,
-            "waitCount": 1.0
+            "activeCount": 60.0,
+            "afterCount": 60.0,
+            "rotateNum": 6.0,
+            "waitCount": 60.0
         }
     }
 }

@@ -6,7 +6,7 @@ BossBullet::BossBullet(const BossBulletData& data)
 	world_ = data.world;
 	velocity_ = data.velocity;
 	acceleration_ = data.acceraletion;
-
+	warningWorld_ = data.warningWorld;
 
 	world_.scale_={ data.radius,data.radius ,data.radius };
 

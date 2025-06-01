@@ -8,6 +8,7 @@ PlayerMove::PlayerMove()
 	tree_.SetMonitorValue("MoveVelo", &debugInputMove);
 	tree_.SetValue("speed",&moveSpped_);
 
+	player_->SetAnimationName("PlayerWalk");
 }
 
 void PlayerMove::Init()
@@ -23,7 +24,7 @@ void PlayerMove::Update()
 	debugInputMove = move;
 
 	//移動する
-	player_->GetWorld().translation_ += move * moveSpped_;
+	player_->parameters_.velocity += move * moveSpped_;
 
 	//もし回避入力があった&クールタイムが終わっている場合
 	if (player_->GetInput()->GetInput(PlayerInput::Type::Roll)&&player_->parameters_.currentRollCount==0) {
@@ -35,4 +36,21 @@ void PlayerMove::Update()
 		//攻撃リクエスト
 		player_->behaviorRequest_ = Player::Behavior::Attack;
 	}
+
+	//入力がない場合
+	if (move.x == 0 && move.y == 0 && move.z == 0) {
+		
+		if (move != beforeVelo) {
+			player_->SetAnimationName("PlayerAvoidance");
+		}
+	}
+	else {
+		if (move != beforeVelo) {
+			//入力があった場合は歩行アニメーション
+			player_->SetAnimationName("PlayerWalk");
+		}
+	}
+
+	//前回の移動量を保存
+	beforeVelo = move;
 }

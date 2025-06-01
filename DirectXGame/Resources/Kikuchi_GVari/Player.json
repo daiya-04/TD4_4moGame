@@ -22,9 +22,18 @@
             "MaxNoHitSec": 60.0,
             "TenmetuNum": 9
         },
+        "Limitation": [
+            10.0,
+            10.0
+        ],
         "Move": {
-            "speed": 0.10000000149011612
+            "speed": 0.30000001192092896
         },
+        "OffsetPos": [
+            0.0,
+            2.509999990463257,
+            0.0
+        ],
         "Roll": {
             "cooldownCount": 60.0,
             "count": 10.0,

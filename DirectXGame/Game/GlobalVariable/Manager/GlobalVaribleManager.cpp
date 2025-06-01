@@ -21,7 +21,7 @@ const char** CreateCStringArray(const std::vector<std::string>& strings) {
 }
 
 //アイテムのImGui表記
-void ItemImGui(const std::string name, std::variant<bool*,int32_t*, float*,Vector2*, Vector3*, Vector4*> value) {
+void ItemImGui(const std::string name, std::variant<bool*, int32_t*, float*, Vector2*, Vector3*, Vector4*> value) {
 	value;
 #ifdef _DEBUG
 	//各アイテムをImGuiで操作
@@ -31,7 +31,8 @@ void ItemImGui(const std::string name, std::variant<bool*,int32_t*, float*,Vecto
 		bool* ptr = *std::get_if<bool*>(&value);
 		ImGui::Checkbox(name.c_str(), ptr);
 
-	}else if (std::holds_alternative<int32_t*>(value)) {
+	}
+	else if (std::holds_alternative<int32_t*>(value)) {
 		int32_t* ptr = *std::get_if<int32_t*>(&value);
 		ImGui::DragInt(name.c_str(), ptr);
 	}//floatの場合
@@ -57,13 +58,13 @@ void ItemImGui(const std::string name, std::variant<bool*,int32_t*, float*,Vecto
 }
 
 //モニター値に設定された物の操作
-void MonitorItemImGui(const std::string name, MonitorItemData&data) {
+void MonitorItemImGui(const std::string name, MonitorItemData& data) {
 
 	name; data;
 #ifdef _DEBUG
 
 	//値を参照
-	std::variant<bool*, int32_t*, float*, Vector3*, std::string*>& value = data.value;
+	std::variant<bool*, int32_t*, float*, Vector2*, Vector3*, std::string*>& value = data.value;
 
 	//アイテムの値がからの時
 	if (data.items.empty()) {
@@ -83,6 +84,12 @@ void MonitorItemImGui(const std::string name, MonitorItemData&data) {
 			float* ptr = *std::get_if<float*>(&value);
 			std::string text = name + " : %4.1f";
 			ImGui::Text(text.c_str(), *ptr, 0.01f);
+		}//Vector2の場合
+		else if (std::holds_alternative<Vector2*>(value)) {
+			Vector2* ptr = *std::get_if<Vector2*>(&value);
+			std::string text = name + " :  %4.1f / %4.1f";
+			ImGui::Text(text.c_str(), *reinterpret_cast<float*>(ptr), 0.01f);
+
 		}//Vector3の場合
 		else if (std::holds_alternative<Vector3*>(value)) {
 			Vector3* ptr = *std::get_if<Vector3*>(&value);
@@ -148,7 +155,7 @@ void MonitorItemImGui(const std::string name, MonitorItemData&data) {
 }
 
 //ツリーのImGui表示処理
-void TreeImGui(const std::string& name, TreeData& treeData,size_t size) {
+void TreeImGui(const std::string& name, TreeData& treeData, size_t size) {
 #ifdef _DEBUG
 	//ツリー処理開始
 	if (ImGui::TreeNode(name.c_str())) {
@@ -275,7 +282,7 @@ void TreeImGui(const std::string& name, TreeData& treeData,size_t size) {
 	}
 #endif // _DEBUG
 
-	
+
 }
 
 GlobalVariableManager* GlobalVariableManager::GetInstance()
@@ -326,7 +333,7 @@ void GlobalVariableManager::Update()
 
 				//モニター地がある場合
 				if (!data.second.monitorKeys.empty()) {
-					
+
 					//指定サイズより多い場合
 					if (data.second.monitorKeys.size() > nodeSize_) {
 
@@ -419,7 +426,7 @@ void GlobalVariableManager::Update()
 						if (ImGui::TreeNode("--ChildTree--")) {
 							//子ツリーの表示
 							for (auto& key : data.second.treeKeys) {
-								TreeImGui(key, data.second.tree[key],nodeSize_);
+								TreeImGui(key, data.second.tree[key], nodeSize_);
 							}
 							//ツリー終了
 							ImGui::TreePop();
@@ -430,7 +437,7 @@ void GlobalVariableManager::Update()
 						ImGui::Text("--ChildTree--");
 						//子ツリーの表示
 						for (auto& key : data.second.treeKeys) {
-							TreeImGui(key, data.second.tree[key],nodeSize_);
+							TreeImGui(key, data.second.tree[key], nodeSize_);
 						}
 					}
 				}
@@ -463,12 +470,13 @@ void SaveItemData(
 		const std::string& itemName = itItem->first;
 		//項目の参照を取得
 		ItemData& item = itItem->second;
-		
+
 		if (std::holds_alternative<bool*>(item.value)) {//int型の値を保持していれば
 			//int32_t型の値を登録
 			root[itemName] = *std::get<bool*>(item.value);
 
-		}else if (std::holds_alternative<int32_t*>(item.value)) {//int型の値を保持していれば
+		}
+		else if (std::holds_alternative<int32_t*>(item.value)) {//int型の値を保持していれば
 			//int32_t型の値を登録
 			root[itemName] = *std::get<int32_t*>(item.value);
 
@@ -476,6 +484,10 @@ void SaveItemData(
 		else if (std::holds_alternative<float*>(item.value)) {//float型の値を保持していれば
 			// int32_t型の値を登録
 			root[itemName] = *std::get<float*>(item.value);
+		}
+		else if (std::holds_alternative<Vector2*>(item.value)) {//Vector2型の値を保持していれば
+			Vector2 value = *std::get<Vector2*>(item.value);
+			root[itemName] = nlohmann::json::array({ value.x, value.y });
 		}
 		else if (std::holds_alternative<Vector3*>(item.value)) {//Vector3型の値を保持していれば
 			Vector3 value = *std::get<Vector3*>(item.value);
@@ -574,15 +586,16 @@ void SetLoadTreeData(TreeData& groupData, SavedTreeData& saveData) {
 		if (saveData.value.end() != saveData.value.find(itemname)) {
 
 			//値取得
-			std::variant<bool,int32_t, float,Vector2, Vector3,Vector4>& saveV = saveData.value[itemname].value;
-			std::variant<bool*,int32_t*, float*,Vector2*, Vector3*, Vector4*>& dataV = groupData.value[itemname].value;
+			std::variant<bool, int32_t, float, Vector2, Vector3, Vector4>& saveV = saveData.value[itemname].value;
+			std::variant<bool*, int32_t*, float*, Vector2*, Vector3*, Vector4*>& dataV = groupData.value[itemname].value;
 
 			///k型が一致する値を代入
 			if (std::holds_alternative<bool>(saveV) && std::holds_alternative<bool*>(dataV)) {				//bool型
 				bool savePtr = *std::get_if<bool>(&saveV);
 				bool* dataPtr = *std::get_if<bool*>(&dataV);
 				*dataPtr = savePtr;
-			}else if (std::holds_alternative<int32_t>(saveV) && std::holds_alternative<int32_t*>(dataV)) {	//int32_t型
+			}
+			else if (std::holds_alternative<int32_t>(saveV) && std::holds_alternative<int32_t*>(dataV)) {	//int32_t型
 				int32_t savePtr = *std::get_if<int32_t>(&saveV);
 				int32_t* dataPtr = *std::get_if<int32_t*>(&dataV);
 				*dataPtr = savePtr;
@@ -641,15 +654,16 @@ void GlobalVariableManager::SetLoadGroupData(const std::string& groupName)
 		if (saveData.value.end() != saveData.value.find(itemname)) {
 
 			//各値取得
-			std::variant<bool,int32_t, float,Vector2, Vector3,Vector4>& saveV = saveData.value[itemname].value;
-			std::variant<bool*,int32_t*, float*,Vector2*, Vector3*, Vector4*>& dataV = groupdata.value[itemname].value;
+			std::variant<bool, int32_t, float, Vector2, Vector3, Vector4>& saveV = saveData.value[itemname].value;
+			std::variant<bool*, int32_t*, float*, Vector2*, Vector3*, Vector4*>& dataV = groupdata.value[itemname].value;
 
 			//合致する値を保存
 			if (std::holds_alternative<bool>(saveV) && std::holds_alternative<bool*>(dataV)) {				//bool型
 				bool savePtr = *std::get_if<bool>(&saveV);
 				bool* dataPtr = *std::get_if<bool*>(&dataV);
 				*dataPtr = savePtr;
-			}else if (std::holds_alternative<int32_t>(saveV) && std::holds_alternative<int32_t*>(dataV)) {	//in32_t型
+			}
+			else if (std::holds_alternative<int32_t>(saveV) && std::holds_alternative<int32_t*>(dataV)) {	//in32_t型
 				int32_t savePtr = *std::get_if<int32_t>(&saveV);
 				int32_t* dataPtr = *std::get_if<int32_t*>(&dataV);
 				*dataPtr = savePtr;
@@ -657,6 +671,11 @@ void GlobalVariableManager::SetLoadGroupData(const std::string& groupName)
 			else if (std::holds_alternative<float>(saveV) && std::holds_alternative<float*>(dataV)) {		//flaot型
 				float savePtr = *std::get_if<float>(&saveV);
 				float* dataPtr = *std::get_if<float*>(&dataV);
+				*dataPtr = savePtr;
+			}
+			else if (std::holds_alternative<Vector2>(saveV) && std::holds_alternative<Vector2*>(dataV)) {	//vector3型
+				Vector2 savePtr = *std::get_if<Vector2>(&saveV);
+				Vector2* dataPtr = *std::get_if<Vector2*>(&dataV);
 				*dataPtr = savePtr;
 			}
 			else if (std::holds_alternative<Vector3>(saveV) && std::holds_alternative<Vector3*>(dataV)) {	//vector3型
@@ -780,12 +799,18 @@ void GlobalVariableManager::LoadGroupData(const std::string& groupName)
 		if (itItem->is_boolean()) {
 			bool value = itItem->get<bool>();
 			data.value = value;
-		}else if (itItem->is_number_integer()) {
+		}
+		else if (itItem->is_number_integer()) {
 			int32_t value = itItem->get<int32_t>();
 			data.value = value;
 		}
 		else if (itItem->is_number_float()) {// float型を保持していた場合
 			float value = itItem->get<float>();
+
+			data.value = value;
+		}
+		else if (itItem->is_array() && itItem->size() == 2) { // 要素数２の配列であれば
+			Vector2 value = { itItem->at(0), itItem->at(1)};
 
 			data.value = value;
 		}
@@ -795,7 +820,7 @@ void GlobalVariableManager::LoadGroupData(const std::string& groupName)
 			data.value = value;
 		}
 		else if (itItem->is_array() && itItem->size() == 4) { // 要素数３の配列であれば
-			Vector4 value = { itItem->at(0), itItem->at(1), itItem->at(2),itItem->at(3)};
+			Vector4 value = { itItem->at(0), itItem->at(1), itItem->at(2),itItem->at(3) };
 
 			data.value = value;
 		}       // 子ツリーの読み込み処理

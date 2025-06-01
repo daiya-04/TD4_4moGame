@@ -8,18 +8,25 @@ BossWeaponRollAttack::BossWeaponRollAttack()
 	tree_.SetValue("activeCount", &attackTime_);
 	tree_.SetValue("afterCount", &endTime_);
 
+	tree_.SetValue("rotateNum", &rotateDegree_);
 }
 
 void BossWeaponRollAttack::InitBehavior0()
 {
+	//予備動作初期化
+	boss_->SetAnimationName("GentlmanAttackPosture2", false);
 }
 
 void BossWeaponRollAttack::InitBehavior1()
 {
+	//回転数保存
+	minRoll_ = boss_->world_->rotation_.y;
+	maxRoll_ = minRoll_ + rotateDegree_;
 }
 
 void BossWeaponRollAttack::InitBehavior2()
 {
+	boss_->SetAnimationName("GentlmanAttack2", false);
 }
 
 void BossWeaponRollAttack::UpdateBehavior0()
@@ -31,6 +38,13 @@ void BossWeaponRollAttack::UpdateBehavior0()
 
 void BossWeaponRollAttack::UpdateBehavior1()
 {
+	//割合Tを計算
+	float t = boss_->parameters_.currentSec / attackTime_;
+
+	//回転量を変更
+	boss_->world_->rotation_.y = Lerp(t, minRoll_, maxRoll_);
+
+	//カウントチェック
 	if (boss_->parameters_.currentSec >= attackTime_) {
 		countRequest_ = 2;
 	}

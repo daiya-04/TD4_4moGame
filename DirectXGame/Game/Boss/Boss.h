@@ -16,6 +16,7 @@ public://**パブリック変数**//
 	struct Parameters {
 		//カウント時間
 		float currentSec = 0;
+		Vector3 velocity_;
 	}parameters_;
 
 
@@ -26,6 +27,11 @@ public://**パブリック関数**//
 	/// </summary>
 	Boss();
 	~Boss()=default;
+
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	void Initialize();
 
 	/// <summary>
 	/// 更新
@@ -45,7 +51,7 @@ public://**パブリック関数**//
 	/// <summary>
 	/// 弾の発射処理
 	/// </summary>
-	void SpawnBullet(const Vector3& pos);
+	void SpawnBullet(const DaiEngine::WorldTransform& pos);
 
 public://**セッター**//
 
@@ -61,13 +67,13 @@ public://**セッター**//
 	/// <returns></returns>
 	Vector3 SetDirection2Player();
 
-public://ゲッター**//
+public://**ゲッター**//
 
-private://**プライベート関数**//
-
-
-
-
+	/// <summary>
+	/// 弾データの取得
+	/// </summary>
+	/// <returns></returns>
+	std::list<std::unique_ptr<BossBullet>>& GetBullets(){ return bulletManager_->GetBullets(); }
 
 public://**状態
 
@@ -95,9 +101,19 @@ private://**プライベート変数**//
 	//警戒エリアマネージャ
 	std::unique_ptr<DangerZoneManager>dangerZoneManager_ = nullptr;
 
+
+	//ワールド座標
+	Vector3 position_{};
+
+
+
 private://**パラメータ変数**//
+	
+	//開始位置
+	Vector3 startPosition_{};
 
-
+	//オフセット位置
+	Vector3 offsetPosition_{};
 
 private://**デバッグ用変数**//
 	

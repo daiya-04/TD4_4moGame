@@ -20,7 +20,7 @@ void GlobalVariableGroup::SetValue(const std::string& name, std::variant<bool*,i
 	datas_.valueKeys.push_back(name);
 }
 
-void GlobalVariableGroup::SetMonitorValue(const std::string& name, std::variant<bool*, int32_t*, float*, Vector3*, std::string*> value)
+void GlobalVariableGroup::SetMonitorValue(const std::string& name, std::variant<bool*, int32_t*, float*,Vector2*, Vector3*, std::string*> value)
 {
 	//監視値をセット
 	datas_.monitorValue[name].value = value;

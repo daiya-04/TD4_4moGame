@@ -7,18 +7,26 @@ BossAreaAttack::BossAreaAttack()
 	tree_.SetValue("WaitCount", &waitTime_);
 	tree_.SetValue("ActiveCount", &attackTime_);
 	tree_.SetValue("Num", &numbers_);
+	tree_.SetValue("PreActionRate_", &preActionRate_);
+	tree_.SetValue("ActionRate_", &actionRate_);
 }
 
 void BossAreaAttack::InitBehavior0()
 {
-	//予備動作初期化
-	boss_->SetAnimationName("GingerManAttack",false);
+	//アニメーション変更
+	boss_->SetAnimationName("GentlmanAttackPosture1",false);
+	//再生速度変更
+	boss_->SetAnimationLeverage(preActionRate_);
 }
 
 void BossAreaAttack::InitBehavior1()
 {
 	//実際の行動初期化
 	currentNum_ = 0;
+	//アニメーション変更
+	boss_->SetAnimationName("GentlmanAttack1", false);
+	//再生速度変更
+	boss_->SetAnimationLeverage(actionRate_);
 }
 
 void BossAreaAttack::UpdateBehavior0()

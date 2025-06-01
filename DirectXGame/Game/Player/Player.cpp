@@ -1,6 +1,8 @@
 #include "Player.h"
 
 #include"GlobalVariable/Group/GlobalVariableGroup.h"
+#include"ColliderManager.h"
+#include"ShapesDraw.h"
 
 #pragma region 状態クラス
 #include"Player/behavior/Roll/ProtPlayerRoll.h"
@@ -14,13 +16,17 @@
 Player::Player()
 {
 	//オブジェクト生成
-	GameObject::Init("Standing");
+	GameObject::Init("PlayerEntry");
 
 	//入力クラス生成
 	input_ = std::make_unique<PlayerInput>();
 
 	//コライダークラス生成
-
+	collider_ = std::make_unique<DaiEngine::SphereCollider>();
+	collider_->Init("player",*world_,radius_);
+	collider_->ColliderOn();
+	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
+	collider_->SetEnterCallback([this](DaiEngine::Collider*) { OnCollison(); });
 	//プレイヤーポインタ設定
 	IProtBehavior::SetPlayer(this);
 
@@ -36,7 +42,9 @@ Player::Player()
 	gvg->SetMonitorValue("HitFlag", &parameters_.isHit);
 	gvg->SetMonitorValue("RollCooldown", &parameters_.currentRollCount);
 	gvg->SetValue("HP", &parameters_.hp);
-
+	gvg->SetValue("OffsetPos", &offsetPos_);
+	gvg->SetValue("Limitation", &limitationXZ_);
+	gvg->SetValue("ColliderRadius", &radius_);
 	//全ての状態のツリーをセット
 	for (auto& behavior : behaviors_) {
 		if (behavior) {
@@ -55,6 +63,15 @@ Player::Player()
 
 void Player::Update()
 {
+
+#ifdef _DEBUG
+	collider_->SetRadius(radius_);
+#endif // DEBUG
+
+
+	//移動量初期化
+	parameters_.velocity = { 0,0,0 };
+
 	//リクエストがある場合
 	if (behaviorRequest_) {
 		//リクエストの値を渡す
@@ -68,25 +85,48 @@ void Player::Update()
 	//回避のクールタイム更新
 	parameters_.currentRollCount --;
 
+
 	//もし時間が0以下なら0に
 	if (parameters_.currentRollCount < 0)parameters_.currentRollCount = 0;
 
 	//状態更新
 	behaviors_[(int)behaviorName_]->Update();
 
+	//座標更新
+	position_ += parameters_.velocity;
+
+	//制限チェック
+	LimitationXZ();
+
+	//オフセット分足してワールド座標更新
+	world_->translation_ =position_ + offsetPos_;
+
+	
+
 	//点滅更新
 	Tenmetu();
 
 	//行列更新
-	GameObject::Update();
+	UpdateMatrix();
 }
 
 void Player::Draw()
 {
+	//円コライダー描画
+#ifdef _DEBUG
+	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()),*camera_);
+#endif // _DEBUG
+
 	//描画
 	if (isDraw_) {
 		GameObject::Draw();
 	}
+}
+
+void Player::UpdateMatrix() {
+	//行列更新
+	GameObject::Update();
+	collider_->Update();
 }
 
 void Player::SetWorldTranslate(const Vector3& translate)
@@ -99,6 +139,8 @@ void Player::OnCollison()
 {
 	//ヒットフラグOFF
 	parameters_.isHit = false;
+	//コライダーOFF
+	collider_->ColliderOff();
 }
 
 
@@ -138,7 +180,7 @@ Vector3 Player::SetBody2Input()
 	//入力がある場合
 	if (velocity != Vector3(0, 0, 0)) {
 		//向きを指定
-		world_->rotation_.y = GetYRotate({ velocity.x,velocity.z }) + ((float)std::numbers::pi);
+		world_->rotation_.y = GetYRotate({ velocity.x,velocity.z });
 	}
 
 	return velocity;
@@ -174,6 +216,26 @@ void Player::Tenmetu()
 			currentHitCount_ = 0;
 			//点滅回数初期化
 			tenmetuCount_ = 0;
+
+			//コライダーON
+			collider_->ColliderOn();
 		}
+	}
+}
+
+void Player::LimitationXZ()
+{
+	//XZ制限チェック
+	if (position_.x <= -limitationXZ_.x) {
+		position_.x = -limitationXZ_.x;
+	}
+	else if (position_.x >= limitationXZ_.x) {
+		position_.x = limitationXZ_.x;
+	}
+	if (position_.z <= -limitationXZ_.y) {
+		position_.z = -limitationXZ_.y;
+	}
+	else if (position_.z >= limitationXZ_.y) {
+		position_.z = limitationXZ_.y;
 	}
 }

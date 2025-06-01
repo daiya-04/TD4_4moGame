@@ -21,11 +21,12 @@ GameScene::GameScene() {
 }
 
 GameScene::~GameScene() {
+
 	bgm_->StopSound();
 }
 
 
-void GameScene::Init(){
+void GameScene::Init() {
 	//カメラ初期化
 	camera_.Init();
 	//ライト初期化
@@ -60,13 +61,16 @@ void GameScene::Init(){
 	//全ての初期化の後に処理
 	globalVariableManager_->LoadAllSaveData();
 	globalVariableManager_->SetLoadAllData();
+
+	//セットされたデータで初期化
+	boss_->Initialize();
 }
 
 void GameScene::Update() {
 	DebugGUI();
 
 #ifdef _DEBUG
-	
+
 	//デバッグ用シーンの切り替えコマンド
 	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_1)) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Title");
@@ -84,8 +88,6 @@ void GameScene::Update() {
 
 #endif // _DEBUG
 
-	
-
 	//ライト更新
 	pointLight_.Update();
 	spotLight_.Update();
@@ -96,15 +98,31 @@ void GameScene::Update() {
 	//カメラ更新
 	camera_.UpdateViewMatrix();
 	camera_.UpdateCameraPos();
-	
+
 	//プレイヤー更新
 	player_->Update();
+	Vector3 pos = player_->GetWorld().translation_;
+	pos.y = field_->GetMassLocationPosY(player_->GetWorld().translation_) + player_->GetWorld().scale_.y;
+	player_->SetWorldTranslate(pos);
+	player_->UpdateMatrix();
 
 	//ボス更新
 	boss_->Update();
 
 	//地面更新
 	field_->Update();
+	field_->GetMassLocationPosY(player_->GetWorld().translation_);
+
+	for (std::unique_ptr<BossBullet>& bullet : boss_->GetBullets()) {
+		Vector2 targetBlock = field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
+		Block* block = field_->GetBlock(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
+
+		// Y範囲にあるか判定
+		if (block->world.translation_.y >= bullet->GetWorld().translation_.y && block->world.translation_.y <= bullet->GetWorld().translation_.y + bullet->GetWorld().scale_.y) {
+			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, -0.5f);
+			bullet->OnCollision();
+		}
+	}
 
 	DaiEngine::InstancingObjData data;
 	data.worldTransform_.Init();
@@ -112,13 +130,13 @@ void GameScene::Update() {
 
 }
 
-void GameScene::DrawBackGround(){
+void GameScene::DrawBackGround() {
 
-	
+
 
 }
 
-void GameScene::DrawModel(){
+void GameScene::DrawModel() {
 
 	//地面描画
 	field_->Draw();
@@ -131,27 +149,27 @@ void GameScene::DrawModel(){
 
 }
 
-void GameScene::DrawParticle(){
+void GameScene::DrawParticle() {
 
 }
 
-void GameScene::DrawUI(){
-	
+void GameScene::DrawUI() {
+
 }
 
 void GameScene::DrawPostEffect() {
 
-	
+
 
 }
 
 void GameScene::DrawRenderTexture() {
-	
+
 }
 
-void GameScene::DebugGUI(){
+void GameScene::DebugGUI() {
 #ifdef _DEBUG
-  
+
 	//デバッグマネージャの更新
 	globalVariableManager_->Update();
 

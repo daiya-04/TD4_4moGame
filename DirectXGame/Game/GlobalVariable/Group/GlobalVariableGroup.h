@@ -27,7 +27,7 @@ public: //**パブリック関数**//
 	/// </summary>
 	/// <param name="name">値の名前</param>
 	/// <param name="value">値</param>
-	void SetMonitorValue(const std::string& name, std::variant<bool*, int32_t*, float*, Vector3*, std::string*> value);
+	void SetMonitorValue(const std::string& name, std::variant<bool*, int32_t*, float*, Vector2*, Vector3*, std::string*> value);
 
 	/// <summary>
 	/// ImGuiのコンボでデバッグ

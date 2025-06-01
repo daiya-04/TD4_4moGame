@@ -20,4 +20,8 @@ void FollowCamera::Update()
 		//カメラの位置をターゲットの位置にオフセットを加えた位置にする
 		camera_->translation_ = *target_ + offset_;
 	}
+	else {
+		//カメラの位置をターゲットの位置にオフセットを加えた位置にする
+		camera_->translation_ = offset_;
+	}
 }

@@ -8,6 +8,10 @@
 #include "Field.h"
 #include"ImGuiManager.h"
 
+#include"GlobalVariable/Group/GlobalVariableGroup.h"
+
+#include <limits>
+
 void Field::Initialize() {
 	//Input
 	input_ = DaiEngine::Input::GetInstance();
@@ -23,16 +27,20 @@ void Field::Initialize() {
 
 	//ステージ開始演出
 	StartStage();
+
+	//
+	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("Field");
+	gvg->SetValue("BlockWidth", &blockWidth_);
+	gvg->SetValue("Radius", &radius_);
+	gvg->SetValue("DeltaY", &deltaY_);
+	gvg->SetValue("HeightLimit", &heightLimit_);
+
 }
 
 void Field::Update() {
 
 #ifdef _DEBUG
 	ImGui::Begin("TestOperate");
-	ImGui::DragFloat("BlockWidth", &blockWidth_);
-	ImGui::DragFloat("Radius", &radius_);
-	ImGui::DragFloat("DeltaY", &deltaY_);
-	ImGui::DragFloat("HeightLimit", &heightLimit_);
 	if (ImGui::Button("TestRaiseBlocksAround")) {
 		//現在のnowPos_の位置からradius_範囲をdeltaY_分下げる
 		RaiseBlocksAround(GetBlockAt(nowPos_.x, nowPos_.y), radius_, deltaY_);
@@ -156,7 +164,7 @@ void Field::SetBlockHeightLimit(float heightLimit) {
 
 float Field::GetMassLocationPosY(Vector3 translate) {
 	//現在のマスを確認する
-	Vector2 selected = GetBlockAt(translate.x, translate.z);
+	Vector2 selected = GetNearestBlockAt(translate.x, translate.z);
 	for (Block& block : blocks_) {
 		if (block.massLocation.x == selected.x && block.massLocation.y == selected.y) {
 			//プレイヤーの位置をnowPos_に記録
@@ -221,6 +229,50 @@ Vector2 Field::GetBlockAt(float x, float z) {
 	}
 
 	return Vector2{ -1,-1 };//見つからなければ適当な値
+}
+
+Vector2 Field::GetNearestBlockAt(float x, float z) {
+	float minDistanceSq = (std::numeric_limits<float>::max)();
+	Block* nearestBlock = nullptr;
+
+	for (Block& block : blocks_) {
+		const Vector3& pos = block.world.translation_;
+
+		float dx = pos.x - x;
+		float dz = pos.z - z;
+		float distSq = dx * dx + dz * dz;
+
+		if (distSq < minDistanceSq) {
+			minDistanceSq = distSq;
+			nearestBlock = &block;
+		}
+	}
+
+	if (nearestBlock) {
+		return nearestBlock->massLocation;
+	}
+	else {
+		return Vector2{ -1, -1 }; // 念のためfallback
+	}
+}
+
+Block* Field::GetBlock(float x, float z) {
+	Block* nearestBlock = nullptr;
+	float minDistanceSquared = (std::numeric_limits<float>::max)();
+
+	for (Block& block : blocks_) {
+		const Vector3& blockPos = block.world.translation_;
+		float dx = blockPos.x - x;
+		float dz = blockPos.z - z;
+		float distanceSquared = dx * dx + dz * dz;
+
+		if (distanceSquared < minDistanceSquared) {
+			minDistanceSquared = distanceSquared;
+			nearestBlock = &block;
+		}
+	}
+
+	return nearestBlock;
 }
 
 void Field::PlayStageIntroAnimation(float deltaTime) {

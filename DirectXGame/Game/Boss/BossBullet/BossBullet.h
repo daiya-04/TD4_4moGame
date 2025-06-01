@@ -9,6 +9,9 @@ struct BossBulletData {
 	//加速度
 	Vector3 acceraletion;
 
+	//警告円のワールド
+	DaiEngine::WorldTransform warningWorld;
+
 	//サイズ
 	float radius = 1.0f;
 };
@@ -47,18 +50,20 @@ public://**パブリック関数**//
 	const DaiEngine::WorldTransform& GetWorld()const { return world_; }
 
 	/// <summary>
-	/// 円の半径取得
+	/// 警告円のワールド取得
 	/// </summary>
 	/// <returns></returns>
-	//float GetRadius() { return colldier_->GetRadius(); };
+	const DaiEngine::WorldTransform& GetWarningWorld()const { return warningWorld_; }
 
-private://**プライベート変数**//
-
-	//コライダー
-	//std::unique_ptr<SphereCollider>colldier_;
+	/// <summary>
+	/// ワールドデータを取得
+	/// </summary>
+	/// <returns></returns>
+	DaiEngine::WorldTransform& GetWorld() { return world_; }
 
 private://**パラメータ変数**//
 
+	//ワールドデータ
 	DaiEngine::WorldTransform world_;
 
 	//速度
@@ -66,6 +71,9 @@ private://**パラメータ変数**//
 	//加速度
 	Vector3 acceleration_;
 	
+	//警告円のワールド
+	DaiEngine::WorldTransform warningWorld_;
+
 	//死亡フラグ
 	bool isDead_ = false;
 };

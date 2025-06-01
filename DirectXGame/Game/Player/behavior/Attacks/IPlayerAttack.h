@@ -70,6 +70,9 @@ private:
 		Count
 	};
 
+	//再生倍率
+	float playbackFactor_;
+
 	//時間
 	float currentCount_ = 0;
 
