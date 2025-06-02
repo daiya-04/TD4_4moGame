@@ -1,5 +1,13 @@
 {
     "Player": {
+        "AttackCollider": {
+            "Radius": 1.0,
+            "pos": [
+                0.0,
+                0.0,
+                1.2400000095367432
+            ]
+        },
         "AttackManager": {
             "Com1": {
                 "AnimationFactor": 3.799999952316284,

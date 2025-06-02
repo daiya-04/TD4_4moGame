@@ -1,4 +1,4 @@
-#include "ProtPlayerMove.h"
+#include "PlayerMove.h"
 #include"Player/Player.h"
 
 
@@ -8,7 +8,7 @@ PlayerMove::PlayerMove()
 	tree_.SetMonitorValue("MoveVelo", &debugInputMove);
 	tree_.SetValue("speed",&moveSpped_);
 
-	player_->SetAnimationName("PlayerWalk");
+	player_->SetAnimationName("PlayerIdle");
 }
 
 void PlayerMove::Init()
@@ -43,7 +43,7 @@ void PlayerMove::Update()
 		
 		if (move != beforeVelo) {
 			//待機モーション
-			player_->SetAnimationName("PlayerDown");
+			player_->SetAnimationName("PlayerIdle");
 		}
 	}
 	else {

@@ -5,8 +5,8 @@
 #include"ShapesDraw.h"
 
 #pragma region 状態クラス
-#include"Player/behavior/Roll/ProtPlayerRoll.h"
-#include"Player/behavior/Move/ProtPlayerMove.h"
+#include"Player/behavior/Roll/PlayerRoll.h"
+#include"Player/behavior/Move/PlayerMove.h"
 #include"Player/behavior/AttackManager/PlayerAttackManager.h"
 #pragma endregion
 
@@ -26,7 +26,16 @@ Player::Player()
 	collider_->Init("player",*world_,radius_);
 	collider_->ColliderOn();
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
-	collider_->SetEnterCallback([this](DaiEngine::Collider*) { OnCollison(); });
+	collider_->SetEnterCallback([this](DaiEngine::Collider*collider) { OnCollison(collider); });
+	//攻撃コライダー生成
+	attackWorld_.Init();
+	attackWorld_.parent_ = world_;
+	attackCollider_ = std::make_unique<DaiEngine::SphereCollider>();
+	attackCollider_->Init("playerAttack", attackWorld_,attackRadius_);
+	DaiEngine::ColliderManager::GetInstance()->AddCollider(attackCollider_.get());
+	collider_->SetEnterCallback([this](DaiEngine::Collider*) { OnCollisionATKCollider(); });
+
+
 	//プレイヤーポインタ設定
 	IProtBehavior::SetPlayer(this);
 
@@ -58,7 +67,15 @@ Player::Player()
 	hitTree.SetMonitorValue("IsHitFlag", &parameters_.isHit);
 	hitTree.SetValue("MaxNoHitSec", &hitCount_);
 	hitTree.SetValue("TenmetuNum", &maxTenmetuNum_);
+
+	//攻撃用コライダー設定
+	GvariTree attackColliderTree;
+	attackColliderTree.name_ = "AttackCollider";
+	attackColliderTree.SetValue("pos", &attackWorld_.translation_);
+	attackColliderTree.SetValue("Radius", &attackRadius_);
+
 	gvg->SetTreeData(hitTree);
+	gvg->SetTreeData(attackColliderTree);
 }
 
 void Player::Update()
@@ -66,6 +83,7 @@ void Player::Update()
 
 #ifdef _DEBUG
 	collider_->SetRadius(radius_);
+	attackCollider_->SetRadius(attackRadius_);
 #endif // DEBUG
 
 
@@ -108,6 +126,7 @@ void Player::Update()
 
 	//行列更新
 	UpdateMatrix();
+
 }
 
 void Player::Draw()
@@ -115,6 +134,7 @@ void Player::Draw()
 	//円コライダー描画
 #ifdef _DEBUG
 	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()),*camera_);
+	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(attackCollider_->GetShape()), *camera_);
 #endif // _DEBUG
 
 	//描画
@@ -127,6 +147,8 @@ void Player::UpdateMatrix() {
 	//行列更新
 	GameObject::Update();
 	collider_->Update();
+	attackWorld_.UpdateMatrix();
+	attackCollider_->Update();
 }
 
 void Player::SetWorldTranslate(const Vector3& translate)
@@ -135,8 +157,13 @@ void Player::SetWorldTranslate(const Vector3& translate)
 	world_->UpdateMatrix();
 }
 
-void Player::OnCollison()
+void Player::OnCollison(DaiEngine::Collider* collider)
 {
+	//ボスコライダーの場合スキップ
+	if (collider->GetTag() == "boss") {
+		return;
+	}
+
 	//ヒットフラグOFF
 	parameters_.isHit = false;
 
@@ -145,6 +172,12 @@ void Player::OnCollison()
 
 	//コライダーOFF
 	collider_->ColliderOff();
+}
+
+void Player::OnCollisionATKCollider()
+{
+	//攻撃コライダーをOFF
+	attackCollider_->ColliderOff();
 }
 
 

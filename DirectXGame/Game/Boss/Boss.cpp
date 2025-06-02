@@ -28,6 +28,8 @@ Boss::Boss(FollowCamera* camera)
 	//マネージャ生成
 	dangerZoneManager_ = std::make_unique<DangerZoneManager>(this);
 	bulletManager_ = std::make_unique<BossBulletManager>(this);
+	
+	//コライダー生成
 	collider_ = std::make_unique<DaiEngine::SphereCollider>();
 	collider_->Init("boss", *world_, radius_);
 	collider_->ColliderOn();

@@ -57,8 +57,17 @@ public://**パブリック変数**//
 	/// <summary>
 	/// 当たり判定処理
 	/// </summary>
-	void OnCollison();
+	void OnCollison(DaiEngine::Collider* collider);
 
+	/// <summary>
+	/// 攻撃コライダーの衝突処理
+	/// </summary>
+	void OnCollisionATKCollider();
+
+	/// <summary>
+	/// ワールド取得
+	/// </summary>
+	/// <returns></returns>
 	DaiEngine::WorldTransform& GetWorld() { return *world_; };
 
 public://**ゲッター**//
@@ -112,6 +121,15 @@ private://**プライベート変数**//
 
 	//円コライダー
 	std::unique_ptr<DaiEngine::SphereCollider> collider_;
+
+	//攻撃用コライダー
+	std::unique_ptr<DaiEngine::SphereCollider> attackCollider_;
+
+	//攻撃コライダー位置
+	DaiEngine::WorldTransform attackWorld_;
+
+	//攻撃コライダー半径
+	float attackRadius_ = 1.0f;
 
 	//コライダー半径
 	float radius_ = 1.0f; 
