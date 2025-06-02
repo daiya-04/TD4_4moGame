@@ -1,11 +1,11 @@
 {
     "Player": {
         "AttackCollider": {
-            "Radius": 1.0,
+            "Radius": 2.5,
             "pos": [
                 0.0,
                 0.0,
-                1.2400000095367432
+                1.2999999523162842
             ]
         },
         "AttackManager": {

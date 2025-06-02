@@ -1,13 +1,13 @@
 {
     "Boss": {
         "DangerZone": {
-            "radius": 2.0,
+            "radius": 3.5,
             "warningCount": 7.0,
             "warningSphereHeight": 0.0
         },
         "FallingBullet": {
             "fallSpeed": 1.100000023841858,
-            "radius": 1.5,
+            "radius": 3.0,
             "spawnHeight": 60.0
         },
         "Idle": {
@@ -39,7 +39,7 @@
             "activeCount": 60.0,
             "afterCount": 60.0,
             "rotateNum": 6.0,
-            "waitCount": 200.0
+            "waitCount": 300.0
         }
     }
 }
