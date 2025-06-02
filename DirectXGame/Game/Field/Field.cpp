@@ -18,15 +18,10 @@ void Field::Initialize() {
 
 	//Instancingゲームオブジェクト
 	instancingObj_ = std::make_unique<InstancingGameObject>();
-	instancingObj_->Init("Cube", 1000);
+	instancingObj_->Init("Cube", 10000);
 
 	worldTransform_.Init();
 
-	//ステージを生成
-	CreateStage();
-
-	//ステージ開始演出
-	StartStage();
 
 	//
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("Field");
@@ -38,6 +33,11 @@ void Field::Initialize() {
 	gvg->SetValue("HorizontalSize", &horizontalSize_);
 	gvg->SetValue("BlockSize", &blockSize_);
 
+	//ステージを生成
+	CreateStage();
+
+	//ステージ開始演出
+	StartStage();
 }
 
 void Field::Update() {
