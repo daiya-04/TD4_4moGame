@@ -30,7 +30,7 @@ void PlayerRoll::Init()
 	//時間リセット
 	currentCount_ = 0;
 
-	player_->SetAnimationName("PlayerDown");
+	player_->SetAnimationName("PlayerAvoidance");
 }
 
 void PlayerRoll::Update()

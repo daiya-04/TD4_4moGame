@@ -3,6 +3,8 @@
 #include"Boss/Behavior/IBossBehavior.h"
 #include"BossBulletManager/BossBulletManager.h"
 #include"Boss/DangerZoneManager/DangerZoneManager.h"
+#include"SphereCollider.h"
+#include"FollowCamera/FollowCamera.h"
 
 #include<optional>
 #include<string>
@@ -25,7 +27,7 @@ public://**パブリック関数**//
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	Boss();
+	Boss(FollowCamera*camera);
 	~Boss()=default;
 
 	/// <summary>
@@ -52,6 +54,12 @@ public://**パブリック関数**//
 	/// 弾の発射処理
 	/// </summary>
 	void SpawnBullet(const DaiEngine::WorldTransform& pos);
+
+	/// <summary>
+	/// カメラの状態設定
+	/// </summary>
+	/// <param name="state"></param>
+	void SetCameraState(FollowCamera::State state) { followCamera_->SetState(state); };
 
 public://**セッター**//
 
@@ -90,6 +98,8 @@ public://**状態
 
 private://**プライベート変数**//
 
+	 FollowCamera* followCamera_ = nullptr;
+
 	//状態
 	std::vector<std::unique_ptr<IBossBehavior>>behaviors_;
 
@@ -101,6 +111,8 @@ private://**プライベート変数**//
 	//警戒エリアマネージャ
 	std::unique_ptr<DangerZoneManager>dangerZoneManager_ = nullptr;
 
+	//コライダー
+	std::unique_ptr<DaiEngine::SphereCollider> collider_ = nullptr;
 
 	//ワールド座標
 	Vector3 position_{};
@@ -109,6 +121,9 @@ private://**プライベート変数**//
 
 private://**パラメータ変数**//
 	
+	//コライダー半径
+	float radius_ = 1.0f;
+
 	//開始位置
 	Vector3 startPosition_{};
 

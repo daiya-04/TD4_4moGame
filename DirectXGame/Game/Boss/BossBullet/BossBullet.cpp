@@ -1,4 +1,5 @@
 #include "BossBullet.h"
+#include"ColliderManager.h"
 
 BossBullet::BossBullet(const BossBulletData& data)
 {
@@ -8,12 +9,21 @@ BossBullet::BossBullet(const BossBulletData& data)
 	acceleration_ = data.acceraletion;
 	warningWorld_ = data.warningWorld;
 
+	//サイズ設定
 	world_.scale_={ data.radius,data.radius ,data.radius };
 
 	//コライダー初期化
-	/*colldier_ = std::make_unique<SphereCollider>();
-	colldier_->Initialize("敵弾",world_);
-	colldier_->SetRadius(data.radius);*/
+	collider_ = std::make_unique<DaiEngine::SphereCollider>();
+	collider_->Init("敵の弾",world_,data.radius);
+	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
+	collider_->SetEnterCallback([this](DaiEngine::Collider*) { OnCollision(); });
+	//コライダーを有効に
+	collider_->ColliderOn();
+}
+
+BossBullet::~BossBullet()
+{
+	DaiEngine::ColliderManager::GetInstance()->RemoveCollider(collider_.get());
 }
 
 void BossBullet::Update()
@@ -23,17 +33,22 @@ void BossBullet::Update()
 	//移動処理
 	world_.translation_ += velocity_;
 
-	//コライダー更新
-	//colldier_->Update();
-
-	//仮の削除処理
+	//ブロックにあたらなかった場合の削除処理
 	if (world_.translation_.y < -10) {
 		isDead_ = true;
 	}
+
+	//ワールド更新
+	world_.UpdateMatrix();
+	//コライダー更新
+	collider_->Update();
 }
 
 void BossBullet::OnCollision()
 {
+	//死亡フラグON
 	isDead_ = true;
+	//コライダーを無効にする
+	collider_->ColliderOff();
 }
 

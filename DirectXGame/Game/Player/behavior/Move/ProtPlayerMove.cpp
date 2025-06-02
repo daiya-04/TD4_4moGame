@@ -13,6 +13,7 @@ PlayerMove::PlayerMove()
 
 void PlayerMove::Init()
 {
+	player_->SetAnimationName("PlayerDown");
 }
 
 void PlayerMove::Update()
@@ -41,7 +42,8 @@ void PlayerMove::Update()
 	if (move.x == 0 && move.y == 0 && move.z == 0) {
 		
 		if (move != beforeVelo) {
-			player_->SetAnimationName("PlayerAvoidance");
+			//待機モーション
+			player_->SetAnimationName("PlayerDown");
 		}
 	}
 	else {
