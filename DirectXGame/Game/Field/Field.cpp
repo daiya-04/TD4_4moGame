@@ -22,7 +22,6 @@ void Field::Initialize() {
 
 	worldTransform_.Init();
 
-
 	//
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("Field");
 	gvg->SetValue("BlockWidth", &blockWidth_);
