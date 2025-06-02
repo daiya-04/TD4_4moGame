@@ -1,5 +1,8 @@
 #pragma once
 #include"WorldTransform.h"
+#include"SphereCollider.h"
+
+#include<memory>
 
 struct BossBulletData {
 	//座標
@@ -26,7 +29,7 @@ public://**パブリック関数**//
 	/// </summary>
 	/// <param name="data"></param>
 	BossBullet(const BossBulletData& data);
-	~BossBullet()=default;
+	~BossBullet();
 
 	/// <summary>
 	/// 更新
@@ -65,6 +68,9 @@ private://**パラメータ変数**//
 
 	//ワールドデータ
 	DaiEngine::WorldTransform world_;
+
+	//円コライダー
+	std::unique_ptr<DaiEngine::SphereCollider>collider_;
 
 	//速度
 	Vector3 velocity_;
