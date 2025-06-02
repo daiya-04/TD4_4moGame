@@ -14,8 +14,6 @@
 #include "ColliderManager.h"
 #include "AudioManager.h"
 
-
-
 GameScene::GameScene() {
 	globalVariableManager_ = globalVariableManager_->GetInstance();
 }

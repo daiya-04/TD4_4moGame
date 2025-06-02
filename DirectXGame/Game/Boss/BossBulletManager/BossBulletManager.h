@@ -67,4 +67,6 @@ private:
 	//弾半径
 	float radius_ = 1.0f;
 
+	//コライダー半径
+	float colliderRadius_ = 1.0f;
 };

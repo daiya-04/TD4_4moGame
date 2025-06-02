@@ -15,6 +15,7 @@ BossBulletManager::BossBulletManager(Boss* boss)
 	tree_.SetValue("spawnHeight", &bulletStartHeight_);
 	tree_.SetValue("fallSpeed", &fallSpeed_);
 	tree_.SetValue("radius", &radius_);
+	tree_.SetValue("colliderRadius", &colliderRadius_);
 }
 
 void BossBulletManager::Update()
@@ -67,7 +68,7 @@ void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos)
 	data.world.Init();
 	data.velocity = Vector3{ 0,-1.0f,0 }*fallSpeed_;
 	data.radius = pos.scale_.x;
-
+	data.colliderRadius = colliderRadius_;
 	//座標設定
 	data.world.translation_ = position;
 
