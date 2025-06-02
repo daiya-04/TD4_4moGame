@@ -78,12 +78,12 @@ void TitleScene::Init() {
 	titleLogo_.reset(DaiEngine::Sprite::Create(titleLogoTex, {}));
 
 	gameStartUI_.reset(DaiEngine::Sprite::Create(gameStartTex, {}));
-	gameStartUI_->SetSize({ 350.0f,70 });
-	gameStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gStartUISwitch_),0.0f }, { 350.0f,70 });
+	gameStartUI_->SetSize({ 350.0f,70.0f });
+	gameStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gStartUISwitch_),0.0f }, { 350.0f,70.0f });
 
 	gameFinishUI_.reset(DaiEngine::Sprite::Create(gameFinifhTex, {}));
-	gameFinishUI_->SetSize({ 350.0f,70 });
-	gameFinishUI_->SetTextureArea({ 350.0f * static_cast<float>(gFinishUISwitch_),0.0f }, { 350.0f,70 });
+	gameFinishUI_->SetSize({ 350.0f,70.0f });
+	gameFinishUI_->SetTextureArea({ 350.0f * static_cast<float>(gFinishUISwitch_),0.0f }, { 350.0f,70.0f });
 	
 
 

@@ -57,6 +57,16 @@ public:
 	~ClearScene()override;
 
 private:
+	/// <summary>
+	/// GlobalVariablesに項目の追加
+	/// </summary>
+	void SetGlobalVariables();
+	/// <summary>
+	/// GlobalVariablesから変数に代入
+	/// </summary>
+	void ApplyGlobalVariables();
+
+private:
 	//カメラ
 	DaiEngine::Camera camera_;
 	//ポイントライト
@@ -66,6 +76,30 @@ private:
 
 	//クリア用BGM
 	DaiEngine::Audio* bgm_ = nullptr;
+
+	//クリア文字
+	std::unique_ptr<DaiEngine::Sprite> clearText_;
+	//タイトルに戻る
+	std::unique_ptr<DaiEngine::Sprite> titleBackUI_;
+	//最初から始める
+	std::unique_ptr<DaiEngine::Sprite> reStartUI_;
+
+private:
+
+	enum class Select {
+		TitleBack,
+		ReStrat,
+	};
+
+	Select select_ = Select::TitleBack;
+
+	enum class UISwitch {
+		On,
+		Off,
+	};
+
+	UISwitch gTitleBackUISwitch_ = UISwitch::On;
+	UISwitch gReStartUISwitch_ = UISwitch::Off;
 
 };
 
