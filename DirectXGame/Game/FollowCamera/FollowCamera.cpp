@@ -8,20 +8,73 @@ FollowCamera::FollowCamera(DaiEngine::Camera* camera, const Vector3& targetTrans
 	target_ = &targetTranslation;
 
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("FollowCamera");
-	gvg->SetValue("offset", &offset_);
-	gvg->SetValue("rotation", &camera_->rotation_);
-	gvg->SetMonitorValue("isFollow", &isFollow_);
+
+	std::string stateNames[] = { "None" ,"Follow" };
+
+	gvg->SetValue("maxEsingCount", &maxEsingCount_);
+	for (int i = 0; i < (int)State::Count; i++) {
+		gvg->SetValue("offset_" + stateNames[i], &offset_[i]);
+		gvg->SetValue("rotation_" + stateNames[i], &rotation_[i]);
+	}
 }
 
 void FollowCamera::Update()
 {
-	//追従ONの場合
-	if (isFollow_) {
-		//カメラの位置をターゲットの位置にオフセットを加えた位置にする
-		camera_->translation_ = *target_ + offset_;
+	Vector3 offset = targetOffset_;
+	Vector3 rotation = targetRotation_;
+	//遷移中の場合
+	if (isEsing_) {
+		esingCount_++;
+		
+		//割合計算
+		float t = (float)esingCount_ / (float)maxEsingCount_;
+		//割合に応じて補間
+		offset = Lerp(t,preOffset_, targetOffset_);
+		rotation = Lerp(t,preRotation_, targetRotation_);
+		//遷移完了チェック
+		if(t>= 1.0f){
+			//フラグをオフ
+			isEsing_ = false;
+			//遷移完了時に目標値を設定
+			offset = targetOffset_;
+			rotation = targetRotation_;
+		}
 	}
-	else {
-		//カメラの位置をターゲットの位置にオフセットを加えた位置にする
-		camera_->translation_ = offset_;
+	
+
+	switch (state_)
+	{
+	case FollowCamera::State::None:
+		//座標と回転を渡す
+		camera_->translation_ = offset;
+		camera_->rotation_ = rotation;
+		break;
+	case FollowCamera::State::Follow:
+		//追従点を
+		camera_->translation_ = *target_ + offset;
+		camera_->rotation_ = rotation;
+		break;
+	case FollowCamera::State::Count:
+		break;
+	default:
+		break;
 	}
+}
+
+void FollowCamera::SetState(State state)
+{
+	//ステート変更
+	state_ = state;
+	//カウントリセット
+	esingCount_ = 0;
+
+
+	isEsing_ = true;
+	//過去情報と目標情報設定
+	preOffset_ = camera_->translation_;
+	preRotation_ = camera_->rotation_;
+	//目標情報設定
+	targetOffset_ = offset_[(int)state_];
+	targetRotation_ = rotation_[(int)state_];
+
 }

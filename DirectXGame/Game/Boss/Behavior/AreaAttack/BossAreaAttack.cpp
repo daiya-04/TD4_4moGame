@@ -17,6 +17,8 @@ void BossAreaAttack::InitBehavior0()
 	boss_->SetAnimationName("GentlmanAttackPosture1",false);
 	//再生速度変更
 	boss_->SetAnimationLeverage(preActionRate_);
+
+	boss_->SetCameraState(FollowCamera::State::None);
 }
 
 void BossAreaAttack::InitBehavior1()
@@ -43,6 +45,8 @@ void BossAreaAttack::UpdateBehavior1()
 	if (boss_->parameters_.currentSec >= attackTime_) {
 		//通常状態に移行
 		boss_->behaviorRequest_ = Boss::Behavior::Idle;
+		//カメラ状態を変更
+		boss_->SetCameraState(FollowCamera::State::Follow);
 	}
 
 	//タイム以上で発生

@@ -45,14 +45,16 @@ void GameScene::Init() {
 	GameObject::SetCamera(&camera_);
 	//陰士単シングオブジェクトにカメラ設定
 	InstancingGameObject::SetCamera(&camera_);
+	
 
 	//プレイヤー生成
 	player_ = std::make_unique<Player>();
-	//ボス生成
-	boss_ = std::make_unique<Boss>();
-	boss_->SetPlayerWorld(&player_->GetWorld());
 	//追従カメラ処理生成
 	followCamera_ = std::make_unique<FollowCamera>(&camera_, player_->GetWorld().translation_);
+	
+	//ボス生成
+	boss_ = std::make_unique<Boss>(followCamera_.get());
+	boss_->SetPlayerWorld(&player_->GetWorld());
 	//地面生成
 	field_ = std::make_unique<Field>();
 	field_->Initialize();
@@ -128,6 +130,8 @@ void GameScene::Update() {
 	data.worldTransform_.Init();
 	data.worldTransform_.translation_.x = 10;
 
+	//当たり判定処理
+	DaiEngine::ColliderManager::GetInstance()->CheckAllCollision();
 }
 
 void GameScene::DrawBackGround() {
