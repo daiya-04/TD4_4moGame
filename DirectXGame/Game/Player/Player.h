@@ -62,7 +62,7 @@ public://**パブリック変数**//
 	/// <summary>
 	/// 攻撃コライダーの衝突処理
 	/// </summary>
-	void OnCollisionATKCollider();
+	void OnCollisionATKCollider(DaiEngine::Collider* collider);
 
 	/// <summary>
 	/// ワールド取得
@@ -85,6 +85,12 @@ public://**セッター
 	/// </summary>
 	/// <returns>向きベクトル</returns>
 	Vector3 SetBody2Input();
+
+	/// <summary>
+	/// 攻撃コライダーの有効化無効化処理
+	/// </summary>
+	/// <param name="isActive"></param>
+	void SetAttackColliderActive(bool isActive);
 
 private://**プライベート関数**//
 

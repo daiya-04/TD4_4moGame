@@ -26,15 +26,14 @@ Player::Player()
 	collider_->Init("player",*world_,radius_);
 	collider_->ColliderOn();
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
-	collider_->SetEnterCallback([this](DaiEngine::Collider*collider) { OnCollison(collider); });
+	collider_->SetStayCallback([this](DaiEngine::Collider*collider) { OnCollison(collider); });
 	//攻撃コライダー生成
 	attackWorld_.Init();
 	attackWorld_.parent_ = world_;
 	attackCollider_ = std::make_unique<DaiEngine::SphereCollider>();
 	attackCollider_->Init("playerAttack", attackWorld_,attackRadius_);
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(attackCollider_.get());
-	collider_->SetEnterCallback([this](DaiEngine::Collider*) { OnCollisionATKCollider(); });
-
+	attackCollider_->SetStayCallback([this](DaiEngine::Collider*collider) { OnCollisionATKCollider(collider); });
 
 	//プレイヤーポインタ設定
 	IProtBehavior::SetPlayer(this);
@@ -160,9 +159,10 @@ void Player::SetWorldTranslate(const Vector3& translate)
 void Player::OnCollison(DaiEngine::Collider* collider)
 {
 	//ボスコライダーの場合スキップ
-	if (collider->GetTag() == "boss") {
+	if (collider->GetTag() == "boss"||!parameters_.isHit) {
 		return;
 	}
+
 
 	//ヒットフラグOFF
 	parameters_.isHit = false;
@@ -174,10 +174,13 @@ void Player::OnCollison(DaiEngine::Collider* collider)
 	collider_->ColliderOff();
 }
 
-void Player::OnCollisionATKCollider()
+void Player::OnCollisionATKCollider(DaiEngine::Collider* collider)
 {
 	//攻撃コライダーをOFF
-	attackCollider_->ColliderOff();
+	if(collider->GetTag() == "boss") {
+		attackCollider_->ColliderOff();
+	}
+	
 }
 
 
@@ -223,6 +226,16 @@ Vector3 Player::SetBody2Input()
 	return velocity;
 }
 
+void Player::SetAttackColliderActive(bool isActive)
+{
+	//isActiveがtrueなら攻撃を有効
+	if (isActive) { 
+		attackCollider_->ColliderOn();
+	}else {
+		attackCollider_->ColliderOff();
+	}
+}
+
 void Player::Tenmetu()
 {
 	if (!parameters_.isHit) {
@@ -240,8 +253,6 @@ void Player::Tenmetu()
 			else {
 				isDraw_ = true;
 			}
-
-			
 		}
 			
 		//時間経過で終了
