@@ -2,7 +2,7 @@
     "Boss": {
         "DangerZone": {
             "radius": 2.0,
-            "warningCount": 5.5,
+            "warningCount": 7.0,
             "warningSphereHeight": 0.0
         },
         "FallingBullet": {
@@ -11,11 +11,11 @@
             "spawnHeight": 60.0
         },
         "Idle": {
-            "second": 60.0
+            "second": 120.0
         },
         "ItemFallAttack": {
             "ActionRate_": 1.0,
-            "ActiveCount": 200.0,
+            "ActiveCount": 250.0,
             "Num": 2,
             "PreActionRate_": 1.0,
             "WaitCount": 200.0
@@ -26,20 +26,20 @@
             0.3100000023841858
         ],
         "Scale": [
-            1.2999999523162842,
-            1.2999999523162842,
-            1.2999999523162842
+            1.5,
+            1.5,
+            1.5
         ],
         "StartPos": [
             0.0,
             0.0,
-            10.0
+            5.0
         ],
         "weaponRollAttack": {
             "activeCount": 60.0,
             "afterCount": 60.0,
             "rotateNum": 6.0,
-            "waitCount": 180.0
+            "waitCount": 200.0
         }
     }
 }

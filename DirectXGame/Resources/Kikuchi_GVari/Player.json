@@ -20,14 +20,15 @@
                 "PreAttack": 10.0
             }
         },
-        "HP": 100,
+        "ColliderRadius": 1.0,
+        "HP": 96,
         "Hit": {
             "MaxNoHitSec": 60.0,
             "TenmetuNum": 10
         },
         "Limitation": [
-            20.0,
-            20.0
+            23.0,
+            23.0
         ],
         "Move": {
             "speed": 0.25
