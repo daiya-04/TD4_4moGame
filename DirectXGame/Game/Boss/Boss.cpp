@@ -32,7 +32,7 @@ Boss::Boss(FollowCamera* camera)
 	collider_->Init("boss", *world_, radius_);
 	collider_->ColliderOn();
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
-	//collider_->SetEnterCallback([this](DaiEngine::Collider*) {});
+	collider_->SetEnterCallback([this](DaiEngine::Collider*) {});
 
 	std::unique_ptr<GlobalVariableGroup> gvg = std::make_unique<GlobalVariableGroup>("Boss");
 	gvg->SetMonitorValue("currentCount", &parameters_.currentSec);
