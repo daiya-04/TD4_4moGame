@@ -46,6 +46,12 @@ public://**パブリック関数**//
 	void Draw();
 
 	/// <summary>
+	/// 当たり判定処理
+	/// </summary>
+	/// <param name="collider"></param>
+	void OnCollision(DaiEngine::Collider* collider);
+
+	/// <summary>
 	/// 警告エリア生成
 	/// </summary>
 	void SpawnDangerZone();
@@ -121,6 +127,9 @@ private://**プライベート変数**//
 
 private://**パラメータ変数**//
 	
+	//HP
+	int HP_ = 100; 
+
 	//コライダー半径
 	float radius_ = 1.0f;
 

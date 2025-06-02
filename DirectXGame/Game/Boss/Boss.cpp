@@ -34,11 +34,10 @@ Boss::Boss(FollowCamera* camera)
 	collider_->Init("boss", *world_, radius_);
 	collider_->ColliderOn();
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
-	collider_->SetEnterCallback([this](DaiEngine::Collider*) {});
+	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {OnCollision(collider); });
 
 	std::unique_ptr<GlobalVariableGroup> gvg = std::make_unique<GlobalVariableGroup>("Boss");
 	gvg->SetMonitorValue("currentCount", &parameters_.currentSec);
-
 	//デバッグ用指定
 	gvg->SetMonitorCombo("setBehavior", &debugBehavior_,behaviorNames_);
 
@@ -49,7 +48,7 @@ Boss::Boss(FollowCamera* camera)
 
 	gvg->SetTreeData(dangerZoneManager_->GetTree());
 	gvg->SetTreeData(bulletManager_->GetTree());
-
+	gvg->SetValue("HP", &HP_);
 	gvg->SetValue("Scale", &world_->scale_);
 	gvg->SetValue("StartPos", &startPosition_);
 	gvg->SetValue("OffsetPos", &offsetPosition_);
@@ -133,6 +132,14 @@ void Boss::Draw()
 	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()), *camera_);
 #endif // _DEBUG
 
+}
+
+void Boss::OnCollision(DaiEngine::Collider* collider)
+{
+	//プレイヤーの攻撃ならHP減少
+	if (collider->GetTag() == "playerAttack") {
+		HP_--;
+	}
 }
 
 void Boss::SpawnDangerZone()
