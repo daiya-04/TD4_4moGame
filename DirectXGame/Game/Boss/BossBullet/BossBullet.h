@@ -17,6 +17,9 @@ struct BossBulletData {
 
 	//サイズ
 	float radius = 1.0f;
+
+	//コライダー半径
+	float colliderRadius = 1.0f;
 };
 
 //ボスが出す一発の弾
@@ -35,6 +38,7 @@ public://**パブリック関数**//
 	/// 更新
 	/// </summary>
 	void Update();
+
 
 	/// <summary>
 	/// 当たった時の処理
