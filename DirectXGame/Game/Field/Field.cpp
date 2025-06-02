@@ -82,7 +82,7 @@ void Field::Update() {
 	FixedHeightCorrection();
 
 	//各ブロックの高さに応じて色を変更
-	ColorAdjustmentByHeight(highColor_, lowColor_, 0.0f, 2.0f);
+	ColorAdjustmentByHeight(highColor_, lowColor_, 0.0f, heightLimit_);
 
 #ifdef _DEBUG
 	//現在のnowPos_に対応するブロックを赤くする
