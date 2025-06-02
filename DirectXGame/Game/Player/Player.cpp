@@ -5,8 +5,8 @@
 #include"ShapesDraw.h"
 
 #pragma region 状態クラス
-#include"Player/behavior/Roll/ProtPlayerRoll.h"
-#include"Player/behavior/Move/ProtPlayerMove.h"
+#include"Player/behavior/Roll/PlayerRoll.h"
+#include"Player/behavior/Move/PlayerMove.h"
 #include"Player/behavior/AttackManager/PlayerAttackManager.h"
 #pragma endregion
 

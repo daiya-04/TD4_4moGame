@@ -15,7 +15,6 @@ FollowCamera::FollowCamera(DaiEngine::Camera* camera, const Vector3& targetTrans
 	for (int i = 0; i < (int)State::Count; i++) {
 		gvg->SetValue("offset_" + stateNames[i], &offset_[i]);
 		gvg->SetValue("rotation_" + stateNames[i], &rotation_[i]);
-
 	}
 }
 

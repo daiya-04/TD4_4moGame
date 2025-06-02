@@ -449,10 +449,10 @@
     <ClCompile Include="Game\Player\behavior\Attacks\Combo3\PlayerAttackCombo3.cpp">
       <Filter>Game\Player\behavior\Attacks\Combo3</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Player\behavior\Move\ProtPlayerMove.cpp">
+    <ClCompile Include="Game\Player\behavior\Move\PlayerMove.cpp">
       <Filter>Game\Player\behavior\Move</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Player\behavior\Roll\ProtPlayerRoll.cpp">
+    <ClCompile Include="Game\Player\behavior\Roll\PlayerRoll.cpp">
       <Filter>Game\Player\behavior\Roll</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Audio\AudioManager.cpp">
@@ -766,10 +766,10 @@
     <ClInclude Include="Game\Player\behavior\Attacks\Combo3\PlayerAttackCombo3.h">
       <Filter>Game\Player\behavior\Attacks\Combo3</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Player\behavior\Move\ProtPlayerMove.h">
+    <ClInclude Include="Game\Player\behavior\Move\PlayerMove.h">
       <Filter>Game\Player\behavior\Move</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Player\behavior\Roll\ProtPlayerRoll.h">
+    <ClInclude Include="Game\Player\behavior\Roll\PlayerRoll.h">
       <Filter>Game\Player\behavior\Roll</Filter>
     </ClInclude>
     <ClInclude Include="Engine\3d\Skeleton.h">
