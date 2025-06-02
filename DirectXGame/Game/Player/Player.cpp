@@ -159,7 +159,7 @@ void Player::SetWorldTranslate(const Vector3& translate)
 void Player::OnCollison(DaiEngine::Collider* collider)
 {
 	//ボスコライダーの場合スキップ
-	if (collider->GetTag() == "boss"|| collider->GetTag() == "player" ||!parameters_.isHit) {
+	if (collider->GetTag() == "boss"|| collider->GetTag() == "playerAttack" ||!parameters_.isHit) {
 		return;
 	}
 
