@@ -28,6 +28,12 @@ public://**パブリック関数**//
 	/// <param name="state"></param>
 	void SetState(State state);
 
+	/// <summary>
+	/// カメラ取得
+	/// </summary>
+	/// <returns></returns>
+	DaiEngine::Camera* GetCamera() const { return camera_; }
+
 private://**プライベート変数**//
 
 

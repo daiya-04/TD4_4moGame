@@ -158,7 +158,7 @@ void GameScene::DrawBackGround() {
 void GameScene::DrawModel() {
 
 	//地面描画
-	field_->Draw();
+	//field_->Draw();
 
 	//ボス描画
 	boss_->Draw();

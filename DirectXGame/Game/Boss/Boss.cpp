@@ -18,7 +18,7 @@ Boss::Boss(FollowCamera* camera)
 	//カメラポインタ設定
 	followCamera_ = camera;
 
-	IBossBehavior::SetBoss(this);
+	IBossBehavior::SetPointer(this,camera->GetCamera());
 
 	behaviors_.resize((size_t)Behavior::Count);
 	behaviors_[(size_t)Behavior::Idle] = std::make_unique<BossIdle>();
@@ -128,6 +128,9 @@ void Boss::Draw()
 	dangerZoneManager_->Draw();
 	//弾の描画
 	bulletManager_->Draw();
+
+	//描画
+	behaviors_[(int)behavior_]->Draw();
 
 	//本体描画
 	GameObject::Draw();

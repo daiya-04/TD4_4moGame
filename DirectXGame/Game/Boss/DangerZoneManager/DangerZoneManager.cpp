@@ -61,7 +61,6 @@ void DangerZoneManager::SpawnDangerZone(const Vector3& position)
 	param.maxDeadSec = warningTime_;
 	param.maxRadius = radius_;
 
-
 	//新しく生成
 	std::unique_ptr<DangerZone>dangerZone = std::make_unique<DangerZone>(param);
 

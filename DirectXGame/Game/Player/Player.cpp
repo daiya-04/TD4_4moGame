@@ -125,8 +125,6 @@ void Player::Update()
 	//オフセット分足してワールド座標更新
 	world_->translation_ =position_ + offsetPos_;
 
-	
-
 	//点滅更新
 	Blinking();
 
