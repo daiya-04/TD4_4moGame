@@ -6,6 +6,7 @@ PlayerEntry::PlayerEntry()
 	tree_.name_ = "playerEntry";
 	tree_.SetValue("maxRate", &maxCount_);
 	tree_.SetValue("animRate", &playRate_);
+	tree_.SetValue("startPos", &startPos_);
 }
 
 void PlayerEntry::Init()
@@ -15,6 +16,9 @@ void PlayerEntry::Init()
 	//アニメーションと再生倍率設定
 	player_->SetAnimationName("PlayerEntry");
 	player_->SetAnimationLeverage(playRate_);
+
+
+	player_->SetPosition(startPos_);
 }
 
 void PlayerEntry::Update()

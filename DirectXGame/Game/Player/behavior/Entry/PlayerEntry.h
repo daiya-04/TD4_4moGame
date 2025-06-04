@@ -22,4 +22,7 @@ private://**パラメータ変数**//
 	//再生倍率
 	float playRate_ = 1.0f;
 
+	//出現位置
+	Vector3 startPos_ = Vector3{ 0,0,0 };
+
 };

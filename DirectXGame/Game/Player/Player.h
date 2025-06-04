@@ -113,6 +113,12 @@ public://**セッター
 	/// <param name="isDraw"></param>
 	void SetDraw(bool isDraw) { isDraw_ = isDraw; };
 
+	/// <summary>
+	/// ポジションを設定
+	/// </summary>
+	/// <param name="pos"></param>
+	void SetPosition(const Vector3& pos) { position_ = pos; };
+
 private://**プライベート関数**//
 
 	/// <summary>
