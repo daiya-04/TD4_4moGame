@@ -121,6 +121,8 @@ void Field::Update() {
 		data.worldTransform_ = block.world;
 		data.color_ = block.color;
 
+		if (block.world.translation_.y <= -heightLimit_) continue;
+
 		//データ追加
 		instancingObj_->SetData(data);
 	}
