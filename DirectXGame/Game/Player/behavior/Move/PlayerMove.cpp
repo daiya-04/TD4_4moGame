@@ -13,7 +13,8 @@ PlayerMove::PlayerMove()
 
 void PlayerMove::Init()
 {
-	player_->SetAnimationName("PlayerDown");
+	//アニメーションを変更
+	player_->SetAnimationName("PlayerIdle");
 }
 
 void PlayerMove::Update()

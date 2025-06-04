@@ -99,8 +99,11 @@ void GameScene::Update() {
 	camera_.UpdateViewMatrix();
 	camera_.UpdateCameraPos();
 
-	//プレイヤー更新
-	player_->Update();
+	//ステージ初期化済でプレイヤー更新
+	if (!field_->GetStageAnimationFinishedFlag()) {
+		//プレイヤー更新
+		player_->Update();
+	}
 	Vector3 pos = player_->GetWorld().translation_;
 	pos.y = field_->GetMassLocationPosY(player_->GetWorld().translation_) + player_->GetWorld().scale_.y;
 	player_->SetWorldTranslate(pos);

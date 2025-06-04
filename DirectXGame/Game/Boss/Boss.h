@@ -61,6 +61,10 @@ public://**パブリック関数**//
 	/// </summary>
 	void SpawnBullet(const DaiEngine::WorldTransform& pos);
 
+	/// <summary>
+	/// プレイヤー方向に移動
+	/// </summary>
+	void Move2Player();
 
 public://**セッター**//
 	
@@ -148,6 +152,9 @@ private://**パラメータ変数**//
 
 	//オフセット位置
 	Vector3 offsetPosition_{};
+
+	//移動速度
+	float speed_ = 0.0f;
 
 private://**デバッグ用変数**//
 	

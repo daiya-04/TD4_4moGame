@@ -36,10 +36,11 @@ Boss::Boss(FollowCamera* camera)
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
 	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {OnCollision(collider); });
 
+#pragma region デバッグパラメータセット
 	std::unique_ptr<GlobalVariableGroup> gvg = std::make_unique<GlobalVariableGroup>("Boss");
 	gvg->SetMonitorValue("currentCount", &parameters_.currentSec);
 	//デバッグ用指定
-	gvg->SetMonitorCombo("setBehavior", &debugBehavior_,behaviorNames_);
+	gvg->SetMonitorCombo("setBehavior", &debugBehavior_, behaviorNames_);
 
 	for (auto& behavior : behaviors_) {
 		if (!behavior)continue;
@@ -49,9 +50,11 @@ Boss::Boss(FollowCamera* camera)
 	gvg->SetTreeData(dangerZoneManager_->GetTree());
 	gvg->SetTreeData(bulletManager_->GetTree());
 	gvg->SetValue("HP", &HP_);
+	gvg->SetValue("Speed", &speed_);
 	gvg->SetValue("Scale", &world_->scale_);
 	gvg->SetValue("StartPos", &startPosition_);
 	gvg->SetValue("OffsetPos", &offsetPosition_);
+#pragma endregion
 }
 
 void Boss::Initialize() {
@@ -158,6 +161,25 @@ void Boss::SpawnDangerZone()
 void Boss::SpawnBullet(const DaiEngine::WorldTransform&position)
 {
 	bulletManager_->SpawnBullet(position);
+}
+
+void Boss::Move2Player()
+{
+	//プレイヤー方向を見て向きベクトル取得
+	Vector3 velo = SetDirection2Player();
+	//正規化して速度を掛ける
+	if(velo!=Vector3(0, 0, 0)) {
+		//プレイヤー方向に向ける
+		velo = velo.Normalize() * speed_;
+	}
+	else {
+		//プレイヤー方向がない場合は止まる
+		velo = Vector3(0, 0, 0);
+	}
+
+	//ワールド座標に加算
+	position_ += velo;
+
 }
 
 float GetYRotation(const Vector2& v) {

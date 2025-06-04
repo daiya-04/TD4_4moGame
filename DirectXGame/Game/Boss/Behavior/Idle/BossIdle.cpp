@@ -23,6 +23,9 @@ void BossIdle::Init()
 
 void BossIdle::Update()
 {
+	//プレイヤー方向に移動
+	boss_->Move2Player();
+
 	//時間経過で次の状態に
 	if (boss_->parameters_.currentSec >= sec_) {
 
