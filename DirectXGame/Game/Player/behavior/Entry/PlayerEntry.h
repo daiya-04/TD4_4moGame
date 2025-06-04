@@ -14,7 +14,7 @@ public://**パブリック関数**//
 private://**パラメータ変数**//
 	
 	// 最大カウント
-	float maxCount_ = 0.0f;
+	float maxCount_ = 60.0f;
 
 	// カウント
 	float count_ = 0.0f; 

@@ -10,8 +10,10 @@ PlayerEntry::PlayerEntry()
 
 void PlayerEntry::Init()
 {
+	//描画フラグON
+	player_->SetDraw(true);
 	//アニメーションと再生倍率設定
-	player_->SetAnimationName("PlayerIdle");
+	player_->SetAnimationName("PlayerEntry");
 	player_->SetAnimationLeverage(playRate_);
 }
 

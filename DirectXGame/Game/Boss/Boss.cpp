@@ -76,7 +76,7 @@ void Boss::Update()
 #ifdef _DEBUG
 		//デバッグ時の攻撃指定
 		if (debugBehavior_ == behaviorNames_[0]) {
-			//何もなし
+			//指定なし
 		}
 		else if (debugBehavior_ == behaviorNames_[1]) {
 			//待機
@@ -107,8 +107,10 @@ void Boss::Update()
 	//状態更新
 	behaviors_[(int)behavior_]->Update();
 
+	//速度加算
 	position_ += parameters_.velocity_;
 
+	//オフセット位置加算
 	world_->translation_ = position_+offsetPosition_;
 
 	//行列更新

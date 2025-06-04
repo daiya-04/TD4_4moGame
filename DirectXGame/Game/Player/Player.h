@@ -6,7 +6,7 @@
 #include<optional>
 
 
-struct ProtPlayerParameters {
+struct PlayerParameters {
 
 	//移動量
 	Vector3 velocity;
@@ -28,7 +28,7 @@ class Player :public GameObject {
 public://**パブリック変数**//
 
 	//基本パラメータ
-	ProtPlayerParameters parameters_;
+	PlayerParameters parameters_;
 
 public://**パブリック変数**//
 
@@ -37,10 +37,19 @@ public://**パブリック変数**//
 	//デストラクタ
 	~Player() = default;
 
-	//更新
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update()override;
 
-	//描画
+	/// <summary>
+	/// フィールドの高さに合わせる
+	/// </summary>
+	void UpdateOnField(float y);
+
+	/// <summary>
+	/// 描画
+	/// </summary>
 	void Draw()override;
 
 	/// <summary>
@@ -98,12 +107,18 @@ public://**セッター
 	/// <param name="isActive"></param>
 	void SetAttackColliderActive(bool isActive);
 
+	/// <summary>
+	/// 描画フラグ変更
+	/// </summary>
+	/// <param name="isDraw"></param>
+	void SetDraw(bool isDraw) { isDraw_ = isDraw; };
+
 private://**プライベート関数**//
 
 	/// <summary>
 	/// 点滅処理
 	/// </summary>
-	void Tenmetu();
+	void Blinking();
 
 	/// <summary>
 	/// XZ軸の制限処理
@@ -162,13 +177,13 @@ private://**ヒット時処理*//
 	float currentHitCount_ = 0;
 
 	//点滅回数カウント
-	int tenmetuCount_ = 0;
+	int blinkingCount_ = 0;
 
 	//無敵時間
 	float hitCount_ = 1.0f;
 
 	//点滅回数
-	int maxTenmetuNum_ = 3;
+	int maxBlinkingNum_ = 3;
 
 	//描画フラグ
 	bool isDraw_ = true;

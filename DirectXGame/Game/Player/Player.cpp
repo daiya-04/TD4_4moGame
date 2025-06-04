@@ -48,6 +48,10 @@ Player::Player()
 	behaviors_[(size_t)Behavior::Roll] = std::make_unique<PlayerRoll>();
 	behaviors_[(size_t)Behavior::Attack] = std::make_unique<PlayerAttackManager>();
 
+	//描画フラグON
+	SetDraw(false);
+
+#pragma region デバッグパラメータ設定
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("Player");
 	gvg->SetMonitorValue("HitFlag", &parameters_.isHit);
 	gvg->SetMonitorValue("RollCooldown", &parameters_.currentRollCount);
@@ -67,7 +71,7 @@ Player::Player()
 	hitTree.name_ = "Hit";
 	hitTree.SetMonitorValue("IsHitFlag", &parameters_.isHit);
 	hitTree.SetValue("MaxNoHitSec", &hitCount_);
-	hitTree.SetValue("TenmetuNum", &maxTenmetuNum_);
+	hitTree.SetValue("TenmetuNum", &maxBlinkingNum_);
 
 	//攻撃用コライダー設定
 	GvariTree attackColliderTree;
@@ -77,6 +81,7 @@ Player::Player()
 
 	gvg->SetTreeData(hitTree);
 	gvg->SetTreeData(attackColliderTree);
+#pragma endregion	
 }
 
 void Player::Update()
@@ -123,18 +128,26 @@ void Player::Update()
 	
 
 	//点滅更新
-	Tenmetu();
+	Blinking();
 
 	//行列更新
 	UpdateMatrix();
 
 }
 
+void Player::UpdateOnField(float y)
+{
+	//高さ修正
+	world_->translation_.y = y;
+	//行列更新
+	UpdateMatrix();
+}
+
 void Player::Draw()
 {
 	//円コライダー描画
 #ifdef _DEBUG
-	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()),*camera_);
+	//ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()),*camera_);
 	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(attackCollider_->GetShape()), *camera_);
 #endif // _DEBUG
 
@@ -243,15 +256,15 @@ void Player::SetAttackColliderActive(bool isActive)
 	}
 }
 
-void Player::Tenmetu()
+void Player::Blinking()
 {
 	if (!parameters_.isHit) {
 
 		currentHitCount_ ++;
 
 		////時間内での点滅処理
-		if (currentHitCount_ >= (hitCount_/maxTenmetuNum_)*tenmetuCount_) {
-			tenmetuCount_++;
+		if (currentHitCount_ >= (hitCount_/maxBlinkingNum_)*blinkingCount_) {
+			blinkingCount_++;
 
 			//透明度を変更
 			if (isDraw_) {
@@ -270,7 +283,7 @@ void Player::Tenmetu()
 			//カウント初期化
 			currentHitCount_ = 0;
 			//点滅回数初期化
-			tenmetuCount_ = 0;
+			blinkingCount_ = 0;
 
 			//コライダーON
 			collider_->ColliderOn();
