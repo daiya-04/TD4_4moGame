@@ -14,10 +14,6 @@
 namespace DaiEngine {
 	//フレームワーククラス
 	class DSFramework {
-	private:
-		//終了リクエスト
-		bool endRequest_ = false;
-
 	public:
 
 		virtual ~DSFramework() = default;
@@ -41,11 +37,6 @@ namespace DaiEngine {
 		/// ゲーム全体
 		/// </summary>
 		void Run();
-		/// <summary>
-		/// 終了のリクエストが来ているか
-		/// </summary>
-		/// <returns>来ていたらtrue、それ以外はfalse</returns>
-		virtual bool IsEndRequest() { return endRequest_; }
 
 	};
 }

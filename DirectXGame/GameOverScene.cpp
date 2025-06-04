@@ -36,20 +36,25 @@ void GameOverScene::Init() {
 
 void GameOverScene::Update() {
 
+	auto* input = DaiEngine::Input::GetInstance();
+
 #ifdef _DEBUG
 
-	//デバッグ用シーン切り替えコマンド
-	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_1)) {
+	///デバッグ用シーン切り替えコマンド
+	//「Ctrl + 1」でタイトルシーンへ
+	if (input->PushKey(DIK_LCONTROL) && input->TriggerKey(DIK_1)) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Title");
 	}
-	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_2)) {
+	//「Ctrl + 2」でゲームシーンへ
+	if (input->PushKey(DIK_LCONTROL) && input->TriggerKey(DIK_2)) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
 	}
-	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_3)) {
+	//「Ctrl + 3」でクリアシーンへ
+	if (input->PushKey(DIK_LCONTROL) && input->TriggerKey(DIK_3)) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Clear");
 	}
-
-	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_0)) {
+	//「Ctrl + 0」でテストシーンへ
+	if (input->PushKey(DIK_LCONTROL) && input->TriggerKey(DIK_0)) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Debug");
 	}
 

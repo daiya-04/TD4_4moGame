@@ -84,27 +84,37 @@ void ClearScene::Init() {
 	reStartUI_->SetSize({ 350.0f, 70.0f });
 	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,70.0f });
 
+
+	SetGlobalVariables();
+	ApplyGlobalVariables();
+
 }
 
 void ClearScene::Update() {
 
+	auto* input = DaiEngine::Input::GetInstance();
+
 #ifdef _DEBUG
 	
-	//デバッグ用シーン切り替えコマンド
-	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_1)) {
+	///デバッグ用シーン切り替えコマンド
+	//「Ctrl + 1」でタイトルシーンへ
+	if (input->PushKey(DIK_LCONTROL) && input->TriggerKey(DIK_1)) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Title");
 	}
-	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_2)) {
+	//「Ctrl + 2」でゲームシーンへ
+	if (input->PushKey(DIK_LCONTROL) && input->TriggerKey(DIK_2)) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
 	}
-	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_4)) {
+	//「Ctrl + 4」でゲームオーバーシーンへ
+	if (input->PushKey(DIK_LCONTROL) && input->TriggerKey(DIK_4)) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("GameOver");
 	}
-	
-	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_0)) {
+	//「Ctrl + 0」でテストシーンへ
+	if (input->PushKey(DIK_LCONTROL) && input->TriggerKey(DIK_0)) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Debug");
 	}
 
+	ApplyGlobalVariables();
 
 #endif // _DEBUG
 
@@ -112,19 +122,27 @@ void ClearScene::Update() {
 	switch (select_) {
 	case Select::TitleBack:
 
-		if (DaiEngine::Input::GetInstance()->TriggerKey(DIK_DOWN)) {
+		if (input->TriggerKey(DIK_DOWN) || input->TriggerButton(DaiEngine::Input::Button::DPAD_DOWN) || input->TriggerLStick(DaiEngine::Input::Stick::Down)) {
 			select_ = Select::ReStrat;
 			gTitleBackUISwitch_ = UISwitch::Off;
 			gReStartUISwitch_ = UISwitch::On;
 		}
 
+		if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
+			DaiEngine::SceneManager::GetInstance()->ChangeScene("Title");
+		}
+
 		break;
 	case Select::ReStrat:
 
-		if (DaiEngine::Input::GetInstance()->TriggerKey(DIK_UP)) {
+		if (input->TriggerKey(DIK_UP) || input->TriggerButton(DaiEngine::Input::Button::DPAD_UP) || input->TriggerLStick(DaiEngine::Input::Stick::Up)) {
 			select_ = Select::TitleBack;
 			gTitleBackUISwitch_ = UISwitch::On;
 			gReStartUISwitch_ = UISwitch::Off;
+		}
+
+		if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
+			DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
 		}
 
 		break;

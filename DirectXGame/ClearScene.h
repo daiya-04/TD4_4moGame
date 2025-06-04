@@ -74,6 +74,8 @@ private:
 	//スポットライト
 	DaiEngine::SpotLight spotLight_;
 
+
+
 	//クリア用BGM
 	DaiEngine::Audio* bgm_ = nullptr;
 
