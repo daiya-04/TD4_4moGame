@@ -38,6 +38,11 @@ Boss::Boss(FollowCamera* camera)
 
 #pragma region デバッグパラメータセット
 	std::unique_ptr<GlobalVariableGroup> gvg = std::make_unique<GlobalVariableGroup>("Boss");
+	
+	gvg->SetMonitorValue("Immortal!!!!!!!!!!!!!!!!!", &isImmortal_);
+	gvg->SetMonitorValue("HealHP", &isHeal_);
+	gvg->SetMonitorValue("HP", &HP_);
+	
 	gvg->SetMonitorValue("currentCount", &parameters_.currentSec);
 	//デバッグ用指定
 	gvg->SetMonitorCombo("setBehavior", &debugBehavior_, behaviorNames_);
@@ -49,7 +54,7 @@ Boss::Boss(FollowCamera* camera)
 
 	gvg->SetTreeData(dangerZoneManager_->GetTree());
 	gvg->SetTreeData(bulletManager_->GetTree());
-	gvg->SetValue("HP", &HP_);
+	gvg->SetValue("MaxHP", &maxHP_);
 	gvg->SetValue("Speed", &speed_);
 	gvg->SetValue("Scale", &world_->scale_);
 	gvg->SetValue("StartPos", &startPosition_);
@@ -60,6 +65,7 @@ Boss::Boss(FollowCamera* camera)
 void Boss::Initialize() {
 	position_ = startPosition_;
 	SetCameraState(FollowCamera::State::Follow);
+	HP_ = maxHP_;
 }
 
 void Boss::Update()
@@ -69,6 +75,15 @@ void Boss::Update()
 
 	//仮でプレイヤー方向に向き続ける
 	SetDirection2Player();
+
+#ifdef _DEBUG
+	//回復フラグ処理
+	if (isHeal_) {
+		isHeal_ = false;
+		HP_ = maxHP_;
+	}
+#endif // _DEBUG
+
 
 	//リクエストがある場合
 	if (behaviorRequest_) {
@@ -152,7 +167,11 @@ void Boss::OnCollision(DaiEngine::Collider* collider)
 
 	if(HP_ <= 0) {
 		//HPが0以下なら死亡
-		isDead_ = true;
+
+		//不死フラグが無効の場合
+		if (!isImmortal_) {
+			isDead_ = true;
+		}
 	}
 }
 

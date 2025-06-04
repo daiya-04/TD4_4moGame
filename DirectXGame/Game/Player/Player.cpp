@@ -53,9 +53,13 @@ Player::Player()
 
 #pragma region デバッグパラメータ設定
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("Player");
+
+	gvg->SetMonitorValue("Immortal!!!!!!!!!!!!!!!!!", &isImmortal_);
+	gvg->SetMonitorValue("HealHP", &isHeal_);
+	gvg->SetMonitorValue("HP", &parameters_.hp);
 	gvg->SetMonitorValue("HitFlag", &parameters_.isHit);
 	gvg->SetMonitorValue("RollCooldown", &parameters_.currentRollCount);
-	gvg->SetValue("HP", &parameters_.hp);
+	gvg->SetValue("MaxHP", &maxHP_);
 	gvg->SetValue("OffsetPos", &offsetPos_);
 	gvg->SetValue("Limitation", &limitationXZ_);
 	gvg->SetValue("ColliderRadius", &radius_);
@@ -84,12 +88,23 @@ Player::Player()
 #pragma endregion	
 }
 
+void Player::Init() {
+	parameters_.hp = maxHP_;
+}
+
 void Player::Update()
 {
 
 #ifdef _DEBUG
 	collider_->SetRadius(radius_);
 	attackCollider_->SetRadius(attackRadius_);
+
+	//回復フラグ処理
+	if (isHeal_) {
+		isHeal_ = false;
+		parameters_.hp = maxHP_;
+	}
+
 #endif // DEBUG
 
 
@@ -185,7 +200,11 @@ void Player::OnCollison(DaiEngine::Collider* collider)
 
 	if(parameters_.hp <= 0) {
 		//HPが0以下ならゲームオーバー
-		isDead_ = true;
+
+		//不死フラグが無効の場合
+		if (!isImmortal_) {
+			isDead_ = true;
+		}
 	}
 
 	//コライダーOFF

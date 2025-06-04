@@ -27,8 +27,8 @@ public://**パブリック関数**//
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	Boss(FollowCamera*camera);
-	~Boss()=default;
+	Boss(FollowCamera* camera);
+	~Boss() = default;
 
 	/// <summary>
 	/// 初期化
@@ -67,7 +67,7 @@ public://**パブリック関数**//
 	void Move2Player();
 
 public://**セッター**//
-	
+
 	/// <summary>
 	/// カメラの状態設定
 	/// </summary>
@@ -92,7 +92,7 @@ public://**ゲッター**//
 	/// 弾データの取得
 	/// </summary>
 	/// <returns></returns>
-	std::list<std::unique_ptr<BossBullet>>& GetBullets(){ return bulletManager_->GetBullets(); }
+	std::list<std::unique_ptr<BossBullet>>& GetBullets() { return bulletManager_->GetBullets(); }
 
 	/// <summary>
 	/// 死亡フラグチェック
@@ -108,20 +108,20 @@ public://**状態
 		Attack1,
 		Attack2,
 		Count
-	}behavior_=Idle;
+	}behavior_ = Idle;
 
 	//状態リクエスト
 	std::optional<Behavior>behaviorRequest_ = Behavior::Idle;
 
 private://**プライベート変数**//
 
-	 FollowCamera* followCamera_ = nullptr;
+	FollowCamera* followCamera_ = nullptr;
 
 	//状態
 	std::vector<std::unique_ptr<IBossBehavior>>behaviors_;
 
 	//プレイヤー座標
-	const DaiEngine::WorldTransform* playerWorld_=nullptr;
+	const DaiEngine::WorldTransform* playerWorld_ = nullptr;
 
 	//弾マネージャ
 	std::unique_ptr<BossBulletManager>bulletManager_ = nullptr;
@@ -137,9 +137,12 @@ private://**プライベート変数**//
 
 
 private://**パラメータ変数**//
-	
+
 	//HP
-	int HP_ = 100; 
+	int HP_ = 100;
+
+	//最大HP
+	int maxHP_ = 100;
 
 	//死亡フラグ
 	bool isDead_ = false;
@@ -157,9 +160,9 @@ private://**パラメータ変数**//
 	float speed_ = 0.0f;
 
 private://**デバッグ用変数**//
-	
+
 	//攻撃指定
-	std::string debugBehavior_="None";
+	std::string debugBehavior_ = "None";
 
 	std::vector<std::string> behaviorNames_ = {
 	"None",
@@ -167,4 +170,10 @@ private://**デバッグ用変数**//
 	"Attack1",
 	"Attack2"
 	};
+
+	//無敵フラグ
+	bool isImmortal_ = false;
+
+	//HP回復フラグ
+	bool isHeal_ = false;
 };
