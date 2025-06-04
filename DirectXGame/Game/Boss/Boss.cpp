@@ -140,6 +140,12 @@ void Boss::OnCollision(DaiEngine::Collider* collider)
 	if (collider->GetTag() == "playerAttack") {
 		HP_--;
 	}
+
+
+	if(HP_ <= 0) {
+		//HPが0以下なら死亡
+		isDead_ = true;
+	}
 }
 
 void Boss::SpawnDangerZone()

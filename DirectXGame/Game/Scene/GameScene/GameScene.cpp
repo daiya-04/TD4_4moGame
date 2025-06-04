@@ -130,6 +130,17 @@ void GameScene::Update() {
 
 	//当たり判定処理
 	DaiEngine::ColliderManager::GetInstance()->CheckAllCollision();
+
+
+	//死亡時ゲームおーばーへ
+	if (player_->GetIsDead()) {
+		DaiEngine::SceneManager::GetInstance()->ChangeScene("GameOver");
+	}
+
+	//ボスのHPが0以下になったらクリアへ
+	if (boss_->GetIsDead()) {
+		DaiEngine::SceneManager::GetInstance()->ChangeScene("Clear");
+	}
 }
 
 void GameScene::DrawBackGround() {

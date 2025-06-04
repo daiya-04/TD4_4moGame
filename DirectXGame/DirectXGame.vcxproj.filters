@@ -464,6 +464,7 @@
     <ClCompile Include="GameOverScene.cpp">
       <Filter>Game\Scene\GameOverScene</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Player\behavior\Entry\PlayerEntry.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -784,5 +785,6 @@
     <ClInclude Include="GameOverScene.h">
       <Filter>Game\Scene\GameOverScene</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Player\behavior\Entry\PlayerEntry.h" />
   </ItemGroup>
 </Project>

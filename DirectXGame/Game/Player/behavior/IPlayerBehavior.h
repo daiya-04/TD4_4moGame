@@ -4,7 +4,7 @@
 class Player;
 
 //プレイヤーの状態の基底クラス
-class IProtBehavior {
+class IPlayerBehavior {
 
 protected://**共通変数**//
 
@@ -24,8 +24,8 @@ public://**パブリック関数**//
 	static void SetPlayer(Player* player) { player_ = player; };
 
 	//全てデフォルト
-	IProtBehavior() = default;
-	virtual ~IProtBehavior() = default;
+	IPlayerBehavior() = default;
+	virtual ~IPlayerBehavior() = default;
 
 	/// <summary>
 	/// 初期化

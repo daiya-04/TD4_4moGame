@@ -2,7 +2,7 @@
 #include"Player/behavior/IPlayerBehavior.h"
 
 //プレイヤーの回避処理
-class PlayerRoll : public IProtBehavior {
+class PlayerRoll : public IPlayerBehavior {
 public://**パブリック関数**//
 
 	/// <summary>
