@@ -5,6 +5,7 @@
 #include"ShapesDraw.h"
 
 #pragma region 状態クラス
+#include"behavior/Entry/PlayerEntry.h"
 #include"Player/behavior/Roll/PlayerRoll.h"
 #include"Player/behavior/Move/PlayerMove.h"
 #include"Player/behavior/AttackManager/PlayerAttackManager.h"
@@ -36,12 +37,13 @@ Player::Player()
 	attackCollider_->SetStayCallback([this](DaiEngine::Collider*collider) { OnCollisionATKCollider(collider); });
 
 	//プレイヤーポインタ設定
-	IProtBehavior::SetPlayer(this);
+	IPlayerBehavior::SetPlayer(this);
 
 	//状態の数指定
 	behaviors_.resize((size_t)Behavior::Count);
 
 	//生成
+	behaviors_[(size_t)Behavior::Entry] = std::make_unique<PlayerEntry>();
 	behaviors_[(size_t)Behavior::Move] = std::make_unique<PlayerMove>();
 	behaviors_[(size_t)Behavior::Roll] = std::make_unique<PlayerRoll>();
 	behaviors_[(size_t)Behavior::Attack] = std::make_unique<PlayerAttackManager>();
@@ -169,6 +171,11 @@ void Player::OnCollison(DaiEngine::Collider* collider)
 
 	//HP減少
 	parameters_.hp -- ;
+
+	if(parameters_.hp <= 0) {
+		//HPが0以下ならゲームオーバー
+		isDead_ = true;
+	}
 
 	//コライダーOFF
 	collider_->ColliderOff();

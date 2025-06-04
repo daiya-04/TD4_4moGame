@@ -3,7 +3,7 @@
 #include"Player/behavior/Attacks/IPlayerAttack.h"
 #include<memory>
 
-class PlayerAttackManager : public IProtBehavior {
+class PlayerAttackManager : public IPlayerBehavior {
 
 public:
 

@@ -61,13 +61,14 @@ public://**パブリック関数**//
 	/// </summary>
 	void SpawnBullet(const DaiEngine::WorldTransform& pos);
 
+
+public://**セッター**//
+	
 	/// <summary>
 	/// カメラの状態設定
 	/// </summary>
 	/// <param name="state"></param>
 	void SetCameraState(FollowCamera::State state) { followCamera_->SetState(state); };
-
-public://**セッター**//
 
 	/// <summary>
 	/// プレイヤーのワールド座標取得
@@ -88,6 +89,12 @@ public://**ゲッター**//
 	/// </summary>
 	/// <returns></returns>
 	std::list<std::unique_ptr<BossBullet>>& GetBullets(){ return bulletManager_->GetBullets(); }
+
+	/// <summary>
+	/// 死亡フラグチェック
+	/// </summary>
+	/// <returns></returns>
+	bool GetIsDead() const { return isDead_; }
 
 public://**状態
 
@@ -129,6 +136,9 @@ private://**パラメータ変数**//
 	
 	//HP
 	int HP_ = 100; 
+
+	//死亡フラグ
+	bool isDead_ = false;
 
 	//コライダー半径
 	float radius_ = 1.0f;

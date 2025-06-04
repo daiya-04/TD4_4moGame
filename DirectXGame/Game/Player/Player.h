@@ -78,6 +78,12 @@ public://**ゲッター**//
 	/// <returns></returns>
 	PlayerInput* GetInput() { return input_.get(); };
 
+	/// <summary>
+	/// 死亡フラグ取得
+	/// </summary>
+	/// <returns></returns>
+	bool GetIsDead() const { return isDead_; };
+
 public://**セッター
 
 	/// <summary>
@@ -108,6 +114,7 @@ public://**状態**//
 
 	//状態
 	enum class Behavior{
+		Entry,	//エントリー
 		Move,	//移動
 		Roll,	//回避
 		Attack,	//攻撃
@@ -115,10 +122,10 @@ public://**状態**//
 	}behaviorName_=Behavior::Move;
 
 	//状態リクエスト
-	std::optional<Behavior>behaviorRequest_ = Behavior::Move;
+	std::optional<Behavior>behaviorRequest_ = Behavior::Entry;
 
 	//状態処理群
-	std::vector<std::unique_ptr<IProtBehavior>>behaviors_;
+	std::vector<std::unique_ptr<IPlayerBehavior>>behaviors_;
 
 private://**プライベート変数**//
 
@@ -146,7 +153,8 @@ private://**プライベート変数**//
 	//座標
 	Vector3 position_ = { 0,0,0 };
 
-	
+	//死亡フラグ
+	bool isDead_ = false;
 
 private://**ヒット時処理*//
 	
