@@ -18,7 +18,7 @@ Boss::Boss(FollowCamera* camera)
 	//カメラポインタ設定
 	followCamera_ = camera;
 
-	IBossBehavior::SetBoss(this);
+	IBossBehavior::SetPointer(this,camera->GetCamera());
 
 	behaviors_.resize((size_t)Behavior::Count);
 	behaviors_[(size_t)Behavior::Idle] = std::make_unique<BossIdle>();
@@ -36,10 +36,11 @@ Boss::Boss(FollowCamera* camera)
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
 	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {OnCollision(collider); });
 
+#pragma region デバッグパラメータセット
 	std::unique_ptr<GlobalVariableGroup> gvg = std::make_unique<GlobalVariableGroup>("Boss");
 	gvg->SetMonitorValue("currentCount", &parameters_.currentSec);
 	//デバッグ用指定
-	gvg->SetMonitorCombo("setBehavior", &debugBehavior_,behaviorNames_);
+	gvg->SetMonitorCombo("setBehavior", &debugBehavior_, behaviorNames_);
 
 	for (auto& behavior : behaviors_) {
 		if (!behavior)continue;
@@ -49,9 +50,11 @@ Boss::Boss(FollowCamera* camera)
 	gvg->SetTreeData(dangerZoneManager_->GetTree());
 	gvg->SetTreeData(bulletManager_->GetTree());
 	gvg->SetValue("HP", &HP_);
+	gvg->SetValue("Speed", &speed_);
 	gvg->SetValue("Scale", &world_->scale_);
 	gvg->SetValue("StartPos", &startPosition_);
 	gvg->SetValue("OffsetPos", &offsetPosition_);
+#pragma endregion
 }
 
 void Boss::Initialize() {
@@ -73,7 +76,7 @@ void Boss::Update()
 #ifdef _DEBUG
 		//デバッグ時の攻撃指定
 		if (debugBehavior_ == behaviorNames_[0]) {
-			//何もなし
+			//指定なし
 		}
 		else if (debugBehavior_ == behaviorNames_[1]) {
 			//待機
@@ -104,8 +107,10 @@ void Boss::Update()
 	//状態更新
 	behaviors_[(int)behavior_]->Update();
 
+	//速度加算
 	position_ += parameters_.velocity_;
 
+	//オフセット位置加算
 	world_->translation_ = position_+offsetPosition_;
 
 	//行列更新
@@ -124,6 +129,9 @@ void Boss::Draw()
 	//弾の描画
 	bulletManager_->Draw();
 
+	//描画
+	behaviors_[(int)behavior_]->Draw();
+
 	//本体描画
 	GameObject::Draw();
 
@@ -140,6 +148,12 @@ void Boss::OnCollision(DaiEngine::Collider* collider)
 	if (collider->GetTag() == "playerAttack") {
 		HP_--;
 	}
+
+
+	if(HP_ <= 0) {
+		//HPが0以下なら死亡
+		isDead_ = true;
+	}
 }
 
 void Boss::SpawnDangerZone()
@@ -152,6 +166,25 @@ void Boss::SpawnDangerZone()
 void Boss::SpawnBullet(const DaiEngine::WorldTransform&position)
 {
 	bulletManager_->SpawnBullet(position);
+}
+
+void Boss::Move2Player()
+{
+	//プレイヤー方向を見て向きベクトル取得
+	Vector3 velo = SetDirection2Player();
+	//正規化して速度を掛ける
+	if(velo!=Vector3(0, 0, 0)) {
+		//プレイヤー方向に向ける
+		velo = velo.Normalize() * speed_;
+	}
+	else {
+		//プレイヤー方向がない場合は止まる
+		velo = Vector3(0, 0, 0);
+	}
+
+	//ワールド座標に加算
+	position_ += velo;
+
 }
 
 float GetYRotation(const Vector2& v) {

@@ -4,7 +4,7 @@
 #include<memory>
 #include<optional>
 
-class IPlayerAttack :public IProtBehavior {
+class IPlayerAttack :public IPlayerBehavior {
 
 public://**パブリック関数**//
 

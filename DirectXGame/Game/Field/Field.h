@@ -55,6 +55,9 @@ public:
 	//現在位置のブロックを基にプレイヤー座標Yを計算して返す
 	float GetMassLocationPosY(Vector3 translate);
 
+	//ステージの開始演出が終わっているか(Falseなら終了済み)
+	bool GetStageAnimationFinishedFlag() { return isAnimationReset_; }
+
 	/// <summary>
 	/// 指定ブロックを中心に周囲の高さを変える(減衰なし)
 	/// 第一引数:中心地点

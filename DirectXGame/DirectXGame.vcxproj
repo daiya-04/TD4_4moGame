@@ -129,6 +129,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Game\Boss\BossBullet\BossBullet.cpp" />
     <ClCompile Include="Game\Boss\DangerZoneManager\DangerZoneManager.cpp" />
     <ClCompile Include="Game\Boss\DangerZone\DangerZone.cpp" />
+    <ClCompile Include="Game\Boss\SingleDangerZone\SingleDangerZone.cpp" />
     <ClCompile Include="Game\Field\Field.cpp" />
     <ClCompile Include="Game\FollowCamera\FollowCamera.cpp" />
     <ClCompile Include="Game\GameObject\GameObject.cpp" />
@@ -141,6 +142,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Game\Player\behavior\Attacks\Combo2\PlayerAttackCombo2.cpp" />
     <ClCompile Include="Game\Player\behavior\Attacks\Combo3\PlayerAttackCombo3.cpp" />
     <ClCompile Include="Game\Player\behavior\Attacks\IPlayerAttack.cpp" />
+    <ClCompile Include="Game\Player\behavior\Entry\PlayerEntry.cpp" />
     <ClCompile Include="Game\Player\behavior\IPlayerBehavior.cpp" />
     <ClCompile Include="Game\Player\behavior\Move\PlayerMove.cpp" />
     <ClCompile Include="Game\Player\behavior\Roll\PlayerRoll.cpp" />
@@ -226,6 +228,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Boss\BossBullet\BossBullet.h" />
     <ClInclude Include="Game\Boss\DangerZoneManager\DangerZoneManager.h" />
     <ClInclude Include="Game\Boss\DangerZone\DangerZone.h" />
+    <ClInclude Include="Game\Boss\SingleDangerZone\SingleDangerZone.h" />
     <ClInclude Include="Game\Field\Field.h" />
     <ClInclude Include="Game\FollowCamera\FollowCamera.h" />
     <ClInclude Include="Game\GameObject\GameObject.h" />
@@ -239,6 +242,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Player\behavior\Attacks\Combo2\PlayerAttackCombo2.h" />
     <ClInclude Include="Game\Player\behavior\Attacks\Combo3\PlayerAttackCombo3.h" />
     <ClInclude Include="Game\Player\behavior\Attacks\IPlayerAttack.h" />
+    <ClInclude Include="Game\Player\behavior\Entry\PlayerEntry.h" />
     <ClInclude Include="Game\Player\behavior\IPlayerBehavior.h" />
     <ClInclude Include="Game\Player\behavior\Move\PlayerMove.h" />
     <ClInclude Include="Game\Player\behavior\Roll\PlayerRoll.h" />

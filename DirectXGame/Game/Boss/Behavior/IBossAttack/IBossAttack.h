@@ -21,6 +21,8 @@ public://**パブリック関数**//
 	/// </summary>
 	void Update()override;
 
+	void Draw()override {};
+
 public://**状態**//
 
 	/// <summary>

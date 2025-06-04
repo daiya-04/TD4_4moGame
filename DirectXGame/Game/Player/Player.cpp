@@ -5,6 +5,7 @@
 #include"ShapesDraw.h"
 
 #pragma region 状態クラス
+#include"behavior/Entry/PlayerEntry.h"
 #include"Player/behavior/Roll/PlayerRoll.h"
 #include"Player/behavior/Move/PlayerMove.h"
 #include"Player/behavior/AttackManager/PlayerAttackManager.h"
@@ -36,16 +37,21 @@ Player::Player()
 	attackCollider_->SetStayCallback([this](DaiEngine::Collider*collider) { OnCollisionATKCollider(collider); });
 
 	//プレイヤーポインタ設定
-	IProtBehavior::SetPlayer(this);
+	IPlayerBehavior::SetPlayer(this);
 
 	//状態の数指定
 	behaviors_.resize((size_t)Behavior::Count);
 
 	//生成
+	behaviors_[(size_t)Behavior::Entry] = std::make_unique<PlayerEntry>();
 	behaviors_[(size_t)Behavior::Move] = std::make_unique<PlayerMove>();
 	behaviors_[(size_t)Behavior::Roll] = std::make_unique<PlayerRoll>();
 	behaviors_[(size_t)Behavior::Attack] = std::make_unique<PlayerAttackManager>();
 
+	//描画フラグON
+	SetDraw(false);
+
+#pragma region デバッグパラメータ設定
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("Player");
 	gvg->SetMonitorValue("HitFlag", &parameters_.isHit);
 	gvg->SetMonitorValue("RollCooldown", &parameters_.currentRollCount);
@@ -65,7 +71,7 @@ Player::Player()
 	hitTree.name_ = "Hit";
 	hitTree.SetMonitorValue("IsHitFlag", &parameters_.isHit);
 	hitTree.SetValue("MaxNoHitSec", &hitCount_);
-	hitTree.SetValue("TenmetuNum", &maxTenmetuNum_);
+	hitTree.SetValue("TenmetuNum", &maxBlinkingNum_);
 
 	//攻撃用コライダー設定
 	GvariTree attackColliderTree;
@@ -75,6 +81,7 @@ Player::Player()
 
 	gvg->SetTreeData(hitTree);
 	gvg->SetTreeData(attackColliderTree);
+#pragma endregion	
 }
 
 void Player::Update()
@@ -118,14 +125,20 @@ void Player::Update()
 	//オフセット分足してワールド座標更新
 	world_->translation_ =position_ + offsetPos_;
 
-	
-
 	//点滅更新
-	Tenmetu();
+	Blinking();
 
 	//行列更新
 	UpdateMatrix();
 
+}
+
+void Player::UpdateOnField(float y)
+{
+	//高さ修正
+	world_->translation_.y = y;
+	//行列更新
+	UpdateMatrix();
 }
 
 void Player::Draw()
@@ -159,7 +172,7 @@ void Player::SetWorldTranslate(const Vector3& translate)
 void Player::OnCollison(DaiEngine::Collider* collider)
 {
 	//ボスコライダーの場合スキップ
-	if (collider->GetTag() == "boss"|| collider->GetTag() == "player" ||!parameters_.isHit) {
+	if (collider->GetTag() == "boss"|| collider->GetTag() == "playerAttack" ||!parameters_.isHit) {
 		return;
 	}
 
@@ -169,6 +182,11 @@ void Player::OnCollison(DaiEngine::Collider* collider)
 
 	//HP減少
 	parameters_.hp -- ;
+
+	if(parameters_.hp <= 0) {
+		//HPが0以下ならゲームオーバー
+		isDead_ = true;
+	}
 
 	//コライダーOFF
 	collider_->ColliderOff();
@@ -236,15 +254,15 @@ void Player::SetAttackColliderActive(bool isActive)
 	}
 }
 
-void Player::Tenmetu()
+void Player::Blinking()
 {
 	if (!parameters_.isHit) {
 
 		currentHitCount_ ++;
 
 		////時間内での点滅処理
-		if (currentHitCount_ >= (hitCount_/maxTenmetuNum_)*tenmetuCount_) {
-			tenmetuCount_++;
+		if (currentHitCount_ >= (hitCount_/maxBlinkingNum_)*blinkingCount_) {
+			blinkingCount_++;
 
 			//透明度を変更
 			if (isDraw_) {
@@ -263,7 +281,7 @@ void Player::Tenmetu()
 			//カウント初期化
 			currentHitCount_ = 0;
 			//点滅回数初期化
-			tenmetuCount_ = 0;
+			blinkingCount_ = 0;
 
 			//コライダーON
 			collider_->ColliderOn();

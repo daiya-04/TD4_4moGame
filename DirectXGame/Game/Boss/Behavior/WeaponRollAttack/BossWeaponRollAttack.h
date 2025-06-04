@@ -1,15 +1,29 @@
 #pragma once
 #include"Boss/Behavior/IBossAttack/IBossAttack.h"
+#include"Boss/SingleDangerZone/SingleDangerZone.h"
+#include"SphereCollider.h"
+#include<memory>
 
 //プレイヤーに弾を落とす攻撃を行う
 class BossWeaponRollAttack : public IBossAttack {
 
-public:
+public://**パブリック関数**//
 
 	BossWeaponRollAttack();
 	~BossWeaponRollAttack() = default;
 
-public://**状態**//
+	/// <summary>
+	/// 描画
+	/// </summary>
+	void Draw()override;
+
+	/// <summary>
+	/// 当たり判定処理
+	/// </summary>
+	/// <param name="collider"></param>
+	void OnCollisionATK(DaiEngine::Collider* collider);
+
+public://**状態関数**//
 
 	void InitBehavior0()override;
 	void InitBehavior1()override;
@@ -23,7 +37,8 @@ public://**状態**//
 	void UpdateBehavior3()override {};
 	void UpdateBehavior4()override {};
 
-private:
+
+private://**プライベート変数**//
 
 	//現在の数
 	int currentNum_ = 0;
@@ -33,7 +48,13 @@ private:
 	//最大度
 	float maxRoll_ = 0;
 
-private:
+	//コライダー
+	std::unique_ptr<DaiEngine::SphereCollider> collider_ ;
+
+	//警告円
+	std::unique_ptr<SingleDangerZone> dangerZone_;
+
+private://**パラメータ変数**//
 
 	//待機時間
 	float waitTime_ = 1.0f;
@@ -47,4 +68,10 @@ private:
 	//回転度合
 	float rotateDegree_ = 360.0f;
 
+	//警戒エリアのパラメータ
+	DangerZoneParameters param;
+
+
+	//円のオフセット
+	Vector3 offsetZone_ = Vector3(0.0f, 0.0f, 0.0f);
 };
