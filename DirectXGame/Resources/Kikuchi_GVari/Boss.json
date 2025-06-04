@@ -1,15 +1,23 @@
 {
     "Boss": {
         "DangerZone": {
+            "alpha": [
+                1.0,
+                0.0,
+                0.0,
+                1.0
+            ],
             "radius": 3.5,
             "warningCount": 7.0,
-            "warningSphereHeight": 0.0
+            "warningSphereHeight": 1.0
         },
         "FallingBullet": {
+            "colliderRadius": 1.0,
             "fallSpeed": 1.100000023841858,
             "radius": 3.0,
             "spawnHeight": 60.0
         },
+        "HP": 94,
         "Idle": {
             "second": 120.0
         },
@@ -30,14 +38,21 @@
             1.5,
             1.5
         ],
+        "Speed": 0.0,
         "StartPos": [
             0.0,
             0.0,
-            5.0
+            10.0
         ],
         "weaponRollAttack": {
             "activeCount": 60.0,
             "afterCount": 60.0,
+            "attackRadius_": 1.0,
+            "offsetZone": [
+                0.0,
+                0.0,
+                0.0
+            ],
             "rotateNum": 6.0,
             "waitCount": 300.0
         }

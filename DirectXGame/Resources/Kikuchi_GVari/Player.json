@@ -29,7 +29,7 @@
             }
         },
         "ColliderRadius": 1.0,
-        "HP": 96,
+        "HP": 7,
         "Hit": {
             "MaxNoHitSec": 60.0,
             "TenmetuNum": 10
@@ -50,6 +50,15 @@
             "cooldownCount": 16.5,
             "count": 10.0,
             "speed": 1.2000000476837158
+        },
+        "playerEntry": {
+            "animRate": 1.0,
+            "maxRate": 60.0,
+            "startPos": [
+                0.0,
+                50.0,
+                0.0
+            ]
         }
     }
 }
