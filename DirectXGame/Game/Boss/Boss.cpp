@@ -52,6 +52,15 @@ Boss::Boss(FollowCamera* camera)
 		gvg->SetTreeData(behavior->tree_);
 	}
 
+	//ヒット時の処理パラメータ設定
+	GvariTree hitTree;
+	hitTree.name_ = "Hit";
+	hitTree.SetMonitorValue("IsHitFlag", &isHit_);
+	hitTree.SetValue("MaxNoHitSec", &hitCount_);
+	hitTree.SetValue("TenmetuNum", &maxBlinkingNum_);
+
+	gvg->SetTreeData(hitTree);
+
 	gvg->SetTreeData(dangerZoneManager_->GetTree());
 	gvg->SetTreeData(bulletManager_->GetTree());
 	gvg->SetValue("MaxHP", &maxHP_);
@@ -128,6 +137,42 @@ void Boss::Update()
 	//オフセット位置加算
 	world_->translation_ = position_+offsetPosition_;
 
+
+#pragma region Blinking
+	if (!isHit_) {
+
+		currentHitCount_++;
+
+		////時間内での点滅処理
+		if (currentHitCount_ >= (hitCount_ / maxBlinkingNum_) * blinkingCount_) {
+			blinkingCount_++;
+
+			//透明度を変更
+			if (isDraw_) {
+				isDraw_ = false;
+			}
+			else {
+				isDraw_ = true;
+			}
+		}
+
+		//時間経過で終了
+		if (currentHitCount_ >= hitCount_) {
+			isHit_ = true;
+			isDraw_ = true;
+
+			//カウント初期化
+			currentHitCount_ = 0;
+			//点滅回数初期化
+			blinkingCount_ = 0;
+
+			//コライダーON
+			collider_->ColliderOn();
+		}
+	}
+#pragma endregion
+
+
 	//行列更新
 	GameObject::Update();
 
@@ -148,7 +193,10 @@ void Boss::Draw()
 	behaviors_[(int)behavior_]->Draw();
 
 	//本体描画
-	GameObject::Draw();
+	if(isDraw_){
+		GameObject::Draw();
+	}
+	
 
 	//円コライダー描画
 #ifdef _DEBUG
