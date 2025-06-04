@@ -38,6 +38,11 @@ public://**パブリック変数**//
 	~Player() = default;
 
 	/// <summary>
+	/// 初期化
+	/// </summary>
+	void Init();
+
+	/// <summary>
 	/// 更新
 	/// </summary>
 	void Update()override;
@@ -177,6 +182,9 @@ private://**プライベート変数**//
 	//死亡フラグ
 	bool isDead_ = false;
 
+	//最大HP
+	int maxHP_ = 10;
+
 private://**ヒット時処理*//
 	
 	//無敵時間カウント
@@ -198,4 +206,13 @@ private://**行動制限**//
 
 	//XZ軸の制限
 	Vector2 limitationXZ_ = { 10,10 };
+
+private://**デバッグ用パラメータ**//
+
+	//無敵フラグ
+	bool isImmortal_ = false;
+
+	//HP回復フラグ
+	bool isHeal_ = false;
+
 };
