@@ -145,7 +145,7 @@ void Player::Draw()
 {
 	//円コライダー描画
 #ifdef _DEBUG
-	//ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()),*camera_);
+	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()),*camera_);
 	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(attackCollider_->GetShape()), *camera_);
 #endif // _DEBUG
 

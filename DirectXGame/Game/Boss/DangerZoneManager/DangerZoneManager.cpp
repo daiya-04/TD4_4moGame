@@ -13,6 +13,7 @@ DangerZoneManager::DangerZoneManager(Boss* boss)
 	tree_.SetValue("warningSphereHeight", &warningHeight_);
 	tree_.SetValue("warningCount", &warningTime_);
 	tree_.SetValue("radius", &radius_);
+	tree_.SetValue("alpha", &color_);
 }
 
 void DangerZoneManager::Update()
@@ -28,7 +29,7 @@ void DangerZoneManager::Update()
 			objData.worldTransform_ = data->GetWorld();
 			//行列更新
 			objData.worldTransform_.UpdateMatrix();
-			objData.color_ = Vector4(1, 0, 0, 1);
+			objData.color_ = color_;
 			//データセット
 			SetData(objData);
 		}
@@ -52,7 +53,7 @@ void DangerZoneManager::SpawnDangerZone(const Vector3& position)
 {
 	Vector3 pos = position;
 	////高さ設定
-	pos.y += warningHeight_;
+	pos.y = warningHeight_;
 
 	DangerZoneParameters param;
 	param.world.Init();
