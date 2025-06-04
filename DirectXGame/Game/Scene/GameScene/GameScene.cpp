@@ -64,6 +64,9 @@ void GameScene::Init() {
 
 	//セットされたデータで初期化
 	boss_->Initialize();
+
+	field_->CreateStage();
+	field_->StartStage();
 }
 
 void GameScene::Update() {
