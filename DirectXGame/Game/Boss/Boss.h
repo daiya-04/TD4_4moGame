@@ -159,6 +159,26 @@ private://**パラメータ変数**//
 	//移動速度
 	float speed_ = 0.0f;
 
+	private://**ヒット時処理*//
+
+		//ヒットフラグ
+		bool isHit_ = true;
+
+		//無敵時間カウント
+		float currentHitCount_ = 0;
+
+		//点滅回数カウント
+		int blinkingCount_ = 0;
+
+		//無敵時間
+		float hitCount_ = 1.0f;
+
+		//点滅回数
+		int maxBlinkingNum_ = 3;
+
+		//描画フラグ
+		bool isDraw_ = true;
+
 private://**デバッグ用変数**//
 
 	//攻撃指定
