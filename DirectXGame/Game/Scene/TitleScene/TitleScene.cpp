@@ -78,12 +78,12 @@ void TitleScene::Init() {
 	titleLogo_.reset(DaiEngine::Sprite::Create(titleLogoTex, {}));
 
 	gameStartUI_.reset(DaiEngine::Sprite::Create(gameStartTex, {}));
-	gameStartUI_->SetSize({ 350.0f,70 });
-	gameStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gStartUISwitch_),0.0f }, { 350.0f,70 });
+	gameStartUI_->SetSize({ 350.0f,70.0f });
+	gameStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gStartUISwitch_),0.0f }, { 350.0f,70.0f });
 
 	gameFinishUI_.reset(DaiEngine::Sprite::Create(gameFinifhTex, {}));
-	gameFinishUI_->SetSize({ 350.0f,70 });
-	gameFinishUI_->SetTextureArea({ 350.0f * static_cast<float>(gFinishUISwitch_),0.0f }, { 350.0f,70 });
+	gameFinishUI_->SetSize({ 350.0f,70.0f });
+	gameFinishUI_->SetTextureArea({ 350.0f * static_cast<float>(gFinishUISwitch_),0.0f }, { 350.0f,70.0f });
 	
 
 
@@ -97,21 +97,26 @@ void TitleScene::Init() {
 void TitleScene::Update() {
 	DebugGUI();
 
+	auto* input = DaiEngine::Input::GetInstance();
+
 #ifdef _DEBUG
 	//調整項目代入
 	ApplyGlobalVariables();
-	//デバッグ用シーン切り替えコマンド
-	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_2)) {
+	///デバッグ用シーン切り替えコマンド
+	//「Ctrl + 2」でゲームシーンへ
+	if (input->PushKey(DIK_LCONTROL) && input->TriggerKey(DIK_2)) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
 	}
-	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_3)) {
+	//「Ctrl + 3」でクリアシーンへ
+	if (input->PushKey(DIK_LCONTROL) && input->TriggerKey(DIK_3)) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Clear");
 	}
-	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_4)) {
+	//「Ctrl + 4」でゲームオーバーシーンへ
+	if (input->PushKey(DIK_LCONTROL) && input->TriggerKey(DIK_4)) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("GameOver");
 	}
-
-	if (DaiEngine::Input::GetInstance()->PushKey(DIK_LCONTROL) && DaiEngine::Input::GetInstance()->TriggerKey(DIK_0)) {
+	//「Ctrl + 0」でテストシーンへ
+	if (input->PushKey(DIK_LCONTROL) && input->TriggerKey(DIK_0)) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Debug");
 	}
 	
@@ -122,19 +127,27 @@ void TitleScene::Update() {
 	switch (select_) {
 		case Select::Start:
 
-			if (DaiEngine::Input::GetInstance()->TriggerKey(DIK_DOWN)) {
+			if (input->TriggerKey(DIK_DOWN) || input->TriggerButton(DaiEngine::Input::Button::DPAD_DOWN) || input->TriggerLStick(DaiEngine::Input::Stick::Down)) {
 				select_ = Select::Finish;
 				gStartUISwitch_ = UISwitch::Off;
 				gFinishUISwitch_ = UISwitch::On;
 			}
 
+			if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
+				DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
+			}
+
 			break;
 		case Select::Finish:
 
-			if (DaiEngine::Input::GetInstance()->TriggerKey(DIK_UP)) {
+			if (input->TriggerKey(DIK_UP) || input->TriggerButton(DaiEngine::Input::Button::DPAD_UP) || input->TriggerLStick(DaiEngine::Input::Stick::Up)) {
 				select_ = Select::Start;
 				gStartUISwitch_ = UISwitch::On;
 				gFinishUISwitch_ = UISwitch::Off;
+			}
+
+			if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
+				DaiEngine::WinApp::GetInstance()->GameEnd();
 			}
 
 			break;

@@ -464,6 +464,8 @@
     <ClCompile Include="GameOverScene.cpp">
       <Filter>Game\Scene\GameOverScene</Filter>
     </ClCompile>
+    <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="BaseUI.cpp" />
     <ClCompile Include="Game\Player\behavior\Entry\PlayerEntry.cpp" />
     <ClCompile Include="Game\Boss\SingleDangerZone\SingleDangerZone.cpp" />
   </ItemGroup>
@@ -788,5 +790,7 @@
     </ClInclude>
     <ClInclude Include="Game\Player\behavior\Entry\PlayerEntry.h" />
     <ClInclude Include="Game\Boss\SingleDangerZone\SingleDangerZone.h" />
+    <ClInclude Include="UIManager.h" />
+    <ClInclude Include="BaseUI.h" />
   </ItemGroup>
 </Project>

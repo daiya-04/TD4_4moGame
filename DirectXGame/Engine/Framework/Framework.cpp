@@ -44,7 +44,7 @@ namespace DaiEngine {
 
 	void DSFramework::Update() {
 
-		if (WinApp::GetInstance()->ProcessMessage()) { endRequest_ = true; }
+		if (WinApp::GetInstance()->ProcessMessage()) { WinApp::GetInstance()->GameEnd(); }
 
 
 		ImGuiManager::GetInstance()->Begin();
@@ -79,7 +79,12 @@ namespace DaiEngine {
 			Update();
 
 			//終了リクエストが来たら抜ける
-			if (IsEndRequest()) { break; }
+			if (WinApp::GetInstance()->IsEndRequest()) {
+				AudioManager::GetInstance()->AllAudioStop();
+				if (AudioManager::GetInstance()->IsAllAudioStop()) {
+					break;
+				}
+			}
 
 			//描画
 			Draw();
