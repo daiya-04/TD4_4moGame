@@ -138,7 +138,15 @@ void Player::Update()
 			position_ = nextPos;
 		}
 		else {
-			parameters_.velocity = { 0, 0, 0 }; // 歩けなければ止まる
+			// 目的地が歩けない ⇒ 今の場所も確認する
+			if (!field_->IsWalkable(position_)) {
+				// 今の場所すら歩けない ⇒ 強制テレポート
+				auto warpPos = field_->FindNearestWalkable(position_);
+				if (warpPos.has_value()) {
+					position_ = warpPos.value();
+				}
+			}
+			parameters_.velocity = { 0, 0, 0 }; // どちらにせよ動きを止める
 		}
 	}
 	else {

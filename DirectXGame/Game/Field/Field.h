@@ -74,9 +74,13 @@ public:
 	/// </summary>
 	void RaiseBlocksAroundWithAttenuation(const Vector2& center, float radius, float deltaY);
 
-	//
+	//プレイヤーが歩けるかどうかの判定
 	bool IsWalkable(const Vector3& worldPos);
 
+	//近くの歩ける足場を探す関数
+	std::optional<Vector3> FindNearestWalkable(const Vector3& from);
+
+	//下がる量の取得
 	float GetDeltaY() { return deltaY_; }
 
 private:
