@@ -24,17 +24,17 @@ Player::Player()
 
 	//コライダークラス生成
 	collider_ = std::make_unique<DaiEngine::SphereCollider>();
-	collider_->Init("player",*world_,radius_);
+	collider_->Init("player", *world_, radius_);
 	collider_->ColliderOn();
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
-	collider_->SetStayCallback([this](DaiEngine::Collider*collider) { OnCollison(collider); });
+	collider_->SetStayCallback([this](DaiEngine::Collider* collider) { OnCollison(collider); });
 	//攻撃コライダー生成
 	attackWorld_.Init();
 	attackWorld_.parent_ = world_;
 	attackCollider_ = std::make_unique<DaiEngine::SphereCollider>();
-	attackCollider_->Init("playerAttack", attackWorld_,attackRadius_);
+	attackCollider_->Init("playerAttack", attackWorld_, attackRadius_);
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(attackCollider_.get());
-	attackCollider_->SetStayCallback([this](DaiEngine::Collider*collider) { OnCollisionATKCollider(collider); });
+	attackCollider_->SetStayCallback([this](DaiEngine::Collider* collider) { OnCollisionATKCollider(collider); });
 
 	//プレイヤーポインタ設定
 	IPlayerBehavior::SetPlayer(this);
@@ -122,7 +122,7 @@ void Player::Update()
 	}
 
 	//回避のクールタイム更新
-	parameters_.currentRollCount --;
+	parameters_.currentRollCount--;
 
 
 	//もし時間が0以下なら0に
@@ -132,13 +132,24 @@ void Player::Update()
 	behaviors_[(int)behaviorName_]->Update();
 
 	//座標更新
-	position_ += parameters_.velocity;
+	Vector3 nextPos = position_ + parameters_.velocity;
+	if (field_) {
+		if (field_->IsWalkable(nextPos)) {
+			position_ = nextPos;
+		}
+		else {
+			parameters_.velocity = { 0, 0, 0 }; // 歩けなければ止まる
+		}
+	}
+	else {
+		position_ = nextPos; // フィールドが無ければそのまま
+	}
 
 	//制限チェック
 	LimitationXZ();
 
 	//オフセット分足してワールド座標更新
-	world_->translation_ =position_ + offsetPos_;
+	world_->translation_ = position_ + offsetPos_;
 
 	//点滅更新
 	Blinking();
@@ -160,7 +171,7 @@ void Player::Draw()
 {
 	//円コライダー描画
 #ifdef _DEBUG
-	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()),*camera_);
+	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()), *camera_);
 	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(attackCollider_->GetShape()), *camera_);
 #endif // _DEBUG
 
@@ -187,7 +198,7 @@ void Player::SetWorldTranslate(const Vector3& translate)
 void Player::OnCollison(DaiEngine::Collider* collider)
 {
 	//ボスコライダーの場合スキップ
-	if (collider->GetTag() == "boss"|| collider->GetTag() == "playerAttack" ||!parameters_.isHit) {
+	if (collider->GetTag() == "boss" || collider->GetTag() == "playerAttack" || !parameters_.isHit) {
 		return;
 	}
 
@@ -196,9 +207,9 @@ void Player::OnCollison(DaiEngine::Collider* collider)
 	parameters_.isHit = false;
 
 	//HP減少
-	parameters_.hp -- ;
+	parameters_.hp--;
 
-	if(parameters_.hp <= 0) {
+	if (parameters_.hp <= 0) {
 		//HPが0以下ならゲームオーバー
 
 		//不死フラグが無効の場合
@@ -214,10 +225,10 @@ void Player::OnCollison(DaiEngine::Collider* collider)
 void Player::OnCollisionATKCollider(DaiEngine::Collider* collider)
 {
 	//攻撃コライダーをOFF
-	if(collider->GetTag() == "boss") {
+	if (collider->GetTag() == "boss") {
 		attackCollider_->ColliderOff();
 	}
-	
+
 }
 
 
@@ -266,9 +277,10 @@ Vector3 Player::SetBody2Input()
 void Player::SetAttackColliderActive(bool isActive)
 {
 	//isActiveがtrueなら攻撃を有効
-	if (isActive) { 
+	if (isActive) {
 		attackCollider_->ColliderOn();
-	}else {
+	}
+	else {
 		attackCollider_->ColliderOff();
 	}
 }
@@ -277,10 +289,10 @@ void Player::Blinking()
 {
 	if (!parameters_.isHit) {
 
-		currentHitCount_ ++;
+		currentHitCount_++;
 
 		////時間内での点滅処理
-		if (currentHitCount_ >= (hitCount_/maxBlinkingNum_)*blinkingCount_) {
+		if (currentHitCount_ >= (hitCount_ / maxBlinkingNum_) * blinkingCount_) {
 			blinkingCount_++;
 
 			//透明度を変更
@@ -291,7 +303,7 @@ void Player::Blinking()
 				isDraw_ = true;
 			}
 		}
-			
+
 		//時間経過で終了
 		if (currentHitCount_ >= hitCount_) {
 			parameters_.isHit = true;

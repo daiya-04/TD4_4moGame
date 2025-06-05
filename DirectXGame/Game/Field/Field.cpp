@@ -447,3 +447,22 @@ void Field::ColorAdjustmentByHeight(const Vector4& highColor, const Vector4& low
 		}
 	}
 }
+
+bool Field::IsWalkable(const Vector3& worldPos) {
+	Vector2 gridPos = GetBlockAt(worldPos.x, worldPos.z);
+
+	for (const Block& block : blocks_) {
+		if (block.massLocation == gridPos) {
+			float blockY = block.world.translation_.y - blockSize_ / 2;
+
+			// 最低高度のブロックは乗れない
+			if (blockY <= -heightLimit_) {
+				return false; // ここで即NG
+			}
+
+			// 歩行判定など他にあれば追加（高さ差など）
+		}
+	}
+
+	return true;
+}

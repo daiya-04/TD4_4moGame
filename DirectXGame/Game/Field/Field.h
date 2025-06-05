@@ -52,7 +52,7 @@ public:
 
 	Block* GetBlock(float x, float z);
 
-	//現在位置のブロックを基にプレイヤー座標Yを計算して返す
+	//現在位置のブロックを基にそのブロックのY座標を計算して返す
 	float GetMassLocationPosY(Vector3 translate);
 
 	//ステージの開始演出が終わっているか(Falseなら終了済み)
@@ -73,6 +73,11 @@ public:
 	/// 第三引数:中心地点の下がる量
 	/// </summary>
 	void RaiseBlocksAroundWithAttenuation(const Vector2& center, float radius, float deltaY);
+
+	//
+	bool IsWalkable(const Vector3& worldPos);
+
+	float GetDeltaY() { return deltaY_; }
 
 private:
 	//各ブロックの生成
