@@ -27,7 +27,7 @@
         "ItemFallAttack": {
             "ActionRate_": 1.0,
             "ActiveCount": 250.0,
-            "Num": 2,
+            "Num": 4,
             "PreActionRate_": 1.0,
             "WaitCount": 200.0
         },
@@ -51,7 +51,7 @@
         "weaponRollAttack": {
             "activeCount": 60.0,
             "afterCount": 60.0,
-            "attackRadius_": 1.0,
+            "attackRadius_": 5.0,
             "offsetZone": [
                 0.0,
                 0.0,
