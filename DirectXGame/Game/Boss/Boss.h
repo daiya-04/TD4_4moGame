@@ -181,6 +181,9 @@ private://**パラメータ変数**//
 
 private://**デバッグ用変数**//
 
+	//コライダーの色
+	Vector4 colliderColor_ = { 1.0f, 0.0f, 0.0f, 1.0f };
+
 	//攻撃指定
 	std::string debugBehavior_ = "None";
 

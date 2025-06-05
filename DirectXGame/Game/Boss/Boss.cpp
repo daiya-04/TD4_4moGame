@@ -68,6 +68,8 @@ Boss::Boss(FollowCamera* camera)
 	gvg->SetValue("Scale", &world_->scale_);
 	gvg->SetValue("StartPos", &startPosition_);
 	gvg->SetValue("OffsetPos", &offsetPosition_);
+	gvg->SetValue("ColliderRadius", &radius_);
+	gvg->SetValue("ColliderColor", &colliderColor_);
 #pragma endregion
 }
 
@@ -75,6 +77,7 @@ void Boss::Initialize() {
 	position_ = startPosition_;
 	SetCameraState(FollowCamera::State::Follow);
 	HP_ = maxHP_;
+	collider_->SetRadius(radius_);
 }
 
 void Boss::Update()
@@ -86,6 +89,7 @@ void Boss::Update()
 	SetDirection2Player();
 
 #ifdef _DEBUG
+	collider_->SetRadius(radius_);
 	//回復フラグ処理
 	if (isHeal_) {
 		isHeal_ = false;
@@ -165,9 +169,6 @@ void Boss::Update()
 			currentHitCount_ = 0;
 			//点滅回数初期化
 			blinkingCount_ = 0;
-
-			//コライダーON
-			collider_->ColliderOn();
 		}
 	}
 #pragma endregion
@@ -200,7 +201,7 @@ void Boss::Draw()
 
 	//円コライダー描画
 #ifdef _DEBUG
-	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()), *camera_);
+	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()), *camera_,colliderColor_);
 #endif // _DEBUG
 
 }
@@ -208,14 +209,12 @@ void Boss::Draw()
 void Boss::OnCollision(DaiEngine::Collider* collider)
 {
 
-	if (!isHit_) {
-		return;
-	}
-
 	//プレイヤーの攻撃ならHP減少
 	if (collider->GetTag() == "playerAttack") {
 		HP_--;
 		isHit_ = false;
+		//カウント初期化
+		blinkingCount_ = 0;
 	}
 
 

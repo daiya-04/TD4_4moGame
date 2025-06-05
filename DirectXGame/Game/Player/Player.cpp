@@ -47,7 +47,7 @@ Player::Player()
 	behaviors_[(size_t)Behavior::Move] = std::make_unique<PlayerMove>();
 	behaviors_[(size_t)Behavior::Roll] = std::make_unique<PlayerRoll>();
 	behaviors_[(size_t)Behavior::Attack] = std::make_unique<PlayerAttackManager>();
-
+	
 	//描画フラグON
 	SetDraw(false);
 
@@ -63,6 +63,7 @@ Player::Player()
 	gvg->SetValue("OffsetPos", &offsetPos_);
 	gvg->SetValue("Limitation", &limitationXZ_);
 	gvg->SetValue("ColliderRadius", &radius_);
+	gvg->SetValue("colliderColor", &colliderColor_);
 	//全ての状態のツリーをセット
 	for (auto& behavior : behaviors_) {
 		if (behavior) {
@@ -90,6 +91,8 @@ Player::Player()
 
 void Player::Init() {
 	parameters_.hp = maxHP_;
+	collider_->SetRadius(radius_);
+	attackCollider_->SetRadius(attackRadius_);
 }
 
 void Player::Update()
@@ -179,8 +182,8 @@ void Player::Draw()
 {
 	//円コライダー描画
 #ifdef _DEBUG
-	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()), *camera_);
-	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(attackCollider_->GetShape()), *camera_);
+	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()), *camera_,colliderColor_);
+	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(attackCollider_->GetShape()), *camera_,colliderColor_);
 #endif // _DEBUG
 
 	//描画
