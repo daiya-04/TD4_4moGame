@@ -16,7 +16,7 @@ namespace DaiEngine {
 
 	void DSFramework::Init() {
 
-		WinApp::GetInstance()->CreateGameWindow(L"魔法師の戦い");
+		WinApp::GetInstance()->CreateGameWindow(L"すいーつらっしゅ！");
 
 
 		DirectXCommon::GetInstance()->Initialize();
