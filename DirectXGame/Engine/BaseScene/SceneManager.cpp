@@ -26,7 +26,7 @@ namespace DaiEngine {
 		fade_->SetColor({ 1.0f,1.0f,1.0f,alpha_ });
 
 #ifdef NDEBUG
-		scene_ = sceneFactory_->CreateScene("Title");
+		scene_ = sceneFactory_->CreateScene("Clear");
 #endif // NDEBUG
 
 #ifdef _DEBUG

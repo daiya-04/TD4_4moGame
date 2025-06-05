@@ -56,6 +56,17 @@ public:
 	/// </summary>
 	~GameOverScene()override;
 
+
+private:
+	/// <summary>
+	/// GlobalVariablesに項目の追加
+	/// </summary>
+	void SetGlobalVariables();
+	/// <summary>
+	/// GlobalVariablesから変数に代入
+	/// </summary>
+	void ApplyGlobalVariables();
+
 private:
 	//カメラ
 	DaiEngine::Camera camera_;
@@ -66,6 +77,31 @@ private:
 
 	//クリア用BGM
 	DaiEngine::Audio* bgm_ = nullptr;
+
+
+	//エームオーバー文字
+	std::unique_ptr<DaiEngine::Sprite> gameOverText_;
+	//タイトルに戻る
+	std::unique_ptr<DaiEngine::Sprite> titleBackUI_;
+	//最初から始める
+	std::unique_ptr<DaiEngine::Sprite> reStartUI_;
+
+private:
+
+	enum class Select {
+		TitleBack,
+		ReStrat,
+	};
+
+	Select select_ = Select::ReStrat;
+
+	enum class UISwitch {
+		On,
+		Off,
+	};
+
+	UISwitch gTitleBackUISwitch_ = UISwitch::Off;
+	UISwitch gReStartUISwitch_ = UISwitch::On;
 
 };
 

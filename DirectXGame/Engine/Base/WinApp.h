@@ -10,9 +10,13 @@ namespace DaiEngine {
 		WinApp(const WinApp&) = delete;
 		WinApp& operator=(const WinApp&) = delete;
 
+	private:
 
 		WNDCLASS wc_{};
 		HWND hwnd_ = nullptr;
+
+		bool endRequest_ = false;
+
 	public: //静的メンバ変数
 		static const int32_t kClientWidth = 1280;
 		static const int32_t kClientHeight = 720;
@@ -32,6 +36,10 @@ namespace DaiEngine {
 		bool ProcessMessage();
 
 		void TerminateGameWindow();
+
+		void GameEnd() { endRequest_ = true; }
+
+		bool IsEndRequest() { return endRequest_; }
 
 	};
 
