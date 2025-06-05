@@ -19,9 +19,9 @@
             "warningSphereHeight": 1.0
         },
         "FallingBullet": {
-            "colliderRadius": 1.0,
+            "colliderRadius": 3.450000047683716,
             "fallSpeed": 0.699999988079071,
-            "radius": 3.0,
+            "radius": 3.5,
             "spawnHeight": 60.0
         },
         "Hit": {
