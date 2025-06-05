@@ -5,6 +5,11 @@ DangerZone::DangerZone(const DangerZoneParameters& param)
 	parameters_ = param;
 }
 
+void DangerZone::Reset() {
+	sec_ = 0;
+	isDead_ = false;
+}
+
 void DangerZone::Update()
 {
 	//時間加算

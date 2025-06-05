@@ -18,6 +18,11 @@ public://**パブリック関数**//
 	~DangerZone() = default;
 
 	/// <summary>
+	/// 再利用時のデータリセット
+	/// </summary>
+	void Reset();
+
+	/// <summary>
 	/// 更新
 	/// </summary>
 	void Update();
@@ -29,10 +34,16 @@ public://**パブリック関数**//
 	bool GetDead() const { return isDead_; }
 
 	/// <summary>
+	/// パラメータをセット
+	/// </summary>
+	/// <param name="param"></param>
+	void SetParameter(const DangerZoneParameters& param) { parameters_ = param; }
+
+	/// <summary>
 	/// ワールド取得
 	/// </summary>
 	/// <returns></returns>
-	const DaiEngine::WorldTransform& GetWorld()const { return parameters_.world; }
+	DaiEngine::WorldTransform& GetWorld() { return parameters_.world; }
 
 private://**プライベート変数**//
 
@@ -44,4 +55,6 @@ private://**プライベート変数**//
 
 	//死亡フラグ
 	bool isDead_ = false;
+
+
 };

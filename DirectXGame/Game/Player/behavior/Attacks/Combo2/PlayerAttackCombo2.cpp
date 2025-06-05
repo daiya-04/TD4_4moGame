@@ -13,10 +13,14 @@ void PlayerAttackCombo2::InitPreliminaryAction()
 
 void PlayerAttackCombo2::InitAction()
 {
+	//攻撃コライダーを有効化
+	player_->SetAttackColliderActive(true);
 }
 
 void PlayerAttackCombo2::InitRigorAction()
 {
+	//攻撃コライダーを無効化
+	player_->SetAttackColliderActive(false);
 }
 
 void PlayerAttackCombo2::UpdatePreliminaryAction()

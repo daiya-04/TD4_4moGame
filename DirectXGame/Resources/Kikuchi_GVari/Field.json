@@ -1,8 +1,11 @@
 {
     "Field": {
-        "BlockWidth": 2.299999952316284,
+        "BlockSize": 0.5,
+        "BlockWidth": 1.0,
         "DeltaY": -0.5,
         "HeightLimit": 2.5,
-        "Radius": 5.0
+        "HorizontalSize": 40,
+        "Radius": 5.0,
+        "VerticalSize": 40
     }
 }

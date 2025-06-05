@@ -5,8 +5,9 @@
 #include"ShapesDraw.h"
 
 #pragma region 状態クラス
-#include"Player/behavior/Roll/ProtPlayerRoll.h"
-#include"Player/behavior/Move/ProtPlayerMove.h"
+#include"behavior/Entry/PlayerEntry.h"
+#include"Player/behavior/Roll/PlayerRoll.h"
+#include"Player/behavior/Move/PlayerMove.h"
 #include"Player/behavior/AttackManager/PlayerAttackManager.h"
 #pragma endregion
 
@@ -23,28 +24,46 @@ Player::Player()
 
 	//コライダークラス生成
 	collider_ = std::make_unique<DaiEngine::SphereCollider>();
-	collider_->Init("player",*world_,radius_);
+	collider_->Init("player", *world_, radius_);
 	collider_->ColliderOn();
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
-	collider_->SetEnterCallback([this](DaiEngine::Collider*) { OnCollison(); });
+	collider_->SetStayCallback([this](DaiEngine::Collider* collider) { OnCollison(collider); });
+	//攻撃コライダー生成
+	attackWorld_.Init();
+	attackWorld_.parent_ = world_;
+	attackCollider_ = std::make_unique<DaiEngine::SphereCollider>();
+	attackCollider_->Init("playerAttack", attackWorld_, attackRadius_);
+	DaiEngine::ColliderManager::GetInstance()->AddCollider(attackCollider_.get());
+	attackCollider_->SetStayCallback([this](DaiEngine::Collider* collider) { OnCollisionATKCollider(collider); });
+
 	//プレイヤーポインタ設定
-	IProtBehavior::SetPlayer(this);
+	IPlayerBehavior::SetPlayer(this);
 
 	//状態の数指定
 	behaviors_.resize((size_t)Behavior::Count);
 
 	//生成
+	behaviors_[(size_t)Behavior::Entry] = std::make_unique<PlayerEntry>();
 	behaviors_[(size_t)Behavior::Move] = std::make_unique<PlayerMove>();
 	behaviors_[(size_t)Behavior::Roll] = std::make_unique<PlayerRoll>();
 	behaviors_[(size_t)Behavior::Attack] = std::make_unique<PlayerAttackManager>();
+	
+	//描画フラグON
+	SetDraw(false);
 
+#pragma region デバッグパラメータ設定
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("Player");
+
+	gvg->SetMonitorValue("Immortal!!!!!!!!!!!!!!!!!", &isImmortal_);
+	gvg->SetMonitorValue("HealHP", &isHeal_);
+	gvg->SetMonitorValue("HP", &parameters_.hp);
 	gvg->SetMonitorValue("HitFlag", &parameters_.isHit);
 	gvg->SetMonitorValue("RollCooldown", &parameters_.currentRollCount);
-	gvg->SetValue("HP", &parameters_.hp);
+	gvg->SetValue("MaxHP", &maxHP_);
 	gvg->SetValue("OffsetPos", &offsetPos_);
 	gvg->SetValue("Limitation", &limitationXZ_);
 	gvg->SetValue("ColliderRadius", &radius_);
+	gvg->SetValue("colliderColor", &colliderColor_);
 	//全ての状態のツリーをセット
 	for (auto& behavior : behaviors_) {
 		if (behavior) {
@@ -57,8 +76,23 @@ Player::Player()
 	hitTree.name_ = "Hit";
 	hitTree.SetMonitorValue("IsHitFlag", &parameters_.isHit);
 	hitTree.SetValue("MaxNoHitSec", &hitCount_);
-	hitTree.SetValue("TenmetuNum", &maxTenmetuNum_);
+	hitTree.SetValue("TenmetuNum", &maxBlinkingNum_);
+
+	//攻撃用コライダー設定
+	GvariTree attackColliderTree;
+	attackColliderTree.name_ = "AttackCollider";
+	attackColliderTree.SetValue("pos", &attackWorld_.translation_);
+	attackColliderTree.SetValue("Radius", &attackRadius_);
+
 	gvg->SetTreeData(hitTree);
+	gvg->SetTreeData(attackColliderTree);
+#pragma endregion	
+}
+
+void Player::Init() {
+	parameters_.hp = maxHP_;
+	collider_->SetRadius(radius_);
+	attackCollider_->SetRadius(attackRadius_);
 }
 
 void Player::Update()
@@ -66,6 +100,14 @@ void Player::Update()
 
 #ifdef _DEBUG
 	collider_->SetRadius(radius_);
+	attackCollider_->SetRadius(attackRadius_);
+
+	//回復フラグ処理
+	if (isHeal_) {
+		isHeal_ = false;
+		parameters_.hp = maxHP_;
+	}
+
 #endif // DEBUG
 
 
@@ -83,7 +125,7 @@ void Player::Update()
 	}
 
 	//回避のクールタイム更新
-	parameters_.currentRollCount --;
+	parameters_.currentRollCount--;
 
 
 	//もし時間が0以下なら0に
@@ -93,19 +135,45 @@ void Player::Update()
 	behaviors_[(int)behaviorName_]->Update();
 
 	//座標更新
-	position_ += parameters_.velocity;
+	Vector3 nextPos = position_ + parameters_.velocity;
+	if (field_) {
+		if (field_->IsWalkable(nextPos)) {
+			position_ = nextPos;
+		}
+		else {
+			// 目的地が歩けない ⇒ 今の場所も確認する
+			if (!field_->IsWalkable(position_)) {
+				// 今の場所すら歩けない ⇒ 強制テレポート
+				auto warpPos = field_->FindNearestWalkable(position_);
+				if (warpPos.has_value()) {
+					position_ = warpPos.value();
+				}
+			}
+			parameters_.velocity = { 0, 0, 0 }; // どちらにせよ動きを止める
+		}
+	}
+	else {
+		position_ = nextPos; // フィールドが無ければそのまま
+	}
 
 	//制限チェック
 	LimitationXZ();
 
 	//オフセット分足してワールド座標更新
-	world_->translation_ =position_ + offsetPos_;
-
-	
+	world_->translation_ = position_ + offsetPos_;
 
 	//点滅更新
-	Tenmetu();
+	Blinking();
 
+	//行列更新
+	UpdateMatrix();
+
+}
+
+void Player::UpdateOnField(float y)
+{
+	//高さ修正
+	world_->translation_.y = y;
 	//行列更新
 	UpdateMatrix();
 }
@@ -114,7 +182,8 @@ void Player::Draw()
 {
 	//円コライダー描画
 #ifdef _DEBUG
-	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()),*camera_);
+	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()), *camera_,colliderColor_);
+	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(attackCollider_->GetShape()), *camera_,colliderColor_);
 #endif // _DEBUG
 
 	//描画
@@ -127,6 +196,8 @@ void Player::UpdateMatrix() {
 	//行列更新
 	GameObject::Update();
 	collider_->Update();
+	attackWorld_.UpdateMatrix();
+	attackCollider_->Update();
 }
 
 void Player::SetWorldTranslate(const Vector3& translate)
@@ -135,16 +206,40 @@ void Player::SetWorldTranslate(const Vector3& translate)
 	world_->UpdateMatrix();
 }
 
-void Player::OnCollison()
+void Player::OnCollison(DaiEngine::Collider* collider)
 {
+	//ボスコライダーの場合スキップ
+	if (collider->GetTag() == "boss" || collider->GetTag() == "playerAttack" || !parameters_.isHit) {
+		return;
+	}
+
+
 	//ヒットフラグOFF
 	parameters_.isHit = false;
 
 	//HP減少
-	parameters_.hp -- ;
+	parameters_.hp--;
+
+	if (parameters_.hp <= 0) {
+		//HPが0以下ならゲームオーバー
+
+		//不死フラグが無効の場合
+		if (!isImmortal_) {
+			isDead_ = true;
+		}
+	}
 
 	//コライダーOFF
 	collider_->ColliderOff();
+}
+
+void Player::OnCollisionATKCollider(DaiEngine::Collider* collider)
+{
+	//攻撃コライダーをOFF
+	if (collider->GetTag() == "boss") {
+		attackCollider_->ColliderOff();
+	}
+
 }
 
 
@@ -190,15 +285,26 @@ Vector3 Player::SetBody2Input()
 	return velocity;
 }
 
-void Player::Tenmetu()
+void Player::SetAttackColliderActive(bool isActive)
+{
+	//isActiveがtrueなら攻撃を有効
+	if (isActive) {
+		attackCollider_->ColliderOn();
+	}
+	else {
+		attackCollider_->ColliderOff();
+	}
+}
+
+void Player::Blinking()
 {
 	if (!parameters_.isHit) {
 
-		currentHitCount_ ++;
+		currentHitCount_++;
 
 		////時間内での点滅処理
-		if (currentHitCount_ >= (hitCount_/maxTenmetuNum_)*tenmetuCount_) {
-			tenmetuCount_++;
+		if (currentHitCount_ >= (hitCount_ / maxBlinkingNum_) * blinkingCount_) {
+			blinkingCount_++;
 
 			//透明度を変更
 			if (isDraw_) {
@@ -207,10 +313,8 @@ void Player::Tenmetu()
 			else {
 				isDraw_ = true;
 			}
-
-			
 		}
-			
+
 		//時間経過で終了
 		if (currentHitCount_ >= hitCount_) {
 			parameters_.isHit = true;
@@ -219,7 +323,7 @@ void Player::Tenmetu()
 			//カウント初期化
 			currentHitCount_ = 0;
 			//点滅回数初期化
-			tenmetuCount_ = 0;
+			blinkingCount_ = 0;
 
 			//コライダーON
 			collider_->ColliderOn();

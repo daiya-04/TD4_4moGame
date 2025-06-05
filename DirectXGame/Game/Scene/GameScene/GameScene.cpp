@@ -15,7 +15,6 @@
 #include "AudioManager.h"
 #include "GlobalVariables.h"
 
-
 GameScene::GameScene() {
 	globalVariableManager_ = globalVariableManager_->GetInstance();
 }
@@ -156,7 +155,11 @@ void GameScene::Init() {
 	globalVariableManager_->SetLoadAllData();
 
 	//セットされたデータで初期化
+	player_->Init();
 	boss_->Initialize();
+
+	field_->CreateStage();
+	field_->StartStage();
 }
 
 void GameScene::Update() {
@@ -199,19 +202,22 @@ void GameScene::Update() {
 	camera_.UpdateViewMatrix();
 	camera_.UpdateCameraPos();
 
-	//プレイヤー更新
-	player_->Update();
-	Vector3 pos = player_->GetWorld().translation_;
-	pos.y = field_->GetMassLocationPosY(player_->GetWorld().translation_) + player_->GetWorld().scale_.y;
-	player_->SetWorldTranslate(pos);
-	player_->UpdateMatrix();
+	//ステージ初期化済でプレイヤー更新
+	if (!field_->GetStageAnimationFinishedFlag()) {
+		//プレイヤー更新
+		player_->Update();
+		player_->UpdateOnField(field_->GetMassLocationPosY(player_->GetWorld().translation_) + player_->GetWorld().scale_.y);
+		player_->SetField(field_.get());
 
-	//ボス更新
-	boss_->Update();
+		//ボス更新
+		boss_->Update();
+	}
+	
+
+
 
 	//地面更新
 	field_->Update();
-	field_->GetMassLocationPosY(player_->GetWorld().translation_);
 
 	for (std::unique_ptr<BossBullet>& bullet : boss_->GetBullets()) {
 		Vector2 targetBlock = field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
@@ -219,7 +225,7 @@ void GameScene::Update() {
 
 		// Y範囲にあるか判定
 		if (block->world.translation_.y >= bullet->GetWorld().translation_.y && block->world.translation_.y <= bullet->GetWorld().translation_.y + bullet->GetWorld().scale_.y) {
-			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, -0.5f);
+			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, field_->GetDeltaY());
 			bullet->OnCollision();
 		}
 	}
@@ -230,6 +236,17 @@ void GameScene::Update() {
 
 	//当たり判定処理
 	DaiEngine::ColliderManager::GetInstance()->CheckAllCollision();
+
+
+	//死亡時ゲームおーばーへ
+	if (player_->GetIsDead()) {
+		DaiEngine::SceneManager::GetInstance()->ChangeScene("GameOver");
+	}
+
+	//ボスのHPが0以下になったらクリアへ
+	if (boss_->GetIsDead()) {
+		DaiEngine::SceneManager::GetInstance()->ChangeScene("Clear");
+	}
 }
 
 void GameScene::DrawBackGround() {
