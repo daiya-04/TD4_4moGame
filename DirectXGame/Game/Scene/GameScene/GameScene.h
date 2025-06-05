@@ -85,6 +85,15 @@ public:
 	/// </summary>
 	GameScene();
 
+private:
+	/// <summary>
+	/// GlobalVariablesに項目の追加
+	/// </summary>
+	void SetGlobalVariables();
+	/// <summary>
+	/// GlobalVariablesから変数に代入
+	/// </summary>
+	void ApplyGlobalVariables();
 
 private:
 	//カメラ
@@ -114,6 +123,9 @@ private://**キクチ
 private:
 
 	DaiEngine::Audio* bgm_ = nullptr;
+
+	//UI（とりあえず雑に）
+	std::map<std::string, std::unique_ptr<DaiEngine::Sprite>> uis_;
 
 };
 
