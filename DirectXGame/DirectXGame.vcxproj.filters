@@ -464,6 +464,8 @@
     <ClCompile Include="GameOverScene.cpp">
       <Filter>Game\Scene\GameOverScene</Filter>
     </ClCompile>
+    <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="BaseUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -784,5 +786,7 @@
     <ClInclude Include="GameOverScene.h">
       <Filter>Game\Scene\GameOverScene</Filter>
     </ClInclude>
+    <ClInclude Include="UIManager.h" />
+    <ClInclude Include="BaseUI.h" />
   </ItemGroup>
 </Project>
