@@ -207,9 +207,15 @@ void Boss::Draw()
 
 void Boss::OnCollision(DaiEngine::Collider* collider)
 {
+
+	if (!isHit_) {
+		return;
+	}
+
 	//プレイヤーの攻撃ならHP減少
 	if (collider->GetTag() == "playerAttack") {
 		HP_--;
+		isHit_ = false;
 	}
 
 
