@@ -13,7 +13,7 @@
 #include <algorithm>
 #include "ColliderManager.h"
 #include "AudioManager.h"
-
+#include "GlobalVariables.h"
 
 
 GameScene::GameScene() {
@@ -25,6 +25,69 @@ GameScene::~GameScene() {
 	bgm_->StopSound();
 }
 
+void GameScene::SetGlobalVariables() {
+	DaiEngine::GlobalVariables* globalVariables = DaiEngine::GlobalVariables::GetInstance();
+
+
+	//AボタンUIの調整項目追加
+	std::string groupName = "Attack_Text";
+	globalVariables->CreateGroup(groupName);
+	globalVariables->AddItem(groupName, "Translation", uis_["Attack_Text"]->GetPosition());
+	//ワープホールの調整項目追加
+	groupName = "Avoid_Text";
+	globalVariables->CreateGroup(groupName);
+	globalVariables->AddItem(groupName, "Translation", uis_["Avoid_Text"]->GetPosition());
+	//ゲーム開始演出の調整項目追加
+	groupName = "Move_Text";
+	globalVariables->CreateGroup(groupName);
+	globalVariables->AddItem(groupName, "Translation", uis_["Move_Text"]->GetPosition());
+
+	//ゲーム開始演出の調整項目追加
+	groupName = "AttackButton";
+	globalVariables->CreateGroup(groupName);
+	globalVariables->AddItem(groupName, "Translation", uis_["AttackButton"]->GetPosition());
+
+	//ゲーム開始演出の調整項目追加
+	groupName = "AvoidButton";
+	globalVariables->CreateGroup(groupName);
+	globalVariables->AddItem(groupName, "Translation", uis_["AvoidButton"]->GetPosition());
+
+	//ゲーム開始演出の調整項目追加
+	groupName = "MoveButton";
+	globalVariables->CreateGroup(groupName);
+	globalVariables->AddItem(groupName, "Translation", uis_["MoveButton"]->GetPosition());
+
+
+}
+
+void GameScene::ApplyGlobalVariables() {
+	DaiEngine::GlobalVariables* globalVariables = DaiEngine::GlobalVariables::GetInstance();
+
+	//AボタンUIのパラメータ設定
+	std::string groupName = "Attack_Text";
+	uis_["Attack_Text"]->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
+
+	//ワープホールのパラメータ設定
+	groupName = "Avoid_Text";
+	uis_["Avoid_Text"]->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
+
+	//ゲーム開始演出のパラメータ設定
+	groupName = "Move_Text";
+	uis_["Move_Text"]->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
+
+	//ゲーム開始演出のパラメータ設定
+	groupName = "AttackButton";
+	uis_["AttackButton"]->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
+
+	//ゲーム開始演出のパラメータ設定
+	groupName = "AvoidButton";
+	uis_["AvoidButton"]->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
+
+	//ゲーム開始演出のパラメータ設定
+	groupName = "MoveButton";
+	uis_["MoveButton"]->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
+
+}
 
 void GameScene::Init() {
 	//カメラ初期化
@@ -35,6 +98,16 @@ void GameScene::Init() {
 	//object3dクラスにライトセット
 	DaiEngine::Object3d::SetPointLight(&pointLight_);
 	DaiEngine::Object3d::SetSpotLight(&spotLight_);
+
+	///
+
+	///
+	uint32_t attackTextTex = DaiEngine::TextureManager::Load("attack.png");
+	uint32_t avoidTextTex = DaiEngine::TextureManager::Load("avoid.png");
+	uint32_t moveTextTex = DaiEngine::TextureManager::Load("move.png");
+	uint32_t attackButtonTex = DaiEngine::TextureManager::Load("attackBottom.png");
+	uint32_t avoidButtonTex = DaiEngine::TextureManager::Load("avoidBottom.png");
+	uint32_t moveButtonTex = DaiEngine::TextureManager::Load("moveBottom.png");
 
 	///
 
@@ -59,6 +132,24 @@ void GameScene::Init() {
 	field_ = std::make_unique<Field>();
 	field_->Initialize();
 	///
+
+	///UI
+
+	uis_["Attack_Text"].reset(DaiEngine::Sprite::Create(attackTextTex, {}));
+	uis_["Avoid_Text"].reset(DaiEngine::Sprite::Create(avoidTextTex, {}));
+	uis_["Move_Text"].reset(DaiEngine::Sprite::Create(moveTextTex, {}));
+	uis_["AttackButton"].reset(DaiEngine::Sprite::Create(attackButtonTex, {}));
+	uis_["AvoidButton"].reset(DaiEngine::Sprite::Create(avoidButtonTex, {}));
+	uis_["MoveButton"].reset(DaiEngine::Sprite::Create(moveButtonTex, {}));
+
+	for (auto& [tag, ui] : uis_) {
+		ui->SetScale(0.7f);
+	}
+
+	///
+
+	SetGlobalVariables();
+	ApplyGlobalVariables();
 
 	//全ての初期化の後に処理
 	globalVariableManager_->LoadAllSaveData();
@@ -92,6 +183,8 @@ void GameScene::Update() {
 	if (input->PushKey(DIK_LCONTROL) && input->TriggerKey(DIK_0)) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Debug");
 	}
+
+	ApplyGlobalVariables();
 
 #endif // _DEBUG
 
@@ -163,7 +256,9 @@ void GameScene::DrawParticle() {
 }
 
 void GameScene::DrawUI() {
-
+	for (auto& [tag, ui] : uis_) {
+		ui->Draw();
+	}
 }
 
 void GameScene::DrawPostEffect() {
