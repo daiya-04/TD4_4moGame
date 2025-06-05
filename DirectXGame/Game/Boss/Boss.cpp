@@ -42,7 +42,7 @@ Boss::Boss(FollowCamera* camera)
 
 	hpGauge_.reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("enemyHPGauge.png"), {}));
 	hpGauge_->SetAnchorpoint({ 0.0f,0.5f });
-	hpGauge_->SetPosition({ 340.0f,60.0f });
+	hpGauge_->SetPosition({ 365.0f,60.0f });
 	gaugeSize_ = hpGauge_->GetSize();
 
 	hpFream_.reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("enemyHPGaugeFram.png"), { 340.0f,60.0f }));
@@ -194,6 +194,8 @@ void Boss::Update()
 
 	//行列更新
 	GameObject::Update();
+
+	UIUpdate();
 
 	//マネージャ更新
 	dangerZoneManager_->Update();
