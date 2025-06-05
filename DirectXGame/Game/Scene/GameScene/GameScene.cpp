@@ -179,7 +179,8 @@ void GameScene::DrawParticle() {
 }
 
 void GameScene::DrawUI() {
-
+	player_->DrawUI();
+	boss_->DrawUI();
 }
 
 void GameScene::DrawPostEffect() {
