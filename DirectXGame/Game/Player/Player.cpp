@@ -3,6 +3,7 @@
 #include"GlobalVariable/Group/GlobalVariableGroup.h"
 #include"ColliderManager.h"
 #include"ShapesDraw.h"
+#include"TextureManager.h"
 
 #pragma region 状態クラス
 #include"behavior/Entry/PlayerEntry.h"
@@ -50,6 +51,20 @@ Player::Player()
 	
 	//描画フラグON
 	SetDraw(false);
+
+	///セト
+
+	hpGauge_.reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("playerHPGage.png"), {}));
+	hpGauge_->SetAnchorpoint({ 0.0f,0.5f });
+	hpGauge_->SetPosition({ 700.0f,670.0f });
+	gaugeSize_ = hpGauge_->GetSize();
+
+	hpFream_.reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("playerHPGageFram.png"), { 700.0f,670.0f }));
+	hpFream_->SetAnchorpoint({ 0.0f,0.5f });
+
+	
+
+	///
 
 #pragma region デバッグパラメータ設定
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("Player");
@@ -168,7 +183,32 @@ void Player::Update()
 	//行列更新
 	UpdateMatrix();
 
+	//UI更新
+	UIUpdate();
+
 }
+
+
+///セト
+void Player::UIUpdate() {
+
+	percent_ = static_cast<float>(parameters_.hp) / static_cast<float>(maxHP_);
+
+	curPer_ = Lerp(0.05f, curPer_, percent_);
+
+	hpGauge_->SetSize({ gaugeSize_.x * curPer_, gaugeSize_.y });
+	hpGauge_->SetTextureArea({}, { gaugeSize_.x * curPer_, gaugeSize_.y });
+	
+}
+
+void Player::DrawUI() {
+
+	hpFream_->Draw();
+	hpGauge_->Draw();
+
+}
+
+///
 
 void Player::UpdateOnField(float y)
 {

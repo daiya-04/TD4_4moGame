@@ -6,6 +6,9 @@
 #include"SphereCollider.h"
 #include"FollowCamera/FollowCamera.h"
 
+//セト
+#include "Sprite.h"
+
 #include<optional>
 #include<string>
 
@@ -65,6 +68,15 @@ public://**パブリック関数**//
 	/// プレイヤー方向に移動
 	/// </summary>
 	void Move2Player();
+
+	///セト
+	void DrawUI();
+
+private:
+
+	void UIUpdate();
+
+	///
 
 public://**セッター**//
 
@@ -134,7 +146,16 @@ private://**プライベート変数**//
 	//ワールド座標
 	Vector3 position_{};
 
+	///セト
+	//UI
+	std::unique_ptr<DaiEngine::Sprite> hpFream_;
+	std::unique_ptr<DaiEngine::Sprite> hpGauge_;
+	std::unique_ptr<DaiEngine::Sprite> icon_;
+	float curPer_ = 1.0f;
+	float percent_ = 1.0f;
+	Vector2 gaugeSize_ = {};
 
+	///
 
 private://**パラメータ変数**//
 
@@ -159,7 +180,7 @@ private://**パラメータ変数**//
 	//移動速度
 	float speed_ = 0.0f;
 
-	private://**ヒット時処理*//
+private://**ヒット時処理*//
 
 		//ヒットフラグ
 		bool isHit_ = true;

@@ -5,6 +5,9 @@
 #include"SphereCollider.h"
 #include<optional>
 
+//セト
+#include "Sprite.h"
+
 #include"Field/Field.h"
 
 struct PlayerParameters {
@@ -84,6 +87,15 @@ public://**パブリック変数**//
 	/// </summary>
 	/// <returns></returns>
 	DaiEngine::WorldTransform& GetWorld() { return *world_; };
+
+	///セト
+	void DrawUI();
+
+private:
+
+	void UIUpdate();
+
+	///
 
 public://**ゲッター**//
 
@@ -198,6 +210,16 @@ private://**プライベート変数**//
 
 	//最大HP
 	int maxHP_ = 10;
+
+	///セト
+	//UI
+	std::unique_ptr<DaiEngine::Sprite> hpFream_;
+	std::unique_ptr<DaiEngine::Sprite> hpGauge_;
+	float curPer_ = 1.0f;
+	float percent_ = 1.0f;
+	Vector2 gaugeSize_ = {};
+
+	///
 
 private://**ヒット時処理*//
 
