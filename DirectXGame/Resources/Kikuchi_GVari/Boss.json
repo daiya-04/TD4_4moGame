@@ -1,5 +1,12 @@
 {
     "Boss": {
+        "ColliderColor": [
+            1.0,
+            0.0,
+            0.0,
+            0.46666666865348816
+        ],
+        "ColliderRadius": 1.0,
         "DangerZone": {
             "alpha": [
                 1.0,
