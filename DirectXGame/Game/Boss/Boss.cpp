@@ -169,9 +169,6 @@ void Boss::Update()
 			currentHitCount_ = 0;
 			//点滅回数初期化
 			blinkingCount_ = 0;
-
-			//コライダーON
-			collider_->ColliderOn();
 		}
 	}
 #pragma endregion
@@ -212,14 +209,12 @@ void Boss::Draw()
 void Boss::OnCollision(DaiEngine::Collider* collider)
 {
 
-	if (!isHit_) {
-		return;
-	}
-
 	//プレイヤーの攻撃ならHP減少
 	if (collider->GetTag() == "playerAttack") {
 		HP_--;
 		isHit_ = false;
+		//カウント初期化
+		blinkingCount_ = 0;
 	}
 
 
