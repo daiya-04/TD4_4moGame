@@ -458,10 +458,10 @@
     <ClCompile Include="Engine\Audio\AudioManager.cpp">
       <Filter>Engine\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="ClearScene.cpp">
+    <ClCompile Include="Game\Scene\ClearScene\ClearScene.cpp">
       <Filter>Game\Scene\ClearScene</Filter>
     </ClCompile>
-    <ClCompile Include="GameOverScene.cpp">
+    <ClCompile Include="Game\Scene\GameOverScene\GameOverScene.cpp">
       <Filter>Game\Scene\GameOverScene</Filter>
     </ClCompile>
     <ClCompile Include="UIManager.cpp" />
@@ -782,10 +782,10 @@
     <ClInclude Include="Engine\Audio\AudioManager.h">
       <Filter>Engine\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="ClearScene.h">
+    <ClInclude Include="Game\Scene\ClearScene\ClearScene.h">
       <Filter>Game\Scene\ClearScene</Filter>
     </ClInclude>
-    <ClInclude Include="GameOverScene.h">
+    <ClInclude Include="Game\Scene\GameOverScene\GameOverScene.h">
       <Filter>Game\Scene\GameOverScene</Filter>
     </ClInclude>
     <ClInclude Include="Game\Player\behavior\Entry\PlayerEntry.h" />
