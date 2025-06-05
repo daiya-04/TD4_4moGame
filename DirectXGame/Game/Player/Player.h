@@ -5,6 +5,7 @@
 #include"SphereCollider.h"
 #include<optional>
 
+#include"Field/Field.h"
 
 struct PlayerParameters {
 
@@ -124,6 +125,13 @@ public://**セッター
 	/// <param name="pos"></param>
 	void SetPosition(const Vector3& pos) { position_ = pos; };
 
+	/// <summary>
+	/// フィールドを設定
+	/// </summary>
+	/// <param name="pos"></param>
+	void SetField(Field* field) { field_ = field; }
+
+
 private://**プライベート関数**//
 
 	/// <summary>
@@ -139,13 +147,13 @@ private://**プライベート関数**//
 public://**状態**//
 
 	//状態
-	enum class Behavior{
+	enum class Behavior {
 		Entry,	//エントリー
 		Move,	//移動
 		Roll,	//回避
 		Attack,	//攻撃
 		Count	//状態の数
-	}behaviorName_=Behavior::Move;
+	}behaviorName_ = Behavior::Move;
 
 	//状態リクエスト
 	std::optional<Behavior>behaviorRequest_ = Behavior::Entry;
@@ -171,10 +179,10 @@ private://**プライベート変数**//
 	float attackRadius_ = 1.0f;
 
 	//コライダー半径
-	float radius_ = 1.0f; 
+	float radius_ = 1.0f;
 
 	//オフセット座標
-	Vector3 offsetPos_ = {0,0,0};
+	Vector3 offsetPos_ = { 0,0,0 };
 
 	//座標
 	Vector3 position_ = { 0,0,0 };
@@ -186,7 +194,7 @@ private://**プライベート変数**//
 	int maxHP_ = 10;
 
 private://**ヒット時処理*//
-	
+
 	//無敵時間カウント
 	float currentHitCount_ = 0;
 
@@ -206,6 +214,8 @@ private://**行動制限**//
 
 	//XZ軸の制限
 	Vector2 limitationXZ_ = { 10,10 };
+
+	Field* field_ = nullptr; // 外からセットする
 
 private://**デバッグ用パラメータ**//
 

@@ -107,6 +107,7 @@ void GameScene::Update() {
 		//プレイヤー更新
 		player_->Update();
 		player_->UpdateOnField(field_->GetMassLocationPosY(player_->GetWorld().translation_) + player_->GetWorld().scale_.y);
+		player_->SetField(field_.get());
 
 		//ボス更新
 		boss_->Update();
@@ -117,7 +118,6 @@ void GameScene::Update() {
 
 	//地面更新
 	field_->Update();
-	field_->GetMassLocationPosY(player_->GetWorld().translation_);
 
 	for (std::unique_ptr<BossBullet>& bullet : boss_->GetBullets()) {
 		Vector2 targetBlock = field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
@@ -125,7 +125,7 @@ void GameScene::Update() {
 
 		// Y範囲にあるか判定
 		if (block->world.translation_.y >= bullet->GetWorld().translation_.y && block->world.translation_.y <= bullet->GetWorld().translation_.y + bullet->GetWorld().scale_.y) {
-			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, -0.5f);
+			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, field_->GetDeltaY());
 			bullet->OnCollision();
 		}
 	}

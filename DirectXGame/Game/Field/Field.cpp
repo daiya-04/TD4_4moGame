@@ -399,6 +399,52 @@ void Field::RaiseBlocksAroundWithAttenuation(const Vector2& center, float radius
 	}
 }
 
+bool Field::IsWalkable(const Vector3& worldPos) {
+	Vector2 gridPos = GetBlockAt(worldPos.x, worldPos.z);
+
+	for (const Block& block : blocks_) {
+		if (block.massLocation == gridPos) {
+			float blockY = block.world.translation_.y - blockSize_ / 2;
+
+			// 最低高度のブロックは乗れない
+			if (blockY <= -heightLimit_) {
+				return false; // ここで即NG
+			}
+
+			// 歩行判定など他にあれば追加（高さ差など）
+		}
+	}
+
+	return true;
+}
+
+std::optional<Vector3> Field::FindNearestWalkable(const Vector3& from) {
+	Vector2 baseGrid = GetBlockAt(from.x, from.z);
+
+	// 周囲の8方向 + 現在地（3x3）をチェック
+	for (int dx = -1; dx <= 1; dx++) {
+		for (int dz = -1; dz <= 1; dz++) {
+			Vector2 grid = { baseGrid.x + dx, baseGrid.y + dz };
+
+			for (const Block& block : blocks_) {
+				if (block.massLocation == grid) {
+					float blockY = block.world.translation_.y - blockSize_ / 2;
+
+					if (blockY > -heightLimit_) {
+						// 乗れる高さのブロックを見つけたらその中央に戻す
+						Vector3 pos;
+						pos.x = block.world.translation_.x;
+						pos.y = block.world.translation_.y + 0.5f; // 足元調整
+						pos.z = block.world.translation_.z;
+						return pos;
+					}
+				}
+			}
+		}
+	}
+	return std::nullopt; // 見つからなかった
+}
+
 void Field::FixedHeightCorrection() {
 	for (Block& block : blocks_) {
 		if (block.world.translation_.y >= heightLimit_) {//+heightlimit_より大きければ
