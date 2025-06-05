@@ -17,9 +17,12 @@
             "radius": 3.0,
             "spawnHeight": 60.0
         },
-        "HP": 94,
+        "Hit": {
+            "MaxNoHitSec": 1.0,
+            "TenmetuNum": 3
+        },
         "Idle": {
-            "second": 120.0
+            "second": 60.0
         },
         "ItemFallAttack": {
             "ActionRate_": 1.0,
@@ -28,6 +31,7 @@
             "PreActionRate_": 1.0,
             "WaitCount": 200.0
         },
+        "MaxHP": 50,
         "OffsetPos": [
             0.0,
             1.159999966621399,
