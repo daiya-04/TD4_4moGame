@@ -1,55 +1,70 @@
 {
     "Player": {
         "AttackCollider": {
-            "Radius": 1.0,
+            "Radius": 4.0,
             "pos": [
                 0.0,
                 0.0,
-                1.2400000095367432
+                1.2999999523162842
             ]
         },
         "AttackManager": {
             "Com1": {
-                "AnimationFactor": 0.0,
-                "Attack": 60.0,
-                "EndAttack": 60.0,
-                "PreAttack": 60.0
+                "AnimationFactor": 3.799999952316284,
+                "Attack": 10.0,
+                "EndAttack": 10.0,
+                "PreAttack": 10.0
             },
             "Com2": {
-                "AnimationFactor": 0.0,
-                "Attack": 60.0,
-                "EndAttack": 60.0,
-                "PreAttack": 60.0
+                "AnimationFactor": 3.799999952316284,
+                "Attack": 10.0,
+                "EndAttack": 10.0,
+                "PreAttack": 10.0
             },
             "Com3": {
-                "AnimationFactor": 0.0,
-                "Attack": 60.0,
-                "EndAttack": 60.0,
-                "PreAttack": 60.0
+                "AnimationFactor": 3.799999952316284,
+                "Attack": 10.0,
+                "EndAttack": 10.0,
+                "PreAttack": 10.0
             }
         },
         "ColliderRadius": 1.0,
-        "HP": 10,
         "Hit": {
             "MaxNoHitSec": 60.0,
-            "TenmetuNum": 9
+            "TenmetuNum": 10
         },
         "Limitation": [
-            10.0,
-            10.0
+            23.0,
+            23.0
         ],
+        "MaxHP": 10,
         "Move": {
-            "speed": 0.30000001192092896
+            "speed": 0.20000000298023224
         },
         "OffsetPos": [
             0.0,
-            2.509999990463257,
+            0.0,
             0.0
         ],
         "Roll": {
-            "cooldownCount": 60.0,
+            "cooldownCount": 16.5,
             "count": 10.0,
             "speed": 1.0
+        },
+        "colliderColor": [
+            0.05882352963089943,
+            1.0,
+            0.0,
+            0.3333333432674408
+        ],
+        "playerEntry": {
+            "animRate": 1.0,
+            "maxRate": 60.0,
+            "startPos": [
+                0.0,
+                50.0,
+                0.0
+            ]
         }
     }
 }

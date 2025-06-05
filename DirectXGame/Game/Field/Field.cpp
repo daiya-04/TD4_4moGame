@@ -32,6 +32,11 @@ void Field::Initialize() {
 	gvg->SetValue("HorizontalSize", &horizontalSize_);
 	gvg->SetValue("BlockSize", &blockSize_);
 
+	//ステージを生成
+	CreateStage();
+
+	//ステージ開始演出
+	StartStage();
 }
 
 void Field::Update() {
