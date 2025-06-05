@@ -219,6 +219,9 @@ private://**行動制限**//
 
 private://**デバッグ用パラメータ**//
 
+	//コライダーの色
+	Vector4 colliderColor_ = { 1.0f, 0.0f, 0.0f, 1.0f };
+
 	//無敵フラグ
 	bool isImmortal_ = false;
 
