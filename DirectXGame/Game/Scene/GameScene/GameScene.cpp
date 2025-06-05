@@ -15,6 +15,7 @@
 #include "AudioManager.h"
 #include "GlobalVariables.h"
 
+
 GameScene::GameScene() {
 	globalVariableManager_ = globalVariableManager_->GetInstance();
 }
@@ -273,6 +274,9 @@ void GameScene::DrawParticle() {
 }
 
 void GameScene::DrawUI() {
+	for (auto& [tag, ui] : uis_) {
+		ui->Draw();
+	}
 	player_->DrawUI();
 	boss_->DrawUI();
 }
