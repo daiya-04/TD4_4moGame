@@ -273,9 +273,8 @@ void GameScene::DrawParticle() {
 }
 
 void GameScene::DrawUI() {
-	for (auto& [tag, ui] : uis_) {
-		ui->Draw();
-	}
+	player_->DrawUI();
+	boss_->DrawUI();
 }
 
 void GameScene::DrawPostEffect() {

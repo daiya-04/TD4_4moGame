@@ -2,6 +2,7 @@
 #include"GlobalVariable/Group/GlobalVariableGroup.h"
 #include"ColliderManager.h"
 #include"ShapesDraw.h"
+#include "TextureManager.h"
 
 #pragma region 状態
 #include"Boss/Behavior/Idle/BossIdle.h"
@@ -35,6 +36,23 @@ Boss::Boss(FollowCamera* camera)
 	collider_->ColliderOn();
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
 	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {OnCollision(collider); });
+
+
+	///セト
+
+	hpGauge_.reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("enemyHPGauge.png"), {}));
+	hpGauge_->SetAnchorpoint({ 0.0f,0.5f });
+	hpGauge_->SetPosition({ 340.0f,60.0f });
+	gaugeSize_ = hpGauge_->GetSize();
+
+	hpFream_.reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("enemyHPGaugeFram.png"), { 340.0f,60.0f }));
+	hpFream_->SetAnchorpoint({ 0.0f,0.5f });
+
+	icon_.reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("bossIcon1.png"), { 330.0f,60.0f }));
+	icon_->SetScale(0.6f);
+
+
+	///
 
 #pragma region デバッグパラメータセット
 	std::unique_ptr<GlobalVariableGroup> gvg = std::make_unique<GlobalVariableGroup>("Boss");
@@ -182,6 +200,30 @@ void Boss::Update()
 	bulletManager_->Update();
 	collider_->Update();
 }
+
+///セト
+
+void Boss::UIUpdate() {
+
+	percent_ = static_cast<float>(HP_) / static_cast<float>(maxHP_);
+
+	curPer_ = Lerp(0.05f, curPer_, percent_);
+
+	hpGauge_->SetSize({ gaugeSize_.x * curPer_, gaugeSize_.y });
+	hpGauge_->SetTextureArea({}, { gaugeSize_.x * curPer_, gaugeSize_.y });
+
+}
+
+void Boss::DrawUI() {
+
+	hpFream_->Draw();
+	hpGauge_->Draw();
+	icon_->Draw();
+
+}
+
+
+///
 
 void Boss::Draw()
 {
