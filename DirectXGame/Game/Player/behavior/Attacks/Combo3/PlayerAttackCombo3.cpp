@@ -21,6 +21,7 @@ void PlayerAttackCombo3::InitRigorAction()
 
 void PlayerAttackCombo3::UpdatePreliminaryAction()
 {
+	player_->SetBody2Input();
 }
 
 void PlayerAttackCombo3::UpdateAction()
