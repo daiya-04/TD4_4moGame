@@ -28,5 +28,6 @@ void PlayerEntry::Update()
 	//時間で移動可能に
 	if(count_ >= maxCount_) {
 		player_->behaviorRequest_ = Player::Behavior::Move;
+		player_->SetColliderActive();
 	}
 }

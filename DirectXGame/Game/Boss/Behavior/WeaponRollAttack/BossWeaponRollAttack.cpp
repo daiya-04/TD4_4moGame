@@ -9,7 +9,7 @@ BossWeaponRollAttack::BossWeaponRollAttack()
 	//コライダー生成
 	collider_ = std::make_unique<DaiEngine::SphereCollider>();
 	collider_->Init("bossRollATK", boss_->GetWorld(), param.maxRadius);
-	collider_->ColliderOn();
+	collider_->ColliderOff();
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
 	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {OnCollisionATK(collider); });
 

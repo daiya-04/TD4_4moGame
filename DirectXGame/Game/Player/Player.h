@@ -107,6 +107,12 @@ public://**セッター
 	/// <returns>向きベクトル</returns>
 	Vector3 SetBody2Input();
 
+	// <summary>
+	/// コライダーの有効化処理
+	/// </summary>
+	/// <param name="isActive"></param>
+	void SetColliderActive() { return collider_->ColliderOn(); };
+
 	/// <summary>
 	/// 攻撃コライダーの有効化無効化処理
 	/// </summary>
