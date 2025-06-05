@@ -4,6 +4,10 @@
 //前方宣言
 class Boss;
 
+namespace DaiEngine {
+	class Camera;
+}
+
 //ボスの状態基底クラス
 class IBossBehavior {
 
@@ -11,6 +15,9 @@ protected://**共通変数**//
 
 	//ボス
 	static Boss* boss_;
+
+	//カメラ
+	static DaiEngine::Camera* camera_;
 
 public://**パブリック変数**//
 
@@ -20,10 +27,12 @@ public://**パブリック変数**//
 public://パブリック関数**//
 
 	/// <summary>
-	/// ボスのポインタをセット
+	/// ポインタをセット
 	/// </summary>
 	/// <param name="boss"></param>
-	static void SetBoss(Boss* boss) { boss_ = boss; }
+	static void SetPointer(Boss* boss, DaiEngine::Camera* camera) { boss_ = boss; camera_ = camera; }
+
+
 
 	IBossBehavior() = default;
 	virtual ~IBossBehavior() = default;
@@ -38,4 +47,8 @@ public://パブリック関数**//
 	/// </summary>
 	virtual void Update() = 0;
 
+	/// <summary>
+	/// 描画
+	/// </summary>
+	virtual void Draw() {};
 };

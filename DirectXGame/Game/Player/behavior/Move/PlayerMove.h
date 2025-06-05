@@ -2,7 +2,7 @@
 #include"Player/behavior/IPlayerBehavior.h"
 
 //プレイヤーの移動関係
-class PlayerMove : public IProtBehavior {
+class PlayerMove : public IPlayerBehavior {
 public://**パブリック関数**//
 
 	/// <summary>

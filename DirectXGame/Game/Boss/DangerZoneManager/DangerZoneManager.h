@@ -45,8 +45,10 @@ private:
 	//警告時間
 	float warningTime_ = 0.5f;
 
-	//警告円の高度誤差
+	//警告円の高度
 	float warningHeight_ = 0.5f;
 	//弾半径
 	float radius_ = 1.0f;
+	//色
+	Vector4 color_ = Vector4(1, 0, 0, 1);
 };

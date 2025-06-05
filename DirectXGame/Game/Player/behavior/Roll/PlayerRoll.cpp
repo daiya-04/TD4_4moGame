@@ -1,4 +1,4 @@
-#include "ProtPlayerRoll.h"
+#include "PlayerRoll.h"
 #include"Player/Player.h"
 
 
@@ -24,7 +24,7 @@ void PlayerRoll::Init()
 		velo_ = {0,0,1};
 		
 		//プレイヤー方向に向ける
-		velo_=TransformNormal(velo_, player_->world_->matWorld_);
+		velo_=TransformNormal(velo_, player_->GetWorld().matWorld_);
 	}
 
 	//時間リセット

@@ -52,8 +52,11 @@ public:
 
 	Block* GetBlock(float x, float z);
 
-	//現在位置のブロックを基にプレイヤー座標Yを計算して返す
+	//現在位置のブロックを基にそのブロックのY座標を計算して返す
 	float GetMassLocationPosY(Vector3 translate);
+
+	//ステージの開始演出が終わっているか(Falseなら終了済み)
+	bool GetStageAnimationFinishedFlag() { return isAnimationReset_; }
 
 	/// <summary>
 	/// 指定ブロックを中心に周囲の高さを変える(減衰なし)
@@ -70,6 +73,15 @@ public:
 	/// 第三引数:中心地点の下がる量
 	/// </summary>
 	void RaiseBlocksAroundWithAttenuation(const Vector2& center, float radius, float deltaY);
+
+	//プレイヤーが歩けるかどうかの判定
+	bool IsWalkable(const Vector3& worldPos);
+
+	//近くの歩ける足場を探す関数
+	std::optional<Vector3> FindNearestWalkable(const Vector3& from);
+
+	//下がる量の取得
+	float GetDeltaY() { return deltaY_; }
 
 private:
 	//各ブロックの生成
@@ -103,8 +115,8 @@ private:
 	float blockSize_ = 1.0f;//ブロックのサイズ
 
 	std::list<Block> blocks_;//各種ブロック
-	static const int verticalSize_ = 20;//縦のブロック数
-	static const int horizontalSize_ = 20;//横のブロック数
+	int verticalSize_ = 20;//縦のブロック数
+	int horizontalSize_ = 20;//横のブロック数
 	float blockWidth_ = 2.0f;//ブロック間隔
 	float prevBlockWidth_ = blockWidth_;//前フレームのブロック間隔
 
