@@ -49,7 +49,7 @@
         "Roll": {
             "cooldownCount": 16.5,
             "count": 10.0,
-            "speed": 1.2000000476837158
+            "speed": 1.0
         },
         "colliderColor": [
             0.05882352963089943,
