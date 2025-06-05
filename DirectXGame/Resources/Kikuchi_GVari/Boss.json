@@ -18,7 +18,7 @@
             "spawnHeight": 60.0
         },
         "Hit": {
-            "MaxNoHitSec": 1.0,
+            "MaxNoHitSec": 5.0,
             "TenmetuNum": 3
         },
         "Idle": {
