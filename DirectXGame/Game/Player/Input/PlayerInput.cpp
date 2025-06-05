@@ -56,7 +56,7 @@ bool PlayerInput::RollInput()
 	ans = input_->TriggerKey(DIK_LSHIFT);
 
 	//コントローラー入力チェック
-	ans += input_->TriggerButton(DaiEngine::Input::Button::B);
+	ans += input_->TriggerButton(DaiEngine::Input::Button::RIGHT_SHOULDER);
 
 	//返却
 	return (bool)ans;
@@ -71,7 +71,7 @@ bool PlayerInput::AttackInput()
 	ans = input_->TriggerKey(DIK_SPACE);
 
 	//コントローラー入力チェック
-	ans += input_->TriggerButton(DaiEngine::Input::Button::X);
+	ans += input_->TriggerButton(DaiEngine::Input::Button::A);
 
 	//返却
 	return (bool)ans;
