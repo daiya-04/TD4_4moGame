@@ -1,7 +1,7 @@
 {
     "Player": {
         "AttackCollider": {
-            "Radius": 2.5,
+            "Radius": 4.0,
             "pos": [
                 0.0,
                 0.0,
@@ -39,7 +39,7 @@
         ],
         "MaxHP": 10,
         "Move": {
-            "speed": 0.25
+            "speed": 0.20000000298023224
         },
         "OffsetPos": [
             0.0,

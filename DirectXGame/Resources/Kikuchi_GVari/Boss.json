@@ -20,7 +20,7 @@
         },
         "FallingBullet": {
             "colliderRadius": 1.0,
-            "fallSpeed": 1.100000023841858,
+            "fallSpeed": 0.699999988079071,
             "radius": 3.0,
             "spawnHeight": 60.0
         },
@@ -33,10 +33,10 @@
         },
         "ItemFallAttack": {
             "ActionRate_": 1.0,
-            "ActiveCount": 250.0,
+            "ActiveCount": 300.0,
             "Num": 4,
             "PreActionRate_": 1.0,
-            "WaitCount": 200.0
+            "WaitCount": 250.0
         },
         "MaxHP": 50,
         "OffsetPos": [
@@ -65,7 +65,7 @@
                 0.0
             ],
             "rotateNum": 6.0,
-            "waitCount": 300.0
+            "waitCount": 350.0
         }
     }
 }
