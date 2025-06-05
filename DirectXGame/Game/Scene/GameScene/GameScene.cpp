@@ -15,7 +15,6 @@
 #include "AudioManager.h"
 #include "GlobalVariables.h"
 
-
 GameScene::GameScene() {
 	globalVariableManager_ = globalVariableManager_->GetInstance();
 }
@@ -156,6 +155,7 @@ void GameScene::Init() {
 	globalVariableManager_->SetLoadAllData();
 
 	//セットされたデータで初期化
+	player_->Init();
 	boss_->Initialize();
 
 	field_->CreateStage();
