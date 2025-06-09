@@ -14,7 +14,7 @@ namespace DaiEngine {
 
 	struct InstancingObjData {
 		WorldTransform worldTransform_;
-		Vector4 color_;
+		Vector4 color_ = { 1.0f,1.0f,1.0f,1.0f };
 		float alpha_ = 1.0f;
 	};
 
