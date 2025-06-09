@@ -31,6 +31,21 @@ void BossIdle::Update()
 
 		//ランダムな値取得
 		int num = GetRandomInt(1, Boss::Behavior::Count - 1);
+
+		if (savedATK_.size() != 2) {
+			savedATK_.push_back(num);
+		}
+		else {
+			//三連続同じ値なら違うものに変更
+			if(savedATK_[0] == num && savedATK_[1] == num) {
+				while (num == savedATK_[0] || num == savedATK_[1]) {
+					num = GetRandomInt(1, Boss::Behavior::Count - 1);
+				}
+				savedATK_.clear();
+				savedATK_.push_back(num);
+			}
+		}
+
 		//値の状態に変更
 		boss_->behaviorRequest_ = Boss::Behavior(num);
 	}
