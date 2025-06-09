@@ -1,5 +1,6 @@
 #pragma once
 #include"Boss/Behavior/IBossBehavior.h"
+#include<vector>
 
 //ボスの待機状態
 class BossIdle : public IBossBehavior {
@@ -27,4 +28,6 @@ private://**パラメータ**//
 	//時間
 	float sec_ = 1.0f;
 
+	//攻撃保存
+	std::vector<int>savedATK_;
 };

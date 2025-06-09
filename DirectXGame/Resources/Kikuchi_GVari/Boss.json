@@ -15,7 +15,7 @@
                 1.0
             ],
             "radius": 3.5,
-            "warningCount": 7.0,
+            "warningCount": 6.0,
             "warningSphereHeight": 1.0
         },
         "FallingBullet": {
@@ -33,12 +33,12 @@
         },
         "ItemFallAttack": {
             "ActionRate_": 1.0,
-            "ActiveCount": 300.0,
+            "ActiveCount": 280.0,
             "Num": 4,
             "PreActionRate_": 1.0,
-            "WaitCount": 250.0
+            "WaitCount": 220.0
         },
-        "MaxHP": 50,
+        "MaxHP": 60,
         "OffsetPos": [
             0.0,
             1.159999966621399,
@@ -65,7 +65,7 @@
                 0.0
             ],
             "rotateNum": 6.0,
-            "waitCount": 350.0
+            "waitCount": 320.0
         }
     }
 }

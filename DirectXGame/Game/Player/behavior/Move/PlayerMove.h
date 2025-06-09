@@ -28,6 +28,7 @@ private://**プライベート変数**//
 
 	Vector3 debugInputMove;
 
-	Vector3 beforeVelo = { 0,0,0 };
+	//移動フラグ
+	bool isMove_ = false;
 
 };

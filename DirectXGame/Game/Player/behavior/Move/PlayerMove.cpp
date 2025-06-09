@@ -15,6 +15,7 @@ void PlayerMove::Init()
 {
 	//アニメーションを変更
 	player_->SetAnimationName("PlayerIdle");
+	isMove_ = false;
 }
 
 void PlayerMove::Update()
@@ -42,18 +43,17 @@ void PlayerMove::Update()
 	//入力がない場合
 	if (move.x == 0 && move.y == 0 && move.z == 0) {
 		
-		if (move != beforeVelo) {
+		if (isMove_) {
+			isMove_ = false;
 			//待機モーション
 			player_->SetAnimationName("PlayerIdle");
 		}
 	}
 	else {
-		if (move != beforeVelo) {
+		if (!isMove_) {
+			isMove_ = true;
 			//入力があった場合は歩行アニメーション
 			player_->SetAnimationName("PlayerWalk");
 		}
 	}
-
-	//前回の移動量を保存
-	beforeVelo = move;
 }
