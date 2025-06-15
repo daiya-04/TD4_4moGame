@@ -15,6 +15,12 @@ struct PlayerParameters {
 	//移動量
 	Vector3 velocity;
 
+	//地面の傾き方向
+	Vector3 grandVelo = {0,0,0};
+
+	//傾きの威力
+	float grandInfluence =0;
+
 	//体力
 	int hp = 10;
 
@@ -149,6 +155,12 @@ public://**セッター
 	/// <param name="pos"></param>
 	void SetField(Field* field) { field_ = field; }
 
+	/// <summary>
+	/// 地面の傾斜取得
+	/// </summary>
+	/// <param name="hill">地面の傾きベクトル（上下を考慮しない）</param>
+	/// <param name="inflence">影響度</param>
+	void SetFieldHill(const Vector3& hill, float inflence) { parameters_.grandVelo = hill; parameters_.grandInfluence = inflence; }
 
 private://**プライベート関数**//
 
@@ -210,6 +222,9 @@ private://**プライベート変数**//
 
 	//最大HP
 	int maxHP_ = 10;
+
+	//重力
+	float gravity_ = 0.1f;
 
 	///セト
 	//UI

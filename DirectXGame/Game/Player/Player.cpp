@@ -75,6 +75,7 @@ Player::Player()
 	gvg->SetMonitorValue("HitFlag", &parameters_.isHit);
 	gvg->SetMonitorValue("RollCooldown", &parameters_.currentRollCount);
 	gvg->SetValue("MaxHP", &maxHP_);
+	gvg->SetValue("gravity", &gravity_);
 	gvg->SetValue("OffsetPos", &offsetPos_);
 	gvg->SetValue("Limitation", &limitationXZ_);
 	gvg->SetValue("ColliderRadius", &radius_);
@@ -148,6 +149,9 @@ void Player::Update()
 
 	//状態更新
 	behaviors_[(int)behaviorName_]->Update();
+
+	//落下
+	parameters_.velocity.y -= gravity_;
 
 	//座標更新
 	Vector3 nextPos = position_ + parameters_.velocity;

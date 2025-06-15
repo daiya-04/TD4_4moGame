@@ -23,20 +23,20 @@ public://**パブリック関数**//
 
 private://**プライベート変数**//
 
-	//移動方向
-	Vector3 velo_;
+	//初速度方向
+	Vector3 currentVelo_;
 
 	//経過時間
-	float currentCount_;
+	float currentCount_ = 0.0f;
 
 private://**パラメータ**//
 
-	//回避時間
-	float count_ = 1.0f;
+	//初速度
+	float startSpeed_ = 10.0f;
 
-	//回避速度
-	float rollSpeed_ = 10.0f;
+	//初速度最大減速時間
+	float maxCount_ = 60.0f;
 
-	//回避クールタイム
-	float cooldowmCount_ = 1.0f;
+	//ロールクールタイム
+	float cooldownCount_ = 60;
 };
