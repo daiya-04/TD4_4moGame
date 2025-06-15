@@ -53,10 +53,10 @@ bool PlayerInput::RollInput()
 	int ans=0;
 
 	//キー入力チェック
-	ans = input_->TriggerKey(DIK_LSHIFT);
+	ans = input_->PushKey(DIK_LSHIFT);
 
 	//コントローラー入力チェック
-	ans += input_->TriggerButton(DaiEngine::Input::Button::RIGHT_SHOULDER);
+	ans += input_->PushButton(DaiEngine::Input::Button::RIGHT_SHOULDER);
 
 	//返却
 	return (bool)ans;
