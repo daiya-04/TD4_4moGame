@@ -26,6 +26,11 @@ BossWeaponRollAttack::BossWeaponRollAttack()
 	tree_.SetValue("offsetZone", &offsetZone_);
 }
 
+BossWeaponRollAttack::~BossWeaponRollAttack()
+{
+	DaiEngine::ColliderManager::GetInstance()->RemoveCollider(collider_.get());
+}
+
 void BossWeaponRollAttack::Draw()
 {
 	//警告円描画
