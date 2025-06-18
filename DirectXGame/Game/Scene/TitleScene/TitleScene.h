@@ -97,6 +97,8 @@ private:
 	//ゲーム終了UI
 	std::unique_ptr<DaiEngine::Sprite> gameFinishUI_;
 	
+	//カーソル消去フラグ
+	bool isDeleteCursor_ = false;
 
 private://パラメータまとめたやつら
 
