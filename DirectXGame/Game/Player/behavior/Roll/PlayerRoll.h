@@ -23,26 +23,26 @@ public://**パブリック関数**//
 
 private://**プライベート変数**//
 
-	//初速度方向
+	// ロール中の現在速度（XZ平面、Yは使わない）
 	Vector3 currentVelo_;
-
-	//経過時間
-	float currentCount_ = 0.0f;
-
-	//ロール方向
-	Vector3 rollDirection;
 
 private://**パラメータ**//
 
-	//初速度
+	// ロールの初速（開始時の勢い）
 	float startSpeed_ = 10.0f;
 
-	//初速度最大減速時間
-	float maxCount_ = 60.0f;
+	//速度減速量
+	float decelRate = 0.05f;
 
-	//ロールクールタイム
-	float cooldownCount_ = 60;
+	// 地形傾斜による重力加速度の倍率（地形が傾いていれば加速）
+	float slopeGravity_ = 0.3f;
 
-	// 地形への追従度
-	float slopeInfluence_ = 0.5f;             
+	// 傾斜がほぼ水平とみなす閾値（これ以下なら減速）
+	float flatThreshold_ = 0.01f;
+
+
+
+	//ロールのクールタイム
+	float cooldownCount_ = 60.0f;
+
 };
