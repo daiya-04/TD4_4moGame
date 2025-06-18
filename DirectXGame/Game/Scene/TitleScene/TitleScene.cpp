@@ -122,6 +122,14 @@ void TitleScene::Update() {
 	
 
 #endif // _DEBUG
+
+#ifndef _DEBUG
+	if (isDeleteCursor_ == false) {
+		isDeleteCursor_ = true;
+		input->ToggleCursor();
+	}
+#endif
+
 	
 
 	switch (select_) {

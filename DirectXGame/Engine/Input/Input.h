@@ -78,6 +78,11 @@ namespace DaiEngine {
 		XINPUT_STATE preJoyState{};
 		SHORT deadZone_ = 10000;
 
+		//マウスカーソルの表示、非表示操作
+		bool toggleCursor_ = true;
+		void ViewCursor();
+		void HideCursor();
+
 	public:
 
 		static Input* GetInstance();
@@ -91,6 +96,8 @@ namespace DaiEngine {
 		bool GetJoystickState();
 		///
 
+		//マウスカーソルの表示、非表示操作
+		void ToggleCursor();
 
 		//キーの押下をチェック
 		bool PushKey(BYTE keyNumber) const;
