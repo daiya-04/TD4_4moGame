@@ -29,6 +29,9 @@ private://**プライベート変数**//
 	//経過時間
 	float currentCount_ = 0.0f;
 
+	//ロール方向
+	Vector3 rollDirection;
+
 private://**パラメータ**//
 
 	//初速度
@@ -39,4 +42,7 @@ private://**パラメータ**//
 
 	//ロールクールタイム
 	float cooldownCount_ = 60;
+
+	// 地形への追従度
+	float slopeInfluence_ = 0.5f;             
 };

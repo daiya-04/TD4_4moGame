@@ -10,7 +10,7 @@ class BossWeaponRollAttack : public IBossAttack {
 public://**パブリック関数**//
 
 	BossWeaponRollAttack();
-	~BossWeaponRollAttack() = default;
+	~BossWeaponRollAttack();
 
 	/// <summary>
 	/// 描画

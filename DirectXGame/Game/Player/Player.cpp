@@ -105,6 +105,12 @@ Player::Player()
 #pragma endregion	
 }
 
+Player::~Player()
+{
+	DaiEngine::ColliderManager::GetInstance()->RemoveCollider(collider_.get());
+	DaiEngine::ColliderManager::GetInstance()->RemoveCollider(attackCollider_.get());
+}
+
 void Player::Init() {
 	parameters_.hp = maxHP_;
 	collider_->SetRadius(radius_);

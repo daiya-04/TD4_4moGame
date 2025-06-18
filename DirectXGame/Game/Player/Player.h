@@ -16,7 +16,7 @@ struct PlayerParameters {
 	Vector3 velocity;
 
 	//地面の傾き方向
-	Vector3 grandVelo = {0,0,0};
+	Vector3 grandNormal = {0,0,0};
 
 	//傾きの威力
 	float grandInfluence =0;
@@ -45,7 +45,7 @@ public://**パブリック変数**//
 	//コンストラクタ
 	Player();
 	//デストラクタ
-	~Player() = default;
+	~Player();
 
 	/// <summary>
 	/// 初期化
@@ -160,7 +160,7 @@ public://**セッター
 	/// </summary>
 	/// <param name="hill">地面の傾きベクトル（上下を考慮しない）</param>
 	/// <param name="inflence">影響度</param>
-	void SetFieldHill(const Vector3& hill, float inflence) { parameters_.grandVelo = hill; parameters_.grandInfluence = inflence; }
+	void SetFieldHill(const Vector3& hill, float inflence) { parameters_.grandNormal = hill; parameters_.grandInfluence = inflence; }
 
 private://**プライベート関数**//
 

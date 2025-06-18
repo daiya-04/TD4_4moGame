@@ -31,7 +31,7 @@ public://**パブリック関数**//
 	/// コンストラクタ
 	/// </summary>
 	Boss(FollowCamera* camera);
-	~Boss() = default;
+	~Boss();
 
 	/// <summary>
 	/// 初期化

@@ -40,6 +40,18 @@ float EaseOutCirc(float x) {
 	return std::sqrt(1.0f - std::pow(x - 1.0f, 2.0f));
 }
 
+//// 入力方向を地面に沿った方向へ変形
+//Vector3 ProjectOnPlane(const Vector3& vec, const Vector3& planeNormal) {
+//	return vec - planeNormal * Dot(vec, planeNormal);
+//}
+//
+//Vector3 BlendSlope(const Vector3& inputDir, const Vector3& groundNormal, float influence) {
+//	Vector3 slopeDir = ProjectOnPlane(inputDir, groundNormal).Normalize();
+//	return Lerp(inputDir, slopeDir, influence).Normalize();
+//}
+
+
+
 void PlayerRoll::Update()
 {
 	//押されていなければ終了
@@ -60,6 +72,9 @@ void PlayerRoll::Update()
 		currentCount_ = maxCount_;
 	}
 
+	//float elapsed = currentCount_ - maxCount_;
+	//float t = Clamp(elapsed / rollDuration);
+	//float speed = initialRollSpeed * EaseOutCirc(t);
 
 	//向きチェック
 
@@ -67,12 +82,13 @@ void PlayerRoll::Update()
 	PlayerParameters params = player_->parameters_;
 
 	//地面の向きベクトル作成
-	//Vector3 grandVelo = params.grandVelo.Normalize()*params.grandInfluence;
+
+	//// 地形に合わせて方向を更新（傾き方向に落ちる感じ）
+	//Vector3 slopeDir = BlendSlope(rollDirection, params.grandNormal, slopeInfluence_);
+	//velocity = slopeDir * speed;
 
 	//速度量を取得
 	float t =( currentCount_ / maxCount_);
-
-	
 
 	//イージング関数を適用
 	t = EaseOutCirc(t);

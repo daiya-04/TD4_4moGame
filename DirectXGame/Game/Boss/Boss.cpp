@@ -91,6 +91,11 @@ Boss::Boss(FollowCamera* camera)
 #pragma endregion
 }
 
+Boss::~Boss()
+{
+	DaiEngine::ColliderManager::GetInstance()->RemoveCollider(collider_.get());
+}
+
 void Boss::Initialize() {
 	position_ = startPosition_;
 	SetCameraState(FollowCamera::State::Follow);
