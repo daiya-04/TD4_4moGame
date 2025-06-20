@@ -409,7 +409,6 @@ void Field::RaiseBlocksAroundWithAttenuation(const Vector2& center, float radius
 }
 
 void Field::AddWave(const Vector2& center, float radius, float amplitude, int waveCount, float speed) {
-	// 新しい波の情報を作成
 	WaveInfo wave;
 	wave.center = center;
 	wave.radius = radius;
@@ -420,7 +419,6 @@ void Field::AddWave(const Vector2& center, float radius, float amplitude, int wa
 	wave.currentWave = 0;
 	wave.active = true;
 
-	// 対象のブロックを中心とした baseY を記録
 	Vector3 centerPos{};
 	bool found = false;
 	for (const Block& block : blocks_) {
@@ -430,26 +428,21 @@ void Field::AddWave(const Vector2& center, float radius, float amplitude, int wa
 			break;
 		}
 	}
-	if (!found) {
-		return; // 中心ブロックが見つからなければ波を追加しない
-	}
+	if (!found) return;
 
-	for (Block& block : blocks_) {
-		// 距離を計算
+	// 波が影響するブロックとその高さを保存
+	for (const Block& block : blocks_) {
 		float dx = block.world.translation_.x - centerPos.x;
 		float dz = block.world.translation_.z - centerPos.z;
 		float distance = std::sqrt(dx * dx + dz * dz);
 
-		// 半径内のブロックのみ対象
 		if (distance <= radius) {
-			block.baseY = block.world.translation_.y; // 現在の高さを記録
+			wave.baseHeights[block.massLocation] = block.world.translation_.y;
 		}
 	}
 
-	// 波を追加
 	waves_.push_back(wave);
 }
-
 
 bool Field::IsWalkable(const Vector3& worldPos) {
 	Vector2 gridPos = GetBlockAt(worldPos.x, worldPos.z);
@@ -513,13 +506,26 @@ void Field::FixedHeightCorrection() {
 }
 
 void Field::WaveUpdate() {
+	// 各ブロックの一時的オフセットを初期化
+	for (Block& block : blocks_) {
+		block.tempYOffset = 0.0f;
+	}
+
+	// 各波の影響を加算
 	for (WaveInfo& wave : waves_) {
 		if (!wave.active) continue;
 
-		// 時間更新
 		wave.time += wave.speed;
+		float wavePhase = wave.time * 2.0f * 3.14159f;
 
-		// 中心ブロックのワールド座標取得
+		if (wavePhase >= (wave.currentWave + 1) * 2.0f * 3.14159f) {
+			wave.currentWave++;
+			if (wave.currentWave >= wave.waveCount) {
+				wave.active = false;
+				continue;
+			}
+		}
+
 		Vector3 centerPos{};
 		bool found = false;
 		for (const Block& block : blocks_) {
@@ -531,47 +537,34 @@ void Field::WaveUpdate() {
 		}
 		if (!found) continue;
 
-		// 現在の波の進行度（全体で waveCount 回の波）
-		float wavePhase = wave.time * 2.0f * 3.14159f;
-
-		// 次の波に到達したらカウントを進める
-		if (wavePhase >= (wave.currentWave + 1) * 2.0f * 3.14159f) {
-			wave.currentWave++;
-			if (wave.currentWave >= wave.waveCount) {
-				// 波終了 → 全対象ブロックの高さを baseY に戻す
-				for (Block& block : blocks_) {
-					block.world.translation_.y = block.baseY;
-				}
-				wave.active = false;
-				continue;
-			}
-		}
-
-		// 各ブロックに波を適用
 		for (Block& block : blocks_) {
-			Vector3& pos = block.world.translation_;
+			auto it = wave.baseHeights.find(block.massLocation);
+			if (it == wave.baseHeights.end()) continue;
 
-			float dx = pos.x - centerPos.x;
-			float dz = pos.z - centerPos.z;
+			float dx = block.world.translation_.x - centerPos.x;
+			float dz = block.world.translation_.z - centerPos.z;
 			float distance = std::sqrt(dx * dx + dz * dz);
 
-			if (distance <= wave.radius) {
-				float delay = std::pow(distance / wave.radius, 1.5f) * 3.14159f;
-				float baseWave = std::sin(wavePhase - delay);
-				baseWave = (std::max)(0.0f, baseWave);
-				baseWave = std::pow(baseWave, 3.0f);
+			float delay = std::pow(distance / wave.radius, 1.5f) * 3.14159f;
+			float baseWave = std::sin(wavePhase - delay);
+			baseWave = (std::max)(0.0f, baseWave);
+			baseWave = std::pow(baseWave, 3.0f);
 
-				// ★ 距離に応じた減衰（外周ほど小さくなる）
-				float attenuation = 1.0f - (distance / wave.radius);
-				attenuation = (std::clamp)(attenuation, 0.0f, 1.0f);  // 念のため範囲制限
+			float attenuation = (std::max)(0.0f, 1.0f - distance / wave.radius);
+			float yOffset = baseWave * wave.amplitude * attenuation;
 
-				float yOffset = baseWave * wave.amplitude * attenuation;
-				pos.y = block.baseY + yOffset;
-			}
-			else {
-				// 外のブロックは徐々にbaseYに戻す（急に変えない）
-				pos.y += (block.baseY - pos.y) * 0.2f;  // 緩やかに補間
-			}
+			block.tempYOffset += yOffset;
+		}
+	}
+
+	// 最終的な高さ反映
+	for (Block& block : blocks_) {
+		if (block.tempYOffset > 0.0f) {
+			block.world.translation_.y = block.baseY + block.tempYOffset;
+		}
+		else {
+			// baseY に戻す（緩やかに）
+			block.world.translation_.y += (block.baseY - block.world.translation_.y) * 0.2f;
 		}
 	}
 }

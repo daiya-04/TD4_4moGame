@@ -13,14 +13,27 @@
 #include <algorithm>
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include <unordered_map>
 
 #include"Input.h"
+
+namespace std {
+	template <>
+	struct hash<Vector2> {
+		size_t operator()(const Vector2& v) const {
+			size_t hx = std::hash<float>{}(v.x);
+			size_t hy = std::hash<float>{}(v.y);
+			return hx ^ (hy << 1); // XOR + シフトで合成
+		}
+	};
+}
 
 struct Block {
 	DaiEngine::WorldTransform world;
 	Vector4 color;
 	Vector2 massLocation;
 	float baseY;
+	float tempYOffset;
 };
 
 struct WaveInfo {
@@ -32,6 +45,7 @@ struct WaveInfo {
 	float time = 0.0f;
 	bool active = true;
 	int currentWave = 0;
+	std::unordered_map<Vector2, float> baseHeights;
 };
 
 
