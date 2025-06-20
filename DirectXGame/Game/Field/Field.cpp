@@ -51,6 +51,9 @@ void Field::Update() {
 		//現在のnowPos_の位置からradius_範囲をdeltaY_分下げる(距離減衰付き)
 		RaiseBlocksAroundWithAttenuation(GetBlockAt(nowPos_.x, nowPos_.y), radius_, deltaY_);
 	}
+	if (ImGui::Button("WaveBlocks")) {
+		AddWave(GetBlockAt(nowPos_.x, nowPos_.y), radius_, heightLimit_, 5 , 0.01f);
+	}
 	if (ImGui::Button("TestSetBlockHeightLimit")) {
 		//各ブロックの高さを限界値で固定
 		SetBlockHeightLimit(heightLimit_);
@@ -69,8 +72,6 @@ void Field::Update() {
 	}
 	ImGui::End();
 #endif // _DEBUG
-
-	
 
 	//ステージ開始/リセット演出
 	if (isAnimationReset_ == true) {
@@ -112,6 +113,9 @@ void Field::Update() {
 		//更新
 		prevBlockWidth_ = blockWidth_;
 	}
+
+	//波の更新
+	WaveUpdate();
 
 	//各ブロックの行列更新
 	for (Block& block : blocks_) {
@@ -205,6 +209,9 @@ void Field::CreateBlocks(const int x, const int z) {
 
 	//マス位置xとzを保存
 	block.massLocation = { (float)x,(float)z };
+
+	//最初のY座標を記録
+	block.baseY = block.world.translation_.y;
 
 	blocks_.push_back(block);
 }
@@ -399,6 +406,49 @@ void Field::RaiseBlocksAroundWithAttenuation(const Vector2& center, float radius
 	}
 }
 
+void Field::AddWave(const Vector2& center, float radius, float amplitude, int waveCount, float speed) {
+	// 新しい波の情報を作成
+	WaveInfo wave;
+	wave.center = center;
+	wave.radius = radius;
+	wave.amplitude = amplitude;
+	wave.waveCount = waveCount;
+	wave.speed = speed;
+	wave.time = 0.0f;
+	wave.currentWave = 0;
+	wave.active = true;
+
+	// 対象のブロックを中心とした baseY を記録
+	Vector3 centerPos{};
+	bool found = false;
+	for (const Block& block : blocks_) {
+		if (block.massLocation == center) {
+			centerPos = block.world.translation_;
+			found = true;
+			break;
+		}
+	}
+	if (!found) {
+		return; // 中心ブロックが見つからなければ波を追加しない
+	}
+
+	for (Block& block : blocks_) {
+		// 距離を計算
+		float dx = block.world.translation_.x - centerPos.x;
+		float dz = block.world.translation_.z - centerPos.z;
+		float distance = std::sqrt(dx * dx + dz * dz);
+
+		// 半径内のブロックのみ対象
+		if (distance <= radius) {
+			block.baseY = block.world.translation_.y; // 現在の高さを記録
+		}
+	}
+
+	// 波を追加
+	waves_.push_back(wave);
+}
+
+
 bool Field::IsWalkable(const Vector3& worldPos) {
 	Vector2 gridPos = GetBlockAt(worldPos.x, worldPos.z);
 
@@ -456,6 +506,72 @@ void Field::FixedHeightCorrection() {
 		}
 		else {//範囲内なら
 
+		}
+	}
+}
+
+void Field::WaveUpdate() {
+	for (WaveInfo& wave : waves_) {
+		if (!wave.active) continue;
+
+		// 時間更新
+		wave.time += wave.speed;
+
+		// 中心ブロックのワールド座標取得
+		Vector3 centerPos{};
+		bool found = false;
+		for (const Block& block : blocks_) {
+			if (block.massLocation == wave.center) {
+				centerPos = block.world.translation_;
+				found = true;
+				break;
+			}
+		}
+		if (!found) continue;
+
+		// 現在の波の進行度（全体で waveCount 回の波）
+		float wavePhase = wave.time * 2.0f * 3.14159f;
+
+		// 次の波に到達したらカウントを進める
+		if (wavePhase >= (wave.currentWave + 1) * 2.0f * 3.14159f) {
+			wave.currentWave++;
+			if (wave.currentWave >= wave.waveCount) {
+				// 波終了 → 全対象ブロックの高さを baseY に戻す
+				for (Block& block : blocks_) {
+					block.world.translation_.y = block.baseY;
+				}
+				wave.active = false;
+				continue;
+			}
+		}
+
+		// 各ブロックに波を適用
+		for (Block& block : blocks_) {
+			Vector3& pos = block.world.translation_;
+
+			float dx = pos.x - centerPos.x;
+			float dz = pos.z - centerPos.z;
+			float distance = std::sqrt(dx * dx + dz * dz);
+
+			if (distance <= wave.radius) {
+				// delay は滑らかさ調整のための距離依存フェーズ遅延
+				float delay = std::pow(distance / wave.radius, 1.5f) * 3.14159f;
+
+				// ベースの波形（sin波）
+				float baseWave = std::sin(wavePhase - delay);
+				baseWave = (std::max)(0.0f, baseWave); // 下方向の波は無効化
+				baseWave = std::pow(baseWave, 3.0f);   // 急激に盛り上げる
+
+				// 高さ計算
+				float yOffset = baseWave * wave.amplitude;
+
+				// 高さ反映（baseY からのみ盛り上がる）
+				pos.y = block.baseY + yOffset;
+			}
+			else {
+				// 対象外ブロックは高さを戻す（安全策）
+				pos.y = block.baseY;
+			}
 		}
 	}
 }
