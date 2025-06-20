@@ -20,7 +20,20 @@ struct Block {
 	DaiEngine::WorldTransform world;
 	Vector4 color;
 	Vector2 massLocation;
+	float baseY;
 };
+
+struct WaveInfo {
+	Vector2 center;
+	float radius;
+	float amplitude;
+	int waveCount;
+	float speed;
+	float time = 0.0f;
+	bool active = true;
+	int currentWave = 0;
+};
+
 
 class Field {
 public:
@@ -74,6 +87,16 @@ public:
 	/// </summary>
 	void RaiseBlocksAroundWithAttenuation(const Vector2& center, float radius, float deltaY);
 
+	/// <summary>
+	/// 指定ブロックを中心に波を発生させる
+	/// 第一引数:発生地点
+	/// 第二引数:発生範囲
+	/// 第三引数:波の高さ
+	/// 第四引数：波の回数
+	/// 第五引数：波の速さ
+	/// </summary>
+	void AddWave(const Vector2& center, float radius, float amplitude, int waveCount, float speed);
+
 	//プレイヤーが歩けるかどうかの判定
 	bool IsWalkable(const Vector3& worldPos);
 
@@ -92,6 +115,9 @@ private:
 
 	//各ブロックの高さを限界値内に修正
 	void FixedHeightCorrection();
+
+	//波の更新処理
+	void WaveUpdate();
 
 	/// <summary>
 	/// 各ブロックの高さで色を変える
@@ -132,4 +158,6 @@ private:
 	float heightLimit_ = 2.5f;//ブロックの高さ限界値+heightLimit ~ -heightLimitの範囲
 	Vector4 highColor_ = { 1.0f, 0.0f, 0.0f, 1.0f };//Yが高い時の色
 	Vector4 lowColor_ = { 0.0f, 0.0f, 1.0f, 1.0f };//Yが低い時の色
+
+	std::vector<WaveInfo> waves_; //現在アクティブな波のリスト
 };
