@@ -556,23 +556,21 @@ void Field::WaveUpdate() {
 			float distance = std::sqrt(dx * dx + dz * dz);
 
 			if (distance <= wave.radius) {
-				// delay は滑らかさ調整のための距離依存フェーズ遅延
 				float delay = std::pow(distance / wave.radius, 1.5f) * 3.14159f;
-
-				// ベースの波形（sin波）
 				float baseWave = std::sin(wavePhase - delay);
-				baseWave = (std::max)(0.0f, baseWave); // 下方向の波は無効化
-				baseWave = std::pow(baseWave, 3.0f);   // 急激に盛り上げる
+				baseWave = (std::max)(0.0f, baseWave);
+				baseWave = std::pow(baseWave, 3.0f);
 
-				// 高さ計算
-				float yOffset = baseWave * wave.amplitude;
+				// ★ 距離に応じた減衰（外周ほど小さくなる）
+				float attenuation = 1.0f - (distance / wave.radius);
+				attenuation = (std::clamp)(attenuation, 0.0f, 1.0f);  // 念のため範囲制限
 
-				// 高さ反映（baseY からのみ盛り上がる）
+				float yOffset = baseWave * wave.amplitude * attenuation;
 				pos.y = block.baseY + yOffset;
 			}
 			else {
-				// 対象外ブロックは高さを戻す（安全策）
-				pos.y = block.baseY;
+				// 外のブロックは徐々にbaseYに戻す（急に変えない）
+				pos.y += (block.baseY - pos.y) * 0.2f;  // 緩やかに補間
 			}
 		}
 	}
