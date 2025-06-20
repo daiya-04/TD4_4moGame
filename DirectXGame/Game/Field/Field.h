@@ -158,6 +158,8 @@ private:
 	float heightLimit_ = 2.5f;//ブロックの高さ限界値+heightLimit ~ -heightLimitの範囲
 	Vector4 highColor_ = { 1.0f, 0.0f, 0.0f, 1.0f };//Yが高い時の色
 	Vector4 lowColor_ = { 0.0f, 0.0f, 1.0f, 1.0f };//Yが低い時の色
+	int waveCount_ = 1;//波の発生回数
+	float waveSpeed_ = 0.01f;//波の速度
 
 	std::vector<WaveInfo> waves_; //現在アクティブな波のリスト
 };
