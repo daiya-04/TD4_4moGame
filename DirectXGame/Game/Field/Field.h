@@ -150,6 +150,7 @@ private:
 	std::string tag_ = "Block";
 
 	std::unique_ptr<InstancingGameObject> instancingObj_ = nullptr;
+	std::unique_ptr<InstancingGameObject> instancingObj2_ = nullptr;
 
 	Vector3 centerBlockPos_ = { 0.0f,0.0f,0.0f };//基準となる中心ブロックの座標
 	float blockSize_ = 1.0f;//ブロックのサイズ

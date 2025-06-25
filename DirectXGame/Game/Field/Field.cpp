@@ -20,6 +20,9 @@ void Field::Initialize() {
 	instancingObj_ = std::make_unique<InstancingGameObject>();
 	instancingObj_->Init("Cube", 10000);
 
+	instancingObj2_ = std::make_unique<InstancingGameObject>();
+	instancingObj2_->Init("testfield", 10000);
+
 	worldTransform_.Init();
 
 	//
@@ -73,6 +76,7 @@ void Field::Update() {
 		ResetStage();
 	}
 	ImGui::End();
+
 #endif // _DEBUG
 
 	//ステージ開始/リセット演出
@@ -80,6 +84,12 @@ void Field::Update() {
 		deltaTime_ += deltaPlusTime_;
 		PlayStageIntroAnimation(deltaTime_);
 	}
+
+	//変数呼び出し
+	DaiEngine::InstancingObjData data2;
+	data2.worldTransform_.translation_.y = -15000.0f;
+	//データ追加
+	instancingObj2_->SetData(data2);
 
 	//高さを限界値内に修正
 	FixedHeightCorrection();
@@ -142,6 +152,7 @@ void Field::Update() {
 void Field::Draw() {
 	//セットされたデータ分描画してセットデータ削除
 	instancingObj_->Draw();
+	instancingObj2_->Draw();
 }
 
 void Field::Finalize() {
