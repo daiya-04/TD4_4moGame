@@ -374,34 +374,34 @@
     <ClCompile Include="Engine\3d\Skeleton.cpp">
       <Filter>Engine\3d</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\Boss.cpp">
+    <ClCompile Include="Game\Boss\Boss1\Boss.cpp">
       <Filter>Game\Boss</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\Behavior\IBossBehavior.cpp">
+    <ClCompile Include="Game\Boss\IBehavior\IBossBehavior.cpp">
       <Filter>Game\Boss\Behavior</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\Behavior\AreaAttack\BossAreaAttack.cpp">
+    <ClCompile Include="Game\Boss\Boss1\Behavior\AreaAttack\BossAreaAttack.cpp">
       <Filter>Game\Boss\Behavior\AreaAttack</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\Behavior\IBossAttack\IBossAttack.cpp">
+    <ClCompile Include="Game\Boss\IBossAttack\IBossAttack.cpp">
       <Filter>Game\Boss\Behavior\IBossAttack</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\Behavior\Idle\BossIdle.cpp">
+    <ClCompile Include="Game\Boss\Boss1\Behavior\Idle\BossIdle.cpp">
       <Filter>Game\Boss\Behavior\Idle</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\Behavior\WeaponRollAttack\BossWeaponRollAttack.cpp">
+    <ClCompile Include="Game\Boss\Boss1\Behavior\WeaponRollAttack\BossWeaponRollAttack.cpp">
       <Filter>Game\Boss\Behavior\WeaponRollAttack</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\BossBullet\BossBullet.cpp">
+    <ClCompile Include="Game\Boss\Boss1\BossBullet\BossBullet.cpp">
       <Filter>Game\Boss\BossBullet</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\BossBulletManager\BossBulletManager.cpp">
+    <ClCompile Include="Game\Boss\Boss1\BossBulletManager\BossBulletManager.cpp">
       <Filter>Game\Boss\BossBulletManager</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\DangerZone\DangerZone.cpp">
+    <ClCompile Include="Game\Boss\Boss1\DangerZone\DangerZone.cpp">
       <Filter>Game\Boss\DangerZone</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\DangerZoneManager\DangerZoneManager.cpp">
+    <ClCompile Include="Game\Boss\Boss1\DangerZoneManager\DangerZoneManager.cpp">
       <Filter>Game\Boss\DangerZoneManager</Filter>
     </ClCompile>
     <ClCompile Include="Game\Field\Field.cpp">
@@ -467,7 +467,10 @@
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="BaseUI.cpp" />
     <ClCompile Include="Game\Player\behavior\Entry\PlayerEntry.cpp" />
-    <ClCompile Include="Game\Boss\SingleDangerZone\SingleDangerZone.cpp" />
+    <ClCompile Include="Game\Boss\Boss1\SingleDangerZone\SingleDangerZone.cpp" />
+    <ClCompile Include="Game\Boss\Boss2\Boss2.cpp" />
+    <ClCompile Include="Game\Boss\Boss2\Behavior\Attack2P\Boss2Attack2Player.cpp" />
+    <ClCompile Include="Game\Boss\Boss2\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -692,34 +695,34 @@
     <ClInclude Include="Engine\GraphicsPipeline\InstancingObject3dGraphicsPipeline.h">
       <Filter>Engine\GraphicsPipeline</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\Boss.h">
+    <ClInclude Include="Game\Boss\Boss1\Boss.h">
       <Filter>Game\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\Behavior\IBossBehavior.h">
+    <ClInclude Include="Game\Boss\IBehavior\IBossBehavior.h">
       <Filter>Game\Boss\Behavior</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\Behavior\AreaAttack\BossAreaAttack.h">
+    <ClInclude Include="Game\Boss\Boss1\Behavior\AreaAttack\BossAreaAttack.h">
       <Filter>Game\Boss\Behavior\AreaAttack</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\Behavior\IBossAttack\IBossAttack.h">
+    <ClInclude Include="Game\Boss\IBossAttack\IBossAttack.h">
       <Filter>Game\Boss\Behavior\IBossAttack</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\Behavior\Idle\BossIdle.h">
+    <ClInclude Include="Game\Boss\Boss1\Behavior\Idle\BossIdle.h">
       <Filter>Game\Boss\Behavior\Idle</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\Behavior\WeaponRollAttack\BossWeaponRollAttack.h">
+    <ClInclude Include="Game\Boss\Boss1\Behavior\WeaponRollAttack\BossWeaponRollAttack.h">
       <Filter>Game\Boss\Behavior\WeaponRollAttack</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\BossBullet\BossBullet.h">
+    <ClInclude Include="Game\Boss\Boss1\BossBullet\BossBullet.h">
       <Filter>Game\Boss\BossBullet</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\BossBulletManager\BossBulletManager.h">
+    <ClInclude Include="Game\Boss\Boss1\BossBulletManager\BossBulletManager.h">
       <Filter>Game\Boss\BossBulletManager</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\DangerZone\DangerZone.h">
+    <ClInclude Include="Game\Boss\Boss1\DangerZone\DangerZone.h">
       <Filter>Game\Boss\DangerZone</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\DangerZoneManager\DangerZoneManager.h">
+    <ClInclude Include="Game\Boss\Boss1\DangerZoneManager\DangerZoneManager.h">
       <Filter>Game\Boss\DangerZoneManager</Filter>
     </ClInclude>
     <ClInclude Include="Game\Field\Field.h">
@@ -789,8 +792,11 @@
       <Filter>Game\Scene\GameOverScene</Filter>
     </ClInclude>
     <ClInclude Include="Game\Player\behavior\Entry\PlayerEntry.h" />
-    <ClInclude Include="Game\Boss\SingleDangerZone\SingleDangerZone.h" />
+    <ClInclude Include="Game\Boss\Boss1\SingleDangerZone\SingleDangerZone.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="BaseUI.h" />
+    <ClInclude Include="Game\Boss\Boss2\Boss2.h" />
+    <ClInclude Include="Game\Boss\Boss2\Behavior\Attack2P\Boss2Attack2Player.h" />
+    <ClInclude Include="Game\Boss\Boss2\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.h" />
   </ItemGroup>
 </Project>

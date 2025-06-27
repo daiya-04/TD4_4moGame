@@ -1,10 +1,10 @@
 {
-    "Boss": {
+    "Boss2": {
         "ColliderColor": [
             1.0,
             0.0,
             0.0,
-            0.46666666865348816
+            1.0
         ],
         "ColliderRadius": 1.0,
         "DangerZone": {
@@ -18,38 +18,38 @@
             "distance": 10.0,
             "finalWarningCount": 30.0,
             "followSpd": 0.10000000149011612,
-            "radius": 3.5,
+            "radius": 2.0,
             "spawnNum": 4,
             "warningCount": 60.0,
-            "warningSphereHeight": 1.0
+            "warningSphereHeight": 0.5
         },
         "FallingBullet": {
-            "colliderRadius": 3.450000047683716,
-            "fallSpeed": 0.699999988079071,
-            "radius": 3.5,
-            "spawnHeight": 60.0
+            "colliderRadius": 1.0,
+            "fallSpeed": 10.0,
+            "radius": 1.0,
+            "spawnHeight": 10.0
         },
         "FollowBullet": {
             "countCount": 120.0,
             "waitCount": 60.0
         },
         "Hit": {
-            "MaxNoHitSec": 5.0,
+            "MaxNoHitSec": 1.0,
             "TenmetuNum": 3
         },
         "Idle": {
-            "second": 60.0
+            "second": 1.0
         },
-        "MaxHP": 60,
+        "MaxHP": 100,
         "OffsetPos": [
             0.0,
-            1.159999966621399,
-            0.3100000023841858
+            0.0,
+            0.0
         ],
         "Scale": [
-            1.5,
-            1.5,
-            1.5
+            1.0,
+            1.0,
+            1.0
         ],
         "Speed": 0.0,
         "SpinAttack2Player": {
@@ -57,7 +57,7 @@
             "executeCount": 3,
             "ptrAnimationRate": 1.0,
             "speed": 1.0,
-            "waitCount": 0.0
+            "waitCount": 60.0
         },
         "StartPos": [
             0.0,
