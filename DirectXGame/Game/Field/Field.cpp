@@ -455,42 +455,6 @@ void Field::AddWave(const Vector2& center, float radius, float amplitude, int wa
 	waves_.push_back(wave);
 }
 
-void Field::AddWave(const Vector2& center, float radius, float amplitude, int waveCount, float speed) {
-	WaveInfo wave;
-	wave.center = center;
-	wave.radius = radius;
-	wave.amplitude = amplitude;
-	wave.waveCount = waveCount;
-	wave.speed = speed;
-	wave.time = 0.0f;
-	wave.currentWave = 0;
-	wave.active = true;
-
-	Vector3 centerPos{};
-	bool found = false;
-	for (const Block& block : blocks_) {
-		if (block.massLocation == center) {
-			centerPos = block.world.translation_;
-			found = true;
-			break;
-		}
-	}
-	if (!found) return;
-
-	// 波が影響するブロックとその高さを保存
-	for (const Block& block : blocks_) {
-		float dx = block.world.translation_.x - centerPos.x;
-		float dz = block.world.translation_.z - centerPos.z;
-		float distance = std::sqrt(dx * dx + dz * dz);
-
-		if (distance <= radius) {
-			wave.baseHeights[block.massLocation] = block.world.translation_.y;
-		}
-	}
-
-	waves_.push_back(wave);
-}
-
 bool Field::IsWalkable(const Vector3& worldPos) {
 	Vector2 gridPos = GetBlockAt(worldPos.x, worldPos.z);
 
