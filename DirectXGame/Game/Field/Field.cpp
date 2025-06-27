@@ -20,6 +20,9 @@ void Field::Initialize() {
 	instancingObj_ = std::make_unique<InstancingGameObject>();
 	instancingObj_->Init("Cube", 10000);
 
+	instancingObj2_ = std::make_unique<InstancingGameObject>();
+	instancingObj2_->Init("testfield", 10000);
+
 	worldTransform_.Init();
 
 	//
@@ -73,6 +76,7 @@ void Field::Update() {
 		ResetStage();
 	}
 	ImGui::End();
+
 #endif // _DEBUG
 
 	//ステージ開始/リセット演出
@@ -80,6 +84,12 @@ void Field::Update() {
 		deltaTime_ += deltaPlusTime_;
 		PlayStageIntroAnimation(deltaTime_);
 	}
+
+	//変数呼び出し
+	DaiEngine::InstancingObjData data2;
+	data2.worldTransform_.translation_.y = -15000.0f;
+	//データ追加
+	instancingObj2_->SetData(data2);
 
 	//高さを限界値内に修正
 	FixedHeightCorrection();
@@ -142,6 +152,7 @@ void Field::Update() {
 void Field::Draw() {
 	//セットされたデータ分描画してセットデータ削除
 	instancingObj_->Draw();
+	instancingObj2_->Draw();
 }
 
 void Field::Finalize() {
@@ -406,6 +417,42 @@ void Field::RaiseBlocksAroundWithAttenuation(const Vector2& center, float radius
 			block.world.translation_.y += adjustedDeltaY;
 		}
 	}
+}
+
+void Field::AddWave(const Vector2& center, float radius, float amplitude, int waveCount, float speed) {
+	WaveInfo wave;
+	wave.center = center;
+	wave.radius = radius;
+	wave.amplitude = amplitude;
+	wave.waveCount = waveCount;
+	wave.speed = speed;
+	wave.time = 0.0f;
+	wave.currentWave = 0;
+	wave.active = true;
+
+	Vector3 centerPos{};
+	bool found = false;
+	for (const Block& block : blocks_) {
+		if (block.massLocation == center) {
+			centerPos = block.world.translation_;
+			found = true;
+			break;
+		}
+	}
+	if (!found) return;
+
+	// 波が影響するブロックとその高さを保存
+	for (const Block& block : blocks_) {
+		float dx = block.world.translation_.x - centerPos.x;
+		float dz = block.world.translation_.z - centerPos.z;
+		float distance = std::sqrt(dx * dx + dz * dz);
+
+		if (distance <= radius) {
+			wave.baseHeights[block.massLocation] = block.world.translation_.y;
+		}
+	}
+
+	waves_.push_back(wave);
 }
 
 void Field::AddWave(const Vector2& center, float radius, float amplitude, int waveCount, float speed) {

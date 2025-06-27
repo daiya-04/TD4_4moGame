@@ -32,7 +32,8 @@
 #include"Player/Player.h"
 #include"GlobalVariable/Manager/GlobalVaribleManager.h"
 #include"FollowCamera/FollowCamera.h"
-#include"Boss/Boss.h"
+#include"Boss/Boss1/Boss.h"
+#include"Boss/Boss2/Boss2.h"
 #pragma endregion
 #include"Field/Field.h"
 
@@ -112,7 +113,10 @@ private://**キクチ
 	std::unique_ptr<Player> player_ = nullptr;
 
 	//ボス
-	std::unique_ptr<Boss> boss_ = nullptr;
+	//std::unique_ptr<Boss> boss__ = nullptr;
+
+	std::unique_ptr<Boss2> boss_ = nullptr;
+
 
 	//追従カメラ
 	std::unique_ptr<FollowCamera> followCamera_ = nullptr;

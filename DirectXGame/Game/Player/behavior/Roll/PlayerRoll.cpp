@@ -6,6 +6,7 @@ PlayerRoll::PlayerRoll()
 {
 	tree_.name_ = "Roll";
 	tree_.SetMonitorValue("nowVelo", &currentVelo_);
+	tree_.SetMonitorValue("groundNormal", &player_->parameters_.grandNormal);
 
 
 	tree_.SetValue("StSpeed", &startSpeed_);

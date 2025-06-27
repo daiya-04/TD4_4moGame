@@ -126,7 +126,7 @@ void GameScene::Init() {
 	followCamera_ = std::make_unique<FollowCamera>(&camera_, player_->GetWorld().translation_);
 	
 	//ボス生成
-	boss_ = std::make_unique<Boss>(followCamera_.get());
+	boss_ = std::make_unique<Boss2>(followCamera_.get());
 	boss_->SetPlayerWorld(&player_->GetWorld());
 	//地面生成
 	field_ = std::make_unique<Field>();
