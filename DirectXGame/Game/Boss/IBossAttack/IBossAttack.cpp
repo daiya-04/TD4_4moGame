@@ -1,5 +1,4 @@
 #include "IBossAttack.h"
-#include"Boss/Boss1/Boss.h"
 
 IBossAttack::IBossAttack()
 {

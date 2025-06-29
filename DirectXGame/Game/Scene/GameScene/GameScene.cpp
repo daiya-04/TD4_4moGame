@@ -126,8 +126,11 @@ void GameScene::Init() {
 	followCamera_ = std::make_unique<FollowCamera>(&camera_, player_->GetWorld().translation_);
 	
 	//ボス生成
-	boss_ = std::make_unique<Boss2>(followCamera_.get());
-	boss_->SetPlayerWorld(&player_->GetWorld());
+	//boss_ = std::make_unique<Boss2>(followCamera_.get());
+	//boss_->SetPlayerWorld(&player_->GetWorld());
+
+	bossSpawnManager_ = std::make_unique<BossSpawnManager>(followCamera_.get(), &player_->GetWorld());
+
 	//地面生成
 	field_ = std::make_unique<Field>();
 	field_->Initialize();
@@ -157,7 +160,8 @@ void GameScene::Init() {
 
 	//セットされたデータで初期化
 	player_->Init();
-	boss_->Initialize();
+	//boss_->Initialize();
+	bossSpawnManager_->Initialize();
 
 	field_->CreateStage();
 	field_->StartStage();
@@ -211,7 +215,7 @@ void GameScene::Update() {
 		player_->SetField(field_.get());
 
 		//ボス更新
-		boss_->Update();
+		bossSpawnManager_->Update();
 	}
 	
 
@@ -220,7 +224,8 @@ void GameScene::Update() {
 	//地面更新
 	field_->Update();
 
-	for (std::unique_ptr<BossBullet>& bullet : boss_->GetBullets()) {
+	//弾の更新
+	for (std::unique_ptr<BossBullet>& bullet : bossSpawnManager_->GetBullets()) {
 		Vector2 targetBlock = field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
 		Block* block = field_->GetBlock(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
 
@@ -245,7 +250,7 @@ void GameScene::Update() {
 	}
 
 	//ボスのHPが0以下になったらクリアへ
-	if (boss_->GetIsDead()) {
+	if (bossSpawnManager_->GetAllBossDead()) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Clear");
 	}
 }
@@ -262,7 +267,7 @@ void GameScene::DrawModel() {
 	field_->Draw();
 
 	//ボス描画
-	boss_->Draw();
+	bossSpawnManager_->Draw();
 
 	//プレイヤー描画
 	player_->Draw();
@@ -278,7 +283,7 @@ void GameScene::DrawUI() {
 		ui->Draw();
 	}
 	player_->DrawUI();
-	boss_->DrawUI();
+	bossSpawnManager_->UIDraw();
 }
 
 void GameScene::DrawPostEffect() {
