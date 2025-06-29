@@ -111,9 +111,14 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseUI.cpp" />
-    <ClCompile Include="Game\Boss\Boss2\Behavior\Attack2P\Boss2Attack2Player.cpp" />
-    <ClCompile Include="Game\Boss\Boss2\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.cpp" />
-    <ClCompile Include="Game\Boss\Boss2\Boss2.cpp" />
+    <ClCompile Include="Game\Boss\Blinking\Blinking.cpp" />
+    <ClCompile Include="Game\Boss\Donut\Behavior\AttackSpin\BossSpinAttack.cpp" />
+    <ClCompile Include="Game\Boss\Donut\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.cpp" />
+    <ClCompile Include="Game\Boss\Donut\Donut.cpp" />
+    <ClCompile Include="Game\Boss\GingerbreadMan\GingerbreadMan.cpp" />
+    <ClCompile Include="Game\Boss\IBoss\IBoss.cpp" />
+    <ClCompile Include="Game\Boss\SpawnManager\BossSpawnManager.cpp" />
+    <ClCompile Include="Game\Boss\UI\BossUI.cpp" />
     <ClCompile Include="Game\Scene\ClearScene\ClearScene.cpp" />
     <ClCompile Include="Engine\Audio\AudioManager.cpp" />
     <ClCompile Include="Engine\Collision\Collider\Collider.cpp" />
@@ -123,17 +128,16 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\3d\Animation\AnimationManager.cpp" />
     <ClCompile Include="Engine\PostEffect\Dissolve.cpp" />
     <ClCompile Include="Game\Scene\GameOverScene\GameOverScene.cpp" />
-    <ClCompile Include="Game\Boss\Boss1\Behavior\AreaAttack\BossAreaAttack.cpp" />
+    <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\AreaAttack\BossAreaAttack.cpp" />
     <ClCompile Include="Game\Boss\IBossAttack\IBossAttack.cpp" />
     <ClCompile Include="Game\Boss\IBehavior\IBossBehavior.cpp" />
-    <ClCompile Include="Game\Boss\Boss1\Behavior\Idle\BossIdle.cpp" />
-    <ClCompile Include="Game\Boss\Boss1\Behavior\WeaponRollAttack\BossWeaponRollAttack.cpp" />
-    <ClCompile Include="Game\Boss\Boss1\Boss.cpp" />
-    <ClCompile Include="Game\Boss\Boss1\BossBulletManager\BossBulletManager.cpp" />
-    <ClCompile Include="Game\Boss\Boss1\BossBullet\BossBullet.cpp" />
-    <ClCompile Include="Game\Boss\Boss1\DangerZoneManager\DangerZoneManager.cpp" />
-    <ClCompile Include="Game\Boss\Boss1\DangerZone\DangerZone.cpp" />
-    <ClCompile Include="Game\Boss\Boss1\SingleDangerZone\SingleDangerZone.cpp" />
+    <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\Idle\BossIdle.cpp" />
+    <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\WeaponRollAttack\BossWeaponRollAttack.cpp" />
+    <ClCompile Include="Game\Boss\BossBulletManager\BossBulletManager.cpp" />
+    <ClCompile Include="Game\Boss\BossBullet\BossBullet.cpp" />
+    <ClCompile Include="Game\Boss\DangerZoneManager\DangerZoneManager.cpp" />
+    <ClCompile Include="Game\Boss\DangerZone\DangerZone.cpp" />
+    <ClCompile Include="Game\Boss\SingleDangerZone\SingleDangerZone.cpp" />
     <ClCompile Include="Game\Field\Field.cpp" />
     <ClCompile Include="Game\FollowCamera\FollowCamera.cpp" />
     <ClCompile Include="Game\GameObject\GameObject.cpp" />
@@ -215,9 +219,14 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseUI.h" />
-    <ClInclude Include="Game\Boss\Boss2\Behavior\Attack2P\Boss2Attack2Player.h" />
-    <ClInclude Include="Game\Boss\Boss2\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.h" />
-    <ClInclude Include="Game\Boss\Boss2\Boss2.h" />
+    <ClInclude Include="Game\Boss\Blinking\Blinking.h" />
+    <ClInclude Include="Game\Boss\Donut\Behavior\AttackSpin\BossSpinAttack.h" />
+    <ClInclude Include="Game\Boss\Donut\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.h" />
+    <ClInclude Include="Game\Boss\Donut\Donut.h" />
+    <ClInclude Include="Game\Boss\GingerbreadMan\GingerbreadMan.h" />
+    <ClInclude Include="Game\Boss\IBoss\IBoss.h" />
+    <ClInclude Include="Game\Boss\SpawnManager\BossSpawnManager.h" />
+    <ClInclude Include="Game\Boss\UI\BossUI.h" />
     <ClInclude Include="Game\Scene\ClearScene\ClearScene.h" />
     <ClInclude Include="Engine\Audio\AudioManager.h" />
     <ClInclude Include="Engine\Collision\Collider\Collider.h" />
@@ -227,17 +236,16 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\3d\Animation\AnimationManager.h" />
     <ClInclude Include="Engine\PostEffect\Dissolve.h" />
     <ClInclude Include="Game\Scene\GameOverScene\GameOverScene.h" />
-    <ClInclude Include="Game\Boss\Boss1\Behavior\AreaAttack\BossAreaAttack.h" />
+    <ClInclude Include="Game\Boss\GingerbreadMan\Behavior\AreaAttack\BossAreaAttack.h" />
     <ClInclude Include="Game\Boss\IBossAttack\IBossAttack.h" />
     <ClInclude Include="Game\Boss\IBehavior\IBossBehavior.h" />
-    <ClInclude Include="Game\Boss\Boss1\Behavior\Idle\BossIdle.h" />
-    <ClInclude Include="Game\Boss\Boss1\Behavior\WeaponRollAttack\BossWeaponRollAttack.h" />
-    <ClInclude Include="Game\Boss\Boss1\Boss.h" />
-    <ClInclude Include="Game\Boss\Boss1\BossBulletManager\BossBulletManager.h" />
-    <ClInclude Include="Game\Boss\Boss1\BossBullet\BossBullet.h" />
-    <ClInclude Include="Game\Boss\Boss1\DangerZoneManager\DangerZoneManager.h" />
-    <ClInclude Include="Game\Boss\Boss1\DangerZone\DangerZone.h" />
-    <ClInclude Include="Game\Boss\Boss1\SingleDangerZone\SingleDangerZone.h" />
+    <ClInclude Include="Game\Boss\GingerbreadMan\Behavior\Idle\BossIdle.h" />
+    <ClInclude Include="Game\Boss\GingerbreadMan\Behavior\WeaponRollAttack\BossWeaponRollAttack.h" />
+    <ClInclude Include="Game\Boss\BossBulletManager\BossBulletManager.h" />
+    <ClInclude Include="Game\Boss\BossBullet\BossBullet.h" />
+    <ClInclude Include="Game\Boss\DangerZoneManager\DangerZoneManager.h" />
+    <ClInclude Include="Game\Boss\DangerZone\DangerZone.h" />
+    <ClInclude Include="Game\Boss\SingleDangerZone\SingleDangerZone.h" />
     <ClInclude Include="Game\Field\Field.h" />
     <ClInclude Include="Game\FollowCamera\FollowCamera.h" />
     <ClInclude Include="Game\GameObject\GameObject.h" />

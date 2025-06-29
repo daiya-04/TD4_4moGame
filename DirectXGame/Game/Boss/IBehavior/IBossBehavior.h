@@ -58,13 +58,13 @@ class IBossBehavior {
 
 protected://**共通変数**//
 
-	//ボス
-	static BossParameters* param_;
-
 	//カメラ
 	static DaiEngine::Camera* camera_;
 
 public://**パブリック変数**//
+
+	//ボス
+	BossParameters* param_;
 
 	//デバッグ用ツリー
 	GvariTree tree_;
@@ -75,12 +75,11 @@ public://パブリック関数**//
 	/// ポインタをセット
 	/// </summary>
 	/// <param name="boss"></param>
-	static void SetPointer(BossParameters* boss, DaiEngine::Camera* camera) { param_ = boss; camera_ = camera; }
+	static void SetPointer(DaiEngine::Camera* camera) { camera_ = camera; }
 
-
-
-	IBossBehavior() = default;
+	IBossBehavior()=default;
 	virtual ~IBossBehavior() = default;
+
 
 	/// <summary>
 	/// 初期化
