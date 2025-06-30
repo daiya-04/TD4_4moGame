@@ -16,16 +16,16 @@
                     0.0,
                     1.0
                 ],
-                "distance": 10.0,
+                "distance": 13.0,
                 "finalWarningCount": 30.0,
-                "followSpd": 0.10000000149011612,
-                "radius": 3.4000000953674316,
+                "followSpd": 0.15000000596046448,
+                "radius": 2.950000047683716,
                 "spawnNum": 4,
                 "warningCount": 60.0,
-                "warningSphereHeight": 3.5
+                "warningSphereHeight": 3.0
             },
             "FallingBullet": {
-                "colliderRadius": 1.0,
+                "colliderRadius": 2.9000000953674316,
                 "fallSpeed": 1.0,
                 "radius": 1.0,
                 "spawnHeight": 10.0
