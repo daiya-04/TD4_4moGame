@@ -118,6 +118,8 @@ public://**ゲッター**//
 	/// <returns></returns>
 	bool GetIsDead() const { return isDead_; };
 
+	Field* GetField() { return field_; }
+
 public://**セッター
 
 	/// <summary>

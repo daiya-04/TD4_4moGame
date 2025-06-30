@@ -122,6 +122,8 @@ public:
 	//下がる量の取得
 	float GetDeltaY() { return deltaY_; }
 
+	float GetBlockWidth() { return blockWidth_; }
+
 private:
 	//各ブロックの生成
 	void CreateBlocks(const int x, const int z);
