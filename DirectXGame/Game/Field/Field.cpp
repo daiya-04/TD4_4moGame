@@ -388,6 +388,7 @@ void Field::RaiseBlocksAroundWithAttenuation(const Vector2& center, float radius
 	Vector3 centerPos{};
 	bool found = false;
 
+	//
 	for (const Block& block : blocks_) {
 		if (block.massLocation.x == center.x && block.massLocation.y == center.y) {
 			centerPos = block.world.translation_;
