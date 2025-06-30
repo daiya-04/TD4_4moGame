@@ -5,7 +5,9 @@
         "DeltaY": -1.5,
         "HeightLimit": 2.5,
         "HorizontalSize": 70,
-        "Radius": 5.0,
-        "VerticalSize": 70
+        "Radius": 30.0,
+        "VerticalSize": 70,
+        "WaveCount": 1,
+        "WaveSpeed": 0.009999999776482582
     }
 }

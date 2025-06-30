@@ -217,9 +217,6 @@ void GameScene::Update() {
 		//ボス更新
 		bossSpawnManager_->Update();
 	}
-	
-
-
 
 	//地面更新
 	field_->Update();
@@ -231,7 +228,16 @@ void GameScene::Update() {
 
 		// Y範囲にあるか判定
 		if (block->world.translation_.y >= bullet->GetWorld().translation_.y && block->world.translation_.y <= bullet->GetWorld().translation_.y + bullet->GetWorld().scale_.y) {
-			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, field_->GetDeltaY());
+			
+			//下げる値取得
+			float deltaY = field_->GetDeltaY();
+			
+			//もし上げる弾なら向きを変更
+			if (bossSpawnManager_->GetBulletType() == BulletType::Follow) {
+				deltaY *= -1.0f; // Follow弾は上げる
+			}
+
+			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, deltaY);
 			bullet->OnCollision();
 		}
 	}

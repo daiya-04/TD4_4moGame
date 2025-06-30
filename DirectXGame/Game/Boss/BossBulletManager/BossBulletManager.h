@@ -11,6 +11,7 @@ public://**パブリック関数**//
 	/// </summary>
 	BossBulletManager(BulletType type);
 	~BossBulletManager() = default;
+
 	/// <summary>
 	/// 更新
 	/// </summary>
@@ -25,6 +26,12 @@ public://**パブリック関数**//
 	/// 弾を生成
 	/// </summary>
 	void SpawnBullet(const DaiEngine::WorldTransform& pos);
+
+	/// <summary>
+	/// 弾タイプ取得
+	/// </summary>
+	/// <returns></returns>
+	BulletType GetBulletType() const { return type_; }
 
 	/// <summary>
 	/// ツリーの取得
