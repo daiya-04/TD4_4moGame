@@ -471,6 +471,7 @@
     <ClCompile Include="Game\Boss\Boss2\Boss2.cpp" />
     <ClCompile Include="Game\Boss\Boss2\Behavior\Attack2P\Boss2Attack2Player.cpp" />
     <ClCompile Include="Game\Boss\Boss2\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.cpp" />
+    <ClCompile Include="PlayerAttackEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -798,5 +799,6 @@
     <ClInclude Include="Game\Boss\Boss2\Boss2.h" />
     <ClInclude Include="Game\Boss\Boss2\Behavior\Attack2P\Boss2Attack2Player.h" />
     <ClInclude Include="Game\Boss\Boss2\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.h" />
+    <ClInclude Include="PlayerAttackEffect.h" />
   </ItemGroup>
 </Project>

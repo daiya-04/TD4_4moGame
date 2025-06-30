@@ -3,6 +3,7 @@
 #include"Player/Input/PlayerInput.h"
 #include"Player/behavior/IPlayerBehavior.h"
 #include"SphereCollider.h"
+#include "PlayerAttackEffect.h"
 #include<optional>
 
 //セト
@@ -118,6 +119,8 @@ public://**ゲッター**//
 	/// <returns></returns>
 	bool GetIsDead() const { return isDead_; };
 
+	PlayerAttackEffect* GetAttackEffect() { return attackEffect_; }
+
 public://**セッター
 
 	/// <summary>
@@ -162,6 +165,8 @@ public://**セッター
 	/// <param name="hill">地面の法線（上下を考慮しない）</param>
 	/// <param name="inflence">影響度</param>
 	void SetFieldNormalVec(const Vector3& normalVec) { parameters_.grandNormal = normalVec;}
+
+	void SetAttackEffect(PlayerAttackEffect* attackEffect) { attackEffect_ = attackEffect; }
 
 private://**プライベート関数**//
 
@@ -234,6 +239,9 @@ private://**プライベート変数**//
 	float curPer_ = 1.0f;
 	float percent_ = 1.0f;
 	Vector2 gaugeSize_ = {};
+
+	//攻撃エフェクト
+	PlayerAttackEffect* attackEffect_ = nullptr;
 
 	///
 

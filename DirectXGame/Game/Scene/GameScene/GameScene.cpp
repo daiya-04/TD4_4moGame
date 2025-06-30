@@ -122,6 +122,10 @@ void GameScene::Init() {
 
 	//プレイヤー生成
 	player_ = std::make_unique<Player>();
+	playerAttackEffect_ = std::make_unique<PlayerAttackEffect>();
+	playerAttackEffect_->Init();
+	player_->SetAttackEffect(playerAttackEffect_.get());
+
 	//追従カメラ処理生成
 	followCamera_ = std::make_unique<FollowCamera>(&camera_, player_->GetWorld().translation_);
 	
@@ -212,9 +216,11 @@ void GameScene::Update() {
 
 		//ボス更新
 		boss_->Update();
+
+		
 	}
 	
-
+	playerAttackEffect_->Update();
 
 
 	//地面更新

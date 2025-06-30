@@ -62,7 +62,8 @@ Player::Player()
 	hpFream_.reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("playerHPGageFram.png"), { 700.0f,670.0f }));
 	hpFream_->SetAnchorpoint({ 0.0f,0.5f });
 
-	
+	//attackEffect_ = std::make_unique<PlayerAttackEffect>();
+	//attackEffect_->Init();
 
 	///
 
@@ -196,6 +197,9 @@ void Player::Update()
 	//UI更新
 	UIUpdate();
 
+	//エフェクト更新
+	//attackEffect_->Update();
+
 }
 
 
@@ -240,6 +244,9 @@ void Player::Draw()
 	if (isDraw_) {
 		GameObject::Draw();
 	}
+
+	//エフェクト描画
+	attackEffect_->Draw(*camera_);
 }
 
 void Player::UpdateMatrix() {

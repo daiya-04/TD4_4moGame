@@ -35,6 +35,9 @@ void PlayerAttackManager::Update()
 		behavior_ = behaviorRequest_.value();
 		behaviorRequest_ = std::nullopt;
 	 	attacks_[behavior_]->Init();
+
+		//演出開始
+		player_->GetAttackEffect()->Start(player_->GetWorld().GetWorldPos(), player_->GetWorld().rotation_.y);
 	}
 
 	//攻撃の更新
