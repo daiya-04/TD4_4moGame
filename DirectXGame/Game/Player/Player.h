@@ -122,11 +122,7 @@ public://**ゲッター**//
 	/// <returns></returns>
 	bool GetIsDead() const { return isDead_; };
 
-	/// <summary>
-	/// ボス方向のベクトル取得
-	/// </summary>
-	/// <returns></returns>
-	Vector3 Get2BossDirection();
+	Field* GetField() { return field_; }
 
 public://**セッター
 

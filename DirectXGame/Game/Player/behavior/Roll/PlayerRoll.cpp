@@ -126,17 +126,4 @@ void PlayerRoll::Update()
 
     // 最終的にプレイヤーに加算
     params.velocity += currentVelo_;
-
-#ifdef _DEBUG
-    if (DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-        player_->behaviorRequest_ = Player::Behavior::SpinAttack;
-    }
-#endif // _DEBUG
-
-
-	if(DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE)){
-		player_->behaviorRequest_ = Player::Behavior::SpinAttack;
-	}
-
-
 }
