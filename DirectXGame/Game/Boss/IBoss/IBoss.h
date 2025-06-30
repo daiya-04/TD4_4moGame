@@ -87,6 +87,8 @@ public://**パブリック関数**//
 	/// <returns></returns>
 	std::list<std::unique_ptr<BossBullet>>& GetBullets() { return bulletManager_->GetBullets(); }
 
+	BulletType GetBulletType() const { return bulletManager_->GetBulletType(); }
+
 	/// <summary>
 	/// ツリー取得
 	/// </summary>
@@ -96,8 +98,8 @@ public://**パブリック関数**//
 private://**プライベート関数**//
 
 	/// <summary>
-/// パラメータフラグ更新
-/// </summary>
+	/// パラメータフラグ更新
+	/// </summary>
 	void ParameterFlagUpdate();
 
 	/// <summary>
