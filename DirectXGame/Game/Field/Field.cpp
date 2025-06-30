@@ -534,6 +534,11 @@ void Field::WaveUpdate() {
 			wave.currentWave++;
 			if (wave.currentWave >= wave.waveCount) {
 				wave.active = false;
+
+				// 終了した波の影響ブロックを記録
+				for (const auto& [massLoc, baseY] : wave.baseHeights) {
+					wave.finishedBlocks.insert(massLoc);
+				}
 				continue;
 			}
 		}
@@ -569,14 +574,32 @@ void Field::WaveUpdate() {
 		}
 	}
 
-	// 最終的な高さ反映
+	// 波の影響 or 終了後リセット対象のブロックだけ補正
 	for (Block& block : blocks_) {
-		if (block.tempYOffset > 0.0f) {
+		bool affected = (block.tempYOffset > 0.0f);
+		bool needsReset = false;
+
+		// どの波からもリセット対象になっているか確認
+		for (const WaveInfo& wave : waves_) {
+			if (!wave.active && wave.finishedBlocks.count(block.massLocation)) {
+				needsReset = true;
+				break;
+			}
+		}
+
+		if (affected) {
 			block.world.translation_.y = block.baseY + block.tempYOffset;
 		}
-		else {
-			// baseY に戻す（緩やかに）
+		else if (needsReset) {
+			// ゆっくり戻す
 			block.world.translation_.y += (block.baseY - block.world.translation_.y) * 0.2f;
+
+			// 戻ったらリセット対象解除（閾値を設ける）
+			if (std::abs(block.world.translation_.y - block.baseY) < 0.01f) {
+				for (WaveInfo& wave : waves_) {
+					wave.finishedBlocks.erase(block.massLocation);
+				}
+			}
 		}
 	}
 }
