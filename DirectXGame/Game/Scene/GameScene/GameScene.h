@@ -32,8 +32,6 @@
 #include"Player/Player.h"
 #include"GlobalVariable/Manager/GlobalVaribleManager.h"
 #include"FollowCamera/FollowCamera.h"
-#include"Boss/Boss1/Boss.h"
-#include"Boss/Boss2/Boss2.h"
 #include"../../Boss/SpawnManager/BossSpawnManager.h"
 #pragma endregion
 #include"Field/Field.h"

@@ -1,5 +1,5 @@
 #include "BossWeaponRollAttack.h"
-#include"Boss/Boss1/Boss.h"
+#include "Boss/IBoss/IBoss.h"
 #include"ColliderManager.h"
 #include"ShapesDraw.h"
 #include"Camera.h"
@@ -117,6 +117,6 @@ void BossWeaponRollAttack::UpdateBehavior2()
 {
 	//時間経過で終わり
 	if (param_->currentSec >= endCount_) {
-		param_->behaviorRequest_ = Boss::Behavior::Idle;
+		param_->behaviorRequest_ = IBoss::BossBehavior::Idle;
 	}
 }
