@@ -50,7 +50,7 @@
             ],
             "Speed": 0.0,
             "SpinAttack2Player": {
-                "actionAnimationRate": 0.0,
+                "actionAnimationRate": 1.0,
                 "color": [
                     1.0,
                     0.0,
