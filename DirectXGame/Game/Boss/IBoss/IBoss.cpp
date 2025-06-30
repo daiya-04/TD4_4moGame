@@ -182,6 +182,7 @@ void IBoss::ParameterFlagUpdate() {
 	if (parameters_.setAnimeName_ != "") {
 		//アニメーション名が設定されている場合
 		GameObject::SetAnimationName(parameters_.setAnimeName_, parameters_.isLoopAnime_);
+		GameObject::SetAnimationLeverage(parameters_.animationLeverage_);
 		//残りをクリア
 		parameters_.setAnimeName_ = "";
 		parameters_.isLoopAnime_ = true;
