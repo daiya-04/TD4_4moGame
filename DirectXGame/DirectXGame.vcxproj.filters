@@ -464,17 +464,11 @@
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="BaseUI.cpp" />
     <ClCompile Include="Game\Player\behavior\Entry\PlayerEntry.cpp" />
-    <ClCompile Include="Game\Boss\SingleDangerZone\SingleDangerZone.cpp" />
-    <ClCompile Include="Game\Boss\Donut\Behavior\AttackSpin\BossSpinAttack.cpp" />
-    <ClCompile Include="Game\Boss\Donut\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.cpp" />
-    <ClCompile Include="Game\Boss\SpawnManager\BossSpawnManager.cpp" />
-    <ClCompile Include="Game\Boss\UI\BossUI.cpp" />
-    <ClCompile Include="Game\Boss\Blinking\Blinking.cpp" />
-    <ClCompile Include="Game\Boss\IBoss\IBoss.cpp" />
-    <ClCompile Include="Game\Boss\GingerbreadMan\GingerbreadMan.cpp" />
-    <ClCompile Include="Game\Boss\Donut\Donut.cpp" />
-    <ClCompile Include="Game\Player\behavior\SpinAttack\SpinAttack.cpp" />
-    <ClCompile Include="Game\Player\UI\PlayerUI.cpp" />
+    <ClCompile Include="Game\Boss\Boss1\SingleDangerZone\SingleDangerZone.cpp" />
+    <ClCompile Include="Game\Boss\Boss2\Boss2.cpp" />
+    <ClCompile Include="Game\Boss\Boss2\Behavior\Attack2P\Boss2Attack2Player.cpp" />
+    <ClCompile Include="Game\Boss\Boss2\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.cpp" />
+    <ClCompile Include="PlayerAttackEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -796,15 +790,9 @@
     <ClInclude Include="Game\Boss\SingleDangerZone\SingleDangerZone.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="BaseUI.h" />
-    <ClInclude Include="Game\Boss\Donut\Behavior\AttackSpin\BossSpinAttack.h" />
-    <ClInclude Include="Game\Boss\Donut\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.h" />
-    <ClInclude Include="Game\Boss\SpawnManager\BossSpawnManager.h" />
-    <ClInclude Include="Game\Boss\UI\BossUI.h" />
-    <ClInclude Include="Game\Boss\IBoss\IBoss.h" />
-    <ClInclude Include="Game\Boss\Blinking\Blinking.h" />
-    <ClInclude Include="Game\Boss\GingerbreadMan\GingerbreadMan.h" />
-    <ClInclude Include="Game\Boss\Donut\Donut.h" />
-    <ClInclude Include="Game\Player\behavior\SpinAttack\SpinAttack.h" />
-    <ClInclude Include="Game\Player\UI\PlayerUI.h" />
+    <ClInclude Include="Game\Boss\Boss2\Boss2.h" />
+    <ClInclude Include="Game\Boss\Boss2\Behavior\Attack2P\Boss2Attack2Player.h" />
+    <ClInclude Include="Game\Boss\Boss2\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.h" />
+    <ClInclude Include="PlayerAttackEffect.h" />
   </ItemGroup>
 </Project>

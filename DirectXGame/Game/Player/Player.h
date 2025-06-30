@@ -4,6 +4,7 @@
 #include"UI/PlayerUI.h"
 #include"Player/behavior/IPlayerBehavior.h"
 #include"SphereCollider.h"
+#include "PlayerAttackEffect.h"
 #include<optional>
 
 
@@ -121,7 +122,7 @@ public://**ゲッター**//
 	/// <returns></returns>
 	bool GetIsDead() const { return isDead_; };
 
-	Field* GetField() { return field_; }
+	PlayerAttackEffect* GetAttackEffect() { return attackEffect_; }
 
 public://**セッター
 
@@ -168,11 +169,7 @@ public://**セッター
 	/// <param name="inflence">影響度</param>
 	void SetFieldNormalVec(const Vector3& normalVec) { parameters_.grandNormal = normalVec;}
 
-	/// <summary>
-	/// ボスのワールド座標
-	/// </summary>
-	/// <param name="bossWorld"></param>
-	void SetBossWorld(DaiEngine::WorldTransform* bossWorld) { bossWorld_ = bossWorld; }
+	void SetAttackEffect(PlayerAttackEffect* attackEffect) { attackEffect_ = attackEffect; }
 
 private://**プライベート関数**//
 
@@ -246,6 +243,9 @@ private://**プライベート変数**//
 	float gravity_ = 0.1f;
 
 
+
+	//攻撃エフェクト
+	PlayerAttackEffect* attackEffect_ = nullptr;
 
 	///
 

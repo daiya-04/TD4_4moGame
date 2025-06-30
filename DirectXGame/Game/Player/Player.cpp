@@ -58,6 +58,9 @@ Player::Player()
 	ui_ = std::make_unique<PlayerUI>();
 	
 
+	//attackEffect_ = std::make_unique<PlayerAttackEffect>();
+	//attackEffect_->Init();
+
 	///
 
 #pragma region デバッグパラメータ設定
@@ -190,6 +193,9 @@ void Player::Update()
 	//UI更新
 	UIUpdate();
 
+	//エフェクト更新
+	//attackEffect_->Update();
+
 }
 
 
@@ -231,6 +237,9 @@ void Player::Draw()
 	if (isDraw_) {
 		GameObject::Draw();
 	}
+
+	//エフェクト描画
+	attackEffect_->Draw(*camera_);
 }
 
 void Player::UpdateMatrix() {
