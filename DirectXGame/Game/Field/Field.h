@@ -14,6 +14,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <unordered_map>
+#include <unordered_set>
 
 #include"Input.h"
 
@@ -46,6 +47,7 @@ struct WaveInfo {
 	bool active = true;
 	int currentWave = 0;
 	std::unordered_map<Vector2, float> baseHeights;
+	std::unordered_set<Vector2> finishedBlocks;
 };
 
 
