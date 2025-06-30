@@ -124,13 +124,6 @@ void PlayerRoll::Update()
         }
     }
 
-	//移動する
-	player_->parameters_.velocity += currentVelo_;
-
-
-	if(DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE)){
-		player_->behaviorRequest_ = Player::Behavior::SpinAttack;
-	}
-
-
+    // 最終的にプレイヤーに加算
+    params.velocity += currentVelo_;
 }
