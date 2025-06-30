@@ -152,7 +152,7 @@ void Field::Update() {
 void Field::Draw() {
 	//セットされたデータ分描画してセットデータ削除
 	instancingObj_->Draw();
-	instancingObj2_->Draw();
+	//instancingObj2_->Draw();
 }
 
 void Field::Finalize() {
