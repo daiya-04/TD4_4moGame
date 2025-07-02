@@ -10,6 +10,7 @@ void DangerZone::Reset() {
 	isDead_ = false;
 	behavior_ = Behavior::Warning;
 	isDraw_ = true;
+	blinkingCount_ = 0;
 }
 
 void DangerZone::Update()
