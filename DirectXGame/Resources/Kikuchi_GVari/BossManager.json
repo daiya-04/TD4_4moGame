@@ -1,0 +1,149 @@
+{
+    "BossManager": {
+        "Donut": {
+            "ColliderColor": [
+                1.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "ColliderRadius": 1.0,
+            "DangerZone": {
+                "BlinkingNum": 3,
+                "alpha": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "distance": 13.0,
+                "finalWarningCount": 30.0,
+                "followSpd": 0.15000000596046448,
+                "radius": 2.950000047683716,
+                "spawnNum": 4,
+                "warningCount": 60.0,
+                "warningSphereHeight": 3.0
+            },
+            "FallingBullet": {
+                "colliderRadius": 2.9000000953674316,
+                "fallSpeed": 1.0,
+                "radius": 1.0,
+                "spawnHeight": 10.0
+            },
+            "FollowBullet": {
+                "countCount": 360.0,
+                "waitCount": 120.0
+            },
+            "Idle": {
+                "second": 60.0
+            },
+            "MaxHP": 100,
+            "OffsetPos": [
+                0.0,
+                4.0,
+                0.0
+            ],
+            "Scale": [
+                10.0,
+                10.0,
+                10.0
+            ],
+            "Speed": 0.0,
+            "SpinAttack2Player": {
+                "actionAnimationRate": 1.0,
+                "color": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "downActionRate": 120.0,
+                "executeCount": 3,
+                "ptrAnimationRate": 0.0,
+                "radius": 1.0,
+                "speed": 0.5,
+                "waitCount": 60.0
+            },
+            "StartPos": [
+                0.0,
+                0.0,
+                10.0
+            ],
+            "fieldSize": [
+                23.0,
+                23.0
+            ]
+        },
+        "GingerbreadMan": {
+            "ColliderColor": [
+                1.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "ColliderRadius": 1.0,
+            "DangerZone": {
+                "BlinkingNum": 3,
+                "alpha": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "finalWarningCount": 30.0,
+                "radius": 3.5,
+                "warningCount": 6.0,
+                "warningSphereHeight": 1.0
+            },
+            "FallingBullet": {
+                "colliderRadius": 3.450000047683716,
+                "fallSpeed": 0.699999988079071,
+                "radius": 3.5,
+                "spawnHeight": 60.0
+            },
+            "Idle": {
+                "second": 60.0
+            },
+            "ItemFallAttack": {
+                "ActionRate_": 1.0,
+                "ActiveCount": 280.0,
+                "Num": 4,
+                "PreActionRate_": 1.0,
+                "WaitCount": 220.0
+            },
+            "MaxHP": 60,
+            "OffsetPos": [
+                0.0,
+                1.559999942779541,
+                0.30000001192092896
+            ],
+            "Scale": [
+                1.5,
+                1.5,
+                1.5
+            ],
+            "Speed": 0.0,
+            "StartPos": [
+                0.0,
+                0.0,
+                10.0
+            ],
+            "fieldSize": [
+                23.0,
+                23.0
+            ],
+            "weaponRollAttack": {
+                "activeCount": 60.0,
+                "afterCount": 60.0,
+                "attackRadius_": 5.0,
+                "offsetZone": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotateNum": 6.0,
+                "waitCount": 320.0
+            }
+        }
+    }
+}

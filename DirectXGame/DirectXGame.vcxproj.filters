@@ -374,34 +374,31 @@
     <ClCompile Include="Engine\3d\Skeleton.cpp">
       <Filter>Engine\3d</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\Boss1\Boss.cpp">
-      <Filter>Game\Boss</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Boss\IBehavior\IBossBehavior.cpp">
       <Filter>Game\Boss\Behavior</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\Boss1\Behavior\AreaAttack\BossAreaAttack.cpp">
+    <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\AreaAttack\BossAreaAttack.cpp">
       <Filter>Game\Boss\Behavior\AreaAttack</Filter>
     </ClCompile>
     <ClCompile Include="Game\Boss\IBossAttack\IBossAttack.cpp">
       <Filter>Game\Boss\Behavior\IBossAttack</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\Boss1\Behavior\Idle\BossIdle.cpp">
+    <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\Idle\BossIdle.cpp">
       <Filter>Game\Boss\Behavior\Idle</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\Boss1\Behavior\WeaponRollAttack\BossWeaponRollAttack.cpp">
+    <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\WeaponRollAttack\BossWeaponRollAttack.cpp">
       <Filter>Game\Boss\Behavior\WeaponRollAttack</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\Boss1\BossBullet\BossBullet.cpp">
+    <ClCompile Include="Game\Boss\BossBullet\BossBullet.cpp">
       <Filter>Game\Boss\BossBullet</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\Boss1\BossBulletManager\BossBulletManager.cpp">
+    <ClCompile Include="Game\Boss\BossBulletManager\BossBulletManager.cpp">
       <Filter>Game\Boss\BossBulletManager</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\Boss1\DangerZone\DangerZone.cpp">
+    <ClCompile Include="Game\Boss\DangerZone\DangerZone.cpp">
       <Filter>Game\Boss\DangerZone</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\Boss1\DangerZoneManager\DangerZoneManager.cpp">
+    <ClCompile Include="Game\Boss\DangerZoneManager\DangerZoneManager.cpp">
       <Filter>Game\Boss\DangerZoneManager</Filter>
     </ClCompile>
     <ClCompile Include="Game\Field\Field.cpp">
@@ -467,11 +464,18 @@
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="BaseUI.cpp" />
     <ClCompile Include="Game\Player\behavior\Entry\PlayerEntry.cpp" />
-    <ClCompile Include="Game\Boss\Boss1\SingleDangerZone\SingleDangerZone.cpp" />
-    <ClCompile Include="Game\Boss\Boss2\Boss2.cpp" />
-    <ClCompile Include="Game\Boss\Boss2\Behavior\Attack2P\Boss2Attack2Player.cpp" />
-    <ClCompile Include="Game\Boss\Boss2\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.cpp" />
     <ClCompile Include="PlayerAttackEffect.cpp" />
+    <ClCompile Include="Game\Boss\SingleDangerZone\SingleDangerZone.cpp" />
+    <ClCompile Include="Game\Boss\Donut\Behavior\AttackSpin\BossSpinAttack.cpp" />
+    <ClCompile Include="Game\Boss\Donut\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.cpp" />
+    <ClCompile Include="Game\Boss\SpawnManager\BossSpawnManager.cpp" />
+    <ClCompile Include="Game\Boss\UI\BossUI.cpp" />
+    <ClCompile Include="Game\Boss\Blinking\Blinking.cpp" />
+    <ClCompile Include="Game\Boss\IBoss\IBoss.cpp" />
+    <ClCompile Include="Game\Boss\GingerbreadMan\GingerbreadMan.cpp" />
+    <ClCompile Include="Game\Boss\Donut\Donut.cpp" />
+    <ClCompile Include="Game\Player\behavior\SpinAttack\SpinAttack.cpp" />
+    <ClCompile Include="Game\Player\UI\PlayerUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -696,34 +700,31 @@
     <ClInclude Include="Engine\GraphicsPipeline\InstancingObject3dGraphicsPipeline.h">
       <Filter>Engine\GraphicsPipeline</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\Boss1\Boss.h">
-      <Filter>Game\Boss</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Boss\IBehavior\IBossBehavior.h">
       <Filter>Game\Boss\Behavior</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\Boss1\Behavior\AreaAttack\BossAreaAttack.h">
+    <ClInclude Include="Game\Boss\GingerbreadMan\Behavior\AreaAttack\BossAreaAttack.h">
       <Filter>Game\Boss\Behavior\AreaAttack</Filter>
     </ClInclude>
     <ClInclude Include="Game\Boss\IBossAttack\IBossAttack.h">
       <Filter>Game\Boss\Behavior\IBossAttack</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\Boss1\Behavior\Idle\BossIdle.h">
+    <ClInclude Include="Game\Boss\GingerbreadMan\Behavior\Idle\BossIdle.h">
       <Filter>Game\Boss\Behavior\Idle</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\Boss1\Behavior\WeaponRollAttack\BossWeaponRollAttack.h">
+    <ClInclude Include="Game\Boss\GingerbreadMan\Behavior\WeaponRollAttack\BossWeaponRollAttack.h">
       <Filter>Game\Boss\Behavior\WeaponRollAttack</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\Boss1\BossBullet\BossBullet.h">
+    <ClInclude Include="Game\Boss\BossBullet\BossBullet.h">
       <Filter>Game\Boss\BossBullet</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\Boss1\BossBulletManager\BossBulletManager.h">
+    <ClInclude Include="Game\Boss\BossBulletManager\BossBulletManager.h">
       <Filter>Game\Boss\BossBulletManager</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\Boss1\DangerZone\DangerZone.h">
+    <ClInclude Include="Game\Boss\DangerZone\DangerZone.h">
       <Filter>Game\Boss\DangerZone</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\Boss1\DangerZoneManager\DangerZoneManager.h">
+    <ClInclude Include="Game\Boss\DangerZoneManager\DangerZoneManager.h">
       <Filter>Game\Boss\DangerZoneManager</Filter>
     </ClInclude>
     <ClInclude Include="Game\Field\Field.h">
@@ -793,12 +794,19 @@
       <Filter>Game\Scene\GameOverScene</Filter>
     </ClInclude>
     <ClInclude Include="Game\Player\behavior\Entry\PlayerEntry.h" />
-    <ClInclude Include="Game\Boss\Boss1\SingleDangerZone\SingleDangerZone.h" />
+    <ClInclude Include="Game\Boss\SingleDangerZone\SingleDangerZone.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="BaseUI.h" />
-    <ClInclude Include="Game\Boss\Boss2\Boss2.h" />
-    <ClInclude Include="Game\Boss\Boss2\Behavior\Attack2P\Boss2Attack2Player.h" />
-    <ClInclude Include="Game\Boss\Boss2\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.h" />
     <ClInclude Include="PlayerAttackEffect.h" />
+    <ClInclude Include="Game\Boss\Donut\Behavior\AttackSpin\BossSpinAttack.h" />
+    <ClInclude Include="Game\Boss\Donut\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.h" />
+    <ClInclude Include="Game\Boss\SpawnManager\BossSpawnManager.h" />
+    <ClInclude Include="Game\Boss\UI\BossUI.h" />
+    <ClInclude Include="Game\Boss\IBoss\IBoss.h" />
+    <ClInclude Include="Game\Boss\Blinking\Blinking.h" />
+    <ClInclude Include="Game\Boss\GingerbreadMan\GingerbreadMan.h" />
+    <ClInclude Include="Game\Boss\Donut\Donut.h" />
+    <ClInclude Include="Game\Player\behavior\SpinAttack\SpinAttack.h" />
+    <ClInclude Include="Game\Player\UI\PlayerUI.h" />
   </ItemGroup>
 </Project>

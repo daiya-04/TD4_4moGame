@@ -80,7 +80,7 @@ private:
 	float nowCount_ = 0;
 
 	//それぞれの最大時間
-	float maxCounts_[Behavior::Count] = {1.0f};
+	float maxCounts_[Behavior::Count] = {60.0f};
 
 	//状態番号
 	int behavior_=0;

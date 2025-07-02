@@ -28,6 +28,8 @@ private://**プライベート変数**//
 
 private://**パラメータ**//
 
+	
+
 	// ロールの初速（開始時の勢い）
 	float startSpeed_ = 10.0f;
 
@@ -40,9 +42,6 @@ private://**パラメータ**//
 	// 傾斜がほぼ水平とみなす閾値（これ以下なら減速）
 	float flatThreshold_ = 0.01f;
 
-
-
 	//ロールのクールタイム
 	float cooldownCount_ = 60.0f;
-
 };

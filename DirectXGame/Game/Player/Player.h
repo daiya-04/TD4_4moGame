@@ -1,13 +1,13 @@
 #pragma once
 #include"GameObject.h"
 #include"Player/Input/PlayerInput.h"
+#include"UI/PlayerUI.h"
 #include"Player/behavior/IPlayerBehavior.h"
 #include"SphereCollider.h"
 #include "PlayerAttackEffect.h"
 #include<optional>
 
-//セト
-#include "Sprite.h"
+
 
 #include"Field/Field.h"
 
@@ -30,6 +30,9 @@ struct PlayerParameters {
 
 	//回避クールタイムカウント
 	float currentRollCount = 0;
+
+	//飛行フラグ
+	bool isFlying = false;
 
 };
 
@@ -121,6 +124,15 @@ public://**ゲッター**//
 
 	PlayerAttackEffect* GetAttackEffect() { return attackEffect_; }
 
+	Field* GetField() { return field_; }
+
+	/// <summary>
+	/// ボス方向のベクトル取得
+	/// </summary>
+	/// <returns></returns>
+	Vector3 Get2BossDirection();
+
+
 public://**セッター
 
 	/// <summary>
@@ -168,6 +180,13 @@ public://**セッター
 
 	void SetAttackEffect(PlayerAttackEffect* attackEffect) { attackEffect_ = attackEffect; }
 
+	/// <summary>
+	/// ボスのワールド座標
+	/// </summary>
+	/// <param name="bossWorld"></param>
+	void SetBossWorld(DaiEngine::WorldTransform* bossWorld) { bossWorld_ = bossWorld; }
+
+
 private://**プライベート関数**//
 
 	/// <summary>
@@ -188,6 +207,7 @@ public://**状態**//
 		Move,	//移動
 		Roll,	//回避
 		Attack,	//攻撃
+		SpinAttack,		//スピンアタック
 		Count	//状態の数
 	}behaviorName_ = Behavior::Move;
 
@@ -199,8 +219,14 @@ public://**状態**//
 
 private://**プライベート変数**//
 
+	//ボスのワールド座標
+	const DaiEngine::WorldTransform* bossWorld_ = nullptr;
+
 	//プレイヤー入力クラス
 	std::unique_ptr<PlayerInput>input_;
+
+	//UIクラス
+	std::unique_ptr<PlayerUI>ui_;
 
 	//円コライダー
 	std::unique_ptr<DaiEngine::SphereCollider> collider_;
@@ -232,13 +258,7 @@ private://**プライベート変数**//
 	//重力
 	float gravity_ = 0.1f;
 
-	///セト
-	//UI
-	std::unique_ptr<DaiEngine::Sprite> hpFream_;
-	std::unique_ptr<DaiEngine::Sprite> hpGauge_;
-	float curPer_ = 1.0f;
-	float percent_ = 1.0f;
-	Vector2 gaugeSize_ = {};
+
 
 	//攻撃エフェクト
 	PlayerAttackEffect* attackEffect_ = nullptr;

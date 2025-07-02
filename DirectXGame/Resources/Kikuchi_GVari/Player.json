@@ -47,11 +47,20 @@
             0.0
         ],
         "Roll": {
-            "StSpeed": 1.0,
+            "StSpeed": 1.2000000476837158,
             "cooldownCount": 16.5,
             "decelRate": 0.05000000074505806,
             "flatThreshold": 0.009999999776482582,
             "slopeGravity": 0.30000001192092896
+        },
+        "SpinAttack": {
+            "AnimationFactor": 1.0,
+            "Attack": 60.0,
+            "EndAttack": 60.0,
+            "PreAttack": 30.0,
+            "downSpeed": 0.5,
+            "stopDistance": 2.0,
+            "upSpeed": 0.5
         },
         "colliderColor": [
             0.05882352963089943,

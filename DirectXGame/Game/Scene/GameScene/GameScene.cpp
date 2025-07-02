@@ -130,8 +130,13 @@ void GameScene::Init() {
 	followCamera_ = std::make_unique<FollowCamera>(&camera_, player_->GetWorld().translation_);
 	
 	//ボス生成
-	boss_ = std::make_unique<Boss2>(followCamera_.get());
-	boss_->SetPlayerWorld(&player_->GetWorld());
+	//boss_ = std::make_unique<Boss2>(followCamera_.get());
+	//boss_->SetPlayerWorld(&player_->GetWorld());
+
+	bossSpawnManager_ = std::make_unique<BossSpawnManager>(followCamera_.get(), &player_->GetWorld());
+	player_->SetBossWorld(&bossSpawnManager_->GetBossWorld());
+
+
 	//地面生成
 	field_ = std::make_unique<Field>();
 	field_->Initialize();
@@ -161,7 +166,8 @@ void GameScene::Init() {
 
 	//セットされたデータで初期化
 	player_->Init();
-	boss_->Initialize();
+	//boss_->Initialize();
+	bossSpawnManager_->Initialize();
 
 	field_->CreateStage();
 	field_->StartStage();
@@ -215,24 +221,35 @@ void GameScene::Update() {
 		player_->SetField(field_.get());
 
 		//ボス更新
-		boss_->Update();
+		bossSpawnManager_->Update();
+		//ボスのワールド座標取得
+		player_->SetBossWorld(&bossSpawnManager_->GetBossWorld());
+    
+    playerAttackEffect_->Update();
 
-		
 	}
-	
-	playerAttackEffect_->Update();
-
 
 	//地面更新
 	field_->Update();
 
-	for (std::unique_ptr<BossBullet>& bullet : boss_->GetBullets()) {
+	//弾の更新
+	for (std::unique_ptr<BossBullet>& bullet : bossSpawnManager_->GetBullets()) {
 		Vector2 targetBlock = field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
 		Block* block = field_->GetBlock(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
 
 		// Y範囲にあるか判定
 		if (block->world.translation_.y >= bullet->GetWorld().translation_.y && block->world.translation_.y <= bullet->GetWorld().translation_.y + bullet->GetWorld().scale_.y) {
-			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, field_->GetDeltaY());
+			
+			//下げる値取得
+			float deltaY = field_->GetDeltaY();
+			
+			//もし上げる弾なら向きを変更
+			if (bossSpawnManager_->GetBulletType() == BulletType::Follow) {
+				deltaY *= -1.0f; // Follow弾は上げる
+			}
+
+			//フィールドに影響
+			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, deltaY);
 			bullet->OnCollision();
 		}
 	}
@@ -251,7 +268,7 @@ void GameScene::Update() {
 	}
 
 	//ボスのHPが0以下になったらクリアへ
-	if (boss_->GetIsDead()) {
+	if (bossSpawnManager_->GetAllBossDead()) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Clear");
 	}
 }
@@ -268,7 +285,7 @@ void GameScene::DrawModel() {
 	field_->Draw();
 
 	//ボス描画
-	boss_->Draw();
+	bossSpawnManager_->Draw();
 
 	//プレイヤー描画
 	player_->Draw();
@@ -284,7 +301,7 @@ void GameScene::DrawUI() {
 		ui->Draw();
 	}
 	player_->DrawUI();
-	boss_->DrawUI();
+	bossSpawnManager_->UIDraw();
 }
 
 void GameScene::DrawPostEffect() {
