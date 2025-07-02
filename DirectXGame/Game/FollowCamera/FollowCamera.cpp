@@ -12,10 +12,15 @@ FollowCamera::FollowCamera(DaiEngine::Camera* camera, const Vector3& targetTrans
 	std::string stateNames[] = { "None" ,"Follow" };
 
 	gvg->SetValue("maxEsingCount", &maxEsingCount_);
+	gvg->SetValue("followSpd", &followSpd_);
+	gvg->SetValue("followSpdMaxDistance", &followSpdMaxDistance_);
+	gvg->SetValue("maxFollowSpdMultiply", &maxFollowSpdMultiply_);
 	for (int i = 0; i < (int)State::Count; i++) {
 		gvg->SetValue("offset_" + stateNames[i], &offset_[i]);
 		gvg->SetValue("rotation_" + stateNames[i], &rotation_[i]);
 	}
+
+
 }
 
 void FollowCamera::Update()
@@ -40,6 +45,15 @@ void FollowCamera::Update()
 			rotation = targetRotation_;
 		}
 	}
+	else {
+		if (state_ == State::Follow) {
+			offset = *target_ + offset;
+			//カメラの追従速度分だけ近づく
+			CameraDelay(offset);
+		}
+
+	}
+	
 	
 
 	switch (state_)
@@ -51,7 +65,7 @@ void FollowCamera::Update()
 		break;
 	case FollowCamera::State::Follow:
 		//追従点を
-		camera_->translation_ = *target_ + offset;
+		camera_->translation_ = offset;
 		camera_->rotation_ = rotation;
 		break;
 	case FollowCamera::State::Count:
@@ -76,5 +90,31 @@ void FollowCamera::SetState(State state)
 	//目標情報設定
 	targetOffset_ = offset_[(int)state_];
 	targetRotation_ = rotation_[(int)state_];
+
+}
+
+void FollowCamera::CameraDelay(Vector3& offset)
+{
+
+	//カメラに向かうベクトル取得
+	Vector3 targetPos = offset- camera_->translation_ ;
+
+	//追従速度より近くの場合はそのまま
+	if (targetPos.Length() <= followSpd_) {
+		return;
+	}
+	else {
+
+		float length = targetPos.Length();
+		if (length > followSpdMaxDistance_) {
+			length = followSpdMaxDistance_;
+		}
+
+		float t = length / followSpdMaxDistance_;
+
+		//追従速度分だけ近づく
+		offset =camera_->translation_ + targetPos.Normalize() * (followSpd_*maxFollowSpdMultiply_*t);
+	}
+
 
 }
