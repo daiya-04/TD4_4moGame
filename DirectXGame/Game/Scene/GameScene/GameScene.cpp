@@ -130,6 +130,8 @@ void GameScene::Init() {
 	//boss_->SetPlayerWorld(&player_->GetWorld());
 
 	bossSpawnManager_ = std::make_unique<BossSpawnManager>(followCamera_.get(), &player_->GetWorld());
+	player_->SetBossWorld(&bossSpawnManager_->GetBossWorld());
+
 
 	//地面生成
 	field_ = std::make_unique<Field>();
@@ -216,6 +218,9 @@ void GameScene::Update() {
 
 		//ボス更新
 		bossSpawnManager_->Update();
+		//ボスのワールド座標取得
+		player_->SetBossWorld(&bossSpawnManager_->GetBossWorld());
+
 	}
 
 	//地面更新
@@ -237,6 +242,7 @@ void GameScene::Update() {
 				deltaY *= -1.0f; // Follow弾は上げる
 			}
 
+			//フィールドに影響
 			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, deltaY);
 			bullet->OnCollision();
 		}

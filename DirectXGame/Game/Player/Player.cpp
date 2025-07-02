@@ -3,13 +3,14 @@
 #include"GlobalVariable/Group/GlobalVariableGroup.h"
 #include"ColliderManager.h"
 #include"ShapesDraw.h"
-#include"TextureManager.h"
+
 
 #pragma region 状態クラス
 #include"behavior/Entry/PlayerEntry.h"
 #include"Player/behavior/Roll/PlayerRoll.h"
 #include"Player/behavior/Move/PlayerMove.h"
 #include"Player/behavior/AttackManager/PlayerAttackManager.h"
+#include"Player/behavior/SpinAttack/SpinAttack.h"
 #pragma endregion
 
 #include<numbers>
@@ -48,20 +49,13 @@ Player::Player()
 	behaviors_[(size_t)Behavior::Move] = std::make_unique<PlayerMove>();
 	behaviors_[(size_t)Behavior::Roll] = std::make_unique<PlayerRoll>();
 	behaviors_[(size_t)Behavior::Attack] = std::make_unique<PlayerAttackManager>();
+	behaviors_[(size_t)Behavior::SpinAttack] = std::make_unique<SpinAttack>();
 	
 	//描画フラグON
 	SetDraw(false);
 
-	///セト
 
-	hpGauge_.reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("playerHPGage.png"), {}));
-	hpGauge_->SetAnchorpoint({ 0.0f,0.5f });
-	hpGauge_->SetPosition({ 700.0f,670.0f });
-	gaugeSize_ = hpGauge_->GetSize();
-
-	hpFream_.reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("playerHPGageFram.png"), { 700.0f,670.0f }));
-	hpFream_->SetAnchorpoint({ 0.0f,0.5f });
-
+	ui_ = std::make_unique<PlayerUI>();
 	
 
 	///
@@ -157,11 +151,11 @@ void Player::Update()
 	behaviors_[(int)behaviorName_]->Update();
 
 	//落下
-	parameters_.velocity.y -= gravity_;
+	//parameters_.velocity.y -= gravity_;
 
 	//座標更新
 	Vector3 nextPos = position_ + parameters_.velocity;
-	if (field_) {
+	if (field_&&!parameters_.isFlying) {
 		if (field_->IsWalkable(nextPos)) {
 			position_ = nextPos;
 		}
@@ -202,19 +196,13 @@ void Player::Update()
 ///セト
 void Player::UIUpdate() {
 
-	percent_ = static_cast<float>(parameters_.hp) / static_cast<float>(maxHP_);
 
-	curPer_ = Lerp(0.05f, curPer_, percent_);
-
-	hpGauge_->SetSize({ gaugeSize_.x * curPer_, gaugeSize_.y });
-	hpGauge_->SetTextureArea({}, { gaugeSize_.x * curPer_, gaugeSize_.y });
-	
+	ui_->Update(parameters_.hp, maxHP_);
 }
 
 void Player::DrawUI() {
 
-	hpFream_->Draw();
-	hpGauge_->Draw();
+	ui_->DrawUI();
 
 }
 
@@ -222,6 +210,9 @@ void Player::DrawUI() {
 
 void Player::UpdateOnField(float y)
 {
+	//飛行中なら高さ修正しない
+	if (parameters_.isFlying)return;
+
 	//高さ修正
 	world_->translation_.y = y;
 	//行列更新
@@ -307,6 +298,19 @@ float GetYRotate(const Vector2& v) {
 		angle *= -1;
 	}
 	return angle;
+}
+
+Vector3 Player::Get2BossDirection()
+{
+	
+	//ボスのワールド座標を取得
+	Vector3 bossPos = bossWorld_->GetWorldPos();
+	//プレイヤーのワールド座標を取得
+	Vector3 playerPos = world_->GetWorldPos();
+	//ボス方向のベクトルを計算
+	Vector3 direction = bossPos - playerPos;
+	return direction;
+
 }
 
 Vector3 Player::SetBody2Input()

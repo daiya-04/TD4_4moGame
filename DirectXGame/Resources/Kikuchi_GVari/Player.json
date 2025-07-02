@@ -53,6 +53,15 @@
             "flatThreshold": 0.009999999776482582,
             "slopeGravity": 0.30000001192092896
         },
+        "SpinAttack": {
+            "AnimationFactor": 1.0,
+            "Attack": 60.0,
+            "EndAttack": 60.0,
+            "PreAttack": 30.0,
+            "downSpeed": 0.5,
+            "stopDistance": 2.0,
+            "upSpeed": 0.5
+        },
         "colliderColor": [
             0.05882352963089943,
             1.0,
