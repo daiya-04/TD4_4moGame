@@ -54,12 +54,7 @@ Player::Player()
 	//描画フラグON
 	SetDraw(false);
 
-
 	ui_ = std::make_unique<PlayerUI>();
-	
-
-	//attackEffect_ = std::make_unique<PlayerAttackEffect>();
-	//attackEffect_->Init();
 
 	///
 

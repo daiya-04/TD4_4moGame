@@ -224,6 +224,8 @@ void GameScene::Update() {
 		bossSpawnManager_->Update();
 		//ボスのワールド座標取得
 		player_->SetBossWorld(&bossSpawnManager_->GetBossWorld());
+    
+    playerAttackEffect_->Update();
 
 	}
 	
