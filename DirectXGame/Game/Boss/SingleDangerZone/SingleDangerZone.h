@@ -37,6 +37,12 @@ public://**パブリック関数**//
 	bool GetIsDead() { return dangerZone_->GetIsDead(); }
 
 	/// <summary>
+	/// 描画フラグ取得
+	/// </summary>
+	/// <returns></returns>
+	bool GetIsDraw() { return isDraw_; }
+
+	/// <summary>
 	/// 描画フラグ
 	/// </summary>
 	/// <param name="isDraw"></param>

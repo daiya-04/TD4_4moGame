@@ -25,6 +25,7 @@ void SingleDangerZone::Update()
 	gameObject_->world_->translation_ = dangerZone_->GetWorld().translation_;
 	gameObject_->world_->scale_ = dangerZone_->GetWorld().scale_;
 	gameObject_->world_->UpdateMatrix();
+	isDraw_ = dangerZone_->GetIsDraw();
 }
 
 void SingleDangerZone::Draw()

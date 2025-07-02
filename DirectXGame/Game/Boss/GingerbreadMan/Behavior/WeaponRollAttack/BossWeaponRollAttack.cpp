@@ -18,7 +18,8 @@ BossWeaponRollAttack::BossWeaponRollAttack(BossParameters* parame)
 	dangerZone_ = std::make_unique<SingleDangerZone>(param);
 
 	tree_.name_ = "weaponRollAttack";
-	tree_.SetValue("waitCount", &waitCount_);
+	tree_.SetValue("warningCount", &param.maxWarningCount);
+	tree_.SetValue("finalWarningCount", &param.maxFinalWarningCount);
 	tree_.SetValue("activeCount", &attackCount_);
 	tree_.SetValue("afterCount", &endCount_);
 
