@@ -50,6 +50,8 @@ public://**パブリック関数**//
 	/// <returns></returns>
 	bool GetAllBossDead() const { return allBossDead_; }
 
+	DaiEngine::WorldTransform& GetBossWorld() { return bosses_[int(bossType_)]->GetWorld(); }
+
 private://**プライベート関数**//
 
 	/// <summary>

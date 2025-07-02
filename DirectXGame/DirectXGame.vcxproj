@@ -119,6 +119,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Game\Boss\IBoss\IBoss.cpp" />
     <ClCompile Include="Game\Boss\SpawnManager\BossSpawnManager.cpp" />
     <ClCompile Include="Game\Boss\UI\BossUI.cpp" />
+    <ClCompile Include="Game\Player\behavior\SpinAttack\SpinAttack.cpp" />
+    <ClCompile Include="Game\Player\UI\PlayerUI.cpp" />
     <ClCompile Include="Game\Scene\ClearScene\ClearScene.cpp" />
     <ClCompile Include="Engine\Audio\AudioManager.cpp" />
     <ClCompile Include="Engine\Collision\Collider\Collider.cpp" />
@@ -227,6 +229,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Boss\IBoss\IBoss.h" />
     <ClInclude Include="Game\Boss\SpawnManager\BossSpawnManager.h" />
     <ClInclude Include="Game\Boss\UI\BossUI.h" />
+    <ClInclude Include="Game\Player\behavior\SpinAttack\SpinAttack.h" />
+    <ClInclude Include="Game\Player\UI\PlayerUI.h" />
     <ClInclude Include="Game\Scene\ClearScene\ClearScene.h" />
     <ClInclude Include="Engine\Audio\AudioManager.h" />
     <ClInclude Include="Engine\Collision\Collider\Collider.h" />
