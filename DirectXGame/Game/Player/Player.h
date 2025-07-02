@@ -121,6 +121,8 @@ public://**ゲッター**//
 	/// <returns></returns>
 	bool GetIsDead() const { return isDead_; };
 
+	Field* GetField() { return field_; }
+
 	/// <summary>
 	/// ボス方向のベクトル取得
 	/// </summary>

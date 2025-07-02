@@ -42,9 +42,6 @@ private://**パラメータ**//
 	// 傾斜がほぼ水平とみなす閾値（これ以下なら減速）
 	float flatThreshold_ = 0.01f;
 
-
-
 	//ロールのクールタイム
 	float cooldownCount_ = 60.0f;
-
 };
