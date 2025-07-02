@@ -134,4 +134,9 @@ void PlayerRoll::Update()
 #endif // _DEBUG
 
 
+	if(DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE)){
+		player_->behaviorRequest_ = Player::Behavior::SpinAttack;
+	}
+
+
 }

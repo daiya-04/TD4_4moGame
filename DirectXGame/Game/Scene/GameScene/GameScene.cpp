@@ -221,9 +221,10 @@ void GameScene::Update() {
 		player_->SetField(field_.get());
 
 		//ボス更新
-		boss_->Update();
+		bossSpawnManager_->Update();
+		//ボスのワールド座標取得
+		player_->SetBossWorld(&bossSpawnManager_->GetBossWorld());
 
-		
 	}
 	
 	playerAttackEffect_->Update();
