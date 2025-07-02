@@ -25,12 +25,7 @@ public://**パブリック変数**//
 	std::vector<std::unique_ptr<IBossBehavior>>behaviors_;
 
 	//状態
-	enum BossBehavior {
-		Idle,
-		Attack1,
-		Attack2,
-		Count
-	}behavior_ = Idle;
+	int behavior_ = 0;
 
 public://**パブリック関数**//
 
@@ -193,7 +188,7 @@ private://**パラメータ変数**//
 	float speed_ = 0.0f;
 
 	//描画フラグ
-	bool isDraw_ = true;
+	bool* isDraw_ = nullptr;
 
 private://**デバッグ用変数**//
 

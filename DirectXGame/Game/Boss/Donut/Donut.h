@@ -12,4 +12,12 @@ public://**パブリック関数**//
 	Donut(const std::string& objectName, FollowCamera* camera, const DaiEngine::WorldTransform* playerWorld);
 	~Donut() = default;
 
+private:
+
+	enum BossBehavior {
+		Idle	,			//アイドル
+		Attack1,			//追従弾
+		Attack2,			//タックル
+		Count				//カウント
+	};
 };

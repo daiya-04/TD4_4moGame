@@ -118,6 +118,6 @@ void BossWeaponRollAttack::UpdateBehavior2()
 {
 	//時間経過で終わり
 	if (param_->currentSec >= endCount_) {
-		param_->behaviorRequest_ = IBoss::BossBehavior::Idle;
+		param_->behaviorRequest_ = 0;
 	}
 }
