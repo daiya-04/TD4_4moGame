@@ -34,6 +34,11 @@ public://**パブリック関数**//
 	/// <returns></returns>
 	DaiEngine::Camera* GetCamera() const { return camera_; }
 
+
+private://**プライベート関数**//
+
+	void CameraDelay(Vector3& offset);
+
 private://**プライベート変数**//
 
 
@@ -59,6 +64,16 @@ private://**プライベート変数**//
 	bool isEsing_ = false;
 	//遷移カウント
 	float esingCount_ = 0.0f;
+
+	//追従速度
+	float followSpd_ = 0.1f;;
+
+	//追従速度をあげる最大距離
+	float followSpdMaxDistance_ = 10.0f;
+
+	//最大倍率
+	float maxFollowSpdMultiply_ = 2.0f;
+
 private://**パラメータ変数**//
 
 	//カメラのオフセット座標
