@@ -48,7 +48,7 @@ void BossAreaAttack::UpdateBehavior1()
 	//経過時間で終了
 	if (param_->currentSec >= attackCount_) {
 		//通常状態に移行
-		param_->behaviorRequest_ = IBoss::BossBehavior::Idle;
+		param_->behaviorRequest_ = 0;
 		//カメラ状態を変更
 		param_->cameraBehaviorRequest_ = FollowCamera::State::Follow;
 	}

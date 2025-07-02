@@ -8,14 +8,15 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	/// <param name="isDraw">ドローフラグポインタ</param>
-	Blinking(bool* isDraw);
+	Blinking();
 	~Blinking() = default;
 
 	/// <summary>
 	/// 更新
 	/// </summary>
 	bool Update();
+
+	bool& GetIsDrawFlag() { return isDraw_; }
 
 	/// <summary>
 	/// 点滅の開始処理
@@ -42,7 +43,7 @@ private://**パラメータ**//
 	int maxBlinkingNum_ = 3;
 
 	//描画フラグ
-	bool* isDraw_ = nullptr;
+	bool isDraw_=true;
 
 	//つりー
 	GvariTree tree_;

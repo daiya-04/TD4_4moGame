@@ -29,7 +29,8 @@ void IBoss::Init(const std::string& objectName, FollowCamera* camera, const DaiE
 	//マネージャの生成は継承先で行う
 
 	//点滅処理クラス生成
-	blinking_ = std::make_unique<Blinking>(&isDraw_);
+	blinking_ = std::make_unique<Blinking>();
+	isDraw_ = &blinking_->GetIsDrawFlag();
 	//UIクラス生成
 	ui_ = std::make_unique<BossUI>();
 
@@ -56,6 +57,7 @@ void IBoss::Init(const std::string& objectName, FollowCamera* camera, const DaiE
 	tree_.SetValue("ColliderColor", &colliderColor_);
 	tree_.SetValue("fieldSize", &mapArea_);
 
+	tree_.SetTreeData(blinking_->GetTree());
 }
 
 void IBoss::SetManager(DangerZoneType zoneType, BulletType bulletType)
@@ -105,20 +107,20 @@ void IBoss::Update() {
 		}
 		else if (debugBehavior_ == behaviorNames_[1]) {
 			//待機
-			parameters_.behaviorRequest_ = BossBehavior::Idle;
+			parameters_.behaviorRequest_ = 0;
 		}
 		else if (debugBehavior_ == behaviorNames_[2]) {
 			//攻撃1
-			parameters_.behaviorRequest_ = BossBehavior::Attack1;
+			parameters_.behaviorRequest_ = 1;
 		}
 		else {
 			//攻撃2
-			parameters_.behaviorRequest_ = BossBehavior::Attack2;
+			parameters_.behaviorRequest_ = 2;
 		}
 #endif // _DEBUG
 
 		//リクエストの値を渡す
-		behavior_ = (BossBehavior)parameters_.behaviorRequest_.value();
+		behavior_ = parameters_.behaviorRequest_.value();
 		//リクエスト初期化
 		parameters_.behaviorRequest_ = std::nullopt;
 		parameters_.currentSec = 0;
@@ -226,7 +228,7 @@ void IBoss::Draw()
 	bulletManager_->Draw();
 
 	//本体描画
-	if (isDraw_) {
+	if (*isDraw_) {
 		GameObject::Draw();
 	}
 

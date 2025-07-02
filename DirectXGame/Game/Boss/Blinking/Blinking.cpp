@@ -1,8 +1,7 @@
 #include "Blinking.h"
 
-Blinking::Blinking(bool* isDraw)
+Blinking::Blinking()
 {
-	isDraw_ = isDraw;
 	tree_.name_ = "Blinking";
 	tree_.SetMonitorValue("isActive", &isActive_);
 	tree_.SetMonitorValue("currentHitCount", &currentHitCount_);
@@ -24,18 +23,18 @@ bool Blinking::Update()
 			blinkingCount_++;
 
 			//透明度を変更
-			if (*isDraw_) {
-				*isDraw_ = false;
+			if (isDraw_) {
+				isDraw_ = false;
 			}
 			else {
-				*isDraw_ = true;
+				isDraw_ = true;
 			}
 		}
 
 		//時間経過で終了
 		if (currentHitCount_ >= hitCount_) {
 			isActive_ = false;
-			*isDraw_ = true;
+			isDraw_ = true;
 		}
 	}
 
