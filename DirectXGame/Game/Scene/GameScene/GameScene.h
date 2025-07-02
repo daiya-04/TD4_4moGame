@@ -36,6 +36,7 @@
 #pragma endregion
 #include"Field/Field.h"
 
+#include "PlayerAttackEffect.h"
 
 //ゲームシーンクラス
 class GameScene : public DaiEngine::IScene {
@@ -110,6 +111,7 @@ private://**キクチ
 
 	//プレイヤー
 	std::unique_ptr<Player> player_ = nullptr;
+	std::unique_ptr<PlayerAttackEffect> playerAttackEffect_;
 
 	//ボス
 	std::unique_ptr<BossSpawnManager> bossSpawnManager_ = nullptr;

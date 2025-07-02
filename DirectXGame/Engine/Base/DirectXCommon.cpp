@@ -293,7 +293,7 @@ namespace DaiEngine {
 		//描画先のRTVを設定する
 		commandList_->OMSetRenderTargets(1, &rtvHandle, false, &dsvHandle);
 		//指定した色で画面全体をクリアする
-		float clearColor[] = { 1.0f,0.8f,0.7f,1.0f };
+		float clearColor[] = { 1.0f,0.78f,0.73f,1.0f };
 		//float clearColor[] = { 0.f,0.0f,0.0f,1.0f };//RGBAの順
 		commandList_->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
 		//ClearDepthBaffer();
