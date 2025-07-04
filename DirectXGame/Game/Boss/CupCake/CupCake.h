@@ -2,6 +2,7 @@
 #include"../IBoss/IBoss.h"
 
 class CupCake : public IBoss {
+public:
 
 	/// <summary>
 	/// コンストラクタ
@@ -9,9 +10,9 @@ class CupCake : public IBoss {
 	CupCake(const std::string& objectName, FollowCamera* camera, const DaiEngine::WorldTransform* playerWorld);
 	~CupCake() = default;
 
-	enum Behavior {
+	enum class Behavior {
 		Idle,				//アイドル
 		Count
 	};
 
-}
+};

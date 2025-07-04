@@ -2,6 +2,7 @@
 
 #include"Boss/GingerbreadMan/Behavior/Idle/BossIdle.h"
 
+
 CupCake::CupCake(const std::string& objectName, FollowCamera* camera, const DaiEngine::WorldTransform* playerWorld) {
 	IBoss::Init(objectName, camera, playerWorld);
 
@@ -20,6 +21,6 @@ CupCake::CupCake(const std::string& objectName, FollowCamera* camera, const DaiE
 	}
 
 	//ツリー名設定
-	tree_.name_ = "Donut";
+	tree_.name_ = "Capcake";
 
 }

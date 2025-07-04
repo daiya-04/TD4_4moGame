@@ -15,7 +15,7 @@ BossSpawnManager::BossSpawnManager(FollowCamera* camera, const DaiEngine::WorldT
 	//ボスの生成
 	bosses_[int(BossType::GingerbreadMan)] = std::make_unique<GingerbreadMan>("GentlmanGuard", camera, playerWorld);
 	bosses_[int(BossType::Donut)] =			 std::make_unique<Donut>("Donut", camera, playerWorld);
-	bosses_[int(BossType::CupCake)] = std::make_unique<CupCake>("CupCake", camera, playerWorld);
+	bosses_[int(BossType::CupCake)] = std::make_unique<CupCake>("Capcake", camera, playerWorld);
 
 	std::unique_ptr<GVariGroup> group = std::make_unique<GVariGroup>("BossManager");
 
