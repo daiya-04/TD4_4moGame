@@ -1,6 +1,10 @@
 {
     "BossManager": {
         "Donut": {
+            "Blinking": {
+                "hitCount": 1.0,
+                "maxBlinkingNum": 3
+            },
             "ColliderColor": [
                 1.0,
                 0.0,
@@ -75,6 +79,10 @@
             ]
         },
         "GingerbreadMan": {
+            "Blinking": {
+                "hitCount": 1.0,
+                "maxBlinkingNum": 3
+            },
             "ColliderColor": [
                 1.0,
                 0.0,
@@ -136,13 +144,14 @@
                 "activeCount": 60.0,
                 "afterCount": 60.0,
                 "attackRadius_": 5.0,
+                "finalWarningCount": 30.0,
                 "offsetZone": [
                     0.0,
                     0.0,
                     0.0
                 ],
                 "rotateNum": 6.0,
-                "waitCount": 320.0
+                "warningCount": 60.0
             }
         }
     }
