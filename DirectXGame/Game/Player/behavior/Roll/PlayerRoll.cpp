@@ -17,6 +17,9 @@ PlayerRoll::PlayerRoll()
 	tree_.SetValue("flatThreshold", &flatThreshold_);
 
 	tree_.SetValue("cooldownCount", &cooldownCount_);
+
+	tree_.SetValue("uphillDecel", &uphillDecel_);
+	tree_.SetValue("downhillAccel", &downhillAccel_);
 }
 
 void PlayerRoll::Init()
@@ -88,15 +91,13 @@ void PlayerRoll::Update()
             slopeFactor = std::clamp(slopeFactor, -1.0f, 1.0f);
 
             // 上りは減速、下りは加速
-            const float uphillDecel = 0.5f;   // 上り最大半減
-            const float downhillAccel = 1.2f; // 下り最大1.2倍
             float speedMultiplier = 1.0f;
 
             if (slopeFactor > 0.0f) {
-                speedMultiplier = 1.0f - slopeFactor * (1.0f - uphillDecel);
+                speedMultiplier = 1.0f - slopeFactor * (1.0f - uphillDecel_);
             }
             else {
-                speedMultiplier = 1.0f - slopeFactor * (downhillAccel - 1.0f);
+                speedMultiplier = 1.0f - slopeFactor * (downhillAccel_ - 1.0f);
             }
 
             currentVelo_ *= speedMultiplier;

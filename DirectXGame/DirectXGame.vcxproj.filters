@@ -464,6 +464,7 @@
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="BaseUI.cpp" />
     <ClCompile Include="Game\Player\behavior\Entry\PlayerEntry.cpp" />
+    <ClCompile Include="PlayerAttackEffect.cpp" />
     <ClCompile Include="Game\Boss\SingleDangerZone\SingleDangerZone.cpp" />
     <ClCompile Include="Game\Boss\Donut\Behavior\AttackSpin\BossSpinAttack.cpp" />
     <ClCompile Include="Game\Boss\Donut\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.cpp" />
@@ -797,6 +798,7 @@
     <ClInclude Include="Game\Boss\SingleDangerZone\SingleDangerZone.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="BaseUI.h" />
+    <ClInclude Include="PlayerAttackEffect.h" />
     <ClInclude Include="Game\Boss\Donut\Behavior\AttackSpin\BossSpinAttack.h" />
     <ClInclude Include="Game\Boss\Donut\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.h" />
     <ClInclude Include="Game\Boss\SpawnManager\BossSpawnManager.h" />

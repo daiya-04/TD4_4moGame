@@ -27,9 +27,9 @@ void DebugTestScene::Init() {
 
 	///
 
-	humanModel_ = DaiEngine::ModelManager::LoadGLTF("Gentlman");
-	standingModel_ = DaiEngine::ModelManager::LoadGLTF("Gentlman");
-	sneakModel_ = DaiEngine::ModelManager::LoadGLTF("Gentlman");
+	humanModel_ = DaiEngine::ModelManager::LoadGLTF("GentlmanGuard");
+	standingModel_ = DaiEngine::ModelManager::LoadGLTF("GentlmanGuard");
+	sneakModel_ = DaiEngine::ModelManager::LoadGLTF("GentlmanGuard");
 	model_ = DaiEngine::ModelManager::LoadGLTF("MultiMeshAnime");
 
 	skyBoxTex_ = DaiEngine::TextureManager::Load("skyBox.dds");
@@ -62,7 +62,7 @@ void DebugTestScene::Init() {
 
 	ParticleEditor::GetInstance()->Init();
 
-	effect_ = ParticleManager::Load("FireBallImpact");
+	effect_ = ParticleManager::Load("testParticle");
 	
 }
 
@@ -149,8 +149,8 @@ void DebugTestScene::DrawBackGround() {
 void DebugTestScene::DrawModel() {
 
 	DaiEngine::SkinningObject::preDraw();
-	human_->Draw(camera_);
-	human_->GetSkeleton().Draw(human_->worldTransform_, camera_);
+	//human_->Draw(camera_);
+	//human_->GetSkeleton().Draw(human_->worldTransform_, camera_);
 
 
 	DaiEngine::Object3d::preDraw();
@@ -171,7 +171,7 @@ void DebugTestScene::DrawParticle() {
 		//particle->Draw(camera_);
 	}
 	
-	//ParticleEditor::GetInstance()->Draw(camera_);
+	ParticleEditor::GetInstance()->Draw(camera_);
 
 }
 
