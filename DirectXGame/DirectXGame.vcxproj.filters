@@ -475,6 +475,7 @@
     <ClCompile Include="Game\Boss\Donut\Donut.cpp" />
     <ClCompile Include="Game\Player\behavior\SpinAttack\SpinAttack.cpp" />
     <ClCompile Include="Game\Player\UI\PlayerUI.cpp" />
+    <ClCompile Include="Game\Boss\CupCake\CupCake.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -806,5 +807,6 @@
     <ClInclude Include="Game\Boss\Donut\Donut.h" />
     <ClInclude Include="Game\Player\behavior\SpinAttack\SpinAttack.h" />
     <ClInclude Include="Game\Player\UI\PlayerUI.h" />
+    <ClInclude Include="Game\Boss\CupCake\CupCake.h" />
   </ItemGroup>
 </Project>

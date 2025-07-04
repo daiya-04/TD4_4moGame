@@ -112,6 +112,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <ClCompile Include="BaseUI.cpp" />
     <ClCompile Include="Game\Boss\Blinking\Blinking.cpp" />
+    <ClCompile Include="Game\Boss\CupCake\CupCake.cpp" />
     <ClCompile Include="Game\Boss\Donut\Behavior\AttackSpin\BossSpinAttack.cpp" />
     <ClCompile Include="Game\Boss\Donut\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.cpp" />
     <ClCompile Include="Game\Boss\Donut\Donut.cpp" />
@@ -222,6 +223,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <ClInclude Include="BaseUI.h" />
     <ClInclude Include="Game\Boss\Blinking\Blinking.h" />
+    <ClInclude Include="Game\Boss\CupCake\CupCake.h" />
     <ClInclude Include="Game\Boss\Donut\Behavior\AttackSpin\BossSpinAttack.h" />
     <ClInclude Include="Game\Boss\Donut\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.h" />
     <ClInclude Include="Game\Boss\Donut\Donut.h" />

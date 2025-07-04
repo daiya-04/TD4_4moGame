@@ -65,6 +65,7 @@ private://**プライベート変数**//
 	enum class BossType {
 		GingerbreadMan,
 		Donut,
+		CupCake,
 		Count
 	}bossType_ = BossType::GingerbreadMan;
 

@@ -4,6 +4,7 @@
 #pragma region ボス
 #include"../GingerbreadMan/GingerbreadMan.h"
 #include"../Donut/Donut.h"
+#include"../CupCake/CupCake.h"
 #pragma endregion
 
 
@@ -13,8 +14,8 @@ BossSpawnManager::BossSpawnManager(FollowCamera* camera, const DaiEngine::WorldT
 	bosses_.resize(static_cast<size_t>(BossType::Count));
 	//ボスの生成
 	bosses_[int(BossType::GingerbreadMan)] = std::make_unique<GingerbreadMan>("GentlmanGuard", camera, playerWorld);
-	bosses_[int(BossType::Donut)] =			 std::make_unique<Donut>("DonutAttack1.5", camera, playerWorld);
-
+	bosses_[int(BossType::Donut)] =			 std::make_unique<Donut>("Donut", camera, playerWorld);
+	bosses_[int(BossType::CupCake)] = std::make_unique<CupCake>("CupCake", camera, playerWorld);
 
 	std::unique_ptr<GVariGroup> group = std::make_unique<GVariGroup>("BossManager");
 
