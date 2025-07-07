@@ -1,6 +1,9 @@
 #include "IBoss.h"
 #include"ColliderManager.h"
 #include"ShapesDraw.h"
+#include<memory>
+#include <random>
+
 
 IBoss::~IBoss()
 {
@@ -124,6 +127,10 @@ void IBoss::Update() {
 		//リクエスト初期化
 		parameters_.behaviorRequest_ = std::nullopt;
 		parameters_.currentSec = 0;
+
+		if(behaviors_.size() <= behavior_) {
+			behavior_ = 0;
+		}
 		//状態初期化
 		behaviors_[(int)behavior_]->Init();
 	}

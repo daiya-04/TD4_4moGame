@@ -152,26 +152,7 @@ void Player::Update()
 	//parameters_.velocity.y -= gravity_;
 
 	//座標更新
-	Vector3 nextPos = position_ + parameters_.velocity;
-	if (field_&&!parameters_.isFlying) {
-		if (field_->IsWalkable(nextPos)) {
-			position_ = nextPos;
-		}
-		else {
-			// 目的地が歩けない ⇒ 今の場所も確認する
-			if (!field_->IsWalkable(position_)) {
-				// 今の場所すら歩けない ⇒ 強制テレポート
-				auto warpPos = field_->FindNearestWalkable(position_);
-				if (warpPos.has_value()) {
-					position_ = warpPos.value();
-				}
-			}
-			parameters_.velocity = { 0, 0, 0 }; // どちらにせよ動きを止める
-		}
-	}
-	else {
-		position_ = nextPos; // フィールドが無ければそのまま
-	}
+	UpdatePositionWithCollision();
 
 	//制限チェック
 	LimitationXZ();
@@ -199,6 +180,56 @@ void Player::UIUpdate() {
 
 
 	ui_->Update(parameters_.hp, maxHP_);
+}
+
+void Player::UpdatePositionWithCollision()
+{
+	Vector3 nextPos = position_ + parameters_.velocity;
+
+	if (field_ && !parameters_.isFlying) {
+		Vector3 moveVec = nextPos - position_;
+		float moveLen = moveVec.Length();
+
+		if (moveLen > 0) {
+			Vector3 moveDir = moveVec.Normalize();
+			const float stepSize = 0.05f;
+			float moved = 0.0f;
+
+			Vector3 tempPos = position_;
+			while (moved < moveLen) {
+				float step = std::min(stepSize, moveLen - moved);
+				tempPos += moveDir * step;
+
+				Vector3 midPos = (position_ + tempPos) * 0.5f;
+
+				if (field_->IsWalkable(tempPos) && field_->IsWalkable(midPos)) {
+					position_ = tempPos;
+					lastSafePos_ = position_;
+				}
+				else {
+					position_ = lastSafePos_;
+					parameters_.velocity = { 0, 0, 0 };
+					break;
+				}
+
+				moved += step;
+			}
+		}
+
+		if (!field_->IsWalkable(position_)) {
+			if (auto warpPos = field_->FindNearestWalkable(position_); warpPos.has_value()) {
+				position_ = warpPos.value();
+				lastSafePos_ = position_;
+			}
+			else {
+				position_ = lastSafePos_;
+			}
+			parameters_.velocity = { 0, 0, 0 };
+		}
+	}
+	else {
+		position_ = nextPos;
+	}
 }
 
 void Player::DrawUI() {

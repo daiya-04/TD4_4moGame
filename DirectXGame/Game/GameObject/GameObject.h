@@ -15,6 +15,11 @@ public:
 
 	DaiEngine::WorldTransform* world_ = nullptr;
 
+	enum class LoadType {
+		Obj,
+		Gltf
+	};
+
 public:
 
 	/// <summary>
@@ -27,7 +32,7 @@ public:
 	GameObject() = default;
 	~GameObject() = default;
 
-	void Init(const std::string& modelName);
+	void Init(const std::string& modelName,LoadType type = LoadType::Gltf);
 
 	/// <summary>
 	/// 更新
