@@ -21,7 +21,7 @@ void Field::Initialize() {
 	instancingObj_->Init("Cube", 10000);
 
 	instancingObj2_ = std::make_unique<InstancingGameObject>();
-	instancingObj2_->Init("testfield", 10000);
+	instancingObj2_->Init("Field", 10000);
 
 	worldTransform_.Init();
 
@@ -152,7 +152,8 @@ void Field::Update() {
 void Field::Draw() {
 	//セットされたデータ分描画してセットデータ削除
 	instancingObj_->Draw();
-	//instancingObj2_->Draw();
+
+	instancingObj2_->Draw();
 }
 
 void Field::Finalize() {
