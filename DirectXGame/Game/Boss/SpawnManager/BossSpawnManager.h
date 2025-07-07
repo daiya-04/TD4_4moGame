@@ -39,12 +39,6 @@ public://**パブリック関数**//
 	std::list<std::unique_ptr<BossBullet>>& GetBullets() { return bosses_[(int)bossType_]->GetBullets(); }
 
 	/// <summary>
-	/// 現在のボスの弾の種類を取得
-	/// </summary>
-	/// <returns></returns>
-	BulletType GetBulletType() const { return bosses_[(int)bossType_]->GetBulletType(); }
-
-	/// <summary>
 	/// 全てのボスの死亡フラグ取得
 	/// </summary>
 	/// <returns></returns>

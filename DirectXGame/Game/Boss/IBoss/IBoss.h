@@ -82,13 +82,17 @@ public://**パブリック関数**//
 	/// <returns></returns>
 	std::list<std::unique_ptr<BossBullet>>& GetBullets() { return bulletManager_->GetBullets(); }
 
-	BulletType GetBulletType() const { return bulletManager_->GetBulletType(); }
-
 	/// <summary>
 	/// ツリー取得
 	/// </summary>
 	/// <returns></returns>
 	GvariTree& GetTree() { return tree_; }
+
+	/// <summary>
+	/// 逆向きフラグ
+	/// </summary>
+	/// <param name="isReverse"></param>
+	void SetReverse(bool isReverse) { isReverse_ = isReverse; }
 
 private://**プライベート関数**//
 
@@ -189,6 +193,9 @@ private://**パラメータ変数**//
 
 	//描画フラグ
 	bool* isDraw_ = nullptr;
+	
+	//逆向きフラグ
+	bool isReverse_ = false; 
 
 private://**デバッグ用変数**//
 

@@ -91,6 +91,9 @@ void IBoss::Update() {
 	//移動量初期化
 	parameters_.velocity_ = { 0,0,0 };
 
+	//ボスの球数を取得
+	parameters_.currentBulletNum_ = (int)bulletManager_->GetBullets().size()+(int)dangerZoneManager_->GetDangerZone().size();
+
 #ifdef _DEBUG
 	collider_->SetRadius(radius_);
 	//回復フラグ処理
@@ -323,9 +326,13 @@ Vector3 IBoss::SetDirection2Player() {
 	//重なっていない場合
 	if (velocity != Vector3(0, 0, 0)) {
 		//向きを指定
-		parameters_.rotation_.y = GetYRotatee({ velocity.x,velocity.z }) + ((float)std::numbers::pi);
+		if (!isReverse_) {
+			parameters_.rotation_.y = GetYRotatee({ velocity.x,velocity.z }) + ((float)std::numbers::pi);
+		}
+		else {
+			parameters_.rotation_.y = GetYRotatee({ velocity.x,velocity.z });
+		}
 	}
-
 
 	return velocity;
 }

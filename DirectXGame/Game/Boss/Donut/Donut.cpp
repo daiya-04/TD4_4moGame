@@ -13,12 +13,14 @@ Donut::Donut(const std::string& objectName, FollowCamera* camera, const DaiEngin
 	//マネージャの生成
 	IBoss::SetManager(DangerZoneType::Follow, BulletType::Follow);
 
+	//反転フラグON
+	SetReverse(true);
+
 	//状態の生成
 	behaviors_.resize((size_t)BossBehavior::Count);
 	behaviors_[(size_t)BossBehavior::Idle] = std::make_unique<BossIdle>(&parameters_);
 	behaviors_[(size_t)BossBehavior::Attack1] = std::make_unique<Boss2SpinAttack>(&parameters_);
 	behaviors_[(size_t)BossBehavior::Attack2] = std::make_unique<Boss2AttackPFollowBullet>(&parameters_);
-
 
 	//ツリーを追加
 	for (auto& behavior : behaviors_) {

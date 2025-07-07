@@ -13,7 +13,7 @@ Boss2AttackPFollowBullet::Boss2AttackPFollowBullet(BossParameters* param)
 void Boss2AttackPFollowBullet::InitBehavior0()
 {
 	//アニメーション変更
-	param_->setAnimeName_ = "DonutAttack1.5";
+	param_->setAnimeName_ = "Donut_Attack2";
 	param_->isLoopAnime_ = false;
 	//再生速度変更
 	param_->animationLeverage_ = preActionRate_;
@@ -22,7 +22,7 @@ void Boss2AttackPFollowBullet::InitBehavior0()
 void Boss2AttackPFollowBullet::InitBehavior1()
 {
 	//アニメーション変更
-	param_->setAnimeName_ = "DonutAttack1";
+	//param_->setAnimeName_ = "DonutAttack1";
 	param_->isLoopAnime_ = false;
 	//再生速度変更
 	param_->animationLeverage_ = preActionRate_;

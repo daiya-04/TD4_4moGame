@@ -18,6 +18,7 @@ Boss2SpinAttack::Boss2SpinAttack(BossParameters* param)
 	tree_.SetMonitorValue("currentExecuteCount", &currentExecuteCount_);
 
 	tree_.SetValue("waitCount", &waitTime_);
+	tree_.SetValue("downCount", &downCount_);
 	tree_.SetValue("executeCount", &executeCount_);
 	tree_.SetValue("ptrAnimationRate", &preActionRate_);
 	tree_.SetValue("actionAnimationRate", &actionRate_);
@@ -43,7 +44,7 @@ void Boss2SpinAttack::Draw()
 void Boss2SpinAttack::InitBehavior0()
 {
 	//アニメーション変更
-	param_->setAnimeName_ = "DonutAttack2";
+	param_->setAnimeName_ = "Donut_AttackStandby";
 	param_->isLoopAnime_ = false;
 	//再生速度変更
 	param_->animationLeverage_ = preActionRate_;
@@ -54,7 +55,7 @@ void Boss2SpinAttack::InitBehavior0()
 void Boss2SpinAttack::InitBehavior1()
 {
 	//アニメーション変更
-	param_->setAnimeName_ = "DonutAttack2";
+	param_->setAnimeName_ = "Donut_Attack";
 	param_->isLoopAnime_ = false;
 	//再生速度変更
 	param_->animationLeverage_ = actionRate_;
@@ -68,7 +69,7 @@ void Boss2SpinAttack::InitBehavior1()
 void Boss2SpinAttack::InitBehavior2()
 {
 	//アニメーション変更
-	param_->setAnimeName_ = "DonutDown";
+	param_->setAnimeName_ = "Donut_AttackEnd";
 	param_->isLoopAnime_ = false;
 	//再生速度変更
 	param_->animationLeverage_ = downActionRate_;

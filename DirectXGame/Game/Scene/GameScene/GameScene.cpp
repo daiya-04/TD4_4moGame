@@ -244,7 +244,7 @@ void GameScene::Update() {
 			float deltaY = field_->GetDeltaY();
 			
 			//もし上げる弾なら向きを変更
-			if (bossSpawnManager_->GetBulletType() == BulletType::Follow) {
+			if (bullet->GetType() == BulletType::Follow) {
 				deltaY *= -1.0f; // Follow弾は上げる
 			}
 

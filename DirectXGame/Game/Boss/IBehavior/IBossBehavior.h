@@ -36,6 +36,9 @@ struct BossParameters {
 	//カメラ状態リクエスト
 	std::optional<FollowCamera::State>cameraBehaviorRequest_ = std::nullopt;
 
+	//ボスの弾の数
+	int currentBulletNum_ = 0;
+
 	//警告円の生成
 	bool SpawnDangerZone_ = false;
 
