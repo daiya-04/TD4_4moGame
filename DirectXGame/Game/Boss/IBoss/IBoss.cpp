@@ -1,6 +1,9 @@
 #include "IBoss.h"
 #include"ColliderManager.h"
 #include"ShapesDraw.h"
+#include<memory>
+#include <random>
+
 
 IBoss::~IBoss()
 {

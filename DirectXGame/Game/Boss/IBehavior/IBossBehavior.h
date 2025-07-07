@@ -52,6 +52,7 @@ struct BossParameters {
 
 };
 
+int GetRandomInt(int min, int max);
 
 //ボスの状態基底クラス
 class IBossBehavior {
