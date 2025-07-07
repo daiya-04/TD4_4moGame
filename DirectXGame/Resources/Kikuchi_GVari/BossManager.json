@@ -1,6 +1,10 @@
 {
     "BossManager": {
         "Donut": {
+            "Blinking": {
+                "hitCount": 1.0,
+                "maxBlinkingNum": 3
+            },
             "ColliderColor": [
                 1.0,
                 0.0,
@@ -75,6 +79,10 @@
             ]
         },
         "GingerbreadMan": {
+            "Blinking": {
+                "hitCount": 1.0,
+                "maxBlinkingNum": 3
+            },
             "ColliderColor": [
                 1.0,
                 0.0,
@@ -92,12 +100,12 @@
                 ],
                 "finalWarningCount": 30.0,
                 "radius": 3.5,
-                "warningCount": 6.0,
+                "warningCount": 120.0,
                 "warningSphereHeight": 1.0
             },
             "FallingBullet": {
                 "colliderRadius": 3.450000047683716,
-                "fallSpeed": 0.699999988079071,
+                "fallSpeed": 1.7999999523162842,
                 "radius": 3.5,
                 "spawnHeight": 60.0
             },
@@ -109,7 +117,7 @@
                 "ActiveCount": 280.0,
                 "Num": 4,
                 "PreActionRate_": 1.0,
-                "WaitCount": 220.0
+                "WaitCount": 300.0
             },
             "MaxHP": 60,
             "OffsetPos": [
@@ -136,13 +144,14 @@
                 "activeCount": 60.0,
                 "afterCount": 60.0,
                 "attackRadius_": 5.0,
+                "finalWarningCount": 30.0,
                 "offsetZone": [
                     0.0,
                     0.0,
                     0.0
                 ],
                 "rotateNum": 6.0,
-                "waitCount": 320.0
+                "warningCount": 60.0
             }
         }
     }
