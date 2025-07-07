@@ -4,10 +4,14 @@
 //初期化
 DaiEngine::Camera* GameObject::camera_ = nullptr;
 
-void GameObject::Init(const std::string& modelName)
+void GameObject::Init(const std::string& modelName,LoadType type)
 {
 	//モデルクラスの初期化
-	model_.reset(DaiEngine::SkinningObject::Create(DaiEngine::ModelManager::LoadGLTF(modelName)));
+	if (type == LoadType::Gltf) {
+		model_.reset(DaiEngine::SkinningObject::Create(DaiEngine::ModelManager::LoadGLTF(modelName)));
+	}else if(type == LoadType::Obj) {
+		model_.reset(DaiEngine::SkinningObject::Create(DaiEngine::ModelManager::LoadOBJ(modelName)));
+	}
 
 	world_ = &model_->worldTransform_;
 }

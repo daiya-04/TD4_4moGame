@@ -1,21 +1,18 @@
-#include "BossIdle.h"
-#include "Boss/IBoss/IBoss.h"
+#include "CupCakeIdle.h"
 
 
-
-BossIdle::BossIdle(BossParameters*param)
+CupCakeIdle::CupCakeIdle(BossParameters* param)
 {
 	param_ = param;
 	tree_.name_ = "Idle";
 	tree_.SetValue("second", &count_);
-
 }
 
-void BossIdle::Init()
+void CupCakeIdle::Init()
 {
 }
 
-void BossIdle::Update()
+void CupCakeIdle::Update()
 {
 	//プレイヤー方向に移動
 	param_->isMoveToPlayer_ = true;
@@ -32,10 +29,10 @@ void BossIdle::Update()
 		}
 		else {
 			//三連続同じ値なら違うものに変更
-			if(savedATK_[0] == num && savedATK_[1] == num) {
+			if (savedATK_[0] == num && savedATK_[1] == num) {
 				while (num == savedATK_[0] || num == savedATK_[1]) {
 					num = GetRandomInt(1, 3);
-					if(num == 3)num = 2;
+					if (num == 3)num = 2;
 				}
 				savedATK_.clear();
 				savedATK_.push_back(num);
