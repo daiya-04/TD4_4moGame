@@ -108,6 +108,9 @@ private:
 	/// </summary>
 	void UIUpdate();
 
+	// プレイヤーが穴空いてる場所を移動できないように
+	void UpdatePositionWithCollision();
+
 public://**ゲッター**//
 
 	/// <summary>
@@ -264,6 +267,7 @@ private://**プライベート変数**//
 	PlayerAttackEffect* attackEffect_ = nullptr;
 
 	///
+	Vector3 lastSafePos_ = { 0,0,0 };
 
 private://**ヒット時処理*//
 
