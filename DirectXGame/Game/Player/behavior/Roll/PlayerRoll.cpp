@@ -21,7 +21,7 @@ PlayerRoll::PlayerRoll()
 	tree_.SetValue("uphillDecel", &uphillDecel_);
 	tree_.SetValue("downhillAccel", &downhillAccel_);
 
-    tree_.SetValue("SideMoveSpeed", &turnInfluence_);
+    tree_.SetValue("turnInfluence_", &turnInfluence_);
 }
 
 void PlayerRoll::Init()
