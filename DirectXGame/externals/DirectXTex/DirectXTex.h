@@ -87,7 +87,7 @@ namespace DirectX
     enum CP_FLAGS : unsigned long
     {
         CP_FLAGS_NONE = 0x0,
-        // Normal operation
+        // Fall operation
 
         CP_FLAGS_LEGACY_DWORD = 0x1,
         // Assume pitch is DWORD aligned instead of BYTE aligned
@@ -738,7 +738,7 @@ namespace DirectX
         _In_ DXGI_FORMAT format, _Out_ ScratchImage& images) noexcept;
 
     //---------------------------------------------------------------------------------
-    // Normal map operations
+    // Fall map operations
 
     enum CNMAP_FLAGS : unsigned long
     {

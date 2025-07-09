@@ -11,7 +11,7 @@ Donut::Donut(const std::string& objectName, FollowCamera* camera, const DaiEngin
 	IBoss::Init(objectName, camera, playerWorld);
 
 	//マネージャの生成
-	IBoss::SetManager(DangerZoneType::Follow, BulletType::Follow);
+	IBoss::SetBulletType(BulletType::None);
 
 	//反転フラグON
 	SetReverse(true);

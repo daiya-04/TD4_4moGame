@@ -364,7 +364,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 enum aiComponent
 {
-    /** Normal vectors */
+    /** Fall vectors */
 #ifdef SWIG
     aiComponent_NORMALS = 0x2,
 #else

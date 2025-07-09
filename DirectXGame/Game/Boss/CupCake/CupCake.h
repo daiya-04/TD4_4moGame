@@ -12,6 +12,7 @@ public:
 
 	enum class Behavior {
 		Idle,				//アイドル
+		ShotBullet,			//弾を撃つ
 		Count
 	};
 

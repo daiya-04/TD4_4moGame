@@ -21,10 +21,10 @@ void DangerZone::Update()
 	//警告状態の処理
 	if(behavior_== Behavior::Warning) {
 		//通常時処理
-		if (parameters_.type == DangerZoneType::Normal) {
+		if (parameters_.type == BulletType::Fall||parameters_.type ==BulletType::Parabola) {
 			NormalUpdate();
 		}//追従時処理
-		else if (parameters_.type == DangerZoneType::Follow) {
+		else if (parameters_.type == BulletType::None) {
 			FollowUpdate();
 		}
 	}else if (behavior_ == Behavior::FinalWarning) {

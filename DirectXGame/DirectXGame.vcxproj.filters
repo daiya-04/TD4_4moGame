@@ -389,10 +389,10 @@
     <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\WeaponRollAttack\BossWeaponRollAttack.cpp">
       <Filter>Game\Boss\Behavior\WeaponRollAttack</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\BossBullet\BossBullet.cpp">
+    <ClCompile Include="Game\Boss\Bullet\BossBullet\BossBullet.cpp">
       <Filter>Game\Boss\BossBullet</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\BossBulletManager\BossBulletManager.cpp">
+    <ClCompile Include="Game\Boss\Bullet\BossBulletManager\BossBulletManager.cpp">
       <Filter>Game\Boss\BossBulletManager</Filter>
     </ClCompile>
     <ClCompile Include="Game\Boss\DangerZone\DangerZone.cpp">
@@ -478,6 +478,7 @@
     <ClCompile Include="Game\Player\UI\PlayerUI.cpp" />
     <ClCompile Include="Game\Boss\CupCake\CupCake.cpp" />
     <ClCompile Include="Game\Boss\CupCake\behavior\idle\CupCakeIdle.cpp" />
+    <ClCompile Include="Game\Boss\CupCake\behavior\shotBullet\CupCakeShotBullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -717,10 +718,10 @@
     <ClInclude Include="Game\Boss\GingerbreadMan\Behavior\WeaponRollAttack\BossWeaponRollAttack.h">
       <Filter>Game\Boss\Behavior\WeaponRollAttack</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\BossBullet\BossBullet.h">
+    <ClInclude Include="Game\Boss\Bullet\BossBullet\BossBullet.h">
       <Filter>Game\Boss\BossBullet</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\BossBulletManager\BossBulletManager.h">
+    <ClInclude Include="Game\Boss\Bullet\BossBulletManager\BossBulletManager.h">
       <Filter>Game\Boss\BossBulletManager</Filter>
     </ClInclude>
     <ClInclude Include="Game\Boss\DangerZone\DangerZone.h">
@@ -812,5 +813,7 @@
     <ClInclude Include="Game\Player\UI\PlayerUI.h" />
     <ClInclude Include="Game\Boss\CupCake\CupCake.h" />
     <ClInclude Include="Game\Boss\CupCake\behavior\idle\CupCakeIdle.h" />
+    <ClInclude Include="Game\Boss\Bullet\types.h" />
+    <ClInclude Include="Game\Boss\CupCake\behavior\shotBullet\CupCakeShotBullet.h" />
   </ItemGroup>
 </Project>

@@ -9,7 +9,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	DangerZoneManager(DangerZoneType type);
+	DangerZoneManager();
 	~DangerZoneManager() = default;
 	/// <summary>
 	/// 更新
@@ -18,7 +18,7 @@ public:
 	/// <summary>
 	/// 警告エリア生成
 	/// </summary>
-	void SpawnDangerZone(const Vector3&pos);
+	void SpawnDangerZone(const Vector3&pos,BulletType type);
 
 	/// <summary>
 /// ツリーの取得
@@ -32,12 +32,13 @@ public:
 	/// <returns></returns>
 	std::list<std::unique_ptr<DangerZone>>&GetDangerZone() { return dangerZones_; }
 
+private://**パラメータを設定**//
+
+	void SetParameters(DangerZoneParameters& param);
+
 private:
 
 	GvariTree tree_;
-
-	//警告エリアのタイプ
-	DangerZoneType type_;
 
 	//プレイヤーのワールド座標取得
 	std::list<std::unique_ptr<DangerZone>>dangerZones_;
@@ -61,13 +62,19 @@ private:
 	Vector4 color_ = Vector4(1, 0, 0, 1);
 
 private://**追従式の場合のパラメータ
-	
-	//生成数
-	int spawnNum_ = 4;
+
 
 	//追従速度
 	float followSpeed_ = 0.1f; 
 
 	//プレイヤーとの距離
 	float distance_ = 10.0f;
+
+private://**ばらまきの場合のパラメータ*//
+
+	//生成数
+	int spawnNum_ = 4;
+
+	//ばらまき最小最大範囲
+	Vector2 spawnRange_ = Vector2(1.0f, 3.0f);
 };

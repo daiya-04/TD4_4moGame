@@ -1,6 +1,6 @@
 #pragma once
 #include"InstancingGameObject/InstancingGameObject.h"
-#include"Boss/BossBullet/BossBullet.h"
+#include"Boss/Bullet/BossBullet/BossBullet.h"
 #include"GlobalVariable/Tree/GlobalVariableTree.h"
 
 class BossBulletManager : public InstancingGameObject {
@@ -9,7 +9,7 @@ public://**パブリック関数**//
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	BossBulletManager(BulletType type);
+	BossBulletManager();
 	~BossBulletManager() = default;
 
 	/// <summary>
@@ -25,13 +25,7 @@ public://**パブリック関数**//
 	/// <summary>
 	/// 弾を生成
 	/// </summary>
-	void SpawnBullet(const DaiEngine::WorldTransform& pos);
-
-	/// <summary>
-	/// 弾タイプ取得
-	/// </summary>
-	/// <returns></returns>
-	BulletType GetBulletType() const { return type_; }
+	void SpawnBullet(const DaiEngine::WorldTransform& pos, BulletType type,const DaiEngine::WorldTransform& boss);
 
 	/// <summary>
 	/// ツリーの取得
@@ -57,9 +51,6 @@ private:
 
 private:
 
-	//ボスの弾の種類を指定
-	BulletType type_;
-
 	//弾の初期高度
 	float bulletStartHeight_ = 10;
 
@@ -71,4 +62,10 @@ private:
 
 	//コライダー半径
 	float colliderRadius_ = 1.0f;
+
+	//放物線処理到着時間
+	int arriveCount_ = 60;
+	//放物線の高さ
+	float parabolaHeight_ = 5.0f;
+
 };

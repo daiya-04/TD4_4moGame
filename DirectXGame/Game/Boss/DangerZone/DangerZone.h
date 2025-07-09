@@ -1,17 +1,12 @@
 #pragma once
 #include"WorldTransform.h"
-
-enum class DangerZoneType {
-	Normal,	//特になし
-	Follow,	//追従
-	Count	//数
-};
+#include"Boss/Bullet/types.h"
 
 struct DangerZoneParameters {
 	//タイプ
-	DangerZoneType type;
+	BulletType type;
 	DaiEngine::WorldTransform world;
-	const Vector3* playerPos = nullptr;	//プレイヤーの位置
+	//const Vector3* playerPos = nullptr;	//プレイヤーの位置
 	float maxRadius = 1.0f;				//最大半径
 	float maxWarningCount = 60.0f;		//警告時間
 	float maxFinalWarningCount = 30.0f;		//最終警告時間時間
@@ -48,6 +43,8 @@ public://**パブリック関数**//
 
 	bool GetIsDraw() const { return isDraw_; }
 
+	BulletType GetType() const { return parameters_.type; }
+
 	/// <summary>
 	/// パラメータをセット
 	/// </summary>
@@ -78,12 +75,10 @@ private://**プライベート変数**//
 
 	//状態
 	enum class Behavior {
-
 		Warning,
 		FinalWarning,
 		Count
 	}behavior_ = Behavior::Warning;
-
 
 	//パラメータ
 	DangerZoneParameters parameters_;
@@ -100,5 +95,6 @@ private://**プライベート変数**//
 	//点滅カウント
 	int blinkingCount_ = 0;
 
-	const Vector3* pPos_ ;	//プレイヤーの位置
+	//プレイヤーの位置
+	const Vector3* pPos_  = nullptr;
 };
