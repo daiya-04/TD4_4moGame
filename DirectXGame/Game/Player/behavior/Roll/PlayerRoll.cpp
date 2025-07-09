@@ -20,6 +20,8 @@ PlayerRoll::PlayerRoll()
 
 	tree_.SetValue("uphillDecel", &uphillDecel_);
 	tree_.SetValue("downhillAccel", &downhillAccel_);
+
+    tree_.SetValue("SideMoveSpeed", &turnInfluence_);
 }
 
 void PlayerRoll::Init()
@@ -130,12 +132,11 @@ void PlayerRoll::Update()
     Vector3 move = player_->SetBody2Input();
 
     // ロール中、入力に応じて少し曲がれるようにする
-    const float turnInfluence = 0.15f; // カーブしやすさ（0〜1）
     if (move.Length() > 0.001f) {
         move = move.Normalize();
         // 今の速度ベクトルと入力を補間して方向を調整（速度は保つ）
         float speed = currentVelo_.Length();
-        Vector3 blendedDir = (currentVelo_.Normalize() * (1.0f - turnInfluence) + move * turnInfluence).Normalize();
+        Vector3 blendedDir = (currentVelo_.Normalize() * (1.0f - turnInfluence_) + move * turnInfluence_).Normalize();
         currentVelo_ = blendedDir * speed;
     }
 
