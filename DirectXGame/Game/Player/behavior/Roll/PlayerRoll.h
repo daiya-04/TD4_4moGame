@@ -47,4 +47,6 @@ private://**パラメータ**//
 
 	float uphillDecel_ = 0.5f;   // 上り最大半減
 	float downhillAccel_ = 1.2f; // 下り最大1.2倍
+
+	float turnInfluence_ = 0.15f; // カーブしやすさ（0〜1）
 };
