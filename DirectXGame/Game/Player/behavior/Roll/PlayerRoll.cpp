@@ -54,6 +54,7 @@ Vector3 ProjectOnPlane(const Vector3& vec, const Vector3& planeNormal) {
 
 void PlayerRoll::Update()
 {
+
     if (!player_->GetInput()->GetInput(PlayerInput::Roll)) {
         player_->behaviorRequest_ = Player::Behavior::Move;
         player_->parameters_.currentRollCount = cooldownCount_;
@@ -123,6 +124,19 @@ void PlayerRoll::Update()
         else {
             currentVelo_ = Vector3{ 0, 0, 0 };
         }
+    }
+
+    // 入力取得（方向制御に使う）
+    Vector3 move = player_->SetBody2Input();
+
+    // ロール中、入力に応じて少し曲がれるようにする
+    const float turnInfluence = 0.15f; // カーブしやすさ（0〜1）
+    if (move.Length() > 0.001f) {
+        move = move.Normalize();
+        // 今の速度ベクトルと入力を補間して方向を調整（速度は保つ）
+        float speed = currentVelo_.Length();
+        Vector3 blendedDir = (currentVelo_.Normalize() * (1.0f - turnInfluence) + move * turnInfluence).Normalize();
+        currentVelo_ = blendedDir * speed;
     }
 
     // 最終的にプレイヤーに加算
