@@ -25,14 +25,14 @@
                     1.0
                 ],
                 "baramaki": {
-                    "spawnNum": 10,
+                    "spawnNum": 5,
                     "spawnRange": [
                         3.0,
                         20.0
                     ]
                 },
                 "finalWarningCount": 30.0,
-                "radius": 1.5,
+                "radius": 2.0,
                 "warningCount": 60.0,
                 "warningSphereHeight": 0.699999988079071
             },
