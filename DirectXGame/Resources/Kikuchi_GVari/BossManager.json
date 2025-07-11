@@ -199,7 +199,7 @@
                 },
                 "finalWarningCount": 30.0,
                 "radius": 3.5,
-                "warningCount": 6.0,
+                "warningCount": 120.0,
                 "warningSphereHeight": 1.0
             },
             "FallingBullet": {
@@ -220,7 +220,7 @@
                 "ActiveCount": 280.0,
                 "Num": 4,
                 "PreActionRate_": 1.0,
-                "WaitCount": 220.0
+                "WaitCount": 300.0
             },
             "MaxHP": 60,
             "OffsetPos": [
