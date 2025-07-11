@@ -8,7 +8,7 @@ PlayerRoll::PlayerRoll()
 	tree_.name_ = "Roll";
 	tree_.SetMonitorValue("nowVelo", &currentVelo_);
 	tree_.SetMonitorValue("groundNormal", &player_->parameters_.grandNormal);
-
+    tree_.SetMonitorValue("chargeCount", &chargeJump_);
 
 	tree_.SetValue("StSpeed", &startSpeed_);
 	tree_.SetValue("decelRate", &decelRate);
@@ -21,7 +21,9 @@ PlayerRoll::PlayerRoll()
 	tree_.SetValue("uphillDecel", &uphillDecel_);
 	tree_.SetValue("downhillAccel", &downhillAccel_);
 
-    tree_.SetValue("turnInfluence_", &turnInfluence_);
+    tree_.SetValue("turnInfluence", &turnInfluence_);
+
+    tree_.SetValue("maxCharge", &maxCharge_);
 }
 
 void PlayerRoll::Init()
@@ -54,8 +56,7 @@ Vector3 ProjectOnPlane(const Vector3& vec, const Vector3& planeNormal) {
 	return vec - planeNormal * Dot(vec, planeNormal);
 }
 
-void PlayerRoll::Update()
-{
+void PlayerRoll::Update() {
 
     if (!player_->GetInput()->GetInput(PlayerInput::Roll)) {
         player_->behaviorRequest_ = Player::Behavior::Move;
@@ -77,25 +78,26 @@ void PlayerRoll::Update()
     Vector3 playerPos = player_->GetWorld().translation_;
     Block* currentBlock = player_->GetField()->GetBlock(playerPos.x, playerPos.z);
 
-    Vector3 nextPos = playerPos + moveDir * player_->GetField()->GetBlockWidth();//ブロック幅分進んだ先
+    Vector3 nextPos = playerPos + moveDir * player_->GetField()->GetBlockWidth();
     Block* nextBlock = player_->GetField()->GetBlock(nextPos.x, nextPos.z);
+
+    bool isSliding = false;
 
     if (currentBlock && nextBlock) {
         float yDiff = nextBlock->world.translation_.y - currentBlock->world.translation_.y;
-        float xzDist = (float)std::sqrt(std::pow(nextBlock->world.translation_.x - currentBlock->world.translation_.x, 2) +
+        float xzDist = (float)std::sqrt(
+            std::pow(nextBlock->world.translation_.x - currentBlock->world.translation_.x, 2) +
             std::pow(nextBlock->world.translation_.z - currentBlock->world.translation_.z, 2));
 
         if (xzDist > 0.001f) {
-            float slopeAngle = std::atan2(yDiff, xzDist); // ラジアン角度
+            float slopeAngle = std::atan2(yDiff, xzDist);
 
-            // 最大角度は45度とし、角度に応じた係数計算
+            // 角度によって加速・減速
             const float maxSlopeRad = 45.0f * 3.14159f / 180.0f;
             float slopeFactor = slopeAngle / maxSlopeRad;
             slopeFactor = std::clamp(slopeFactor, -1.0f, 1.0f);
 
-            // 上りは減速、下りは加速
             float speedMultiplier = 1.0f;
-
             if (slopeFactor > 0.0f) {
                 speedMultiplier = 1.0f - slopeFactor * (1.0f - uphillDecel_);
             }
@@ -104,50 +106,49 @@ void PlayerRoll::Update()
             }
 
             currentVelo_ *= speedMultiplier;
+
+            // 滑り判定：一定以上の上り下り坂
+            const float slideThreshold = 0.0001f * 3.14159f / 180.0f;
+            if (std::fabs(slopeAngle) > slideThreshold && std::fabs(yDiff) > 0.01f) {
+                isSliding = true;
+            }
         }
     }
 
-    // 元の傾斜・減速処理
-    Vector3 groundNormal = params.grandNormal;
-    Vector3 slopeDir = ProjectOnPlane(Vector3(0, -1, 0), groundNormal);
-    slopeDir.y = 0.0f;
-    float slopeLen = slopeDir.Length();
-
-    if (slopeLen > flatThreshold_) {
-        slopeDir = slopeDir.Normalize();
-        Vector3 slopeAccel = slopeDir * slopeGravity_ * slopeLen;
-        currentVelo_ += slopeAccel;
+    // 減速処理（傾斜無し）
+    float spd = currentVelo_.Length();
+    if (spd > decelRate) {
+        currentVelo_ = currentVelo_.Normalize() * (spd - decelRate);
     }
     else {
-        float spd = currentVelo_.Length();
-        if (spd > decelRate) {
-            currentVelo_ = currentVelo_.Normalize() * (spd - decelRate);
-        }
-        else {
-            currentVelo_ = Vector3{ 0, 0, 0 };
+        currentVelo_ = Vector3{ 0, 0, 0 };
+    }
+
+    // 滑り中にチャージ
+    if (isSliding && currentVelo_.Length() > 0.1f) {
+        chargeJump_ += 1.0f;
+        if (chargeJump_ > maxCharge_) {
+            chargeJump_ = maxCharge_;
         }
     }
 
     // 入力取得（方向制御に使う）
     Vector3 move = player_->SetBody2Input();
 
-    // ロール中、入力に応じて少し曲がれるようにする
+    // ロール中、入力に応じて方向を少し曲げる
     if (move.Length() > 0.001f) {
         move = move.Normalize();
-        // 今の速度ベクトルと入力を補間して方向を調整（速度は保つ）
         float speed = currentVelo_.Length();
         Vector3 blendedDir = (currentVelo_.Normalize() * (1.0f - turnInfluence_) + move * turnInfluence_).Normalize();
         currentVelo_ = blendedDir * speed;
     }
 
-    // 最終的にプレイヤーに加算
+    // プレイヤーに速度反映
     params.velocity += currentVelo_;
 
-#ifdef _DEBUG
-    if (DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+    // チャージ完了時スピン
+    if (DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE) && chargeJump_ >= maxCharge_) {
         player_->behaviorRequest_ = Player::Behavior::SpinAttack;
+        chargeJump_ = 0.0f;
     }
-#endif // _DEBUG
-
-
 }
