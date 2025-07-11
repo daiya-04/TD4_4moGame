@@ -228,6 +228,9 @@ void GameScene::Update() {
     playerAttackEffect_->Update();
 
 	}
+	
+	playerAttackEffect_->Update();
+
 
 	//地面更新
 	field_->Update();

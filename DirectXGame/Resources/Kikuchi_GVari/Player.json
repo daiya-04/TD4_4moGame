@@ -37,7 +37,7 @@
             23.0,
             23.0
         ],
-        "MaxHP": 6,
+        "MaxHP": 15,
         "Move": {
             "speed": 0.20000000298023224
         },
@@ -50,8 +50,10 @@
             "StSpeed": 1.2000000476837158,
             "cooldownCount": 16.5,
             "decelRate": 0.05000000074505806,
+            "downhillAccel": 1.2000000476837158,
             "flatThreshold": 0.009999999776482582,
-            "slopeGravity": 0.30000001192092896
+            "slopeGravity": 0.30000001192092896,
+            "uphillDecel": 0.5
         },
         "SpinAttack": {
             "AnimationFactor": 1.0,
