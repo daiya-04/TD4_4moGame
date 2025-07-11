@@ -32,7 +32,7 @@
                     ]
                 },
                 "finalWarningCount": 30.0,
-                "radius": 2.0,
+                "radius": 1.5,
                 "warningCount": 60.0,
                 "warningSphereHeight": 0.699999988079071
             },
