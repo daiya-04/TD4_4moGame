@@ -60,7 +60,6 @@ void BossWeaponRollAttack::InitBehavior0()
 	param_->isLoopAnime_ = false;
 	//警告円初期化
 	param.world.translation_ = param_->world->GetWorldPos() + offsetZone_;
-	param.maxWarningCount = waitCount_;
 	dangerZone_->Init(param);
 }
 

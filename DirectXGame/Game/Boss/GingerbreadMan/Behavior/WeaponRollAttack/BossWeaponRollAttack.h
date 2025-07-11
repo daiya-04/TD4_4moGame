@@ -56,9 +56,6 @@ private://**プライベート変数**//
 
 private://**パラメータ変数**//
 
-	//待機時間
-	float waitCount_ = 60.0f;
-
 	//実行時間
 	float attackCount_ = 60.0f;
 
