@@ -49,4 +49,7 @@ private://**パラメータ**//
 	float downhillAccel_ = 1.2f; // 下り最大1.2倍
 
 	float turnInfluence_ = 0.15f; // カーブしやすさ（0〜1）
+
+	float chargeJump_ = 0.0f; // ジャンプ攻撃のチャージ
+	float maxCharge_ = 120.0f; // ジャンプ攻撃のチャージ満タンの値
 };
