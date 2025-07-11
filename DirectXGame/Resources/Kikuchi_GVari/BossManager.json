@@ -86,7 +86,7 @@
                 0.0,
                 1.0
             ],
-            "ColliderRadius": 4.0,
+            "ColliderRadius": 2.0,
             "DangerZone": {
                 "BlinkingNum": 3,
                 "FollowParam": {
@@ -128,7 +128,7 @@
             "Idle": {
                 "second": 60.0
             },
-            "MaxHP": 100,
+            "MaxHP": 60,
             "OffsetPos": [
                 0.0,
                 0.5600000023841858,
@@ -149,12 +149,12 @@
                     1.0
                 ],
                 "downActionRate": 120.0,
-                "downCount": 60.0,
+                "downCount": 240.0,
                 "executeCount": 3,
                 "ptrAnimationRate": 0.0,
                 "radius": 1.0,
                 "speed": 0.5,
-                "waitCount": 60.0
+                "waitCount": 180.0
             },
             "StartPos": [
                 0.0,
@@ -198,18 +198,18 @@
                     ]
                 },
                 "finalWarningCount": 30.0,
-                "radius": 3.5,
+                "radius": 2.5,
                 "warningCount": 120.0,
                 "warningSphereHeight": 1.0
             },
             "FallingBullet": {
-                "colliderRadius": 3.450000047683716,
+                "colliderRadius": 2.3499999046325684,
                 "fallSpeed": 0.699999988079071,
                 "parabolaBullet": {
                     "arriveCount": 60,
                     "parabolaHeight": 5.0
                 },
-                "radius": 3.5,
+                "radius": 2.4000000953674316,
                 "spawnHeight": 60.0
             },
             "Idle": {
