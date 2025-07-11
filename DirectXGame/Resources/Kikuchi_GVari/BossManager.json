@@ -86,7 +86,7 @@
                 0.0,
                 1.0
             ],
-            "ColliderRadius": 2.0,
+            "ColliderRadius": 4.0,
             "DangerZone": {
                 "BlinkingNum": 3,
                 "FollowParam": {
