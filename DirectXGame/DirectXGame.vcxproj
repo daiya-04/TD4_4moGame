@@ -112,8 +112,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <ClCompile Include="BaseUI.cpp" />
     <ClCompile Include="Game\Boss\Blinking\Blinking.cpp" />
+    <ClCompile Include="Game\Boss\CupCake\behavior\fallAttack\CupCakeFallAttack.cpp" />
     <ClCompile Include="Game\Boss\CupCake\behavior\idle\CupCakeIdle.cpp" />
     <ClCompile Include="Game\Boss\CupCake\behavior\shotBullet\CupCakeShotBullet.cpp" />
+    <ClCompile Include="Game\Boss\CupCake\behavior\waveDive\CupCakeWaveDive.cpp" />
     <ClCompile Include="Game\Boss\CupCake\CupCake.cpp" />
     <ClCompile Include="Game\Boss\Donut\Behavior\AttackSpin\BossSpinAttack.cpp" />
     <ClCompile Include="Game\Boss\Donut\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.cpp" />
@@ -227,8 +229,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="BaseUI.h" />
     <ClInclude Include="Game\Boss\Blinking\Blinking.h" />
     <ClInclude Include="Game\Boss\Bullet\types.h" />
+    <ClInclude Include="Game\Boss\CupCake\behavior\fallAttack\CupCakeFallAttack.h" />
     <ClInclude Include="Game\Boss\CupCake\behavior\idle\CupCakeIdle.h" />
     <ClInclude Include="Game\Boss\CupCake\behavior\shotBullet\CupCakeShotBullet.h" />
+    <ClInclude Include="Game\Boss\CupCake\behavior\waveDive\CupCakeWaveDive.h" />
     <ClInclude Include="Game\Boss\CupCake\CupCake.h" />
     <ClInclude Include="Game\Boss\Donut\Behavior\AttackSpin\BossSpinAttack.h" />
     <ClInclude Include="Game\Boss\Donut\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.h" />

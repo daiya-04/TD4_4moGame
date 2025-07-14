@@ -26,6 +26,8 @@ void IBoss::Init(const std::string& objectName, FollowCamera* camera, const DaiE
 	//プレイヤーポインタ
 	playerWorld_ = playerWorld;
 
+	parameters_.playerWorld_ = playerWorld_;
+
 	//カメラポインタを設定
 	IBossBehavior::SetPointer(camera->GetCamera());
 
