@@ -15,7 +15,7 @@ CupCake::CupCake(const std::string& objectName, FollowCamera* camera, const DaiE
 	behaviors_.resize((size_t)Behavior::Count);
 	behaviors_[(size_t)Behavior::Idle] = std::make_unique<BossIdle>(&parameters_);
 	behaviors_[(size_t)Behavior::ShotBullet] = std::make_unique<CupCakeShotBullet>(&parameters_);
-	//ehaviors_[(size_t)Behavior::WaveDive] = std::make_unique<CupCakeWaveDive>(&parameters_);
+	behaviors_[(size_t)Behavior::WaveDive] = std::make_unique<CupCakeWaveDive>(&parameters_);
 	behaviors_[(size_t)Behavior::JumpAttack] = std::make_unique<CupCakeFallAttack>(&parameters_);
 
 	//ツリーを追加
