@@ -11,7 +11,7 @@
                 0.0,
                 1.0
             ],
-            "ColliderRadius": 1.0,
+            "ColliderRadius": 2.5,
             "DangerZone": {
                 "BlinkingNum": 3,
                 "FollowParam": {
@@ -25,25 +25,25 @@
                     1.0
                 ],
                 "baramaki": {
-                    "spawnNum": 10,
+                    "spawnNum": 5,
                     "spawnRange": [
                         3.0,
                         20.0
                     ]
                 },
                 "finalWarningCount": 30.0,
-                "radius": 1.0,
+                "radius": 1.5,
                 "warningCount": 60.0,
-                "warningSphereHeight": 0.5
+                "warningSphereHeight": 0.699999988079071
             },
             "FallingBullet": {
-                "colliderRadius": 1.0,
+                "colliderRadius": 1.899999976158142,
                 "fallSpeed": 1.0,
                 "parabolaBullet": {
                     "arriveCount": 60,
                     "parabolaHeight": 5.0
                 },
-                "radius": 1.0,
+                "radius": 2.0,
                 "spawnHeight": 10.0
             },
             "Idle": {
@@ -52,13 +52,13 @@
             "MaxHP": 100,
             "OffsetPos": [
                 0.0,
-                0.0,
+                2.200000047683716,
                 0.0
             ],
             "Scale": [
-                1.0,
-                1.0,
-                1.0
+                2.0,
+                2.0,
+                2.0
             ],
             "ShotBullet": {
                 "attackCount": 60.0,
@@ -67,7 +67,7 @@
             "Speed": 0.0,
             "StartPos": [
                 0.0,
-                0.0,
+                2.200000047683716,
                 0.0
             ],
             "fieldSize": [
@@ -86,7 +86,7 @@
                 0.0,
                 1.0
             ],
-            "ColliderRadius": 1.0,
+            "ColliderRadius": 2.0,
             "DangerZone": {
                 "BlinkingNum": 3,
                 "FollowParam": {
@@ -128,16 +128,16 @@
             "Idle": {
                 "second": 60.0
             },
-            "MaxHP": 100,
+            "MaxHP": 60,
             "OffsetPos": [
                 0.0,
-                4.0,
+                0.5600000023841858,
                 0.0
             ],
             "Scale": [
-                10.0,
-                10.0,
-                10.0
+                2.0,
+                2.0,
+                2.0
             ],
             "Speed": 0.0,
             "SpinAttack2Player": {
@@ -149,12 +149,12 @@
                     1.0
                 ],
                 "downActionRate": 120.0,
-                "downCount": 60.0,
+                "downCount": 240.0,
                 "executeCount": 3,
                 "ptrAnimationRate": 0.0,
                 "radius": 1.0,
                 "speed": 0.5,
-                "waitCount": 60.0
+                "waitCount": 180.0
             },
             "StartPos": [
                 0.0,
@@ -198,18 +198,18 @@
                     ]
                 },
                 "finalWarningCount": 30.0,
-                "radius": 3.5,
+                "radius": 2.5,
                 "warningCount": 120.0,
                 "warningSphereHeight": 1.0
             },
             "FallingBullet": {
-                "colliderRadius": 3.450000047683716,
+                "colliderRadius": 2.3499999046325684,
                 "fallSpeed": 0.699999988079071,
                 "parabolaBullet": {
                     "arriveCount": 60,
                     "parabolaHeight": 5.0
                 },
-                "radius": 3.5,
+                "radius": 2.4000000953674316,
                 "spawnHeight": 60.0
             },
             "Idle": {
@@ -254,7 +254,7 @@
                     0.0
                 ],
                 "rotateNum": 6.0,
-                "warningCount": 60.0
+                "warningCount": 180.0
             }
         }
     }
