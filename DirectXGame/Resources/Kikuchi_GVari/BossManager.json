@@ -73,7 +73,21 @@
             "fieldSize": [
                 23.0,
                 23.0
-            ]
+            ],
+            "jumpAttack": {
+                "attackCount": 60.0,
+                "jumpHeight": 20.0,
+                "jumpNUm": 3,
+                "stopCount": 60.0,
+                "waitCount": 60.0
+            },
+            "waveDive": {
+                "fallSpd": 5.0,
+                "jumpCount": 60.0,
+                "jumpHeight": 50.0,
+                "stopCount": 60.0,
+                "waitCount": 60.0
+            }
         },
         "Donut": {
             "Blinking": {
@@ -222,7 +236,7 @@
                 "PreActionRate_": 1.0,
                 "WaitCount": 300.0
             },
-            "MaxHP": 60,
+            "MaxHP": 61,
             "OffsetPos": [
                 0.0,
                 1.559999942779541,
