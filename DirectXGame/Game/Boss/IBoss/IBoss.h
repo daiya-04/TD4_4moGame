@@ -156,7 +156,6 @@ private://**プライベート変数**//
 	//コライダー
 	std::unique_ptr<DaiEngine::SphereCollider> collider_ = nullptr;
 
-
 	//弾マネージャ
 	std::unique_ptr<BossBulletManager>bulletManager_ = nullptr;
 	//警戒エリアマネージャ

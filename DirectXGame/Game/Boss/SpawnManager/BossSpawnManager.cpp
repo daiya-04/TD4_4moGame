@@ -77,7 +77,7 @@ void BossSpawnManager::UIDraw()
 void BossSpawnManager::CheckBossDead()
 {
 	//現在のボスが死んだ場合
-	if(bosses_[(int)bossType_]->GetIsDead()||isNextBoss_){
+	if((bosses_[(int)bossType_]->GetIsDead()||isNextBoss_)&&bosses_[(int)bossType_]->parameters_.currentBulletNum_==0) {
 
 		isNextBoss_=false;
 

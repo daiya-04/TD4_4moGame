@@ -266,6 +266,7 @@ void IBoss::OnCollision(DaiEngine::Collider* collider)
 		//不死フラグが無効の場合
 		if (!isImmortal_) {
 			isDead_ = true;
+			collider_->ColliderOff();
 		}
 	}
 }
