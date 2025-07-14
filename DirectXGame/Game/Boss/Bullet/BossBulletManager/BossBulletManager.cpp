@@ -82,7 +82,7 @@ void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos, Bullet
 
 	}
 	else if (type == BulletType::None) {
-		position.y = 0;
+		position.y = -0.5;
 		data.velocity = Vector3{ 0,0,0 };
 	}
 
