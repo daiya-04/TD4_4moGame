@@ -479,6 +479,8 @@
     <ClCompile Include="Game\Boss\CupCake\CupCake.cpp" />
     <ClCompile Include="Game\Boss\CupCake\behavior\idle\CupCakeIdle.cpp" />
     <ClCompile Include="Game\Boss\CupCake\behavior\shotBullet\CupCakeShotBullet.cpp" />
+    <ClCompile Include="Game\Boss\CupCake\behavior\waveDive\CupCakeWaveDive.cpp" />
+    <ClCompile Include="Game\Boss\CupCake\behavior\fallAttack\CupCakeFallAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -815,5 +817,7 @@
     <ClInclude Include="Game\Boss\CupCake\behavior\idle\CupCakeIdle.h" />
     <ClInclude Include="Game\Boss\Bullet\types.h" />
     <ClInclude Include="Game\Boss\CupCake\behavior\shotBullet\CupCakeShotBullet.h" />
+    <ClInclude Include="Game\Boss\CupCake\behavior\waveDive\CupCakeWaveDive.h" />
+    <ClInclude Include="Game\Boss\CupCake\behavior\fallAttack\CupCakeFallAttack.h" />
   </ItemGroup>
 </Project>

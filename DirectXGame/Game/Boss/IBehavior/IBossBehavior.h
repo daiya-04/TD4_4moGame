@@ -18,6 +18,9 @@ struct BossParameters {
 	//参照用本体ワールド
 	const DaiEngine::WorldTransform* world;
 
+	//プレイヤーワールド
+	const DaiEngine::WorldTransform* playerWorld_;
+
 	//カウント時間
 	float currentSec = 0;
 	Vector3 velocity_;
