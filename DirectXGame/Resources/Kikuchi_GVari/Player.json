@@ -50,7 +50,7 @@
             "StSpeed": 0.800000011920929,
             "cooldownCount": 16.5,
             "decelRate": 0.05000000074505806,
-            "downhillAccel": 1.399999976158142,
+            "downhillAccel": 1.2000000476837158,
             "flatThreshold": 0.009999999776482582,
             "maxCharge": 120.0,
             "slopeGravity": 0.30000001192092896,
