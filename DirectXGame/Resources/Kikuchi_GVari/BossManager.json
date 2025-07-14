@@ -78,8 +78,8 @@
                 "attackCount": 60.0,
                 "jumpHeight": 20.0,
                 "jumpNUm": 3,
-                "stopCount": 120.0,
-                "waitCount": 80.0
+                "stopCount": 60.0,
+                "waitCount": 60.0
             },
             "waveDive": {
                 "fallSpd": 5.0,
