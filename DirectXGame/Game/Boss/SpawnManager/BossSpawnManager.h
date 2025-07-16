@@ -46,6 +46,12 @@ public://**パブリック関数**//
 
 	DaiEngine::WorldTransform& GetBossWorld() { return bosses_[int(bossType_)]->GetWorld(); }
 
+	/// <summary>
+	/// ブロック上に設置
+	/// </summary>
+	/// <param name="y"></param>
+	void SetOnField(float y);
+
 private://**プライベート関数**//
 
 	/// <summary>

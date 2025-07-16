@@ -130,9 +130,6 @@ void GameScene::Init() {
 	followCamera_ = std::make_unique<FollowCamera>(&camera_, player_->GetWorld().translation_);
 	
 	//ボス生成
-	//boss_ = std::make_unique<Boss2>(followCamera_.get());
-	//boss_->SetPlayerWorld(&player_->GetWorld());
-
 	bossSpawnManager_ = std::make_unique<BossSpawnManager>(followCamera_.get(), &player_->GetWorld());
 	player_->SetBossWorld(&bossSpawnManager_->GetBossWorld());
 
@@ -230,6 +227,8 @@ void GameScene::Update() {
 
 		//ボス更新
 		bossSpawnManager_->Update();
+		bossSpawnManager_->SetOnField(field_->GetMassLocationPosY(bossSpawnManager_->GetBossWorld().translation_) + bossSpawnManager_->GetBossWorld().scale_.y);
+
 		//ボスのワールド座標取得
 		player_->SetBossWorld(&bossSpawnManager_->GetBossWorld());
     
@@ -253,6 +252,16 @@ void GameScene::Update() {
 		// Y範囲にあるか判定
 		if (block->world.translation_.y >= bullet->GetWorld().translation_.y && block->world.translation_.y <= bullet->GetWorld().translation_.y + bullet->GetWorld().scale_.y) {
 			
+			//WAVE発生タイプの場合
+			if (bullet->GetType() == BulletType::Wave) {
+
+				Vector2 bPos = field_->GetBlockAt(0, 0);
+
+				field_->AddWave(bPos,30,1.0f,1,0.01f);
+				bullet->OnCollision();
+				continue;
+			}
+
 			//下げる値取得
 			float deltaY = field_->GetDeltaY();
 			

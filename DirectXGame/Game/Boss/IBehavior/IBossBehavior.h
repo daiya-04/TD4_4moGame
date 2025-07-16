@@ -2,6 +2,7 @@
 #include"GlobalVariable/Tree/GlobalVariableTree.h"
 #include"FollowCamera/FollowCamera.h"
 #include"WorldTransform.h"
+#include"Boss/Bullet/types.h"
 #include<optional>
 
 
@@ -26,12 +27,17 @@ struct BossParameters {
 	Vector3 velocity_;
 	Vector3 rotation_;
 
+	float fieldY_= 0;
+
 	//アニメーション変更名（””なら空）
 	std::string setAnimeName_ = "";
 	//ループアニメーションかどうか
 	bool isLoopAnime_ = false;
 	//アニメーションの速度倍率
 	float animationLeverage_ = 1.0f;
+
+	//弾タイプリクエスト
+	std::optional<BulletType>bulletTypeRequest_ = std::nullopt;
 
 	//状態リクエスト
 	std::optional<int>behaviorRequest_ = 0;

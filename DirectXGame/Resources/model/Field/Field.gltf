@@ -678,27 +678,27 @@
 		{
 			"mimeType":"image/png",
 			"name":"Donut.png",
-			"uri":"../../../../../../../Documents/TD4_01/Donut/Donut.png"
+			"uri":"Donut.png"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"Icing.png",
-			"uri":"../../../../../../../Documents/TD4_01/Donut/Icing.png"
+			"uri":"Icing.png"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"Cap.png",
-			"uri":"../../../../../../../Documents/TD4_01/Capcake/cap.png"
+			"uri":"Cap.png"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"Body.png",
-			"uri":"../../../../../../../Documents/TD4_01/Capcake/Body.png"
+			"uri":"Body.png"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"Cream.png",
-			"uri":"../../../../../../../Documents/TD4_01/Capcake/cream.png"
+			"uri":"Cream.png"
 		}
 	],
 	"skins":[
