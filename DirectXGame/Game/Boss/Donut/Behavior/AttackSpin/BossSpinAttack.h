@@ -11,7 +11,6 @@ public://**パブリック関数**//
 	Boss2SpinAttack(BossParameters* param);
 	~Boss2SpinAttack();
 
-
 	void Draw()override;
 
 public://**状態**//

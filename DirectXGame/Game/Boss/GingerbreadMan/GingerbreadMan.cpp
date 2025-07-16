@@ -11,7 +11,7 @@ GingerbreadMan::GingerbreadMan(const std::string& objectName, FollowCamera* came
 	IBoss::Init(objectName, camera, playerWorld);
 
 	//マネージャの生成
-	IBoss::SetManager(DangerZoneType::Normal, BulletType::Normal);
+	IBoss::SetBulletType(BulletType::Fall);
 
 	//状態の生成
 	behaviors_.resize((size_t)BossBehavior::Count);

@@ -1,14 +1,11 @@
 #pragma once
 #include"WorldTransform.h"
 #include"SphereCollider.h"
+#include"Boss/Bullet/types.h"
 
 #include<memory>
 
-enum class BulletType {
-	Normal,
-	Follow,
-	Count
-};
+
 
 struct BossBulletData {
 
@@ -30,6 +27,15 @@ struct BossBulletData {
 
 	//コライダー半径
 	float colliderRadius = 1.0f;
+
+	//放物線用ボスワールド
+	DaiEngine::WorldTransform bossWorld;
+
+	//到着時間
+	int arriveCount = 60;
+
+	//放物線の高さ
+	float parabolaHeight = 5.0f;
 };
 
 //ボスが出す一発の弾
@@ -56,9 +62,21 @@ public://**パブリック関数**//
 	void OnCollision();
 
 	/// <summary>
+	/// コライダーとの接触判定
+	/// </summary>
+	/// <param name="collier"></param>
+	//void OnCollisionCollider(DaiEngine::Collider* collier);
+
+	/// <summary>
 	/// 死亡フラグ
 	/// </summary>
 	bool GetDead() { return isDead_; };
+
+	/// <summary>
+	/// 有効フラグ
+	/// </summary>
+	/// <returns></returns>
+	bool GetActive() { return isActive_; }
 
 	/// <summary>
 	/// ワールド取得
@@ -90,7 +108,7 @@ private://**パラメータ変数**//
 	DaiEngine::WorldTransform world_;
 
 	//弾の種類
-	BulletType type_ = BulletType::Normal;
+	BulletType type_ = BulletType::Fall;
 
 	//円コライダー
 	std::unique_ptr<DaiEngine::SphereCollider>collider_;
@@ -103,6 +121,19 @@ private://**パラメータ変数**//
 	//警告円のワールド
 	DaiEngine::WorldTransform warningWorld_;
 
+	//放物線用のボスワールド
+	DaiEngine::WorldTransform bossWorld_;
+
+	//放物線用の到着時間
+	int arriveCount_ = 60;
+	//カウント
+	int currentCount_ = 0;
+	//放物線の高さ
+	float parabolaHeight_ = 5.0f;
+
 	//死亡フラグ
 	bool isDead_ = false;
+
+	//有効フラグ
+	bool isActive_ = true;
 };

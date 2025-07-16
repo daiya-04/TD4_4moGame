@@ -18,6 +18,9 @@ struct BossParameters {
 	//参照用本体ワールド
 	const DaiEngine::WorldTransform* world;
 
+	//プレイヤーワールド
+	const DaiEngine::WorldTransform* playerWorld_;
+
 	//カウント時間
 	float currentSec = 0;
 	Vector3 velocity_;
@@ -35,6 +38,9 @@ struct BossParameters {
 
 	//カメラ状態リクエスト
 	std::optional<FollowCamera::State>cameraBehaviorRequest_ = std::nullopt;
+
+	//ボスの弾の数
+	int currentBulletNum_ = 0;
 
 	//警告円の生成
 	bool SpawnDangerZone_ = false;

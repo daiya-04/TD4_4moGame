@@ -46,7 +46,7 @@ void BossAreaAttack::UpdateBehavior0()
 void BossAreaAttack::UpdateBehavior1()
 {	
 	//経過時間で終了
-	if (param_->currentSec >= attackCount_) {
+	if (param_->currentSec >= attackCount_&&param_->currentBulletNum_<=0) {
 		//通常状態に移行
 		param_->behaviorRequest_ = 0;
 		//カメラ状態を変更
@@ -54,7 +54,7 @@ void BossAreaAttack::UpdateBehavior1()
 	}
 
 	//タイム以上で発生
-	if (param_->currentSec >= (attackCount_ / numbers_) * currentNum_) {
+	if (param_->currentSec >= (attackCount_ / numbers_) * currentNum_&& param_->currentSec < attackCount_) {
 		//カウント増加
 		currentNum_++;
 

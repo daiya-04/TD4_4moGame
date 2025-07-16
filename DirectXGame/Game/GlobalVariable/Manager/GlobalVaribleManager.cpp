@@ -605,6 +605,11 @@ void SetLoadTreeData(TreeData& groupData, SavedTreeData& saveData) {
 				float* dataPtr = *std::get_if<float*>(&dataV);
 				*dataPtr = savePtr;
 			}
+			else if (std::holds_alternative<Vector2>(saveV) && std::holds_alternative<Vector2*>(dataV)) {	//vector2型
+				Vector2 savePtr = *std::get_if<Vector2>(&saveV);
+				Vector2* dataPtr = *std::get_if<Vector2*>(&dataV);
+				*dataPtr = savePtr;
+			}
 			else if (std::holds_alternative<Vector3>(saveV) && std::holds_alternative<Vector3*>(dataV)) {	//vector3型
 				Vector3 savePtr = *std::get_if<Vector3>(&saveV);
 				Vector3* dataPtr = *std::get_if<Vector3*>(&dataV);
@@ -737,6 +742,10 @@ void LoadTreeData(SavedTreeData& treeData, const nlohmann::json& jsonNode) {
 			float value = itItem->get<float>();
 			data.value = value;
 
+		}// Vector2 (2 要素の配列) を保持している場合
+		else if (itItem->is_array() && itItem->size() == 2) {
+			Vector2 value = { itItem->at(0).get<float>(), itItem->at(1).get<float>() };
+			data.value = value;
 		}// Vector3 (3 要素の配列) を保持している場合
 		else if (itItem->is_array() && itItem->size() == 3) {
 			Vector3 value = { itItem->at(0).get<float>(), itItem->at(1).get<float>(), itItem->at(2).get<float>() };

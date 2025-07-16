@@ -392,10 +392,10 @@
     <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\WeaponRollAttack\BossWeaponRollAttack.cpp">
       <Filter>Game\Boss\Behavior\WeaponRollAttack</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\BossBullet\BossBullet.cpp">
+    <ClCompile Include="Game\Boss\Bullet\BossBullet\BossBullet.cpp">
       <Filter>Game\Boss\BossBullet</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\BossBulletManager\BossBulletManager.cpp">
+    <ClCompile Include="Game\Boss\Bullet\BossBulletManager\BossBulletManager.cpp">
       <Filter>Game\Boss\BossBulletManager</Filter>
     </ClCompile>
     <ClCompile Include="Game\Boss\DangerZone\DangerZone.cpp">
@@ -487,6 +487,9 @@
     <ClCompile Include="Game\Effect\EffectManager.cpp">
       <Filter>Game\Effect</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Boss\CupCake\behavior\shotBullet\CupCakeShotBullet.cpp" />
+    <ClCompile Include="Game\Boss\CupCake\behavior\waveDive\CupCakeWaveDive.cpp" />
+    <ClCompile Include="Game\Boss\CupCake\behavior\fallAttack\CupCakeFallAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -726,10 +729,10 @@
     <ClInclude Include="Game\Boss\GingerbreadMan\Behavior\WeaponRollAttack\BossWeaponRollAttack.h">
       <Filter>Game\Boss\Behavior\WeaponRollAttack</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\BossBullet\BossBullet.h">
+    <ClInclude Include="Game\Boss\Bullet\BossBullet\BossBullet.h">
       <Filter>Game\Boss\BossBullet</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\BossBulletManager\BossBulletManager.h">
+    <ClInclude Include="Game\Boss\Bullet\BossBulletManager\BossBulletManager.h">
       <Filter>Game\Boss\BossBulletManager</Filter>
     </ClInclude>
     <ClInclude Include="Game\Boss\DangerZone\DangerZone.h">
@@ -827,5 +830,9 @@
     <ClInclude Include="Game\Effect\EffectManager.h">
       <Filter>Game\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Boss\Bullet\types.h" />
+    <ClInclude Include="Game\Boss\CupCake\behavior\shotBullet\CupCakeShotBullet.h" />
+    <ClInclude Include="Game\Boss\CupCake\behavior\waveDive\CupCakeWaveDive.h" />
+    <ClInclude Include="Game\Boss\CupCake\behavior\fallAttack\CupCakeFallAttack.h" />
   </ItemGroup>
 </Project>

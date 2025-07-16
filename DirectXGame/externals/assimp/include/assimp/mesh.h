@@ -682,7 +682,7 @@ struct aiMesh {
      * still dangerous because even 1.f == 1.f could evaluate to false! (
      * remember the subtleties of IEEE754 artithmetics). Use stuff like
      * @c fpclassify instead.
-     * @note Normal vectors computed by Assimp are always unit-length.
+     * @note Fall vectors computed by Assimp are always unit-length.
      * However, this needn't apply for normals that have been taken
      * directly from the model file.
      */

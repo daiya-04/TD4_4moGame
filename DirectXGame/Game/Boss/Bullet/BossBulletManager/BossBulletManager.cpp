@@ -1,6 +1,6 @@
 #include "BossBulletManager.h"
 
-BossBulletManager::BossBulletManager(BulletType type)
+BossBulletManager::BossBulletManager()
 {
 	//オブジェクト生成
 	InstancingGameObject::Init("Candy", 100);
@@ -8,14 +8,18 @@ BossBulletManager::BossBulletManager(BulletType type)
 	dangerZone_ = std::make_unique<InstancingGameObject>();
 	dangerZone_->Init("DangerZone", 100);
 
-	//タイプ指定
-	type_ = type;
-
 	tree_.name_ = "FallingBullet";
 	tree_.SetValue("spawnHeight", &bulletStartHeight_);
 	tree_.SetValue("fallSpeed", &fallSpeed_);
 	tree_.SetValue("radius", &radius_);
 	tree_.SetValue("colliderRadius", &colliderRadius_);
+
+	GvariTree tree;
+	tree.name_ = "parabolaBullet";
+	tree.SetValue("parabolaHeight", &parabolaHeight_);
+	tree.SetValue("arriveCount", &arriveCount_);
+	//ツリーに追加
+	tree_.SetTreeData(tree);
 }
 
 void BossBulletManager::Update()
@@ -33,9 +37,8 @@ void BossBulletManager::Update()
 			//行列更新
 			objData.worldTransform_.UpdateMatrix();
 			
-
 			//通常時のみ警告円群の更新
-			if(type_== BulletType::Normal) {
+			if(data->GetType() != BulletType::None) {
 				//データセット
 				SetData(objData);
 				//警告円の更新
@@ -63,22 +66,23 @@ void BossBulletManager::Draw()
 	dangerZone_->Draw();
 }
 
-void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos)
+void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos, BulletType type,const DaiEngine::WorldTransform& boss)
 {
 	//座標作成
 	Vector3 position = pos.translation_;
 	//渡すパラメータ設定
 	BossBulletData data;
-	data.type = type_;
+	data.type = type;
+	data.bossWorld = boss;
 
-	if(type_ == BulletType::Normal) {
+	if(type == BulletType::Fall) {
 		//指定値高くする
 		position.y = bulletStartHeight_;
 		data.velocity = Vector3{ 0,-1.0f,0 }*fallSpeed_;
 
 	}
-	else if (type_ == BulletType::Follow) {
-		position.y = 0;
+	else if (type == BulletType::None) {
+		position.y = -0.5;
 		data.velocity = Vector3{ 0,0,0 };
 	}
 
@@ -91,6 +95,10 @@ void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos)
 	data.colliderRadius = colliderRadius_;
 	//座標設定
 	data.world.translation_ = position;
+
+	//放物線用の設定
+	data.arriveCount = arriveCount_;
+	data.parabolaHeight = parabolaHeight_;
 
 	//生成
 	std::unique_ptr<BossBullet>bullet = std::make_unique<BossBullet>(data);

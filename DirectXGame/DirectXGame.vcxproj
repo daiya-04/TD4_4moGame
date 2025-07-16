@@ -114,7 +114,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Game\Effect\Effect.cpp" />
     <ClCompile Include="Game\Effect\EffectManager.cpp" />
     <ClCompile Include="Game\Boss\Blinking\Blinking.cpp" />
+    <ClCompile Include="Game\Boss\CupCake\behavior\fallAttack\CupCakeFallAttack.cpp" />
     <ClCompile Include="Game\Boss\CupCake\behavior\idle\CupCakeIdle.cpp" />
+    <ClCompile Include="Game\Boss\CupCake\behavior\shotBullet\CupCakeShotBullet.cpp" />
+    <ClCompile Include="Game\Boss\CupCake\behavior\waveDive\CupCakeWaveDive.cpp" />
     <ClCompile Include="Game\Boss\CupCake\CupCake.cpp" />
     <ClCompile Include="Game\Boss\Donut\Behavior\AttackSpin\BossSpinAttack.cpp" />
     <ClCompile Include="Game\Boss\Donut\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.cpp" />
@@ -139,8 +142,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Game\Boss\IBehavior\IBossBehavior.cpp" />
     <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\Idle\BossIdle.cpp" />
     <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\WeaponRollAttack\BossWeaponRollAttack.cpp" />
-    <ClCompile Include="Game\Boss\BossBulletManager\BossBulletManager.cpp" />
-    <ClCompile Include="Game\Boss\BossBullet\BossBullet.cpp" />
+    <ClCompile Include="Game\Boss\Bullet\BossBulletManager\BossBulletManager.cpp" />
+    <ClCompile Include="Game\Boss\Bullet\BossBullet\BossBullet.cpp" />
     <ClCompile Include="Game\Boss\DangerZoneManager\DangerZoneManager.cpp" />
     <ClCompile Include="Game\Boss\DangerZone\DangerZone.cpp" />
     <ClCompile Include="Game\Boss\SingleDangerZone\SingleDangerZone.cpp" />
@@ -229,7 +232,11 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Effect\Effect.h" />
     <ClInclude Include="Game\Effect\EffectManager.h" />
     <ClInclude Include="Game\Boss\Blinking\Blinking.h" />
+    <ClInclude Include="Game\Boss\Bullet\types.h" />
+    <ClInclude Include="Game\Boss\CupCake\behavior\fallAttack\CupCakeFallAttack.h" />
     <ClInclude Include="Game\Boss\CupCake\behavior\idle\CupCakeIdle.h" />
+    <ClInclude Include="Game\Boss\CupCake\behavior\shotBullet\CupCakeShotBullet.h" />
+    <ClInclude Include="Game\Boss\CupCake\behavior\waveDive\CupCakeWaveDive.h" />
     <ClInclude Include="Game\Boss\CupCake\CupCake.h" />
     <ClInclude Include="Game\Boss\Donut\Behavior\AttackSpin\BossSpinAttack.h" />
     <ClInclude Include="Game\Boss\Donut\Behavior\AttackPFollowBullet\Boss2AttackPFollowBullet.h" />
@@ -254,8 +261,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Boss\IBehavior\IBossBehavior.h" />
     <ClInclude Include="Game\Boss\GingerbreadMan\Behavior\Idle\BossIdle.h" />
     <ClInclude Include="Game\Boss\GingerbreadMan\Behavior\WeaponRollAttack\BossWeaponRollAttack.h" />
-    <ClInclude Include="Game\Boss\BossBulletManager\BossBulletManager.h" />
-    <ClInclude Include="Game\Boss\BossBullet\BossBullet.h" />
+    <ClInclude Include="Game\Boss\Bullet\BossBulletManager\BossBulletManager.h" />
+    <ClInclude Include="Game\Boss\Bullet\BossBullet\BossBullet.h" />
     <ClInclude Include="Game\Boss\DangerZoneManager\DangerZoneManager.h" />
     <ClInclude Include="Game\Boss\DangerZone\DangerZone.h" />
     <ClInclude Include="Game\Boss\SingleDangerZone\SingleDangerZone.h" />

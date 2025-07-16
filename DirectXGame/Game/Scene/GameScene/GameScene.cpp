@@ -236,6 +236,9 @@ void GameScene::Update() {
     playerAttackEffect_->Update();
 
 	}
+	
+	playerAttackEffect_->Update();
+
 
 	EffectManager::GetInstance()->Update();
 
@@ -254,8 +257,9 @@ void GameScene::Update() {
 			float deltaY = field_->GetDeltaY();
 			
 			//もし上げる弾なら向きを変更
-			if (bossSpawnManager_->GetBulletType() == BulletType::Follow) {
-				deltaY *= -1.0f; // Follow弾は上げる
+			if (bullet->GetType() != BulletType::Fall) {
+				//落下弾以外は上方向に
+				deltaY *= -1.0f; 
 			}
 
 			//フィールドに影響

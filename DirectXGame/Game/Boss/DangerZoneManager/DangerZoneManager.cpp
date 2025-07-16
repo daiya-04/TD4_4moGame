@@ -1,28 +1,32 @@
 #include "DangerZoneManager.h"
+#include<memory>
+#include <random>
 
-DangerZoneManager::DangerZoneManager(DangerZoneType type)
+DangerZoneManager::DangerZoneManager()
 {
 	//オブジェクト生成
 	InstancingGameObject::Init("DangerZone", 100);
-
-	//生成タイプ指定
-	type_ = type;
-
 
 	//デバッグ用にツリーを生成
 	tree_.name_ = "DangerZone";
 	tree_.SetValue("warningSphereHeight", &warningHeight_);
 	tree_.SetValue("warningCount", &warningTime_);
 	tree_.SetValue("finalWarningCount", &finalWarningTime_);
-	tree_.SetValue("BlinkingNum",&blinkingNum_);
+	tree_.SetValue("BlinkingNum", &blinkingNum_);
 	tree_.SetValue("radius", &radius_);
 	tree_.SetValue("alpha", &color_);
-	if(type_ == DangerZoneType::Follow) {
-		tree_.SetValue("spawnNum", &spawnNum_);
-		tree_.SetValue("followSpd", &followSpeed_);
-		tree_.SetValue("distance", &distance_);
-	}
+	GvariTree tree;
+	tree.name_ = "FollowParam";
+	tree.SetValue("followSpd", &followSpeed_);
+	tree.SetValue("distance", &distance_);
+	tree_.SetTreeData(tree);
+	GvariTree btree;
+	btree.name_ = "baramaki";
+	btree.SetValue("spawnNum", &spawnNum_);
+	btree.SetValue("spawnRange", &spawnRange_);
+	tree_.SetTreeData(btree);
 }
+
 
 void DangerZoneManager::Update()
 {
@@ -30,7 +34,7 @@ void DangerZoneManager::Update()
 	for (auto& data : dangerZones_) {
 		data->Update();
 		//死んでいない&描画ON場合データをセット
-		if (!data->GetIsDead()&&data->GetIsDraw()) {
+		if (!data->GetIsDead() && data->GetIsDraw()) {
 			//専用変数生成
 			DaiEngine::InstancingObjData objData;
 			//ワールドデータコピー
@@ -42,19 +46,6 @@ void DangerZoneManager::Update()
 			SetData(objData);
 		}
 	}
-
-	////死んだ円を削除
-	//dangerZones_.remove_if([&](auto& data) {
-	//	//死んでいる場合
-	//	if (data->GetIsDead()) {
-	//		//弾を出現させて削除
-	//		param_->SpawnBullet(data->GetWorld());
-
-	//		return true;
-	//	}
-	//	return false;
-	//	});
-
 }
 
 // ラジアンでベクトルを回転させる関数
@@ -68,35 +59,43 @@ Vector2 RotateVectorRad(const Vector2& vec, float radians) {
 	};
 }
 
-void DangerZoneManager::SpawnDangerZone(const Vector3& position)
+
+
+
+float RandomFloat(float min, float max) {
+	static std::random_device rd;  // 一度だけ初期化
+	static std::mt19937 mt(rd());  // メルセンヌ・ツイスタ
+	std::uniform_real_distribution<float> dist(min, max);
+	return dist(mt);
+}
+
+void DangerZoneManager::SpawnDangerZone(const Vector3& Ppos,BulletType type)
 {
-	if (type_ == DangerZoneType::Normal) {
-		Vector3 pos = position;
+
+	if (type == BulletType::Fall) {
+		Vector3 pos = Ppos;
 		////高さ設定
 		pos.y = warningHeight_;
 
+		//値生成
 		DangerZoneParameters param;
-		param.type = type_;
-		param.world.Init();
 		param.world.translation_ = pos;
-		param.world.rotation_.y = (float)std::numbers::pi; //Y軸回転	
-		param.maxRadius = radius_;
-		param.maxWarningCount = warningTime_;
-		param.maxFinalWarningCount = finalWarningTime_;
-		param.blinkingNum = blinkingNum_;
+		param.type = type;
+		SetParameters(param);
 
 		//新しく生成
 		std::unique_ptr<DangerZone>dangerZone = std::make_unique<DangerZone>(param);
-
+		dangerZone->SetPlayerPos(&Ppos);
 		//配列に追加
 		dangerZones_.emplace_back(std::move(dangerZone));
+
 	}
-	else if (type_ == DangerZoneType::Follow) {
+	else if (type == BulletType::None) {
 		//float rad = (float)std::numbers::pi * 2.0f;
 		//プレイヤー四隅に設置
-		for(int num=0;num<spawnNum_;num++){
+		for (int num = 0; num < 4; num++) {
 			//プレイヤーの座標を取得
-			Vector3 pos = position;
+			Vector3 pos = Ppos;
 
 			////プレイヤーの座標を中心に半径分ずらす
 			Vector2 offset = Vector2(1.0f, 0.0f);
@@ -124,25 +123,63 @@ void DangerZoneManager::SpawnDangerZone(const Vector3& position)
 			pos.z += offset.y;
 			pos.y = warningHeight_;
 
-			//パラメータ設定
+			//値生成
 			DangerZoneParameters param;
-			param.type = type_;
-			param.world.Init();
+			//パラメータ設定
 			param.world.translation_ = pos;
-			param.world.rotation_.y = (float)std::numbers::pi; //Y軸回転
-			//半径設定
-			param.maxRadius = radius_;
-			//各時間設定
-			param.maxWarningCount = warningTime_;
-			param.maxFinalWarningCount = finalWarningTime_;
-			param.blinkingNum = blinkingNum_;
-			param.playerPos = &position;
-			param.followSpd = followSpeed_;
+			param.type = type;
+			SetParameters(param);
 			//新しく生成
 			std::unique_ptr<DangerZone>dangerZone = std::make_unique<DangerZone>(param);
-			dangerZone->SetPlayerPos(&position);
+			dangerZone->SetPlayerPos(&Ppos);
 			//配列に追加
 			dangerZones_.emplace_back(std::move(dangerZone));
 		}
 	}
+	else if (type == BulletType::Parabola) {
+		//ランダムな所に生成
+		for (int i = 0; i < spawnNum_; i++) {
+			//ランダムな値XZ取得
+			float length =RandomFloat(spawnRange_.x, spawnRange_.y);
+
+			//ランダム向きベクトル生成
+			Vector3 pos = {
+				RandomFloat(-1.0f,1.0f),
+				0,
+				RandomFloat(-1.0f,1.0f)
+			};
+
+			//正規化して出た長さにする
+			pos = pos.Normalize() * length;
+			//高さは指定分
+			pos.y = warningHeight_;
+
+			//値生成
+			DangerZoneParameters param;
+			//パラメータ設定
+			param.world.translation_ = pos;
+			param.type = type;
+			SetParameters(param);
+			//新しく生成
+			std::unique_ptr<DangerZone>dangerZone = std::make_unique<DangerZone>(param);
+			//配列に追加
+			dangerZones_.emplace_back(std::move(dangerZone));
+		}
+	}
+
+	
+
+
+}
+
+void DangerZoneManager::SetParameters(DangerZoneParameters& param)
+{
+	param.world.Init();
+	//Y軸回転	
+	param.world.rotation_.y = (float)std::numbers::pi;
+	param.maxRadius = radius_;
+	param.maxWarningCount = warningTime_;
+	param.maxFinalWarningCount = finalWarningTime_;
+	param.blinkingNum = blinkingNum_;
+	param.followSpd = followSpeed_;
 }

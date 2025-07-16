@@ -3,7 +3,7 @@
 #include"../../FollowCamera/FollowCamera.h"
 #include"../IBehavior/IBossBehavior.h"
 #include"SphereCollider.h"
-#include"../BossBulletManager/BossBulletManager.h"
+#include"../Bullet/BossBulletManager/BossBulletManager.h"
 #include"../DangerZoneManager/DangerZoneManager.h"
 #include"../UI/BossUI.h"
 #include"../Blinking/Blinking.h"
@@ -44,11 +44,10 @@ public://**パブリック関数**//
 	void Init(const std::string& objectName, FollowCamera* camera, const DaiEngine::WorldTransform* playerWorld);
 
 	/// <summary>
-	/// マネージャの生成タイプ指定
+	/// 弾タイプ設定
 	/// </summary>
-	/// <param name="zoneType"></param>
 	/// <param name="bulletType"></param>
-	void SetManager(DangerZoneType zoneType,BulletType bulletType);
+	void SetBulletType(BulletType bulletType) { bulletType_ = bulletType; };
 
 	/// <summary>
 	/// 初期化
@@ -82,13 +81,17 @@ public://**パブリック関数**//
 	/// <returns></returns>
 	std::list<std::unique_ptr<BossBullet>>& GetBullets() { return bulletManager_->GetBullets(); }
 
-	BulletType GetBulletType() const { return bulletManager_->GetBulletType(); }
-
 	/// <summary>
 	/// ツリー取得
 	/// </summary>
 	/// <returns></returns>
 	GvariTree& GetTree() { return tree_; }
+
+	/// <summary>
+	/// 逆向きフラグ
+	/// </summary>
+	/// <param name="isReverse"></param>
+	void SetReverse(bool isReverse) { isReverse_ = isReverse; }
 
 private://**プライベート関数**//
 
@@ -111,7 +114,7 @@ private://**プライベート関数**//
 	/// <summary>
 	/// 弾の発射処理
 	/// </summary>
-	void SpawnBullet(const DaiEngine::WorldTransform& pos);
+	void SpawnBullet(const DaiEngine::WorldTransform& pos, BulletType type);
 
 	/// <summary>
 	/// プレイヤー方向に移動
@@ -153,7 +156,6 @@ private://**プライベート変数**//
 	//コライダー
 	std::unique_ptr<DaiEngine::SphereCollider> collider_ = nullptr;
 
-
 	//弾マネージャ
 	std::unique_ptr<BossBulletManager>bulletManager_ = nullptr;
 	//警戒エリアマネージャ
@@ -189,6 +191,12 @@ private://**パラメータ変数**//
 
 	//描画フラグ
 	bool* isDraw_ = nullptr;
+	
+	//逆向きフラグ
+	bool isReverse_ = false; 
+
+
+	BulletType bulletType_ = BulletType::Fall; //弾の種類
 
 private://**デバッグ用変数**//
 

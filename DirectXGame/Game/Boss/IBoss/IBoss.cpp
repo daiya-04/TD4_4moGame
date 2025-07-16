@@ -26,10 +26,14 @@ void IBoss::Init(const std::string& objectName, FollowCamera* camera, const DaiE
 	//プレイヤーポインタ
 	playerWorld_ = playerWorld;
 
+	parameters_.playerWorld_ = playerWorld_;
+
+	//カメラポインタを設定
 	IBossBehavior::SetPointer(camera->GetCamera());
 
-	//behaviorsの生成は継承先で行う
-	//マネージャの生成は継承先で行う
+	//マネージャ生成
+	dangerZoneManager_ = std::make_unique<DangerZoneManager>();
+	bulletManager_ = std::make_unique<BossBulletManager>();
 
 	//点滅処理クラス生成
 	blinking_ = std::make_unique<Blinking>();
@@ -43,6 +47,8 @@ void IBoss::Init(const std::string& objectName, FollowCamera* camera, const DaiE
 	collider_->ColliderOn();
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
 	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {OnCollision(collider); });
+
+
 
 	//汎用パラをあらかじめ設定
 	tree_.SetMonitorValue("Immortal!!!!!!!!!!!!!!!!!", &isImmortal_);
@@ -61,13 +67,6 @@ void IBoss::Init(const std::string& objectName, FollowCamera* camera, const DaiE
 	tree_.SetValue("fieldSize", &mapArea_);
 
 	tree_.SetTreeData(blinking_->GetTree());
-}
-
-void IBoss::SetManager(DangerZoneType zoneType, BulletType bulletType)
-{
-	//マネージャ生成
-	dangerZoneManager_ = std::make_unique<DangerZoneManager>(zoneType);
-	bulletManager_ = std::make_unique<BossBulletManager>(bulletType);
 
 	tree_.SetTreeData(dangerZoneManager_->GetTree());
 	tree_.SetTreeData(bulletManager_->GetTree());
@@ -90,6 +89,9 @@ void IBoss::InitParameters()
 void IBoss::Update() {
 	//移動量初期化
 	parameters_.velocity_ = { 0,0,0 };
+
+	//ボスの球数を取得
+	parameters_.currentBulletNum_ = (int)bulletManager_->GetBullets().size()+(int)dangerZoneManager_->GetDangerZone().size();
 
 #ifdef _DEBUG
 	collider_->SetRadius(radius_);
@@ -214,7 +216,7 @@ void IBoss::ParameterFlagUpdate() {
 		//死んでいる場合
 		if (data->GetIsDead()) {
 			//弾を出現させて削除
-			SpawnBullet(data->GetWorld());
+			SpawnBullet(data->GetWorld(),data->GetType());
 			return true;
 		}
 		return false;
@@ -264,18 +266,19 @@ void IBoss::OnCollision(DaiEngine::Collider* collider)
 		//不死フラグが無効の場合
 		if (!isImmortal_) {
 			isDead_ = true;
+			collider_->ColliderOff();
 		}
 	}
 }
 
 void IBoss::SpawnDangerZone() {
 	//プレイヤー座標取得
-	dangerZoneManager_->SpawnDangerZone(playerWorld_->translation_);
+	dangerZoneManager_->SpawnDangerZone(playerWorld_->translation_,bulletType_);
 }
 
-void IBoss::SpawnBullet(const DaiEngine::WorldTransform& position) {
+void IBoss::SpawnBullet(const DaiEngine::WorldTransform& position,BulletType type) {
 	//弾生成
-	bulletManager_->SpawnBullet(position);
+	bulletManager_->SpawnBullet(position,type,*world_);
 }
 
 void IBoss::Move2Player() {
@@ -323,9 +326,13 @@ Vector3 IBoss::SetDirection2Player() {
 	//重なっていない場合
 	if (velocity != Vector3(0, 0, 0)) {
 		//向きを指定
-		parameters_.rotation_.y = GetYRotatee({ velocity.x,velocity.z }) + ((float)std::numbers::pi);
+		if (!isReverse_) {
+			parameters_.rotation_.y = GetYRotatee({ velocity.x,velocity.z }) + ((float)std::numbers::pi);
+		}
+		else {
+			parameters_.rotation_.y = GetYRotatee({ velocity.x,velocity.z });
+		}
 	}
-
 
 	return velocity;
 }
