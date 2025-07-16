@@ -51,6 +51,9 @@ void CupCakeWaveDive::UpdateBehavior1()
 
 	if (param_->currentSec >= waitCount_) {
 		countRequest_ = 2;
+
+		param_->bulletTypeRequest_ = BulletType::Wave;
+		param_->SpawnDangerZone_ = true;
 	}
 }
 

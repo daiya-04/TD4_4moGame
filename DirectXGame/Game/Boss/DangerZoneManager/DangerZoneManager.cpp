@@ -71,7 +71,7 @@ float RandomFloat(float min, float max) {
 
 void DangerZoneManager::SpawnDangerZone(const Vector3& Ppos,BulletType type)
 {
-
+	//上から落下タイプの弾処理
 	if (type == BulletType::Fall) {
 		Vector3 pos = Ppos;
 		////高さ設定
@@ -89,7 +89,7 @@ void DangerZoneManager::SpawnDangerZone(const Vector3& Ppos,BulletType type)
 		//配列に追加
 		dangerZones_.emplace_back(std::move(dangerZone));
 
-	}
+	}//追従する
 	else if (type == BulletType::None) {
 		//float rad = (float)std::numbers::pi * 2.0f;
 		//プレイヤー四隅に設置
@@ -135,7 +135,7 @@ void DangerZoneManager::SpawnDangerZone(const Vector3& Ppos,BulletType type)
 			//配列に追加
 			dangerZones_.emplace_back(std::move(dangerZone));
 		}
-	}
+	}//放物線処理
 	else if (type == BulletType::Parabola) {
 		//ランダムな所に生成
 		for (int i = 0; i < spawnNum_; i++) {
@@ -166,10 +166,22 @@ void DangerZoneManager::SpawnDangerZone(const Vector3& Ppos,BulletType type)
 			dangerZones_.emplace_back(std::move(dangerZone));
 		}
 	}
-
-	
-
-
+	else if (type == BulletType::Wave) {
+		Vector3 pos = {0,0,0};
+		////高さ設定
+		pos.y = warningHeight_;
+		//値生成
+		DangerZoneParameters param;
+		param.world.translation_ = pos;
+		param.type = type;
+		SetParameters(param);
+		//新しく生成
+		std::unique_ptr<DangerZone>dangerZone = std::make_unique<DangerZone>(param);
+		//即死設定
+		dangerZone->SetDead(true);
+		//配列に追加
+		dangerZones_.emplace_back(std::move(dangerZone));
+	}
 }
 
 void DangerZoneManager::SetParameters(DangerZoneParameters& param)

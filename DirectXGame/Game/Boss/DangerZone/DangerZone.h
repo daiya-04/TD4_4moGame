@@ -53,6 +53,9 @@ public://**パブリック関数**//
 
 	void SetPlayerPos(const Vector3* pos) { pPos_ = pos; }
 
+
+	void SetDead(bool isDead) { isDead_ = isDead; }
+
 	/// <summary>
 	/// ワールド取得
 	/// </summary>

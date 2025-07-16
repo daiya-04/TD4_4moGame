@@ -282,6 +282,10 @@ void IBoss::OnCollision(DaiEngine::Collider* collider)
 }
 
 void IBoss::SpawnDangerZone() {
+	if (parameters_.bulletTypeRequest_) {
+		bulletType_ = parameters_.bulletTypeRequest_.value();
+		parameters_.bulletTypeRequest_ = std::nullopt;
+	}
 	//プレイヤー座標取得
 	dangerZoneManager_->SpawnDangerZone(playerWorld_->translation_,bulletType_);
 }

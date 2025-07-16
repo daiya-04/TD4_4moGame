@@ -19,7 +19,9 @@ void CupCakeShotBullet::InitBehavior0()
 
 	//カメラの状態リクエスト
 	//param_->cameraBehaviorRequest_ = FollowCamera::State::None;
-
+	
+	//生成
+	param_->bulletTypeRequest_ = BulletType::Parabola;
 	//警告円生成
 	param_->SpawnDangerZone_ = true;
 }

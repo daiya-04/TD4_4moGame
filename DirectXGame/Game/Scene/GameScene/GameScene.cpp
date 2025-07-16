@@ -242,6 +242,16 @@ void GameScene::Update() {
 		// Y範囲にあるか判定
 		if (block->world.translation_.y >= bullet->GetWorld().translation_.y && block->world.translation_.y <= bullet->GetWorld().translation_.y + bullet->GetWorld().scale_.y) {
 			
+			//WAVE発生タイプの場合
+			if (bullet->GetType() == BulletType::Wave) {
+
+				Vector2 bPos = field_->GetBlockAt(0, 0);
+
+				field_->AddWave(bPos,30,1.0f,1,0.01f);
+				bullet->OnCollision();
+				continue;
+			}
+
 			//下げる値取得
 			float deltaY = field_->GetDeltaY();
 			
