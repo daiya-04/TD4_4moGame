@@ -10,6 +10,11 @@ CupCakeIdle::CupCakeIdle(BossParameters* param)
 
 void CupCakeIdle::Init()
 {
+	//アニメーション変更
+	param_->setAnimeName_ = "CapCakeStandby";
+	param_->isLoopAnime_ =true;
+	//再生速度変更
+	param_->animationLeverage_ = 1;
 }
 
 void CupCakeIdle::Update()

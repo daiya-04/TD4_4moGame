@@ -171,6 +171,12 @@ void IBoss::Update() {
 
 }
 
+void IBoss::ClearAllBulletAndZone()
+{
+	dangerZoneManager_->ClearAllDangerZone();
+	bulletManager_->ClearAllBullets();
+}
+
 void IBoss::ParameterFlagUpdate() {
 	//向きを変更する処理
 	if (parameters_.isLookAtPlayer_) {
@@ -265,8 +271,12 @@ void IBoss::OnCollision(DaiEngine::Collider* collider)
 		//HPが0以下なら死亡
 		//不死フラグが無効の場合
 		if (!isImmortal_) {
+			//死亡フラグ有効
 			isDead_ = true;
+			//体コライダーオフ
 			collider_->ColliderOff();
+			//全ての弾と警告円削除
+			ClearAllBulletAndZone();
 		}
 	}
 }

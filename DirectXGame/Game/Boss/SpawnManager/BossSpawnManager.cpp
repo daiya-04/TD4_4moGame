@@ -15,7 +15,7 @@ BossSpawnManager::BossSpawnManager(FollowCamera* camera, const DaiEngine::WorldT
 	//ボスの生成
 	bosses_[int(BossType::GingerbreadMan)] = std::make_unique<GingerbreadMan>("GentlmanGuard", camera, playerWorld);
 	bosses_[int(BossType::Donut)] =			 std::make_unique<Donut>("Donut", camera, playerWorld);
-	bosses_[int(BossType::CupCake)] = std::make_unique<CupCake>("Capcake", camera, playerWorld);
+	bosses_[int(BossType::CupCake)] =		 std::make_unique<CupCake>("CapCakeStandby", camera, playerWorld);
 
 	std::unique_ptr<GVariGroup> group = std::make_unique<GVariGroup>("BossManager");
 
@@ -72,6 +72,20 @@ void BossSpawnManager::UIDraw()
 {
 	//ボスの描画
 	bosses_[(int)bossType_]->DrawUI();
+}
+
+void BossSpawnManager::SetOnField(float y)
+{
+	//現在のボス取得
+	IBoss* boss = bosses_[(int)bossType_].get();
+	//現在の位置
+	if (boss->GetPosition().y < y) {
+		boss->SetPositionY(y);
+	}
+	//フィールドのY取得
+	boss->parameters_.fieldY_ = y;
+	
+
 }
 
 void BossSpawnManager::CheckBossDead()

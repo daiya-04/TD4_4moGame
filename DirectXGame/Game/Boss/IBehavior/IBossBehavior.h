@@ -26,6 +26,8 @@ struct BossParameters {
 	Vector3 velocity_;
 	Vector3 rotation_;
 
+	float fieldY_= 0;
+
 	//アニメーション変更名（””なら空）
 	std::string setAnimeName_ = "";
 	//ループアニメーションかどうか
