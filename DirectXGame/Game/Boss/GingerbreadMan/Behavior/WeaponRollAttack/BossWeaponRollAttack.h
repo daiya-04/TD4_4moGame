@@ -4,6 +4,8 @@
 #include"SphereCollider.h"
 #include<memory>
 
+class GingerbreadMan;
+
 //プレイヤーに弾を落とす攻撃を行う
 class BossWeaponRollAttack : public IBossAttack {
 
@@ -16,12 +18,14 @@ public://**パブリック関数**//
 	/// 描画
 	/// </summary>
 	void Draw()override;
-
+	
 	/// <summary>
 	/// 当たり判定処理
 	/// </summary>
 	/// <param name="collider"></param>
 	void OnCollisionATK(DaiEngine::Collider* collider);
+
+	void SetGingerbreadMan(GingerbreadMan* gingerbreadMan) { gingerbreadMan_ = gingerbreadMan; }
 
 public://**状態関数**//
 
@@ -53,6 +57,8 @@ private://**プライベート変数**//
 
 	//警告円
 	std::unique_ptr<SingleDangerZone> dangerZone_;
+
+	GingerbreadMan* gingerbreadMan_ = nullptr;
 
 private://**パラメータ変数**//
 

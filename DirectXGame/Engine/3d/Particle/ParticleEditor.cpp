@@ -51,7 +51,7 @@ void ParticleEditor::Update() {
 
 void ParticleEditor::Draw(const DaiEngine::Camera& camera) {
 	for (auto& [group, particle] : particles_) {
-		particle->Draw(camera);
+		particle->Draw(camera, DaiEngine::BlendMode::kAlpha);
 	}
 }
 

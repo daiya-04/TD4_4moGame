@@ -1,5 +1,5 @@
 {
-    "PlayerMoveEffect": {
+    "CandyFinishEffect": {
         "particle1": {
             "Emitter": {
                 "BillboardType": 0,
@@ -7,21 +7,21 @@
                     1.0,
                     1.0,
                     1.0,
-                    0.0
+                    1.0
                 ],
-                "Count": 4,
-                "EmitterType": 5,
-                "Frequency": 0.10000000149011612,
-                "LifeTime": 0.6000000238418579,
-                "Radius": 1.5,
-                "Rotate": 0.0,
-                "Scale": 0.30000001192092896,
+                "Count": 100,
+                "EmitterType": 2,
+                "Frequency": 0.01600000075995922,
+                "LifeTime": 1.0,
+                "Radius": 2.0,
+                "Rotate": 360.0,
+                "Scale": 1.0,
                 "Size": [
                     1.0,
                     1.0,
                     1.0
                 ],
-                "Speed": 0.0,
+                "Speed": 15.0,
                 "Translate": [
                     0.0,
                     0.0,
@@ -29,10 +29,10 @@
                 ]
             },
             "OverLifeTime": {
-                "Gravity": 0.0,
+                "Gravity": 0.5,
                 "Velocity": [
                     0.0,
-                    0.0,
+                    10.0,
                     0.0
                 ],
                 "density": [
@@ -40,14 +40,14 @@
                     0.0,
                     0.0
                 ],
-                "endAlpha": 0.0,
+                "endAlpha": 1.0,
                 "endColor": [
                     0.0,
                     0.0,
                     0.0
                 ],
-                "endScale": 0.800000011920929,
-                "endSpeed": 0.0,
+                "endScale": 0.0,
+                "endSpeed": 2.0,
                 "endVelocity": [
                     0.0,
                     0.0,
@@ -55,32 +55,32 @@
                 ],
                 "isAlpha": 1,
                 "isColor": 0,
-                "isConstantVelocity": 0,
+                "isConstantVelocity": 1,
                 "isNoise": 0,
                 "isRandom": 0,
-                "isRoring": 0,
+                "isRoring": 1,
                 "isScale": 1,
                 "isTransSpeed": 0,
                 "isTransVelocity": 0,
                 "maxRoringSpeed": [
-                    0.0,
-                    0.0,
-                    0.0
+                    3.0,
+                    3.0,
+                    3.0
                 ],
                 "midAlpha": 1.0,
                 "minRoringSpeed": [
-                    0.0,
-                    0.0,
-                    0.0
+                    1.0,
+                    1.0,
+                    1.0
                 ],
-                "startAlpha": 0.5,
+                "startAlpha": 1.0,
                 "startColor": [
                     0.0,
                     0.0,
                     0.0
                 ],
-                "startScale": 0.20000000298023224,
-                "startSpeed": 0.0,
+                "startScale": 0.5,
+                "startSpeed": 5.0,
                 "startVelocity": [
                     0.0,
                     0.0,
@@ -89,9 +89,9 @@
                 "strength": 0.0
             },
             "isLoop": false,
-            "isModel": false,
-            "modelName": "",
-            "textureName": "walkParticle.png"
+            "isModel": true,
+            "modelName": "Candy",
+            "textureName": "Candy.png"
         }
     }
 }

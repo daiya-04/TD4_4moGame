@@ -19,6 +19,10 @@ GingerbreadMan::GingerbreadMan(const std::string& objectName, FollowCamera* came
 	behaviors_[(size_t)BossBehavior::Attack1] = std::make_unique<BossAreaAttack>(&parameters_);
 	behaviors_[(size_t)BossBehavior::Attack2] = std::make_unique<BossWeaponRollAttack>(&parameters_);
 
+	if (auto* attack2 = dynamic_cast<BossWeaponRollAttack*>(behaviors_[(size_t)BossBehavior::Attack2].get())) {
+		attack2->SetGingerbreadMan(this); // GingerbreadMan の this を渡す
+	}
+
 
 	//ツリーを追加
 	for (auto& behavior : behaviors_) {

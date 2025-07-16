@@ -11,6 +11,8 @@ void Effect::Init(const std::string& effectName, const std::string& modelName) {
 	if (!modelName.empty()) {
 		obj_.reset(DaiEngine::SkinningObject::Create(DaiEngine::ModelManager::LoadGLTF(modelName)));
 		obj_->SetAnimation(modelName, false);
+		obj_->GetAnimation().SetAnimationSpeed(10.0f);
+		obj_->worldTransform_.scale_ = { 2.0f,2.0f,2.0f };
 	}
 
 }
@@ -29,7 +31,9 @@ void Effect::Update() {
 	for (auto& [group, particle] : effect_) {
 		particle->Update();
 	}
-	if (obj_) { obj_->Update(rotateMat_); }
+	if (obj_) { 
+		obj_->Update(rotateMat_);
+	}
 }
 
 void Effect::Draw(const DaiEngine::Camera& camera) {
@@ -77,7 +81,7 @@ void Effect::Start(const Vector3& pos, const float angle) {
 
 	if (obj_) { 
 		obj_->worldTransform_.translation_ = pos + offset;
-		obj_->GetAnimation().Start();
+		obj_->GetAnimation().Start(false);
 	}
 
 }

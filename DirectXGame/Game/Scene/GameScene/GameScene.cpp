@@ -160,6 +160,8 @@ void GameScene::Init() {
 	///エフェクト
 
 	EffectManager::GetInstance()->AddEffect("BiteEffect","Tooth");
+	EffectManager::GetInstance()->AddEffect("PlayerMoveEffect");
+	EffectManager::GetInstance()->AddEffect("CandyFinishEffect");
 
 	///
 

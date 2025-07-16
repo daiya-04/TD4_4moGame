@@ -1,6 +1,8 @@
 #include "BossBullet.h"
 #include"ColliderManager.h"
 
+#include "EffectManager.h"
+
 BossBullet::BossBullet(const BossBulletData& data)
 {
 	type_ = data.type;
@@ -51,5 +53,7 @@ void BossBullet::OnCollision()
 	isDead_ = true;
 	//コライダーを無効にする
 	collider_->ColliderOff();
+
+	EffectManager::GetInstance()->Start("CandyFinishEffect", world_.GetWorldPos());
 }
 

@@ -3,6 +3,8 @@
 #include"ColliderManager.h"
 #include"ShapesDraw.h"
 #include"Camera.h"
+#include "EffectManager.h"
+#include "GingerbreadMan.h"
 
 BossWeaponRollAttack::BossWeaponRollAttack(BossParameters* parame)
 {
@@ -109,6 +111,8 @@ void BossWeaponRollAttack::UpdateBehavior1()
 	if (param_->currentSec >= attackCount_) {
 		countRequest_ = 2;
 	}
+
+	//EffectManager::GetInstance()->Start("WeaponRollAttack", gingerbreadMan_->GetJointWorldPosition());
 
 	//コライダー更新
 	collider_->Update();
