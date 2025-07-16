@@ -227,7 +227,7 @@ void GameScene::Update() {
     playerAttackEffect_->Update();
 
 	}
-	
+		
 	playerAttackEffect_->Update();
 
 

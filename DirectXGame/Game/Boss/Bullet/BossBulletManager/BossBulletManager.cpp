@@ -11,7 +11,6 @@ BossBulletManager::BossBulletManager()
 	tree_.name_ = "FallingBullet";
 	tree_.SetValue("spawnHeight", &bulletStartHeight_);
 	tree_.SetValue("fallSpeed", &fallSpeed_);
-	tree_.SetValue("radius", &radius_);
 	tree_.SetValue("colliderRadius", &colliderRadius_);
 
 	GvariTree tree;
