@@ -142,7 +142,15 @@ void Field::Update() {
 		data.worldTransform_ = block.world;
 		data.color_ = block.color;
 
-		if (block.world.translation_.y <= -heightLimit_) continue;
+		if (!isAnimationReset_) {
+			if (block.world.translation_.y <= -heightLimit_ && block.isDrawing) {
+				block.isDrawing = false;
+			}
+		}
+
+		if (!block.isDrawing) {
+			continue;
+		}
 
 		//データ追加
 		instancingObj_->SetData(data);
@@ -172,6 +180,9 @@ void Field::ResetStage() {
 	deltaTime_ = 0.0f;
 	elapsedTime_ = 0.0f;
 	deltaPlusTime_ = 1.0f / 600.0f;
+	for (Block& block : blocks_) {
+		block.isDrawing = true;
+	}
 }
 
 void Field::DeleteStage() {
@@ -227,6 +238,9 @@ void Field::CreateBlocks(const int x, const int z) {
 	//最初のY座標を記録
 	block.baseY = block.world.translation_.y;
 
+	//表示フラグ
+	block.isDrawing = true;
+
 	blocks_.push_back(block);
 }
 
@@ -243,17 +257,30 @@ void Field::CreateStage() {
 }
 
 Vector2 Field::GetBlockAt(float x, float z) {
+	Block* nearestBlock = nullptr;
+	float minDistanceSq = (std::numeric_limits<float>::max)();
+
 	for (Block& block : blocks_) {
 		const Vector3& blockPos = block.world.translation_;
 
-		//各軸面上でブロックの中心からBlockSize_の範囲か確認
-		if (std::abs(blockPos.x - x) <= blockSize_ &&
-			std::abs(blockPos.z - z) <= blockSize_) {
-			return block.massLocation;
+		// 距離の2乗を計算（sqrtを使わず高速）
+		float dx = blockPos.x - x;
+		float dz = blockPos.z - z;
+		float distanceSq = dx * dx + dz * dz;
+
+		if (distanceSq < minDistanceSq) {
+			minDistanceSq = distanceSq;
+			nearestBlock = &block;
 		}
 	}
 
-	return Vector2{ -1,-1 };//見つからなければ適当な値
+	// 最も近いブロックを返す（必ず1つ見つかる前提）
+	if (nearestBlock) {
+		return nearestBlock->massLocation;
+	}
+
+	// 念のためfallback（blocks_が空の可能性）
+	return Vector2{ 0, 0 };
 }
 
 Vector2 Field::GetNearestBlockAt(float x, float z) {
@@ -451,6 +478,12 @@ void Field::AddWave(const Vector2& center, float radius, float amplitude, int wa
 
 		if (distance <= radius) {
 			wave.baseHeights[block.massLocation] = block.world.translation_.y;
+
+			for (Block& b : blocks_) {
+				if (b.massLocation == block.massLocation) {
+					b.baseY = block.world.translation_.y;
+				}
+			}
 		}
 	}
 
@@ -593,9 +626,15 @@ void Field::WaveUpdate() {
 
 			// 戻ったらリセット対象解除（閾値を設ける）
 			if (std::abs(block.world.translation_.y - block.baseY) < 0.01f) {
+				block.world.translation_.y = block.baseY; // 完全一致に補正
+				// **このブロックだけすべてのwaveから削除**
 				for (WaveInfo& wave : waves_) {
 					wave.finishedBlocks.erase(block.massLocation);
 				}
+			}
+			else {
+				// リセット継続中：強制的にフラグ保持
+				needsReset = true;
 			}
 		}
 	}

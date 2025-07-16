@@ -35,6 +35,7 @@ struct Block {
 	Vector2 massLocation;
 	float baseY;
 	float tempYOffset;
+	bool isDrawing;
 };
 
 struct WaveInfo {
