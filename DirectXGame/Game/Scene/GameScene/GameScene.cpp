@@ -14,6 +14,7 @@
 #include "ColliderManager.h"
 #include "AudioManager.h"
 #include "GlobalVariables.h"
+#include "EffectManager.h"
 
 
 GameScene::GameScene() {
@@ -21,7 +22,6 @@ GameScene::GameScene() {
 }
 
 GameScene::~GameScene() {
-
 	bgm_->StopSound();
 }
 
@@ -154,6 +154,14 @@ void GameScene::Init() {
 
 	///
 
+	///エフェクト
+
+	EffectManager::GetInstance()->AddEffect("BiteEffect","Tooth");
+	EffectManager::GetInstance()->AddEffect("PlayerMoveEffect");
+	EffectManager::GetInstance()->AddEffect("CandyFinishEffect");
+
+	///
+
 	SetGlobalVariables();
 	ApplyGlobalVariables();
 
@@ -231,6 +239,8 @@ void GameScene::Update() {
 	playerAttackEffect_->Update();
 
 
+	EffectManager::GetInstance()->Update();
+
 	//地面更新
 	field_->Update();
 
@@ -306,6 +316,8 @@ void GameScene::DrawModel() {
 }
 
 void GameScene::DrawParticle() {
+
+	EffectManager::GetInstance()->Draw(camera_);
 
 }
 

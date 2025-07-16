@@ -7,6 +7,7 @@
 #include"Player/behavior/Attacks/Combo3/PlayerAttackCombo3.h"
 #pragma endregion
 
+#include "EffectManager.h"
 
 PlayerAttackManager::PlayerAttackManager()
 {
@@ -38,6 +39,7 @@ void PlayerAttackManager::Update()
 
 		//演出開始
 		player_->GetAttackEffect()->Start(player_->GetWorld().GetWorldPos(), player_->GetWorld().rotation_.y);
+		EffectManager::GetInstance()->Start("BiteEffect", player_->GetWorld().GetWorldPos(), player_->GetWorld().rotation_.y);
 	}
 
 	//攻撃の更新
