@@ -157,8 +157,13 @@ void GameScene::Init() {
 	///エフェクト
 
 	EffectManager::GetInstance()->AddEffect("BiteEffect","Tooth");
+	EffectManager::GetInstance()->AddEffect("BiteHitEffect");
 	EffectManager::GetInstance()->AddEffect("PlayerMoveEffect");
 	EffectManager::GetInstance()->AddEffect("CandyFinishEffect");
+	EffectManager::GetInstance()->AddEffect("DonutsRollEffect");
+	EffectManager::GetInstance()->AddEffect("DonutsStageApperEffect");
+	EffectManager::GetInstance()->AddEffect("StickAttackEffect");
+	EffectManager::GetInstance()->AddEffect("CapCakeStampEffect");
 
 	///
 

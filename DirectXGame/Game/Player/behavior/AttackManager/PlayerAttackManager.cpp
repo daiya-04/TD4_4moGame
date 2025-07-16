@@ -38,8 +38,10 @@ void PlayerAttackManager::Update()
 	 	attacks_[behavior_]->Init();
 
 		//演出開始
-		player_->GetAttackEffect()->Start(player_->GetWorld().GetWorldPos(), player_->GetWorld().rotation_.y);
-		EffectManager::GetInstance()->Start("BiteEffect", player_->GetWorld().GetWorldPos(), player_->GetWorld().rotation_.y);
+		Matrix4x4 rotateMat_ = MakeRotateAxisAngle(Vector3(0.0f, 1.0f, 0.0f), player_->GetWorld().rotation_.y);
+		Vector3 offset = { 0.0f,0.0f,2.0f };
+		offset = TransformNormal(offset, rotateMat_);
+		EffectManager::GetInstance()->Trigger("BiteEffect", player_->GetWorld().GetWorldPos() + offset, player_->GetWorld().rotation_.y);
 	}
 
 	//攻撃の更新

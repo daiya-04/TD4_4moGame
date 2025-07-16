@@ -61,6 +61,7 @@ private:
 	//ダウンタイム
 	float downCount_ = 60.0f;
 
+	Vector3 emitPos_{};
 
 	//予備動作再生倍率
 	float preActionRate_ = 1.0f;

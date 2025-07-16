@@ -24,11 +24,17 @@ void Effect::Update() {
 	timer_ += kDeltaTime_;
 	if (timer_ > kEffectTime_) {
 		isEffect_ = false;
+		isTrigger_ = false;
 		timer_ = 0.0f;
 	}
+	
 
 
 	for (auto& [group, particle] : effect_) {
+		if (particle->particleData_.isLoop_) {
+			particle->particleData_.emitter_.translate = *parentPos_;
+			timer_ = 0.0f;
+		}
 		particle->Update();
 	}
 	if (obj_) { 
@@ -52,35 +58,74 @@ void Effect::Draw(const DaiEngine::Camera& camera) {
 
 }
 
-void Effect::Start(const Vector3& pos) {
+void Effect::Start(const Vector3* pos) {
 
 	isEffect_ = true;
+
+	parentPos_ = pos;
+
+	for (auto& [group, particle] : effect_) {
+		particle->particleData_.isLoop_ = true;
+	}
+
+}
+
+//void Effect::Start(const Vector3* pos, const float angle) {
+//
+//	isEffect_ = true;
+//	parentPos_ = pos;
+//
+//	rotateMat_ = MakeRotateAxisAngle(Vector3(0.0f, 1.0f, 0.0f), angle);
+//
+//
+//	for (auto& [group, particle] : effect_) {
+//		particle->particleData_.isLoop_ = true;
+//	}
+//
+//	if (obj_) { 
+//		obj_->GetAnimation().Start(false);
+//	}
+//
+//}
+
+void Effect::End() {
+
+	parentPos_ = nullptr;
+
+	for (auto& [group, particle] : effect_) {
+		particle->particleData_.isLoop_ = false;
+	}
+
+
+}
+
+void Effect::Trigger(const Vector3& pos) {
+	isEffect_ = true;
+	isTrigger_ = true;
 	timer_ = 0.0f;
 
 	for (auto& [group, particle] : effect_) {
 		particle->particleData_.emitter_.translate = pos;
 		particle->Emit();
 	}
-
 }
 
-void Effect::Start(const Vector3& pos, const float angle) {
+void Effect::Trigger(const Vector3& pos, const float angle) {
 
 	isEffect_ = true;
+	isTrigger_ = true;
 	timer_ = 0.0f;
 
 	rotateMat_ = MakeRotateAxisAngle(Vector3(0.0f, 1.0f, 0.0f), angle);
-	Vector3 offset = { 0.0f,0.0f,2.0f };
-	offset = TransformNormal(offset, rotateMat_);
 
 
 	for (auto& [group, particle] : effect_) {
-		particle->particleData_.emitter_.translate = pos + offset;
+		particle->particleData_.emitter_.translate = pos;
 		particle->Emit();
 	}
 
-	if (obj_) { 
-		obj_->worldTransform_.translation_ = pos + offset;
+	if (obj_) {
+		obj_->worldTransform_.translation_ = pos;
 		obj_->GetAnimation().Start(false);
 	}
 

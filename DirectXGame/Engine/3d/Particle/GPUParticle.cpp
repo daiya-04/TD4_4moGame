@@ -156,7 +156,7 @@ namespace DaiEngine {
 	}
 
 	void GPUParticle::SetModel() {
-		model_ = ModelManager::LoadOBJ(particleData_.modelName_);
+		model_ = ModelManager::LoadGLTF(particleData_.modelName_);
 	}
 
 	void GPUParticle::CreateBuffer() {

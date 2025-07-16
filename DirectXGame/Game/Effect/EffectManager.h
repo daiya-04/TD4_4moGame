@@ -22,8 +22,13 @@ public:
 	/// 再生開始
 	/// </summary>
 	/// <param name="pos"></param>
-	void Start(const std::string& effectName, const Vector3& pos);
-	void Start(const std::string& effectName, const Vector3& pos, float angle);
+	void Start(const std::string& effectName, const Vector3* pos);
+	//void Start(const std::string& effectName, const Vector3& pos, float angle);
+
+	void End(const std::string& effectName);
+
+	void Trigger(const std::string& effectName, const Vector3& pos);
+	void Trigger(const std::string& effectName, const Vector3& pos, float angle);
 	/// <summary>
 	/// エフェクトを追加
 	/// </summary>
@@ -31,11 +36,11 @@ public:
 	/// <summary>
 	/// 全エフェクト消去
 	/// </summary>
-	void ClearEffects() { effects_.clear(); }
+	void ClearEffects() { effectPool_.clear(); }
 
 private:
 
-	std::map<std::string, std::unique_ptr<Effect>> effects_;
+	std::map<std::string, std::vector<std::unique_ptr<Effect>>> effectPool_;
 
 
 private:

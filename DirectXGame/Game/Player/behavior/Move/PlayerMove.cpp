@@ -35,17 +35,16 @@ void PlayerMove::Update()
 	if (player_->GetInput()->GetInput(PlayerInput::Type::Roll)&&player_->parameters_.currentRollCount==0) {
 		//状態リクエスト送信
 		player_->behaviorRequest_ = Player::Behavior::Roll;
+		EffectManager::GetInstance()->End("PlayerMoveEffect");
 	}
 	//もし攻撃入力があったら
 	else if (player_->GetInput()->GetInput(PlayerInput::Type::Attack)) {
 		//攻撃リクエスト
 		player_->behaviorRequest_ = Player::Behavior::Attack;
+		EffectManager::GetInstance()->End("PlayerMoveEffect");
 	}
 
-	if (isMove_) {
-		Vector3 emitPos = player_->GetWorld().GetWorldPos() - Vector3(0.0f, 1.0f, 0.0f);
-		EffectManager::GetInstance()->Start("PlayerMoveEffect", emitPos);
-	}
+	emitPos_ = player_->GetWorld().GetWorldPos() - Vector3(0.0f, 1.0f, 0.0f);
 
 	//入力がない場合
 	if (move.x == 0 && move.y == 0 && move.z == 0) {
@@ -54,6 +53,7 @@ void PlayerMove::Update()
 			isMove_ = false;
 			//待機モーション
 			player_->SetAnimationName("PlayerIdle");
+			EffectManager::GetInstance()->End("PlayerMoveEffect");
 		}
 	}
 	else {
@@ -61,6 +61,9 @@ void PlayerMove::Update()
 			isMove_ = true;
 			//入力があった場合は歩行アニメーション
 			player_->SetAnimationName("PlayerWalk");
+
+			emitPos_ = player_->GetWorld().GetWorldPos() - Vector3(0.0f, 1.0f, 0.0f);
+			EffectManager::GetInstance()->Start("PlayerMoveEffect", &emitPos_);
 		}
 	}
 }

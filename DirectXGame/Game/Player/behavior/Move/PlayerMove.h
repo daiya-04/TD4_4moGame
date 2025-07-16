@@ -31,4 +31,6 @@ private://**プライベート変数**//
 	//移動フラグ
 	bool isMove_ = false;
 
+	Vector3 emitPos_{};
+
 };

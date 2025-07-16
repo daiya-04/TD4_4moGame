@@ -1,6 +1,7 @@
 #include "BossSpinAttack.h"
 #include"ColliderManager.h"
 #include"ShapesDraw.h"
+#include "EffectManager.h"
 
 Boss2SpinAttack::Boss2SpinAttack(BossParameters* param)
 {
@@ -64,6 +65,9 @@ void Boss2SpinAttack::InitBehavior1()
 	velo_ = param_->lookAtPlayerVec_.Normalize() * speed_;
 	param_->isHitMapEdge_ = false;
 	collider_->ColliderOn();
+
+	emitPos_ = collider_->GetWorldPos() - Vector3(0.0f, 1.0f, 0.0f);
+	EffectManager::GetInstance()->Start("DonutsRollEffect", &emitPos_);
 }
 
 void Boss2SpinAttack::InitBehavior2()
@@ -108,9 +112,11 @@ void Boss2SpinAttack::UpdateBehavior1()
 			//通常状態に移行
 			countRequest_ = 2;
 		}
+		EffectManager::GetInstance()->End("DonutsRollEffect");
 	}
 
 	collider_->Update();
+	emitPos_ = collider_->GetWorldPos() - Vector3(0.0f, 1.0f, 0.0f);
 }
 
 void Boss2SpinAttack::UpdateBehavior2()
