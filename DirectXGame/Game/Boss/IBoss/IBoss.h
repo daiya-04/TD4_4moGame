@@ -24,6 +24,9 @@ public://**パブリック変数**//
 	//状態
 	std::vector<std::unique_ptr<IBossBehavior>>behaviors_;
 
+	//死亡状態処理
+	std::unique_ptr<IBossBehavior>deadBehavior_;
+
 	//状態
 	int behavior_ = 0;
 
