@@ -130,9 +130,6 @@ void GameScene::Init() {
 	followCamera_ = std::make_unique<FollowCamera>(&camera_, player_->GetWorld().translation_);
 	
 	//ボス生成
-	//boss_ = std::make_unique<Boss2>(followCamera_.get());
-	//boss_->SetPlayerWorld(&player_->GetWorld());
-
 	bossSpawnManager_ = std::make_unique<BossSpawnManager>(followCamera_.get(), &player_->GetWorld());
 	player_->SetBossWorld(&bossSpawnManager_->GetBossWorld());
 
@@ -222,6 +219,8 @@ void GameScene::Update() {
 
 		//ボス更新
 		bossSpawnManager_->Update();
+		bossSpawnManager_->SetOnField(field_->GetMassLocationPosY(bossSpawnManager_->GetBossWorld().translation_) + bossSpawnManager_->GetBossWorld().scale_.y);
+
 		//ボスのワールド座標取得
 		player_->SetBossWorld(&bossSpawnManager_->GetBossWorld());
     

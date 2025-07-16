@@ -11,10 +11,17 @@ public:
 	/// </summary>
 	DangerZoneManager();
 	~DangerZoneManager() = default;
+
 	/// <summary>
 	/// 更新
 	/// </summary>
 	void Update();
+
+	/// <summary>
+	/// 全ての危険ゾーンの削除
+	/// </summary>
+	void ClearAllDangerZone() { dangerZones_.clear(); }
+
 	/// <summary>
 	/// 警告エリア生成
 	/// </summary>

@@ -23,6 +23,11 @@ public://**パブリック関数**//
 	void Draw();
 
 	/// <summary>
+	/// 全ての弾データの削除
+	/// </summary>
+	void ClearAllBullets() { bullets_.clear(); }
+
+	/// <summary>
 	/// 弾を生成
 	/// </summary>
 	void SpawnBullet(const DaiEngine::WorldTransform& pos, BulletType type,const DaiEngine::WorldTransform& boss);
