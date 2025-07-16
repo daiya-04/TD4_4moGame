@@ -33,7 +33,7 @@ void DebugTestScene::Init() {
 	model_ = DaiEngine::ModelManager::LoadGLTF("MultiMeshAnime");
 
 	skyBoxTex_ = DaiEngine::TextureManager::Load("skyBox.dds");
-	tex_ = DaiEngine::TextureManager::Load("TitleBack.png");
+	tex_ = DaiEngine::TextureManager::Load("Black.png");
 	burnScarsTex_ = DaiEngine::TextureManager::Load("BurnScars.png");
 
 	skyBox_.reset(DaiEngine::SkyBox::Create(skyBoxTex_));
@@ -49,7 +49,8 @@ void DebugTestScene::Init() {
 	anime_ = DaiEngine::AnimationManager::Load(model_->name_);
 	anime_.Start();
 
-	sprite_.reset(DaiEngine::Sprite::Create(tex_, { 670.0f,200.0f }));
+	sprite_.reset(DaiEngine::Sprite::Create(tex_, { 640.0f,360.0f }));
+	sprite_->SetSize({ 1280.0f,720.0f });
 	
 	dissolve_ = Dissolve::GetInstance();
 	dissolve_->Init();
@@ -142,7 +143,7 @@ void DebugTestScene::Update() {
 
 void DebugTestScene::DrawBackGround() {
 
-
+	sprite_->Draw();
 
 }
 
@@ -216,31 +217,6 @@ void DebugTestScene::DebugGUI() {
 
 	ImGui::End();
 
-	ImGui::Begin("texture");
-
-	uint32_t image = DaiEngine::TextureManager::Load("cross_01.png");
-	D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle = DaiEngine::TextureManager::GetInstance()->GetSRVGPUHandle(image);
-
-	ImGui::ImageButton("cross_01", (ImTextureID)gpuHandle.ptr, ImVec2(128, 128));
-
-	image = DaiEngine::TextureManager::Load("ring_03.png");
-	gpuHandle = DaiEngine::TextureManager::GetInstance()->GetSRVGPUHandle(image);
-
-	ImGui::SameLine();
-
-	ImGui::ImageButton("ring_03", (ImTextureID)gpuHandle.ptr, ImVec2(128, 128));
-
-	ImGui::End();
-
-	Vector2 pos = sprite_->GetPosition();
-
-	ImGui::Begin("clear_text");
-
-	ImGui::DragFloat2("position", &pos.x, 0.01f);
-
-	ImGui::End();
-
-	sprite_->SetPosition(pos);
 
 #endif // _DEBUG
 }

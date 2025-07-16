@@ -1,6 +1,8 @@
 #include "PlayerMove.h"
 #include"Player/Player.h"
 
+#include "EffectManager.h"
+
 
 PlayerMove::PlayerMove()
 {
@@ -38,6 +40,11 @@ void PlayerMove::Update()
 	else if (player_->GetInput()->GetInput(PlayerInput::Type::Attack)) {
 		//攻撃リクエスト
 		player_->behaviorRequest_ = Player::Behavior::Attack;
+	}
+
+	if (isMove_) {
+		Vector3 emitPos = player_->GetWorld().GetWorldPos() - Vector3(0.0f, 1.0f, 0.0f);
+		EffectManager::GetInstance()->Start("PlayerMoveEffect", emitPos);
 	}
 
 	//入力がない場合
