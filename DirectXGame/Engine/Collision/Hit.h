@@ -130,3 +130,17 @@ bool IsCollision(const Shapes::OBB& obb1, const Shapes::OBB& obb2);
 /// <param name=""></param>
 /// <returns></returns>
 bool IsCollision(const Shapes::Circle& circle, const Shapes::RectAngle& rect);
+/// <summary>
+/// 球と円柱の衝突判定
+/// </summary>
+/// <param name="Sphere"></param>
+/// <param name="Cylinder"></param>
+/// <returns></returns>
+bool IsCollision(const Shapes::Sphere& sphere, const Shapes::Cylinder& cylinder);
+/// <summary>
+/// 円柱と円柱の衝突判定
+/// </summary>
+/// <param name="Cylinder1"></param>
+/// <param name="Cylinder2"></param>
+/// <returns></returns>
+bool IsCollision(const Shapes::Cylinder& cylinder1, const Shapes::Cylinder& cylinder2);

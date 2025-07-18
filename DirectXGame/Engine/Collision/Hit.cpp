@@ -465,3 +465,77 @@ bool IsCollision(const Shapes::Circle& circle, const Shapes::RectAngle& rect) {
 	// 最短距離が円の半径以下なら衝突
 	return distance <= circle.radius;
 }
+
+float DistanceSquared(const Vector3& a, const Vector3& b) {
+	return (a.x - b.x) * (a.x- b.x) +
+		(a.y - b.y) * (a.y - b.y) +
+		(a.y - b.y) * (a.y - b.y);
+}
+
+bool IsCollision(const Shapes::Sphere& sphere, const Shapes::Cylinder& cylinder) {
+	//円柱の高さ方向の単位ベクトルを計算
+	Vector3 cylinderAxis = {
+		cylinder.topCenter.x - cylinder.bottomCenter.x,
+		cylinder.topCenter.y - cylinder.bottomCenter.y,
+		cylinder.topCenter.z - cylinder.bottomCenter.z
+	};
+
+	float heightSquared = DistanceSquared(cylinder.topCenter, cylinder.bottomCenter);
+	float height = std::sqrt(heightSquared);
+	Vector3 unitAxis = { cylinderAxis.x / height, cylinderAxis.y / height, cylinderAxis.y / height };
+
+	//円柱の高さ方向に射影
+	Vector3 sphereToCylinderBase = {
+		sphere.center.x - cylinder.bottomCenter.x,
+		sphere.center.y - cylinder.bottomCenter.y,
+		sphere.center.z - cylinder.bottomCenter.z
+	};
+	float projLength = sphereToCylinderBase.x * unitAxis.x +
+		sphereToCylinderBase.y * unitAxis.y +
+		sphereToCylinderBase.z * unitAxis.z;
+
+	//円柱の高さ方向での位置を制限
+	projLength = std::fmax(0.0f, std::fmin(projLength, height));
+
+	//最も近い点を計算
+	Vector3 closestPointOnCylinder = {
+		cylinder.bottomCenter.x + projLength * unitAxis.x,
+		cylinder.bottomCenter.y + projLength * unitAxis.y,
+		cylinder.bottomCenter.z + projLength * unitAxis.z
+	};
+
+	//Sphereの中心と円柱の最も近い点との距離
+	float distSquared = DistanceSquared(sphere.center, closestPointOnCylinder);
+	float radiusSum = sphere.radius + cylinder.radius;
+	return distSquared <= radiusSum * radiusSum;
+}
+
+bool IsCollision(const Shapes::Cylinder& cylinder1, const Shapes::Cylinder& cylinder2) {
+	// 両円柱の高さ軸の単位ベクトルを計算
+	Vector3 axis1 = cylinder1.topCenter - cylinder1.bottomCenter;
+	Vector3 axis2 = cylinder2.topCenter - cylinder2.bottomCenter;
+	float height1 = (axis1).Length();
+	float height2 = (axis2).Length();
+	Vector3 unitAxis1 = (axis1).Normalize();
+	Vector3 unitAxis2 = (axis2).Normalize();
+
+	// 両円柱の中心間ベクトルを計算
+	Vector3 center1ToCenter2 = cylinder2.bottomCenter - cylinder1.bottomCenter;
+
+	// 両円柱が同じ軸方向に並んでいるか、あるいは軸方向が平行でない場合
+	float dotProduct = Dot(unitAxis1, unitAxis2);
+	if (std::abs(dotProduct) > 0.99f) {
+		// 両円柱の軸がほぼ平行
+		// 高さ方向の最小距離を計算
+		float minHeightDist = std::abs(Dot(center1ToCenter2, unitAxis1));
+
+		// 両円柱の半径の合計
+		float radiusSum = cylinder1.radius + cylinder2.radius;
+
+		// 高さ方向の距離が許容範囲内なら接触
+		return minHeightDist <= std::fmin(height1, height2) && (center1ToCenter2).Length() <= radiusSum;
+	}
+
+	// 高さ方向での最も近い位置を求め、円柱の半径を考慮して接触判定
+	return false;
+}
