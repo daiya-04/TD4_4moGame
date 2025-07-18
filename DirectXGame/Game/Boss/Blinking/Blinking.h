@@ -16,6 +16,10 @@ public:
 	/// </summary>
 	bool Update();
 
+	/// <summary>
+	/// 描画フラグ取得
+	/// </summary>
+	/// <returns></returns>
 	bool& GetIsDrawFlag() { return isDraw_; }
 
 	/// <summary>
