@@ -153,8 +153,6 @@ private://**プライベート関数**//
 	/// <returns></returns>
 	Vector3 SetDirection2Player();
 
-
-
 	/// <summary>
 	/// プレイヤー方向取得
 	/// </summary>

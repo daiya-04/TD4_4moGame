@@ -252,23 +252,22 @@ void GameScene::Update() {
 		Vector2 targetBlock = field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
 		Block* block = field_->GetBlock(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
 
+		//WAVE発生タイプの場合
+		if (bullet->GetType() == BulletType::Wave) {
+
+			//中心の場所検索
+			Vector2 bPos = field_->GetBlockAt(0, 0);
+
+			//波の発生
+			field_->AddWave(bPos, 30, 1.0f, 1, 0.01f);
+			//弾の削除処理
+			bullet->OnCollision();
+			//この弾の処理を終了
+			continue;
+		}
+
 		// Y範囲にあるか判定
 		if (block->world.translation_.y >= bullet->GetWorld().translation_.y && block->world.translation_.y <= bullet->GetWorld().translation_.y + bullet->GetWorld().scale_.y) {
-			
-			//WAVE発生タイプの場合
-			if (bullet->GetType() == BulletType::Wave) {
-
-				//中心の場所検索
-				Vector2 bPos = field_->GetBlockAt(0, 0);
-
-				//波の発生
-				field_->AddWave(bPos,30,1.0f,1,0.01f);
-				//弾の削除処理
-				bullet->OnCollision();
-				//この弾の処理を終了
-				continue;
-			}
-
 			//下げる値取得
 			float deltaY = field_->GetDeltaY();
 			
