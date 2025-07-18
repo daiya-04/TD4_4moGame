@@ -240,7 +240,7 @@ void GameScene::Update() {
     playerAttackEffect_->Update();
 
 	}
-	
+		
 	playerAttackEffect_->Update();
 
 
@@ -260,10 +260,14 @@ void GameScene::Update() {
 			//WAVE発生タイプの場合
 			if (bullet->GetType() == BulletType::Wave) {
 
+				//中心の場所検索
 				Vector2 bPos = field_->GetBlockAt(0, 0);
 
+				//波の発生
 				field_->AddWave(bPos,30,1.0f,1,0.01f);
+				//弾の削除処理
 				bullet->OnCollision();
+				//この弾の処理を終了
 				continue;
 			}
 

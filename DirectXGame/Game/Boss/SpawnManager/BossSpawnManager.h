@@ -61,6 +61,8 @@ private://**プライベート関数**//
 
 private://**プライベート変数**//
 
+	FollowCamera* camera_ = nullptr;
+
 	//ボスの生成タイプ
 	enum class BossType {
 		GingerbreadMan,
@@ -76,6 +78,13 @@ private://**プライベート変数**//
 	//状態リクエスト
 	std::optional<int>typeRequest_ = std::nullopt;
 
+	//ボス引継ぎフラグ
+	bool changeBoss_ = false;
+
+	//変更時間
+	int changeCount_ = 60;
+
+	int currentChangeCount_ = 0;
 
 	//全てのボスの死亡フラグ
 	bool allBossDead_ = false;
@@ -84,5 +93,13 @@ private://**デバッグ用**//
 
 	//次のボスフラグ
 	bool isNextBoss_ = false;
+
+	std::string bossNames_[(int)BossType::Count] = {
+		"GentlmanGuard",
+		"Donut",
+		"CapCake"
+	};
+
+	std::string nowBossName_ = "";
 
 };

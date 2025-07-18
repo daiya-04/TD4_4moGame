@@ -15,7 +15,7 @@ BossAreaAttack::BossAreaAttack(BossParameters* param)
 void BossAreaAttack::InitBehavior0()
 {
 	//アニメーション変更
-	param_->setAnimeName_ = "GentlmanAttackPosture1";
+	param_->setAnimeName_ = "GentlmanStandby";
 	param_->isLoopAnime_ = false;
 	//再生速度変更
 	param_->animationLeverage_ =preActionRate_;
@@ -29,10 +29,19 @@ void BossAreaAttack::InitBehavior1()
 	//実際の行動初期化
 	currentNum_ = 0;
 	//アニメーション変更
-	param_->setAnimeName_ = "GentlmanAttack1";
+	param_->setAnimeName_ = "GentlmanAttack";
 	param_->isLoopAnime_ = false;
 	//再生速度変更
 	param_->animationLeverage_ = actionRate_;
+}
+
+void BossAreaAttack::InitBehavior2()
+{
+	//アニメーション変更
+	param_->setAnimeName_ = "GentlmanAttackEnd";
+	param_->isLoopAnime_ = false;
+	//再生速度変更
+	param_->animationLeverage_ = stopActionRate_;
 }
 
 void BossAreaAttack::UpdateBehavior0()
@@ -47,8 +56,7 @@ void BossAreaAttack::UpdateBehavior1()
 {	
 	//経過時間で終了
 	if (param_->currentSec >= attackCount_&&param_->currentBulletNum_<=0) {
-		//通常状態に移行
-		param_->behaviorRequest_ = 0;
+		countRequest_ = 2;	
 		//カメラ状態を変更
 		param_->cameraBehaviorRequest_ = FollowCamera::State::Follow;
 	}
@@ -57,9 +65,16 @@ void BossAreaAttack::UpdateBehavior1()
 	if (param_->currentSec >= (attackCount_ / numbers_) * currentNum_&& param_->currentSec < attackCount_) {
 		//カウント増加
 		currentNum_++;
-
 		//生成
 		param_->SpawnDangerZone_ = true;
+	}
+}
+
+void BossAreaAttack::UpdateBehavior2()
+{
+	if (param_->currentSec >= stopCount_) {
+		//通常状態に移行
+		param_->behaviorRequest_ = 0;
 	}
 }
 

@@ -18,7 +18,7 @@ void Field::Initialize() {
 
 	//Instancingゲームオブジェクト
 	instancingObj_ = std::make_unique<InstancingGameObject>();
-	instancingObj_->Init("Cube", 10000);
+	instancingObj_->Init("Floor", 10000);
 
 	instancingObj2_ = std::make_unique<InstancingGameObject>();
 	instancingObj2_->Init("Field", 10000);

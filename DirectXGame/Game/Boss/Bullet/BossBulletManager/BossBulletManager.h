@@ -9,7 +9,7 @@ public://**パブリック関数**//
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	BossBulletManager();
+	BossBulletManager(bool isCandy =true);
 	~BossBulletManager() = default;
 
 	/// <summary>
@@ -62,14 +62,12 @@ private:
 	//落下速度
 	float fallSpeed_ = 1.0f;
 
-	//弾半径
-	float radius_ = 1.0f;
-
 	//コライダー半径
 	float colliderRadius_ = 1.0f;
 
 	//放物線処理到着時間
 	int arriveCount_ = 60;
+
 	//放物線の高さ
 	float parabolaHeight_ = 5.0f;
 

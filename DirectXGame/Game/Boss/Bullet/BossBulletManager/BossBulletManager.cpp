@@ -1,9 +1,14 @@
 #include "BossBulletManager.h"
 
-BossBulletManager::BossBulletManager()
+BossBulletManager::BossBulletManager(bool isCandy)
 {
 	//オブジェクト生成
-	InstancingGameObject::Init("Candy", 100);
+	if (isCandy) {
+		InstancingGameObject::Init("Candy", 100);
+	}
+	else {
+		InstancingGameObject::Init("Cream", 100);
+	}
 	//警告円の生成
 	dangerZone_ = std::make_unique<InstancingGameObject>();
 	dangerZone_->Init("DangerZone", 100);
@@ -11,7 +16,6 @@ BossBulletManager::BossBulletManager()
 	tree_.name_ = "FallingBullet";
 	tree_.SetValue("spawnHeight", &bulletStartHeight_);
 	tree_.SetValue("fallSpeed", &fallSpeed_);
-	tree_.SetValue("radius", &radius_);
 	tree_.SetValue("colliderRadius", &colliderRadius_);
 
 	GvariTree tree;
