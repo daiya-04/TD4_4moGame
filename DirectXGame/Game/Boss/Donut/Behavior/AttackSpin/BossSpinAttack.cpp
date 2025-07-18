@@ -5,6 +5,8 @@
 Boss2SpinAttack::Boss2SpinAttack(BossParameters* param)
 {
 	param_ = param;
+	dangerZone_ = std::make_unique<SquareDangerZone>(param->world);
+
 	//コライダー生成
 	collider_ = std::make_unique<DaiEngine::SphereCollider>();
 	collider_->Init("bossCharge",*param_->world , radius_);
@@ -17,7 +19,6 @@ Boss2SpinAttack::Boss2SpinAttack(BossParameters* param)
 
 	tree_.SetMonitorValue("currentExecuteCount", &currentExecuteCount_);
 
-	tree_.SetValue("waitCount", &waitTime_);
 	tree_.SetValue("downCount", &downCount_);
 	tree_.SetValue("executeCount", &executeCount_);
 	tree_.SetValue("ptrAnimationRate", &preActionRate_);
@@ -26,6 +27,7 @@ Boss2SpinAttack::Boss2SpinAttack(BossParameters* param)
 	tree_.SetValue("speed", &speed_);
 	tree_.SetValue("radius", &radius_);
 	tree_.SetValue("color", &color_);
+	tree_.SetTreeData(dangerZone_->GetTree());
 }
 
 Boss2SpinAttack::~Boss2SpinAttack()
@@ -39,6 +41,11 @@ void Boss2SpinAttack::Draw()
 #ifdef _DEBUG
 	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()), *camera_, color_);
 #endif // _DEBUG
+
+	if (isDrawZone_) {
+		dangerZone_->Draw();
+	}
+
 }
 
 void Boss2SpinAttack::InitBehavior0()
@@ -50,6 +57,9 @@ void Boss2SpinAttack::InitBehavior0()
 	param_->animationLeverage_ = preActionRate_;
 	param_->currentSec = 0;
 	collider_->ColliderOff();
+
+	dangerZone_->Init();
+	isDrawZone_ = true;
 }
 
 void Boss2SpinAttack::InitBehavior1()
@@ -64,6 +74,7 @@ void Boss2SpinAttack::InitBehavior1()
 	velo_ = param_->lookAtPlayerVec_.Normalize() * speed_;
 	param_->isHitMapEdge_ = false;
 	collider_->ColliderOn();
+	isDrawZone_ = false;
 }
 
 void Boss2SpinAttack::InitBehavior2()
@@ -77,9 +88,10 @@ void Boss2SpinAttack::InitBehavior2()
 
 void Boss2SpinAttack::UpdateBehavior0()
 {
+	dangerZone_->Update();
 	//プレイヤー方向を向く
 	param_->isLookAtPlayer_ = true;
-	if (param_->currentSec >= waitTime_) {	
+	if (dangerZone_->isEnd()) {	
 		countRequest_ = 1;	
 	}
 }

@@ -1,9 +1,10 @@
 #include "SquareDangerZone.h"
 
-SquareDangerZone::SquareDangerZone()
+SquareDangerZone::SquareDangerZone(const DaiEngine::WorldTransform* world)
 {
 	//オブジェクト生成
 	GameObject::Init("Square");
+	world_->parent_ = world;
 
 	tree_.name_ = "SquareDangerZone";
 	tree_.SetValue("maxScale",&maxScale_);
@@ -31,10 +32,21 @@ void SquareDangerZone::Update() {
 
 			float scaleZ = Lerp(t, 0, maxScale_);
 			world_->scale_.z = scaleZ;
-
+			world_->translation_.z = scaleZ;
 		}
 		break;
 	case SquareDangerZone::State::FINALWARNING:
+
+		if (count_ >= (finalWarningCount_ / blinkNum_) * currentBlink_) {
+			//描画フラグ反転
+			if (isDraw_) {
+				isDraw_ = false;
+			}
+			else {
+				isDraw_ = true;
+			}
+		}
+
 		if (count_++ >= finalWarningCount_) {
 			isEnd_ = true;
 		}

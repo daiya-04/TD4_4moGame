@@ -1,7 +1,6 @@
 #pragma once
 #include"Boss/IBossAttack/IBossAttack.h"
 
-
 class Boss2AttackPFollowBullet : public IBossAttack {
 
 public://**パブリック関数**//
@@ -33,13 +32,12 @@ private:
 
 private:
 
+
 	//待機時間
 	float waitTime_ = 60.0f;
 
 	//実行時間
 	float executeCount_ = 120.0f;
-
-
 
 	//予備動作再生倍率
 	float preActionRate_ = 1.0f;
