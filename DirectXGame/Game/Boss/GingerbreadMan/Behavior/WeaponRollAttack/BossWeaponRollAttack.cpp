@@ -28,6 +28,11 @@ BossWeaponRollAttack::BossWeaponRollAttack(BossParameters* parame)
 	tree_.SetValue("rotateNum", &rotateDegree_);
 	tree_.SetValue("attackRadius_", &param.maxRadius);
 	tree_.SetValue("offsetZone", &offsetZone_);
+
+	tree_.SetValue("preActionRate",&preActionRate_);
+	tree_.SetValue("actionRate", &actionRate_);
+	tree_.SetValue("endActionRate", &endActionRate_);
+
 }
 
 BossWeaponRollAttack::~BossWeaponRollAttack()
@@ -58,7 +63,8 @@ void BossWeaponRollAttack::OnCollisionATK(DaiEngine::Collider* collider)
 void BossWeaponRollAttack::InitBehavior0()
 {
 	//予備動作初期化
-	param_->setAnimeName_ = "GentlmanAttackPosture2";
+	param_->setAnimeName_ = "GentlmanStandby2";
+	param_->animationLeverage_ = preActionRate_;
 	param_->isLoopAnime_ = false;
 	//警告円初期化
 	param.world.translation_ = param_->world->GetWorldPos() + offsetZone_;
@@ -72,6 +78,7 @@ void BossWeaponRollAttack::InitBehavior1()
 	maxRoll_ = minRoll_ + rotateDegree_;
 	//アニメーション再生
 	param_->setAnimeName_ = "GentlmanAttack2";
+	param_->animationLeverage_ = actionRate_;
 	param_->isLoopAnime_ = false;
 	//コライダーON
 	collider_->ColliderOn();
@@ -81,6 +88,11 @@ void BossWeaponRollAttack::InitBehavior1()
 
 void BossWeaponRollAttack::InitBehavior2()
 {	
+	//アニメーション再生
+	param_->setAnimeName_ = "GentlmanAttackEnd2";
+	param_->animationLeverage_ = endActionRate_;
+	param_->isLoopAnime_ = false;
+
 	//コライダーOFF
 	collider_->ColliderOff();
 
@@ -101,10 +113,10 @@ void BossWeaponRollAttack::UpdateBehavior0()
 void BossWeaponRollAttack::UpdateBehavior1()
 {
 	//割合Tを計算
-	float t = param_->currentSec / attackCount_;
+	//float t = param_->currentSec / attackCount_;
 
 	//回転量を変更
-	param_->rotation_.y = Lerp(t, minRoll_, maxRoll_);
+	//param_->rotation_.y = Lerp(t, minRoll_, maxRoll_);
 
 	//カウントチェック
 	if (param_->currentSec >= attackCount_) {

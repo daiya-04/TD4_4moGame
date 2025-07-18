@@ -244,6 +244,9 @@ void GameScene::Update() {
 	//地面更新
 	field_->Update();
 
+	//当たり判定処理
+	DaiEngine::ColliderManager::GetInstance()->CheckAllCollision();
+
 	//弾の更新
 	for (std::unique_ptr<BossBullet>& bullet : bossSpawnManager_->GetBullets()) {
 		Vector2 targetBlock = field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
@@ -273,10 +276,16 @@ void GameScene::Update() {
 			if (bullet->GetType() != BulletType::Fall) {
 				//落下弾以外は上方向に
 				deltaY *= -1.0f; 
+				//えふぇこ発生
 			}
 
 			//フィールドに影響
 			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, deltaY);
+			bullet->OnCollision();
+		}
+
+		//盛り上げる弾は即爆破
+		if (bullet->GetType() == BulletType::None) {
 			bullet->OnCollision();
 		}
 	}
@@ -285,8 +294,7 @@ void GameScene::Update() {
 	data.worldTransform_.Init();
 	data.worldTransform_.translation_.x = 10;
 
-	//当たり判定処理
-	DaiEngine::ColliderManager::GetInstance()->CheckAllCollision();
+
 
 
 	//死亡時ゲームおーばーへ
