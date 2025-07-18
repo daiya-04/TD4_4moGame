@@ -278,6 +278,11 @@ void GameScene::Update() {
 			if (bullet->GetType() != BulletType::Fall) {
 				//落下弾以外は上方向に
 				deltaY *= -1.0f; 
+
+				if (bullet->GetType() == BulletType::None) {
+					EffectManager::GetInstance()->Trigger("DonutsStageApperEffect", bullet->GetWarningWorld().GetWorldPos());
+				}
+
 			}
 
 			//フィールドに影響

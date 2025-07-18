@@ -76,6 +76,8 @@ void BossWeaponRollAttack::InitBehavior1()
 	//コライダーON
 	collider_->ColliderOn();
 	collider_->SetRadius(param.maxRadius);
+
+	EffectManager::GetInstance()->Start("StickAttackEffect", &jointPos_);
 	
 }
 
@@ -109,9 +111,11 @@ void BossWeaponRollAttack::UpdateBehavior1()
 	//カウントチェック
 	if (param_->currentSec >= attackCount_) {
 		countRequest_ = 2;
+		EffectManager::GetInstance()->End("StickAttackEffect");
 	}
 
-	//EffectManager::GetInstance()->Start("WeaponRollAttack", gingerbreadMan_->GetJointWorldPosition());
+	jointPos_ = gingerbreadMan_->GetJointWorldPosition("Bone.002.R.002");
+	
 
 	//コライダー更新
 	collider_->Update();

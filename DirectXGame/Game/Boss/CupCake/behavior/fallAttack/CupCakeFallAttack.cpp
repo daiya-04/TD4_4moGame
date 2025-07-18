@@ -69,12 +69,13 @@ void CupCakeFallAttack::UpdateBehavior2()
 	if (param_->currentSec >= attackCount_) {
 		if (currentJumpNum_ >= jumpNum_) {
 			countRequest_ = 3;
-			EffectManager::GetInstance()->Trigger("CapCakeStampEffect", param_->world->translation_ - Vector3(0.0f, 1.0f, 0.0f));
+			//EffectManager::GetInstance()->Trigger("CapCakeStampEffect", param_->world->translation_ - Vector3(0.0f, 1.0f, 0.0f));
 		}
 		else {
 			//前の状態に戻る
 			countRequest_ = 1;
 		}
+		EffectManager::GetInstance()->Trigger("CapCakeStampEffect", param_->world->translation_ - Vector3(0.0f, 1.0f, 0.0f));
 	}
 }
 
