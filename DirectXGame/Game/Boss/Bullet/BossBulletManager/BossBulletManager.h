@@ -9,7 +9,7 @@ public://**パブリック関数**//
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	BossBulletManager();
+	BossBulletManager(bool isCandy =true);
 	~BossBulletManager() = default;
 
 	/// <summary>
