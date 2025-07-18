@@ -46,6 +46,12 @@ public://**パブリック関数**//
 
 	DaiEngine::WorldTransform& GetBossWorld() { return bosses_[int(bossType_)]->GetWorld(); }
 
+	/// <summary>
+	/// ブロック上に設置
+	/// </summary>
+	/// <param name="y"></param>
+	void SetOnField(float y);
+
 private://**プライベート関数**//
 
 	/// <summary>
@@ -54,6 +60,8 @@ private://**プライベート関数**//
 	void CheckBossDead();
 
 private://**プライベート変数**//
+
+	FollowCamera* camera_ = nullptr;
 
 	//ボスの生成タイプ
 	enum class BossType {
@@ -70,6 +78,13 @@ private://**プライベート変数**//
 	//状態リクエスト
 	std::optional<int>typeRequest_ = std::nullopt;
 
+	//ボス引継ぎフラグ
+	bool changeBoss_ = false;
+
+	//変更時間
+	int changeCount_ = 60;
+
+	int currentChangeCount_ = 0;
 
 	//全てのボスの死亡フラグ
 	bool allBossDead_ = false;
@@ -78,5 +93,13 @@ private://**デバッグ用**//
 
 	//次のボスフラグ
 	bool isNextBoss_ = false;
+
+	std::string bossNames_[(int)BossType::Count] = {
+		"GentlmanGuard",
+		"Donut",
+		"CapCake"
+	};
+
+	std::string nowBossName_ = "";
 
 };

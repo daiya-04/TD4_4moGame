@@ -22,8 +22,6 @@ void InstancingGameObject::Draw()
 {
 	//描画
 	model_->Draw(*camera_,datas_);
-	
-	
 
 	//データクリア
 	datas_.clear();

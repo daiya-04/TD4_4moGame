@@ -14,6 +14,7 @@
 #include "ColliderManager.h"
 #include "AudioManager.h"
 #include "GlobalVariables.h"
+#include "EffectManager.h"
 
 
 GameScene::GameScene() {
@@ -21,7 +22,6 @@ GameScene::GameScene() {
 }
 
 GameScene::~GameScene() {
-
 	bgm_->StopSound();
 }
 
@@ -130,9 +130,6 @@ void GameScene::Init() {
 	followCamera_ = std::make_unique<FollowCamera>(&camera_, player_->GetWorld().translation_);
 	
 	//ボス生成
-	//boss_ = std::make_unique<Boss2>(followCamera_.get());
-	//boss_->SetPlayerWorld(&player_->GetWorld());
-
 	bossSpawnManager_ = std::make_unique<BossSpawnManager>(followCamera_.get(), &player_->GetWorld());
 	player_->SetBossWorld(&bossSpawnManager_->GetBossWorld());
 
@@ -154,6 +151,14 @@ void GameScene::Init() {
 	for (auto& [tag, ui] : uis_) {
 		ui->SetScale(0.7f);
 	}
+
+	///
+
+	///エフェクト
+
+	EffectManager::GetInstance()->AddEffect("BiteEffect","Tooth");
+	EffectManager::GetInstance()->AddEffect("PlayerMoveEffect");
+	EffectManager::GetInstance()->AddEffect("CandyFinishEffect");
 
 	///
 
@@ -222,15 +227,19 @@ void GameScene::Update() {
 
 		//ボス更新
 		bossSpawnManager_->Update();
+		bossSpawnManager_->SetOnField(field_->GetMassLocationPosY(bossSpawnManager_->GetBossWorld().translation_) + bossSpawnManager_->GetBossWorld().scale_.y);
+
 		//ボスのワールド座標取得
 		player_->SetBossWorld(&bossSpawnManager_->GetBossWorld());
     
     playerAttackEffect_->Update();
 
 	}
-	
+		
 	playerAttackEffect_->Update();
 
+
+	EffectManager::GetInstance()->Update();
 
 	//地面更新
 	field_->Update();
@@ -243,6 +252,20 @@ void GameScene::Update() {
 		// Y範囲にあるか判定
 		if (block->world.translation_.y >= bullet->GetWorld().translation_.y && block->world.translation_.y <= bullet->GetWorld().translation_.y + bullet->GetWorld().scale_.y) {
 			
+			//WAVE発生タイプの場合
+			if (bullet->GetType() == BulletType::Wave) {
+
+				//中心の場所検索
+				Vector2 bPos = field_->GetBlockAt(0, 0);
+
+				//波の発生
+				field_->AddWave(bPos,30,1.0f,1,0.01f);
+				//弾の削除処理
+				bullet->OnCollision();
+				//この弾の処理を終了
+				continue;
+			}
+
 			//下げる値取得
 			float deltaY = field_->GetDeltaY();
 			
@@ -297,6 +320,8 @@ void GameScene::DrawModel() {
 }
 
 void GameScene::DrawParticle() {
+
+	EffectManager::GetInstance()->Draw(camera_);
 
 }
 

@@ -11,7 +11,6 @@ BossBulletManager::BossBulletManager()
 	tree_.name_ = "FallingBullet";
 	tree_.SetValue("spawnHeight", &bulletStartHeight_);
 	tree_.SetValue("fallSpeed", &fallSpeed_);
-	tree_.SetValue("radius", &radius_);
 	tree_.SetValue("colliderRadius", &colliderRadius_);
 
 	GvariTree tree;
@@ -38,7 +37,7 @@ void BossBulletManager::Update()
 			objData.worldTransform_.UpdateMatrix();
 			
 			//通常時のみ警告円群の更新
-			if(data->GetType() != BulletType::None) {
+			if(data->GetType() != BulletType::None&&data->GetType()!=BulletType::Wave) {
 				//データセット
 				SetData(objData);
 				//警告円の更新
@@ -81,7 +80,7 @@ void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos, Bullet
 		data.velocity = Vector3{ 0,-1.0f,0 }*fallSpeed_;
 
 	}
-	else if (type == BulletType::None) {
+	else if (type == BulletType::None||type==BulletType::Wave) {
 		position.y = -0.5;
 		data.velocity = Vector3{ 0,0,0 };
 	}

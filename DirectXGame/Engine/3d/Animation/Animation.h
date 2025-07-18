@@ -43,7 +43,7 @@ namespace DaiEngine {
 		void Play(Skeleton& skeleton);
 		//再生開始
 		void Start(bool isLoop = true) {
-			if (isPlaying_) { return; }
+			
 			isPlaying_ = true;
 			isLoop_ = isLoop;
 			TimeReset();

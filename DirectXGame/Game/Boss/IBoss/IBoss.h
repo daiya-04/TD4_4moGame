@@ -24,6 +24,9 @@ public://**パブリック変数**//
 	//状態
 	std::vector<std::unique_ptr<IBossBehavior>>behaviors_;
 
+	//死亡状態処理
+	std::unique_ptr<IBossBehavior>deadBehavior_;
+
 	//状態
 	int behavior_ = 0;
 
@@ -88,10 +91,27 @@ public://**パブリック関数**//
 	GvariTree& GetTree() { return tree_; }
 
 	/// <summary>
+	/// オフセット抜きポジション取得
+	/// </summary>
+	/// <returns></returns>
+	const Vector3& GetPosition() { return position_; }
+
+	/// <summary>
 	/// 逆向きフラグ
 	/// </summary>
 	/// <param name="isReverse"></param>
 	void SetReverse(bool isReverse) { isReverse_ = isReverse; }
+
+	/// <summary>
+	/// 弾と警告円削除
+	/// </summary>
+	void ClearAllBulletAndZone();
+
+	/// <summary>
+	/// ｙを設定
+	/// </summary>
+	/// <param name="y"></param>
+	void SetPositionY(float y) { position_.y = y; }
 
 private://**プライベート関数**//
 
@@ -132,6 +152,8 @@ private://**プライベート関数**//
 	/// </summary>
 	/// <returns></returns>
 	Vector3 SetDirection2Player();
+
+
 
 	/// <summary>
 	/// プレイヤー方向取得

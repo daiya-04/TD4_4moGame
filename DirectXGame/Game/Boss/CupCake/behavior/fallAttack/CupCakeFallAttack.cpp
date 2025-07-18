@@ -8,7 +8,7 @@ CupCakeFallAttack::CupCakeFallAttack(BossParameters* parameters)
 	tree_.SetValue("waitCount", &waitCount_);
 	tree_.SetValue("attackCount", &attackCount_);
 	tree_.SetValue("jumpHeight", &jumpHeight_);
-	tree_.SetValue("jumpNUm", &jumpNum_);
+	tree_.SetValue("jumpNum", &jumpNum_);
 	tree_.SetValue("stopCount", &stopCount_);
 }
 

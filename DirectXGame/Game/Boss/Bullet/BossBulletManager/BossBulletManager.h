@@ -23,6 +23,11 @@ public://**パブリック関数**//
 	void Draw();
 
 	/// <summary>
+	/// 全ての弾データの削除
+	/// </summary>
+	void ClearAllBullets() { bullets_.clear(); }
+
+	/// <summary>
 	/// 弾を生成
 	/// </summary>
 	void SpawnBullet(const DaiEngine::WorldTransform& pos, BulletType type,const DaiEngine::WorldTransform& boss);
@@ -57,14 +62,12 @@ private:
 	//落下速度
 	float fallSpeed_ = 1.0f;
 
-	//弾半径
-	float radius_ = 1.0f;
-
 	//コライダー半径
 	float colliderRadius_ = 1.0f;
 
 	//放物線処理到着時間
 	int arriveCount_ = 60;
+
 	//放物線の高さ
 	float parabolaHeight_ = 5.0f;
 
