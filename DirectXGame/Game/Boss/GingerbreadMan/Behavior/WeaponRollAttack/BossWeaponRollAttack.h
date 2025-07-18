@@ -74,7 +74,10 @@ private://**パラメータ変数**//
 	//警戒エリアのパラメータ
 	DangerZoneParameters param;
 
-
 	//円のオフセット
 	Vector3 offsetZone_ = Vector3(0.0f, 0.0f, 0.0f);
+
+	float preActionRate_ = 1.0f;
+	float actionRate_ = 1.0f;
+	float endActionRate_ = 1.0f;
 };

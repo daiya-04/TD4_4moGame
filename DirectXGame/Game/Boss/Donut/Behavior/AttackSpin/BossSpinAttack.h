@@ -1,6 +1,7 @@
 #pragma once
 #include"Boss/IBossAttack/IBossAttack.h"
 #include"Collider/SphereCollider.h"
+#include"SquareDangerZone/SquareDangerZone.h"
 
 #include<memory>
 
@@ -33,8 +34,7 @@ private:
 
 private:
 
-	//現在の数
-	int currentNum_ = 0;
+	bool isDrawZone_ = false;
 
 	//移動方向
 	Vector3 velo_;
@@ -44,6 +44,8 @@ private:
 
 private:
 
+	std::unique_ptr<SquareDangerZone>dangerZone_;
+
 	//コライダー
 	std::unique_ptr<DaiEngine::SphereCollider> collider_ = nullptr;
 	
@@ -52,8 +54,6 @@ private:
 
 	Vector4 color_ = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
 
-	//待機時間
-	float waitTime_ = 0.0f; 
 
 	//実行回数
 	int executeCount_ = 3;

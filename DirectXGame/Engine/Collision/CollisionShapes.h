@@ -63,4 +63,10 @@ namespace Shapes{
 		float radius;
 	};
 
+	//円柱
+	struct Cylinder {
+		Vector3 topCenter;    //円柱の上端の中心
+		Vector3 bottomCenter; //円柱の下端の中心
+		float radius;         //円柱の半径
+	};
 }
