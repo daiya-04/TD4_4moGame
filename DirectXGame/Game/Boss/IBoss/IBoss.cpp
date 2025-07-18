@@ -33,6 +33,7 @@ void IBoss::Init(const std::string& objectName, FollowCamera* camera, const DaiE
 
 	//マネージャ生成
 	dangerZoneManager_ = std::make_unique<DangerZoneManager>();
+	
 
 	if (objectName != "CapCakeStandby") {
 		bulletManager_ = std::make_unique<BossBulletManager>();
@@ -40,6 +41,8 @@ void IBoss::Init(const std::string& objectName, FollowCamera* camera, const DaiE
 	else {
 		bulletManager_ = std::make_unique<BossBulletManager>(false);
 	}
+	bulletManager_->SetCamera(followCamera_->GetCamera());
+
 	//点滅処理クラス生成
 	blinking_ = std::make_unique<Blinking>();
 	isDraw_ = &blinking_->GetIsDrawFlag();

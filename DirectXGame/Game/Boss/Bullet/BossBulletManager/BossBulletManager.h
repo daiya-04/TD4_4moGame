@@ -44,7 +44,14 @@ public://**パブリック関数**//
 	/// <returns>弾のデータ群</returns>
 	std::list<std::unique_ptr<BossBullet>>& GetBullets() { return bullets_; }
 
+	/// <summary>
+	/// カメラセット
+	/// </summary>
+	/// <param name="camera"></param>
+	void SetCamera(DaiEngine::Camera* camera) { camera_ = camera; };
 private:
+
+	DaiEngine::Camera* camera_ = nullptr;
 
 	GvariTree tree_;
 

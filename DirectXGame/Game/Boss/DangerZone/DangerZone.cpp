@@ -44,6 +44,9 @@ void DangerZone::Update()
 			//時間経過でフラグON
 			isDead_ = true;
 			isDraw_ = false; // 描画フラグをリセット
+			//プレイヤー高度にセット
+			parameters_.world.translation_.y=pPos_->y;
+			
 		}
 	}
 

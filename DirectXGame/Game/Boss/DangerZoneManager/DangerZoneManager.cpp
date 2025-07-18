@@ -162,6 +162,7 @@ void DangerZoneManager::SpawnDangerZone(const Vector3& Ppos,BulletType type)
 			SetParameters(param);
 			//新しく生成
 			std::unique_ptr<DangerZone>dangerZone = std::make_unique<DangerZone>(param);
+			dangerZone->SetPlayerPos(&Ppos);
 			//配列に追加
 			dangerZones_.emplace_back(std::move(dangerZone));
 		}
@@ -177,6 +178,8 @@ void DangerZoneManager::SpawnDangerZone(const Vector3& Ppos,BulletType type)
 		SetParameters(param);
 		//新しく生成
 		std::unique_ptr<DangerZone>dangerZone = std::make_unique<DangerZone>(param);
+		//
+		dangerZone->SetPlayerPos(&Ppos);
 		//即死設定
 		dangerZone->SetDead(true);
 		//配列に追加

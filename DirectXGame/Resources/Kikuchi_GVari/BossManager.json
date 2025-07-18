@@ -125,7 +125,7 @@
                 "warningSphereHeight": 3.0
             },
             "FallingBullet": {
-                "colliderRadius": 2.9000000953674316,
+                "colliderRadius": 4.0,
                 "fallSpeed": 1.0,
                 "parabolaBullet": {
                     "arriveCount": 60,
@@ -153,6 +153,11 @@
             ],
             "Speed": 0.0,
             "SpinAttack2Player": {
+                "SquareDangerZone": {
+                    "finalWarningCount": 30.0,
+                    "maxScale": 30.0,
+                    "warningCount": 60.0
+                },
                 "actionAnimationRate": 1.0,
                 "color": [
                     1.0,
@@ -165,8 +170,7 @@
                 "executeCount": 2,
                 "ptrAnimationRate": 0.0,
                 "radius": 1.0,
-                "speed": 0.5,
-                "waitCount": 180.0
+                "speed": 0.5
             },
             "StartPos": [
                 0.0,
@@ -255,15 +259,18 @@
                 23.0
             ],
             "weaponRollAttack": {
+                "actionRate": 1.0,
                 "activeCount": 60.0,
                 "afterCount": 60.0,
                 "attackRadius_": 5.0,
+                "endActionRate": 1.0,
                 "finalWarningCount": 45.0,
                 "offsetZone": [
                     0.0,
                     0.0,
                     0.0
                 ],
+                "preActionRate": 1.0,
                 "rotateNum": 6.0,
                 "warningCount": 180.0
             }

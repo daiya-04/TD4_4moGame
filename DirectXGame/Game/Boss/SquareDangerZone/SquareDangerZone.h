@@ -30,18 +30,20 @@ private:
 	//ツリー
 	GvariTree tree_;
 
+	//終了フラグ
 	bool isEnd_ = false;
-
+	//描画フラグ
 	bool isDraw_ = true;
-
+	//カウント
 	float count_ = 0;
-
+	//最大サイズ
 	float maxScale_ = 30.0f;
-
+	//警告時間
 	float warningCount_ = 60.0f;
-
+	//最終警告時間
 	float finalWarningCount_ = 30.0f;
-
+	//点滅回数
 	int currentBlink_ = 0;
+	//最大点滅回数
 	int blinkNum_ = 3;
 };

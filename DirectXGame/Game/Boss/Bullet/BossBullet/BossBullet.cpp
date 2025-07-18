@@ -1,8 +1,11 @@
 #include "BossBullet.h"
 #include"ColliderManager.h"
+#include"ShapesDraw.h"
 
-BossBullet::BossBullet(const BossBulletData& data)
+BossBullet::BossBullet(const BossBulletData& data, DaiEngine::Camera* camera)
 {
+	camera_ = camera;
+
 	type_ = data.type;
 	//弾判定初期化
 	world_ = data.world;
@@ -20,7 +23,7 @@ BossBullet::BossBullet(const BossBulletData& data)
 	collider_ = std::make_unique<DaiEngine::SphereCollider>();
 	collider_->Init("敵の弾",world_,data.colliderRadius);
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
-	collider_->SetStayCallback([this](DaiEngine::Collider*) { });
+	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {if (collider->GetTag() == "player")collider_->ColliderOff(); isDead_ = true; });
 	//コライダーを有効に
 	collider_->ColliderOn();
 
@@ -84,6 +87,13 @@ void BossBullet::Update()
 	world_.UpdateMatrix();
 	//コライダー更新
 	collider_->Update();
+}
+
+void BossBullet::DrawCollider()
+{
+#ifdef _DEBUG
+	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()), *camera_, {1,1,1,1});
+#endif // _DEBUG
 }
 
 void BossBullet::OnCollision()

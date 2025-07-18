@@ -2,7 +2,7 @@
 #include"WorldTransform.h"
 #include"SphereCollider.h"
 #include"Boss/Bullet/types.h"
-
+#include"Camera.h"
 #include<memory>
 
 
@@ -47,7 +47,7 @@ public://**パブリック関数**//
 	/// コンストラクタと初期化
 	/// </summary>
 	/// <param name="data"></param>
-	BossBullet(const BossBulletData& data);
+	BossBullet(const BossBulletData& data,DaiEngine::Camera*camera);
 	~BossBullet();
 
 	/// <summary>
@@ -55,6 +55,10 @@ public://**パブリック関数**//
 	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// コライダー描画
+	/// </summary>
+	void DrawCollider();
 
 	/// <summary>
 	/// 当たった時の処理
@@ -103,6 +107,8 @@ public://**パブリック関数**//
 	BulletType GetType() const { return type_; }
 
 private://**パラメータ変数**//
+
+	DaiEngine::Camera* camera_=nullptr;
 
 	//ワールドデータ
 	DaiEngine::WorldTransform world_;
