@@ -60,6 +60,7 @@ void Boss2SpinAttack::InitBehavior0()
 
 	dangerZone_->Init();
 	isDrawZone_ = true;
+	param_->cameraBehaviorRequest_ = FollowCamera::State::None;
 }
 
 void Boss2SpinAttack::InitBehavior1()
@@ -84,6 +85,7 @@ void Boss2SpinAttack::InitBehavior2()
 	param_->isLoopAnime_ = false;
 	//再生速度変更
 	param_->animationLeverage_ = downActionRate_;
+	param_->cameraBehaviorRequest_ = FollowCamera::State::Follow;
 }
 
 void Boss2SpinAttack::UpdateBehavior0()
