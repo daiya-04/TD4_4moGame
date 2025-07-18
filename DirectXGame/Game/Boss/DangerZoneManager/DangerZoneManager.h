@@ -28,9 +28,9 @@ public:
 	void SpawnDangerZone(const Vector3&pos,BulletType type);
 
 	/// <summary>
-/// ツリーの取得
-/// </summary>
-/// <returns></returns>
+	/// ツリーの取得
+	/// </summary>
+	/// <returns></returns>
 	GvariTree& GetTree() { return tree_; }
 
 	/// <summary>

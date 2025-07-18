@@ -51,9 +51,6 @@ void CupCakeWaveDive::UpdateBehavior1()
 
 	if (param_->currentSec >= waitCount_) {
 		countRequest_ = 2;
-
-		param_->bulletTypeRequest_ = BulletType::Wave;
-		param_->SpawnDangerZone_ = true;
 	}
 }
 
@@ -64,6 +61,9 @@ void CupCakeWaveDive::UpdateBehavior2()
 	//地面以下で終了
 	if (param_->world->translation_.y <= param_->fieldY_) {
 		countRequest_ = 3;
+
+		param_->bulletTypeRequest_ = BulletType::Wave;
+		param_->SpawnDangerZone_ = true;
 	}
 }
 
