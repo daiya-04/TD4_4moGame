@@ -43,7 +43,6 @@
                     "arriveCount": 60,
                     "parabolaHeight": 5.0
                 },
-                "radius": 2.0,
                 "spawnHeight": 10.0
             },
             "Idle": {
@@ -52,7 +51,7 @@
             "MaxHP": 100,
             "OffsetPos": [
                 0.0,
-                2.200000047683716,
+                0.0,
                 0.0
             ],
             "Scale": [
@@ -67,7 +66,7 @@
             "Speed": 0.0,
             "StartPos": [
                 0.0,
-                2.200000047683716,
+                0.0,
                 0.0
             ],
             "fieldSize": [
@@ -77,7 +76,7 @@
             "jumpAttack": {
                 "attackCount": 60.0,
                 "jumpHeight": 20.0,
-                "jumpNUm": 3,
+                "jumpNum": 3,
                 "stopCount": 60.0,
                 "waitCount": 60.0
             },
@@ -132,7 +131,6 @@
                     "arriveCount": 60,
                     "parabolaHeight": 5.0
                 },
-                "radius": 1.0,
                 "spawnHeight": 10.0
             },
             "FollowBullet": {
@@ -223,7 +221,6 @@
                     "arriveCount": 60,
                     "parabolaHeight": 5.0
                 },
-                "radius": 2.4000000953674316,
                 "spawnHeight": 60.0
             },
             "Idle": {
@@ -239,7 +236,7 @@
             "MaxHP": 61,
             "OffsetPos": [
                 0.0,
-                1.559999942779541,
+                0.0,
                 0.30000001192092896
             ],
             "Scale": [
