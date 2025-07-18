@@ -15,7 +15,7 @@ BossSpawnManager::BossSpawnManager(FollowCamera* camera, const DaiEngine::WorldT
 	//サイズ指定
 	bosses_.resize(static_cast<size_t>(BossType::Count));
 	//ボスの生成
-	bosses_[int(BossType::GingerbreadMan)] = std::make_unique<GingerbreadMan>("GentlmanGuard", camera, playerWorld);
+	bosses_[int(BossType::GingerbreadMan)] = std::make_unique<GingerbreadMan>("GentlmanStandby", camera, playerWorld);
 	bosses_[int(BossType::Donut)] =			 std::make_unique<Donut>("Donut", camera, playerWorld);
 	bosses_[int(BossType::CupCake)] =		 std::make_unique<CupCake>("CapCakeStandby", camera, playerWorld);
 
