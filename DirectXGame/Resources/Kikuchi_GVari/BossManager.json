@@ -2,7 +2,7 @@
     "BossManager": {
         "Capcake": {
             "Blinking": {
-                "hitCount": 1.0,
+                "hitCount": 5.0,
                 "maxBlinkingNum": 3
             },
             "ColliderColor": [
@@ -60,14 +60,14 @@
                 2.0
             ],
             "ShotBullet": {
-                "attackCount": 60.0,
-                "waitCount": 60.0
+                "attackCount": 120.0,
+                "waitCount": 90.0
             },
             "Speed": 0.0,
             "StartPos": [
                 0.0,
                 0.0,
-                0.0
+                10.0
             ],
             "fieldSize": [
                 23.0,
@@ -78,19 +78,19 @@
                 "jumpHeight": 20.0,
                 "jumpNum": 3,
                 "stopCount": 60.0,
-                "waitCount": 60.0
+                "waitCount": 90.0
             },
             "waveDive": {
                 "fallSpd": 5.0,
                 "jumpCount": 60.0,
                 "jumpHeight": 50.0,
-                "stopCount": 60.0,
+                "stopCount": 120.0,
                 "waitCount": 60.0
             }
         },
         "Donut": {
             "Blinking": {
-                "hitCount": 1.0,
+                "hitCount": 5.0,
                 "maxBlinkingNum": 3
             },
             "ColliderColor": [
@@ -143,7 +143,7 @@
             "MaxHP": 60,
             "OffsetPos": [
                 0.0,
-                0.5600000023841858,
+                0.0,
                 0.0
             ],
             "Scale": [
@@ -160,9 +160,9 @@
                     0.0,
                     1.0
                 ],
-                "downActionRate": 120.0,
-                "downCount": 240.0,
-                "executeCount": 3,
+                "downActionRate": 60.0,
+                "downCount": 200.0,
+                "executeCount": 2,
                 "ptrAnimationRate": 0.0,
                 "radius": 1.0,
                 "speed": 0.5,
@@ -180,8 +180,8 @@
         },
         "GingerbreadMan": {
             "Blinking": {
-                "hitCount": 1.0,
-                "maxBlinkingNum": 3
+                "hitCount": 5.0,
+                "maxBlinkingNum": 2
             },
             "ColliderColor": [
                 1.0,
