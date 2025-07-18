@@ -3,6 +3,9 @@
 Boss2AttackPFollowBullet::Boss2AttackPFollowBullet(BossParameters* param)
 {
 	param_ = param;
+
+	
+
 	tree_.name_ = "FollowBullet";
 	tree_.SetValue("waitCount", &waitTime_);
 	tree_.SetValue("countCount", &executeCount_);

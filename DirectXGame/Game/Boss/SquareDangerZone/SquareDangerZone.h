@@ -6,7 +6,7 @@ class SquareDangerZone :public GameObject {
 
 public:
 
-	SquareDangerZone();
+	SquareDangerZone(const DaiEngine::WorldTransform* world);
 	~SquareDangerZone()=default;
 
 	void Init();
@@ -42,4 +42,6 @@ private:
 
 	float finalWarningCount_ = 30.0f;
 
+	int currentBlink_ = 0;
+	int blinkNum_ = 3;
 };
