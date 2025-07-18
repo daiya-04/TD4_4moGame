@@ -79,6 +79,12 @@ namespace DaiEngine {
 		else if (typeA == Collider::Type::OBB && typeB == Collider::Type::Sphere) {
 			return IsCollision(std::get<Shapes::OBB>(shapeA), std::get<Shapes::Sphere>(shapeB));
 		}
+		else if (typeA == Collider::Type::Sphere && typeB == Collider::Type::Cylinder) {
+			return IsCollision(std::get<Shapes::OBB>(shapeA), std::get<Shapes::Sphere>(shapeB));
+		}
+		else if (typeA == Collider::Type::Cylinder && typeB == Collider::Type::Cylinder) {
+			return IsCollision(std::get<Shapes::OBB>(shapeA), std::get<Shapes::Sphere>(shapeB));
+		}
 
 
 		return false;

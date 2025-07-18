@@ -15,6 +15,7 @@ namespace DaiEngine {
 		enum class Type {
 			Sphere,
 			OBB,
+			Cylinder,
 		};
 
 		enum class CollisionPhase {
@@ -27,7 +28,7 @@ namespace DaiEngine {
 
 	protected:
 
-		std::variant<Shapes::Sphere, Shapes::OBB> shape_;
+		std::variant<Shapes::Sphere, Shapes::OBB , Shapes::Cylinder> shape_;
 		Type shapeType_;
 		std::array<std::function<void(Collider*)>, static_cast<size_t>(CollisionPhase::PhaseNum)> callbackFuncs_;
 
@@ -61,7 +62,7 @@ namespace DaiEngine {
 		const std::string GetTag() const { return tag_; }
 
 		const Type GetType() const { return shapeType_; }
-		const std::variant<Shapes::Sphere, Shapes::OBB> GetShape() const { return shape_; }
+		const std::variant<Shapes::Sphere, Shapes::OBB , Shapes::Cylinder> GetShape() const { return shape_; }
 
 		void SetPosition(const Vector3& position) { worldTransform_.translation_ = position; }
 		Vector3 GetWorldPos() const;
