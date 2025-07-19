@@ -4,6 +4,7 @@ SingleDangerZone::SingleDangerZone(const DangerZoneParameters& param)
 {
 	//警告円生成
 	dangerZone_ = std::make_unique<DangerZone>(param);
+	dangerZone_->SetPlayerPos(&pPos_);
 	//オブジェクト生成
 	gameObject_ = std::make_unique<GameObject>();
 	gameObject_->Init("DangerZone");

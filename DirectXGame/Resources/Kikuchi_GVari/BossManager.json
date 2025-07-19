@@ -125,7 +125,7 @@
                 "warningSphereHeight": 3.0
             },
             "FallingBullet": {
-                "colliderRadius": 2.9000000953674316,
+                "colliderRadius": 4.0,
                 "fallSpeed": 1.0,
                 "parabolaBullet": {
                     "arriveCount": 60,

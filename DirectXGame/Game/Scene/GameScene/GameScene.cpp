@@ -232,7 +232,7 @@ void GameScene::Update() {
 		//ボスのワールド座標取得
 		player_->SetBossWorld(&bossSpawnManager_->GetBossWorld());
     
-    playerAttackEffect_->Update();
+		 playerAttackEffect_->Update();
 
 	}
 		
@@ -247,8 +247,10 @@ void GameScene::Update() {
 	//当たり判定処理
 	DaiEngine::ColliderManager::GetInstance()->CheckAllCollision();
 
+#pragma region ブロックと弾の判定
 	//弾の更新
 	for (std::unique_ptr<BossBullet>& bullet : bossSpawnManager_->GetBullets()) {
+		if (bullet->GetDead())continue;
 		Vector2 targetBlock = field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
 		Block* block = field_->GetBlock(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
 
@@ -266,35 +268,29 @@ void GameScene::Update() {
 			continue;
 		}
 
-		// Y範囲にあるか判定
-		if (block->world.translation_.y >= bullet->GetWorld().translation_.y && block->world.translation_.y <= bullet->GetWorld().translation_.y + bullet->GetWorld().scale_.y) {
+		//もし上げる弾なら向きを変更して処理
+		if (bullet->GetType() == BulletType::None) {
 			//下げる値取得
 			float deltaY = field_->GetDeltaY();
-			
-			//もし上げる弾なら向きを変更
-			if (bullet->GetType() != BulletType::Fall) {
-				//落下弾以外は上方向に
-				deltaY *= -1.0f; 
-				//えふぇこ発生
-			}
+			//落下弾以外は上方向に
+			deltaY *= -1.0f;
+			//えふぇこ発生
 
 			//フィールドに影響
 			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, deltaY);
 			bullet->OnCollision();
+
+			continue;
 		}
 
-		//盛り上げる弾は即爆破
-		if (bullet->GetType() == BulletType::None) {
+		// Y範囲にあるか判定
+		if (block->world.translation_.y >= bullet->GetWorld().translation_.y && block->world.translation_.y <= bullet->GetWorld().translation_.y + bullet->GetWorld().scale_.y) {
+			//フィールドに影響
+			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, field_->GetDeltaY());
 			bullet->OnCollision();
 		}
 	}
-
-	DaiEngine::InstancingObjData data;
-	data.worldTransform_.Init();
-	data.worldTransform_.translation_.x = 10;
-
-
-
+#pragma endregion
 
 	//死亡時ゲームおーばーへ
 	if (player_->GetIsDead()) {

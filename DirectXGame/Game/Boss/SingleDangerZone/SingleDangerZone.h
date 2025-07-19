@@ -55,6 +55,8 @@ private:
 	//インスタンス化されたゲームオブジェクト
 	std::unique_ptr<GameObject> gameObject_;
 
+	Vector3 pPos_ = { 0,0,0 };
+
 	//描画フラグ
 	bool isDraw_ = true;
 };

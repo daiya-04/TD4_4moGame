@@ -68,6 +68,14 @@ void BossBulletManager::Draw()
 
 	//警告円の描画
 	dangerZone_->Draw();
+
+	//弾コライダー描画
+#ifdef _DEBUG
+	for (auto& bullet : bullets_) {
+		bullet->DrawCollider();
+	}
+#endif // _DEBUG
+
 }
 
 void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos, BulletType type,const DaiEngine::WorldTransform& boss)
@@ -86,7 +94,7 @@ void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos, Bullet
 
 	}
 	else if (type == BulletType::None||type==BulletType::Wave) {
-		position.y = -0.5;
+		//position.y = 0.0f;
 		data.velocity = Vector3{ 0,0,0 };
 	}
 
@@ -105,7 +113,7 @@ void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos, Bullet
 	data.parabolaHeight = parabolaHeight_;
 
 	//生成
-	std::unique_ptr<BossBullet>bullet = std::make_unique<BossBullet>(data);
+	std::unique_ptr<BossBullet>bullet = std::make_unique<BossBullet>(data,camera_);
 	//配列に追加
 	bullets_.emplace_back(std::move(bullet));
 }
