@@ -157,8 +157,13 @@ void GameScene::Init() {
 	///エフェクト
 
 	EffectManager::GetInstance()->AddEffect("BiteEffect","Tooth");
+	EffectManager::GetInstance()->AddEffect("BiteHitEffect");
 	EffectManager::GetInstance()->AddEffect("PlayerMoveEffect");
 	EffectManager::GetInstance()->AddEffect("CandyFinishEffect");
+	EffectManager::GetInstance()->AddEffect("DonutsRollEffect");
+	EffectManager::GetInstance()->AddEffect("DonutsStageApperEffect");
+	EffectManager::GetInstance()->AddEffect("StickAttackEffect");
+	EffectManager::GetInstance()->AddEffect("CapCakeStampEffect");
 
 	///
 
@@ -282,6 +287,17 @@ void GameScene::Update() {
 
 			continue;
 		}
+			
+			//もし上げる弾なら向きを変更
+			if (bullet->GetType() != BulletType::Fall) {
+				//落下弾以外は上方向に
+				deltaY *= -1.0f; 
+
+				if (bullet->GetType() == BulletType::None) {
+					EffectManager::GetInstance()->Trigger("DonutsStageApperEffect", bullet->GetWarningWorld().GetWorldPos());
+				}
+
+			}
 
 		// Y範囲にあるか判定
 		if (block->world.translation_.y >= bullet->GetWorld().translation_.y && block->world.translation_.y <= bullet->GetWorld().translation_.y + bullet->GetWorld().scale_.y) {

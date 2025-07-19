@@ -1,5 +1,6 @@
 #include "BossBullet.h"
 #include"ColliderManager.h"
+#include "EffectManager.h"
 #include"ShapesDraw.h"
 
 BossBullet::BossBullet(const BossBulletData& data, DaiEngine::Camera* camera)
@@ -102,6 +103,10 @@ void BossBullet::OnCollision()
 		return;
 	}
 
+	if (type_ == BulletType::Fall || type_ == BulletType::Parabola) {
+		EffectManager::GetInstance()->Trigger("CandyFinishEffect", collider_->GetWorldPos());
+	}
+	
 	//死亡フラグON
 	isDead_ = true;
 	//コライダーを無効にする

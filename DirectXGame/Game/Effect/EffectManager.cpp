@@ -15,16 +15,20 @@ void EffectManager::Init() {
 
 void EffectManager::Update() {
 
-	for (auto& [key, effect] : effects_) {
-		effect->Update();
+	for (auto& [key, effects] : effectPool_) {
+		for (auto& effect : effects) {
+			effect->Update();
+		}
 	}
 
 }
 
 void EffectManager::Draw(const DaiEngine::Camera& camera) {
 
-	for (auto& [key, effect] : effects_) {
-		effect->Draw(camera);
+	for (auto& [key, effects] : effectPool_) {
+		for (auto& effect : effects) {
+			effect->Draw(camera);
+		}
 	}
 
 }
@@ -32,28 +36,82 @@ void EffectManager::Draw(const DaiEngine::Camera& camera) {
 void EffectManager::AddEffect(const std::string& fileName, const std::string& modelName) {
 
 	//なければ追加
-	if (effects_.find(fileName) == effects_.end()) {
-		effects_[fileName] = std::make_unique<Effect>();
-		effects_[fileName]->Init(fileName, modelName);
+	if (effectPool_.find(fileName) == effectPool_.end()) {
+		std::vector<std::unique_ptr<Effect>> pool;
+		for (size_t i = 0; i < 20; ++i) {
+			auto effect = std::make_unique<Effect>();
+			effect->Init(fileName, modelName);
+			pool.push_back(std::move(effect));
+		}
+		effectPool_[fileName] = std::move(pool);
 	}
 
 }
 
-void EffectManager::Start(const std::string& effectName, const Vector3& pos) {
+void EffectManager::Start(const std::string& effectName, const Vector3* pos) {
 
-	auto it = effects_.find(effectName);
-	if (it != effects_.end()) {
-		it->second->Start(pos);
+	auto it = effectPool_.find(effectName);
+	if (it != effectPool_.end()) {
+		for (auto& effect : it->second) {
+			if (!effect->IsEffect()) {
+				effect->Start(pos);
+				return;
+			}
+		}
 	}
 
 }
 
-void EffectManager::Start(const std::string& effectName, const Vector3& pos, float angle) {
+//void EffectManager::Start(const std::string& effectName, const Vector3& pos, float angle) {
+//
+//	auto it = effectPool_.find(effectName);
+//	if (it != effectPool_.end()) {
+//		for (auto& effect : it->second) {
+//			if (!effect->IsEffect()) {
+//				effect->Start(pos, angle);
+//				return;
+//			}
+//		}
+//	}
+//
+//}
 
-	auto it = effects_.find(effectName);
-	if (it != effects_.end()) {
-		it->second->Start(pos, angle);
+void EffectManager::End(const std::string& effectName) {
+	auto it = effectPool_.find(effectName);
+	if (it != effectPool_.end()) {
+		for (auto& effect : it->second) {
+			if (effect->IsEffect()) {
+				effect->End();
+				return;
+			}
+		}
+	}
+}
+
+void EffectManager::Trigger(const std::string& effectName, const Vector3& pos) {
+
+	auto it = effectPool_.find(effectName);
+	if (it != effectPool_.end()) {
+		for (auto& effect : it->second) {
+			if (!effect->IsEffect()) {
+				effect->Trigger(pos);
+				return;
+			}
+		}
 	}
 
 }
 
+void EffectManager::Trigger(const std::string& effectName, const Vector3& pos, float angle) {
+
+	auto it = effectPool_.find(effectName);
+	if (it != effectPool_.end()) {
+		for (auto& effect : it->second) {
+			if (!effect->IsEffect()) {
+				effect->Trigger(pos, angle);
+				return;
+			}
+		}
+	}
+
+}

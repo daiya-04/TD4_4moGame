@@ -3,7 +3,7 @@
 #include"GlobalVariable/Group/GlobalVariableGroup.h"
 #include"ColliderManager.h"
 #include"ShapesDraw.h"
-
+#include "EffectManager.h"
 
 #pragma region 状態クラス
 #include"behavior/Entry/PlayerEntry.h"
@@ -319,7 +319,15 @@ void Player::OnCollisionATKCollider(DaiEngine::Collider* collider)
 	//攻撃コライダーをOFF
 	if (collider->GetTag() == "boss") {
 		attackCollider_->ColliderOff();
+
+		Matrix4x4 rotateMat_ = MakeRotateAxisAngle(Vector3(0.0f, 1.0f, 0.0f), GetWorld().rotation_.y);
+		Vector3 offset = { 0.0f,0.0f,2.0f };
+		offset = TransformNormal(offset, rotateMat_);
+
+		EffectManager::GetInstance()->Trigger("BiteHitEffect", GetWorld().GetWorldPos() + offset);
 	}
+	
+	
 
 }
 

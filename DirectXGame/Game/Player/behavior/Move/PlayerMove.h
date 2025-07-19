@@ -59,4 +59,6 @@ private://**プライベート変数**//
 
 	float nowSpd_;
 
+	Vector3 emitPos_{};
+
 };

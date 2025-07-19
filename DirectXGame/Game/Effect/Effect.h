@@ -16,14 +16,22 @@ public:
 
 	void Draw(const DaiEngine::Camera& camera);
 
-	void Start(const Vector3& pos);
-	void Start(const Vector3& pos, const float angle);
+	void Start(const Vector3* pos);
+	//void Start(const Vector3* pos, const float angle);
+
+	void End();
+
+	void Trigger(const Vector3& pos);
+	void Trigger(const Vector3& pos, const float angle);
 	
+	bool IsEffect() const { return isEffect_; }
 
 private:
 
 	std::unique_ptr<DaiEngine::SkinningObject> obj_;
 	std::map<std::string, std::unique_ptr<DaiEngine::GPUParticle>> effect_;
+
+	const Vector3* parentPos_ = nullptr;
 
 	bool isEffect_ = false;
 	Matrix4x4 rotateMat_ = MakeIdentity44();
@@ -32,6 +40,7 @@ private:
 	const float kDeltaTime_ = 1.0f / 60.0f;
 	const float kEffectTime_ = 2.0f;
 
+	bool isTrigger_ = false;
 
 };
 
