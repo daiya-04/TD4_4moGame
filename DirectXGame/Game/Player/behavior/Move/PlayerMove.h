@@ -21,6 +21,23 @@ public://**パブリック関数**//
 	/// </summary>
 	void Update()override;
 
+private:
+
+	/// <summary>
+	/// ジャンプ更新
+	/// </summary>
+	void JumpUpdate(Vector3& move);
+
+	/// <summary>
+	/// 状態変化処理
+	/// </summary>
+	void BehaviorChange();
+
+	/// <summary>
+	/// 移動量による処理
+	/// </summary>
+	void MoveVeloUpdate(const Vector3& move);
+
 private://**プライベート変数**//
 
 	//移動速度
@@ -30,5 +47,16 @@ private://**プライベート変数**//
 
 	//移動フラグ
 	bool isMove_ = false;
+
+	//ジャンプフラグ
+	bool isJump_ = false;
+
+	//初速度
+	float stSpd_=10.0f;
+
+	//減速量
+	float gravity_ = 1.0f;
+
+	float nowSpd_;
 
 };

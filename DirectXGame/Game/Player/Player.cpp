@@ -149,7 +149,7 @@ void Player::Update()
 	behaviors_[(int)behaviorName_]->Update();
 
 	//落下
-	//parameters_.velocity.y -= gravity_;
+	parameters_.velocity.y -= gravity_;
 
 	//座標更新
 	UpdatePositionWithCollision();
@@ -242,11 +242,16 @@ void Player::DrawUI() {
 
 void Player::UpdateOnField(float y)
 {
+	parameters_.blockY = y;
 	//飛行中なら高さ修正しない
 	if (parameters_.isFlying)return;
 
 	//高さ修正
-	world_->translation_.y = y;
+	if (world_->translation_.y < y) {
+		world_->translation_.y = y;
+		position_.y = world_->translation_.y - offsetPos_.y;
+		//position_.y = y;
+	}
 	//行列更新
 	UpdateMatrix();
 }
@@ -317,7 +322,6 @@ void Player::OnCollisionATKCollider(DaiEngine::Collider* collider)
 	}
 
 }
-
 
 float GetYRotate(const Vector2& v) {
 	Vector2 offset = { 0,1 };

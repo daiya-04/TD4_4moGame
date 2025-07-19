@@ -64,6 +64,7 @@ void IBoss::Init(const std::string& objectName, FollowCamera* camera, const DaiE
 	tree_.SetMonitorValue("HP", &HP_);
 	tree_.SetMonitorValue("currentCount", &parameters_.currentSec);
 	tree_.SetMonitorCombo("setBehavior", &debugBehavior_, behaviorNames_);
+	tree_.SetMonitorValue("position", &world_->translation_);
 
 	tree_.SetValue("MaxHP", &maxHP_);
 	tree_.SetValue("Speed", &speed_);

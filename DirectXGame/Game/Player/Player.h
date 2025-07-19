@@ -34,6 +34,9 @@ struct PlayerParameters {
 	//飛行フラグ
 	bool isFlying = false;
 
+	//足元のブロックの高さ
+	float blockY = 0;
+
 };
 
 
