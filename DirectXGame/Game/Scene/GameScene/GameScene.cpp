@@ -280,6 +280,7 @@ void GameScene::Update() {
 			//落下弾以外は上方向に
 			deltaY *= -1.0f;
 			//えふぇこ発生
+			EffectManager::GetInstance()->Trigger("DonutsStageApperEffect", bullet->GetWarningWorld().GetWorldPos());
 
 			//フィールドに影響
 			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, deltaY);
@@ -287,22 +288,17 @@ void GameScene::Update() {
 
 			continue;
 		}
-			
-			//もし上げる弾なら向きを変更
-			if (bullet->GetType() != BulletType::Fall) {
-				//落下弾以外は上方向に
-				deltaY *= -1.0f; 
-
-				if (bullet->GetType() == BulletType::None) {
-					EffectManager::GetInstance()->Trigger("DonutsStageApperEffect", bullet->GetWarningWorld().GetWorldPos());
-				}
-
-			}
 
 		// Y範囲にあるか判定
 		if (block->world.translation_.y >= bullet->GetWorld().translation_.y && block->world.translation_.y <= bullet->GetWorld().translation_.y + bullet->GetWorld().scale_.y) {
+			//下げる値取得
+			float deltaY = field_->GetDeltaY();
+			if (bullet->GetType() == BulletType::Parabola) {
+				deltaY *= -1.0f;
+			}
+			
 			//フィールドに影響
-			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, field_->GetDeltaY());
+			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, deltaY);
 			bullet->OnCollision();
 		}
 	}

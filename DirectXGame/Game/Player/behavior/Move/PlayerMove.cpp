@@ -89,7 +89,7 @@ void PlayerMove::MoveVeloUpdate(const Vector3 &move)
 {
 	if (isMove_) {
 		Vector3 emitPos = player_->GetWorld().GetWorldPos() - Vector3(0.0f, 1.0f, 0.0f);
-		EffectManager::GetInstance()->Start("PlayerMoveEffect", emitPos);
+		EffectManager::GetInstance()->Start("PlayerMoveEffect", &emitPos);
 	}
 	emitPos_ = player_->GetWorld().GetWorldPos() - Vector3(0.0f, 1.0f, 0.0f);
 
