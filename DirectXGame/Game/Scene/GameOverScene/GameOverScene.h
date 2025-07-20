@@ -75,9 +75,11 @@ private:
 	//スポットライト
 	DaiEngine::SpotLight spotLight_;
 
-	//クリア用BGM
+	//ゲームオーバー用BGM
 	DaiEngine::Audio* bgm_ = nullptr;
 
+	DaiEngine::Audio* choiceSE_ = nullptr;
+	DaiEngine::Audio* doneSE_ = nullptr;
 
 	//エームオーバー文字
 	std::unique_ptr<DaiEngine::Sprite> gameOverText_;

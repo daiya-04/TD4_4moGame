@@ -2,6 +2,7 @@
 #include"ColliderManager.h"
 #include"ShapesDraw.h"
 #include "EffectManager.h"
+#include "AudioManager.h"
 
 Boss2SpinAttack::Boss2SpinAttack(BossParameters* param)
 {
@@ -28,6 +29,8 @@ Boss2SpinAttack::Boss2SpinAttack(BossParameters* param)
 	tree_.SetValue("radius", &radius_);
 	tree_.SetValue("color", &color_);
 	tree_.SetTreeData(dangerZone_->GetTree());
+
+	dashSE_ = DaiEngine::AudioManager::Load("SE/DonutDash.mp3");
 }
 
 Boss2SpinAttack::~Boss2SpinAttack()
@@ -80,6 +83,8 @@ void Boss2SpinAttack::InitBehavior1()
 	emitPos_ = collider_->GetWorldPos() - Vector3(0.0f, 1.0f, 0.0f);
 	EffectManager::GetInstance()->Start("DonutsRollEffect", &emitPos_);
 	isDrawZone_ = false;
+
+	dashSE_->Play();
 }
 
 void Boss2SpinAttack::InitBehavior2()

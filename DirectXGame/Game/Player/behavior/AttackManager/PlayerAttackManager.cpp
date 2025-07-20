@@ -1,5 +1,6 @@
 #include "PlayerAttackManager.h"
 #include"Player/Player.h"
+#include "AudioManager.h"
 
 #pragma region 状態
 #include"Player/behavior/Attacks/Combo1/PlayerAttackCombo1.h"
@@ -22,6 +23,8 @@ PlayerAttackManager::PlayerAttackManager()
 	for (auto& behavior : attacks_) {
 		tree_.SetTreeData(behavior->tree_);
 	}
+
+	se_ = DaiEngine::AudioManager::Load("SE/Attack.mp3");
 }
 
 void PlayerAttackManager::Init()
@@ -36,6 +39,8 @@ void PlayerAttackManager::Update()
 		behavior_ = behaviorRequest_.value();
 		behaviorRequest_ = std::nullopt;
 	 	attacks_[behavior_]->Init();
+
+		se_->Play();
 
 		//演出開始
 		Matrix4x4 rotateMat_ = MakeRotateAxisAngle(Vector3(0.0f, 1.0f, 0.0f), player_->GetWorld().rotation_.y);

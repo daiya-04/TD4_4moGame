@@ -1,6 +1,7 @@
 #pragma once
 #include"Player/behavior/IPlayerBehavior.h"
 #include"Player/behavior/Attacks/IPlayerAttack.h"
+#include "Audio.h"
 #include<memory>
 
 class PlayerAttackManager : public IPlayerBehavior {
@@ -38,4 +39,5 @@ private:
 	//攻撃データ
 	std::vector<std::unique_ptr<IPlayerAttack>>attacks_;
 
+	DaiEngine::Audio* se_ = nullptr;
 };
