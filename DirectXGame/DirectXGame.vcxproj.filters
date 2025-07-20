@@ -492,6 +492,11 @@
     <ClCompile Include="Game\Boss\CupCake\behavior\fallAttack\CupCakeFallAttack.cpp" />
     <ClCompile Include="Game\Boss\SquareDangerZone\SquareDangerZone.cpp" />
     <ClCompile Include="Engine\Collision\Collider\CylinderCollider.cpp" />
+    <ClCompile Include="Game\Boss\Bullet\IBossBullet\IBossBullet.cpp" />
+    <ClCompile Include="Game\Boss\Bullet\bullets\Fall\BossFallBullet.cpp" />
+    <ClCompile Include="Game\Boss\Bullet\bullets\Parabola\BossParabolaBullet.cpp" />
+    <ClCompile Include="Game\Boss\Bullet\bullets\Wave\BossWaveBullet.cpp" />
+    <ClCompile Include="Game\Boss\Bullet\bullets\None\BossNoneBullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -838,5 +843,10 @@
     <ClInclude Include="Game\Boss\CupCake\behavior\fallAttack\CupCakeFallAttack.h" />
     <ClInclude Include="Game\Boss\SquareDangerZone\SquareDangerZone.h" />
     <ClInclude Include="Engine\Collision\Collider\CylinderCollider.h" />
+    <ClInclude Include="Game\Boss\Bullet\IBossBullet\IBossBullet.h" />
+    <ClInclude Include="Game\Boss\Bullet\bullets\Fall\BossFallBullet.h" />
+    <ClInclude Include="Game\Boss\Bullet\bullets\None\BossNoneBullet.h" />
+    <ClInclude Include="Game\Boss\Bullet\bullets\Parabola\BossParabolaBullet.h" />
+    <ClInclude Include="Game\Boss\Bullet\bullets\Wave\BossWaveBullet.h" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #pragma once
 #include"InstancingGameObject/InstancingGameObject.h"
-#include"Boss/Bullet/BossBullet/BossBullet.h"
+#include"Boss/Bullet/IBossBullet/IBossBullet.h"
+
 #include"GlobalVariable/Tree/GlobalVariableTree.h"
 
 class BossBulletManager : public InstancingGameObject {
@@ -42,7 +43,7 @@ public://**パブリック関数**//
 	/// 弾丸のリストを取得
 	/// </summary>
 	/// <returns>弾のデータ群</returns>
-	std::list<std::unique_ptr<BossBullet>>& GetBullets() { return bullets_; }
+	std::list<std::unique_ptr<IBossBullet>>& GetBullets() { return bullets_; }
 
 	/// <summary>
 	/// カメラセット
@@ -56,7 +57,7 @@ private:
 	GvariTree tree_;
 
 	//弾データ群
-	std::list<std::unique_ptr<BossBullet>>bullets_;
+	std::list<std::unique_ptr<IBossBullet>>bullets_;
 
 	//警告円用
 	std::unique_ptr<InstancingGameObject>dangerZone_;
