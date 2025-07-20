@@ -4,6 +4,7 @@
 #include"behavior/shotBullet/CupCakeShotBullet.h"
 #include"behavior/waveDive/CupCakeWaveDive.h"
 #include"behavior/fallAttack/CupCakeFallAttack.h"
+#include"behavior/Dead/CupCakeDead.h"
 
 CupCake::CupCake(const std::string& objectName, FollowCamera* camera, const DaiEngine::WorldTransform* playerWorld) {
 	IBoss::Init(objectName, camera, playerWorld);
@@ -27,6 +28,8 @@ CupCake::CupCake(const std::string& objectName, FollowCamera* camera, const DaiE
 	behaviors_[(size_t)Behavior::ShotBullet] = std::make_unique<CupCakeShotBullet>(&parameters_);
 	behaviors_[(size_t)Behavior::WaveDive] = std::make_unique<CupCakeWaveDive>(&parameters_);
 	behaviors_[(size_t)Behavior::JumpAttack] = std::make_unique<CupCakeFallAttack>(&parameters_);
+	behaviors_[(size_t)Behavior::Dead] = std::make_unique<CupCakeDead>(&parameters_);
+
 
 	//ツリーを追加
 	for (auto& behavior : behaviors_) {

@@ -97,7 +97,6 @@ void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos, Bullet
 	data.type = type;
 	data.bossWorld = boss;
 
-
 	//指定値高くする
 	position.y = bulletStartHeight_;
 	data.velocity = Vector3{ 0,-1.0f,0 }*fallSpeed_;
@@ -126,14 +125,12 @@ void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos, Bullet
 	}
 	else {
 
-
-
 		//Diveはボス位置に生成
 		if (type == BulletType::Dive) {
 			data.world.translation_ = boss.translation_;
 		}
 
-		data.world.translation_.y = pos.y;
+		data.world.translation_.y = pos.translation_.y;
 
 		bullet = std::make_unique<BossNoneBullet>(data, camera_);
 	}

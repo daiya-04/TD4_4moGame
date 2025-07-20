@@ -4,6 +4,7 @@
 #include"Boss/GingerbreadMan/Behavior/Idle/BossIdle.h"
 #include"Boss/GingerbreadMan/Behavior/AreaAttack/BossAreaAttack.h"
 #include"Boss/GingerbreadMan/Behavior/WeaponRollAttack/BossWeaponRollAttack.h"
+#include"Boss/GingerbreadMan/Behavior/Dead/GingerbreadManDead.h"
 #pragma endregion
 
 GingerbreadMan::GingerbreadMan(const std::string& objectName, FollowCamera* camera, const DaiEngine::WorldTransform* playerWorld)
@@ -27,6 +28,8 @@ GingerbreadMan::GingerbreadMan(const std::string& objectName, FollowCamera* came
 	behaviors_[(size_t)BossBehavior::Idle] = std::make_unique<BossIdle>(&parameters_);
 	behaviors_[(size_t)BossBehavior::Attack1] = std::make_unique<BossAreaAttack>(&parameters_);
 	behaviors_[(size_t)BossBehavior::Attack2] = std::make_unique<BossWeaponRollAttack>(&parameters_);
+	behaviors_[(size_t)BossBehavior::Dead] = std::make_unique<GingerbreadManDead>(&parameters_);
+
 
 	if (auto* attack2 = dynamic_cast<BossWeaponRollAttack*>(behaviors_[(size_t)BossBehavior::Attack2].get())) {
 		attack2->SetGingerbreadMan(this); // GingerbreadMan の this を渡す

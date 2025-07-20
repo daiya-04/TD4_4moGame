@@ -15,6 +15,7 @@ public://**パブリック関数**//
 		Idle,			//アイドル
 		Attack1,			//弾
 		Attack2,			//回転攻撃
+		Dead,
 		Count				//カウント
 	};
 };

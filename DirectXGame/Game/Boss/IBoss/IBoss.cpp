@@ -275,12 +275,13 @@ void IBoss::OnCollision(DaiEngine::Collider* collider)
 		//HPが0以下なら死亡
 		//不死フラグが無効の場合
 		if (!isImmortal_) {
-			//死亡フラグ有効
-			isDead_ = true;
 			//体コライダーオフ
 			collider_->ColliderOff();
 			//全ての弾と警告円削除
 			ClearAllBulletAndZone();
+
+			//一番下の状態に変更（死亡状態
+			parameters_.behaviorRequest_ = (int)behaviors_.size() - 1;
 		}
 	}
 }

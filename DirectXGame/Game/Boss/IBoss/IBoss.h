@@ -78,7 +78,7 @@ public://**パブリック関数**//
 	/// 死亡フラグ取得
 	/// </summary>
 	/// <returns></returns>
-	bool GetIsDead() { return isDead_; }
+	bool GetIsDead() { return parameters_.isDead_; }
 
 	/// <summary>
 	/// 弾データの取得
@@ -200,8 +200,7 @@ private://**パラメータ変数**//
 	int HP_ = 100;
 	//最大HP
 	int maxHP_ = 100;
-	//死亡フラグ
-	bool isDead_ = false;
+
 	//体コライダー半径
 	float radius_ = 1.0f;
 	//開始位置

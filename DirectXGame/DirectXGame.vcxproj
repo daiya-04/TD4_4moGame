@@ -117,10 +117,13 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Game\Boss\Bullet\bullets\Parabola\BossParabolaBullet.cpp" />
     <ClCompile Include="Game\Boss\Bullet\bullets\Wave\BossWaveBullet.cpp" />
     <ClCompile Include="Game\Boss\Bullet\IBossBullet\IBossBullet.cpp" />
+    <ClCompile Include="Game\Boss\CupCake\behavior\Dead\CupCakeDead.cpp" />
     <ClCompile Include="Game\Boss\DangerZone\IDangerZone\IDangerZone.cpp" />
     <ClCompile Include="Game\Boss\DangerZone\Zones\Follow\FollowDangerZone.cpp" />
     <ClCompile Include="Game\Boss\DangerZone\Zones\Quick\QuickDangerZone.cpp" />
     <ClCompile Include="Game\Boss\DangerZone\Zones\Simple\SinpleDangerZone.cpp" />
+    <ClCompile Include="Game\Boss\Donut\Behavior\Dead\DonutDead.cpp" />
+    <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\Dead\GingerbreadManDead.cpp" />
     <ClCompile Include="Game\Boss\SquareDangerZone\SquareDangerZone.cpp" />
     <ClCompile Include="Game\Effect\Effect.cpp" />
     <ClCompile Include="Game\Effect\EffectManager.cpp" />
@@ -244,10 +247,13 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Boss\Bullet\bullets\Parabola\BossParabolaBullet.h" />
     <ClInclude Include="Game\Boss\Bullet\bullets\Wave\BossWaveBullet.h" />
     <ClInclude Include="Game\Boss\Bullet\IBossBullet\IBossBullet.h" />
+    <ClInclude Include="Game\Boss\CupCake\behavior\Dead\CupCakeDead.h" />
     <ClInclude Include="Game\Boss\DangerZone\IDangerZone\IDangerZone.h" />
     <ClInclude Include="Game\Boss\DangerZone\Zones\Follow\FollowDangerZone.h" />
     <ClInclude Include="Game\Boss\DangerZone\Zones\Quick\QuickDangerZone.h" />
     <ClInclude Include="Game\Boss\DangerZone\Zones\Simple\SinpleDangerZone.h" />
+    <ClInclude Include="Game\Boss\Donut\Behavior\Dead\DonutDead.h" />
+    <ClInclude Include="Game\Boss\GingerbreadMan\Behavior\Dead\GingerbreadManDead.h" />
     <ClInclude Include="Game\Boss\SquareDangerZone\SquareDangerZone.h" />
     <ClInclude Include="Game\Effect\Effect.h" />
     <ClInclude Include="Game\Effect\EffectManager.h" />

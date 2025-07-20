@@ -44,7 +44,9 @@ void SinpleDangerZone::Update()
 			isDead_ = true;
 			isDraw_ = false; // 描画フラグをリセット
 			//プレイヤー高度にセット
-			param_.world.translation_.y = pPos_->y;
+			if (pPos_) {
+				param_.world.translation_.y = pPos_->y;
+			}
 
 		}
 
