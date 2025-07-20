@@ -117,6 +117,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Game\Boss\Bullet\bullets\Parabola\BossParabolaBullet.cpp" />
     <ClCompile Include="Game\Boss\Bullet\bullets\Wave\BossWaveBullet.cpp" />
     <ClCompile Include="Game\Boss\Bullet\IBossBullet\IBossBullet.cpp" />
+    <ClCompile Include="Game\Boss\DangerZone\IDangerZone\IDangerZone.cpp" />
+    <ClCompile Include="Game\Boss\DangerZone\Zones\Follow\FollowDangerZone.cpp" />
+    <ClCompile Include="Game\Boss\DangerZone\Zones\Quick\QuickDangerZone.cpp" />
+    <ClCompile Include="Game\Boss\DangerZone\Zones\Simple\SinpleDangerZone.cpp" />
     <ClCompile Include="Game\Boss\SquareDangerZone\SquareDangerZone.cpp" />
     <ClCompile Include="Game\Effect\Effect.cpp" />
     <ClCompile Include="Game\Effect\EffectManager.cpp" />
@@ -150,11 +154,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\Idle\BossIdle.cpp" />
     <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\WeaponRollAttack\BossWeaponRollAttack.cpp" />
     <ClCompile Include="Game\Boss\Bullet\BossBulletManager\BossBulletManager.cpp" />
-    <ClCompile Include="Game\Boss\Bullet\BossBullet\BossBullet.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Game\Boss\DangerZoneManager\DangerZoneManager.cpp" />
-    <ClCompile Include="Game\Boss\DangerZone\DangerZone.cpp" />
+    <ClCompile Include="Game\Boss\DangerZone\Manager\DangerZoneManager.cpp" />
     <ClCompile Include="Game\Boss\SingleDangerZone\SingleDangerZone.cpp" />
     <ClCompile Include="Game\Field\Field.cpp" />
     <ClCompile Include="Game\FollowCamera\FollowCamera.cpp" />
@@ -244,6 +244,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Boss\Bullet\bullets\Parabola\BossParabolaBullet.h" />
     <ClInclude Include="Game\Boss\Bullet\bullets\Wave\BossWaveBullet.h" />
     <ClInclude Include="Game\Boss\Bullet\IBossBullet\IBossBullet.h" />
+    <ClInclude Include="Game\Boss\DangerZone\IDangerZone\IDangerZone.h" />
+    <ClInclude Include="Game\Boss\DangerZone\Zones\Follow\FollowDangerZone.h" />
+    <ClInclude Include="Game\Boss\DangerZone\Zones\Quick\QuickDangerZone.h" />
+    <ClInclude Include="Game\Boss\DangerZone\Zones\Simple\SinpleDangerZone.h" />
     <ClInclude Include="Game\Boss\SquareDangerZone\SquareDangerZone.h" />
     <ClInclude Include="Game\Effect\Effect.h" />
     <ClInclude Include="Game\Effect\EffectManager.h" />
@@ -278,11 +282,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Boss\GingerbreadMan\Behavior\Idle\BossIdle.h" />
     <ClInclude Include="Game\Boss\GingerbreadMan\Behavior\WeaponRollAttack\BossWeaponRollAttack.h" />
     <ClInclude Include="Game\Boss\Bullet\BossBulletManager\BossBulletManager.h" />
-    <ClInclude Include="Game\Boss\Bullet\BossBullet\BossBullet.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Game\Boss\DangerZoneManager\DangerZoneManager.h" />
-    <ClInclude Include="Game\Boss\DangerZone\DangerZone.h" />
+    <ClInclude Include="Game\Boss\DangerZone\Manager\DangerZoneManager.h" />
     <ClInclude Include="Game\Boss\SingleDangerZone\SingleDangerZone.h" />
     <ClInclude Include="Game\Field\Field.h" />
     <ClInclude Include="Game\FollowCamera\FollowCamera.h" />

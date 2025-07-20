@@ -19,5 +19,5 @@ public:
 	/// <summary>
 	/// ブロック接触時の追加処理
 	/// </summary>
-	void AddOnCollisionBlock() {};
+	void AddOnCollisionBlock();
 };

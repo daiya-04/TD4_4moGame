@@ -125,6 +125,16 @@ void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos, Bullet
 		bullet = std::make_unique<BossParabolaBullet>(data, camera_);
 	}
 	else {
+
+
+
+		//Diveはボス位置に生成
+		if (type == BulletType::Dive) {
+			data.world.translation_ = boss.translation_;
+		}
+
+		data.world.translation_.y = pos.y;
+
 		bullet = std::make_unique<BossNoneBullet>(data, camera_);
 	}
 

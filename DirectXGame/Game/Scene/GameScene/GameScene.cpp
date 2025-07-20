@@ -273,14 +273,14 @@ void GameScene::Update() {
 			continue;
 		}
 
-		//もし上げる弾なら向きを変更して処理
-		if (bullet->GetType() == BulletType::None) {
+		//盛り上げ弾orDiveがある場合
+		if (bullet->GetType() == BulletType::None||bullet->GetType()==BulletType::Dive) {
 			//下げる値取得
 			float deltaY = field_->GetDeltaY();
-			//落下弾以外は上方向に
-			deltaY *= -1.0f;
-			//えふぇこ発生
-			EffectManager::GetInstance()->Trigger("DonutsStageApperEffect", bullet->data_.warningWorld.GetWorldPos());
+			//盛り上げる弾なら反転
+			if (bullet->GetType() == BulletType::None) {
+				deltaY *= -1.0f;		
+			}
 
 			//フィールドに影響
 			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, deltaY);

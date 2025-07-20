@@ -4,7 +4,7 @@
 #include"../IBehavior/IBossBehavior.h"
 #include"SphereCollider.h"
 #include"../Bullet/BossBulletManager/BossBulletManager.h"
-#include"../DangerZoneManager/DangerZoneManager.h"
+#include"Boss/DangerZone/Manager/DangerZoneManager.h"
 #include"../UI/BossUI.h"
 #include"../Blinking/Blinking.h"
 #include"../../GlobalVariable/Tree/GlobalVariableTree.h"

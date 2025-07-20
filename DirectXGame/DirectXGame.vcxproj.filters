@@ -392,16 +392,10 @@
     <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\WeaponRollAttack\BossWeaponRollAttack.cpp">
       <Filter>Game\Boss\Behavior\WeaponRollAttack</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\Bullet\BossBullet\BossBullet.cpp">
-      <Filter>Game\Boss\BossBullet</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Boss\Bullet\BossBulletManager\BossBulletManager.cpp">
       <Filter>Game\Boss\BossBulletManager</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Boss\DangerZone\DangerZone.cpp">
-      <Filter>Game\Boss\DangerZone</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Boss\DangerZoneManager\DangerZoneManager.cpp">
+    <ClCompile Include="Game\Boss\DangerZone\Manager\DangerZoneManager.cpp">
       <Filter>Game\Boss\DangerZoneManager</Filter>
     </ClCompile>
     <ClCompile Include="Game\Field\Field.cpp">
@@ -497,6 +491,10 @@
     <ClCompile Include="Game\Boss\Bullet\bullets\Parabola\BossParabolaBullet.cpp" />
     <ClCompile Include="Game\Boss\Bullet\bullets\Wave\BossWaveBullet.cpp" />
     <ClCompile Include="Game\Boss\Bullet\bullets\None\BossNoneBullet.cpp" />
+    <ClCompile Include="Game\Boss\DangerZone\IDangerZone\IDangerZone.cpp" />
+    <ClCompile Include="Game\Boss\DangerZone\Zones\Follow\FollowDangerZone.cpp" />
+    <ClCompile Include="Game\Boss\DangerZone\Zones\Simple\SinpleDangerZone.cpp" />
+    <ClCompile Include="Game\Boss\DangerZone\Zones\Quick\QuickDangerZone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -736,16 +734,10 @@
     <ClInclude Include="Game\Boss\GingerbreadMan\Behavior\WeaponRollAttack\BossWeaponRollAttack.h">
       <Filter>Game\Boss\Behavior\WeaponRollAttack</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\Bullet\BossBullet\BossBullet.h">
-      <Filter>Game\Boss\BossBullet</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Boss\Bullet\BossBulletManager\BossBulletManager.h">
       <Filter>Game\Boss\BossBulletManager</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Boss\DangerZone\DangerZone.h">
-      <Filter>Game\Boss\DangerZone</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Boss\DangerZoneManager\DangerZoneManager.h">
+    <ClInclude Include="Game\Boss\DangerZone\Manager\DangerZoneManager.h">
       <Filter>Game\Boss\DangerZoneManager</Filter>
     </ClInclude>
     <ClInclude Include="Game\Field\Field.h">
@@ -848,5 +840,9 @@
     <ClInclude Include="Game\Boss\Bullet\bullets\None\BossNoneBullet.h" />
     <ClInclude Include="Game\Boss\Bullet\bullets\Parabola\BossParabolaBullet.h" />
     <ClInclude Include="Game\Boss\Bullet\bullets\Wave\BossWaveBullet.h" />
+    <ClInclude Include="Game\Boss\DangerZone\IDangerZone\IDangerZone.h" />
+    <ClInclude Include="Game\Boss\DangerZone\Zones\Follow\FollowDangerZone.h" />
+    <ClInclude Include="Game\Boss\DangerZone\Zones\Simple\SinpleDangerZone.h" />
+    <ClInclude Include="Game\Boss\DangerZone\Zones\Quick\QuickDangerZone.h" />
   </ItemGroup>
 </Project>
