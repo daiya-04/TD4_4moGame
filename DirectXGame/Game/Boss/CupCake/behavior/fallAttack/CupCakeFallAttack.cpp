@@ -1,6 +1,7 @@
 #include "CupCakeFallAttack.h"
 
 #include "EffectManager.h"
+#include "AudioManager.h"
 
 CupCakeFallAttack::CupCakeFallAttack(BossParameters* parameters)
 {
@@ -12,6 +13,8 @@ CupCakeFallAttack::CupCakeFallAttack(BossParameters* parameters)
 	tree_.SetValue("jumpHeight", &jumpHeight_);
 	tree_.SetValue("jumpNum", &jumpNum_);
 	tree_.SetValue("stopCount", &stopCount_);
+
+	stampSE_ = DaiEngine::AudioManager::Load("SE/CapCakeDownAttack.mp3");
 }
 
 void CupCakeFallAttack::InitBehavior0()
@@ -76,6 +79,7 @@ void CupCakeFallAttack::UpdateBehavior2()
 			countRequest_ = 1;
 		}
 		EffectManager::GetInstance()->Trigger("CapCakeStampEffect", param_->world->translation_ - Vector3(0.0f, 1.0f, 0.0f));
+		stampSE_->Play();
 	}
 }
 

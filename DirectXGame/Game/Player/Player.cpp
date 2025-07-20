@@ -4,6 +4,7 @@
 #include"ColliderManager.h"
 #include"ShapesDraw.h"
 #include "EffectManager.h"
+#include "AudioManager.h"
 
 #pragma region 状態クラス
 #include"behavior/Entry/PlayerEntry.h"
@@ -57,6 +58,8 @@ Player::Player()
 	ui_ = std::make_unique<PlayerUI>();
 
 	///
+
+	damageSE_ = DaiEngine::AudioManager::Load("SE/Damege.mp3");
 
 #pragma region デバッグパラメータ設定
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("Player");
@@ -300,6 +303,8 @@ void Player::OnCollison(DaiEngine::Collider* collider)
 
 	//HP減少
 	parameters_.hp--;
+
+	damageSE_->Play();
 
 	if (parameters_.hp <= 0) {
 		//HPが0以下ならゲームオーバー

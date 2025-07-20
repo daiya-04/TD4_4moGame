@@ -6,6 +6,7 @@
 #include"SphereCollider.h"
 #include "PlayerAttackEffect.h"
 #include<optional>
+#include "Audio.h"
 
 
 
@@ -264,7 +265,7 @@ private://**プライベート変数**//
 	//重力
 	float gravity_ = 0.1f;
 
-
+	DaiEngine::Audio* damageSE_ = nullptr;
 
 	//攻撃エフェクト
 	PlayerAttackEffect* attackEffect_ = nullptr;

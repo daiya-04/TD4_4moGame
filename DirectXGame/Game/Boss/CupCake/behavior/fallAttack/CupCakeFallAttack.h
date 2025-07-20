@@ -1,5 +1,6 @@
 #pragma once
 #include"Boss/IBossAttack/IBossAttack.h"
+#include "Audio.h"
 
 class CupCakeFallAttack : public IBossAttack {
 public:
@@ -46,5 +47,7 @@ private:
 
 	//ジャンプ後交直
 	float stopCount_ = 60.0f;
+
+	DaiEngine::Audio* stampSE_ = nullptr;
 
 };

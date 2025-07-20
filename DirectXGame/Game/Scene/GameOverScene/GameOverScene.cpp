@@ -74,6 +74,9 @@ void GameOverScene::Init() {
 	bgm_ = DaiEngine::AudioManager::Load("BGM/GameOver.mp3");
 	bgm_->Play();
 
+	choiceSE_ = DaiEngine::AudioManager::Load("SE/Choice.mp3");
+	doneSE_ = DaiEngine::AudioManager::Load("SE/Done.mp3");
+
 	gameOverText_.reset(DaiEngine::Sprite::Create(gameOverTextTex, {}));
 
 	titleBackUI_.reset(DaiEngine::Sprite::Create(titleBackTex, {}));
@@ -126,9 +129,11 @@ void GameOverScene::Update() {
 			select_ = Select::ReStrat;
 			gTitleBackUISwitch_ = UISwitch::Off;
 			gReStartUISwitch_ = UISwitch::On;
+			choiceSE_->Play();
 		}
 
 		if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
+			doneSE_->Play();
 			DaiEngine::SceneManager::GetInstance()->ChangeScene("Title");
 		}
 
@@ -139,9 +144,11 @@ void GameOverScene::Update() {
 			select_ = Select::TitleBack;
 			gTitleBackUISwitch_ = UISwitch::On;
 			gReStartUISwitch_ = UISwitch::Off;
+			choiceSE_->Play();
 		}
 
 		if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
+			doneSE_->Play();
 			DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
 		}
 

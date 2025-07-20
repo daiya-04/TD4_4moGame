@@ -2,6 +2,7 @@
 #include"Boss/IBossAttack/IBossAttack.h"
 #include"Collider/SphereCollider.h"
 #include"SquareDangerZone/SquareDangerZone.h"
+#include "Audio.h"
 
 #include<memory>
 
@@ -72,5 +73,7 @@ private:
 
 	//移動速度
 	float speed_ = 1.0f;
+
+	DaiEngine::Audio* dashSE_ = nullptr;
 
 };

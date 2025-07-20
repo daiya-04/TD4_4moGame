@@ -90,6 +90,9 @@ private:
 	//タイトル用BGM
 	DaiEngine::Audio* bgm_ = nullptr;
 
+	DaiEngine::Audio* choiceSE_ = nullptr;
+	DaiEngine::Audio* doneSE_ = nullptr;
+
 	//タイトルロゴ
 	std::unique_ptr<DaiEngine::Sprite> titleLogo_;
 	//ゲームスタートUI

@@ -79,6 +79,9 @@ private:
 	//クリア用BGM
 	DaiEngine::Audio* bgm_ = nullptr;
 
+	DaiEngine::Audio* choiceSE_ = nullptr;
+	DaiEngine::Audio* doneSE_ = nullptr;
+
 	//クリア文字
 	std::unique_ptr<DaiEngine::Sprite> clearText_;
 	//タイトルに戻る
