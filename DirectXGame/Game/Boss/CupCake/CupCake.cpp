@@ -8,6 +8,16 @@
 CupCake::CupCake(const std::string& objectName, FollowCamera* camera, const DaiEngine::WorldTransform* playerWorld) {
 	IBoss::Init(objectName, camera, playerWorld);
 
+	//状態を設定
+	std::vector<std::string>names = {
+		"None",
+		"Idle",
+		"ShotBullet",
+		"WaveDive",
+		"fallAttack"
+	};
+	IBoss::SetDebugBehaviorName(names);
+
 	//マネージャの生成
 	IBoss::SetBulletType(BulletType::Parabola);
 

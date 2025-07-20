@@ -108,10 +108,6 @@ private:
 	//円コライダー
 	std::unique_ptr<DaiEngine::SphereCollider>collider_;
 
-	
-
 	//死亡フラグ
 	bool isDead_ = false;
-
-
 };

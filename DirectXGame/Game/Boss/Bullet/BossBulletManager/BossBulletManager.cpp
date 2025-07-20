@@ -62,7 +62,12 @@ void BossBulletManager::Update()
 
 	//死んだ弾を削除
 	bullets_.remove_if([](auto& data) {
-		return data->GetDead();
+		if (data->GetDead()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 		});
 }
 

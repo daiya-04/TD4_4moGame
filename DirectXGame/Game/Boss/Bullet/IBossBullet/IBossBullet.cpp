@@ -14,9 +14,9 @@ void IBossBullet::Init(const BossBulletData& data, DaiEngine::Camera* camera) {
 
 	//コライダー初期化
 	collider_ = std::make_unique<DaiEngine::SphereCollider>();
-	collider_->Init("敵の弾", data.world, data.colliderRadius);
+	collider_->Init("敵の弾", data_.world, data_.colliderRadius);
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
-	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {if (collider->GetTag() == "player")collider_->ColliderOff(); isDead_ = true; });
+	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {OnCollision(collider); });
 	//コライダーを有効に
 	collider_->ColliderOn();
 }
@@ -37,8 +37,8 @@ void IBossBullet::UpdateObject() {
 
 void IBossBullet::OnCollision(DaiEngine::Collider* collider) {
 
-	//有効ではない場合無視
-	if (!isActive_) {
+	//有効ではないor同じ球の場合無視
+	if (!isActive_||collider->GetTag()== "敵の弾") {
 		return;
 	}
 

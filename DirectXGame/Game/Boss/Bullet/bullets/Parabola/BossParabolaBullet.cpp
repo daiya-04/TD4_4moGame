@@ -4,6 +4,8 @@
 BossParabolaBullet::BossParabolaBullet(const BossBulletData& data, DaiEngine::Camera* camera)
 {
 	IBossBullet::Init(data, camera);
+	data_.world.translation_.y = 0;
+	isActive_ = false;
 }
 
 void BossParabolaBullet::Update()
@@ -12,7 +14,9 @@ void BossParabolaBullet::Update()
 	currentCount_++;
 
 	//カウントが経過で判定
-	if (!isActive_ && currentCount_ >= ((float)data_.arriveCount / 2.0f))isActive_ = true;
+	if (!isActive_ && currentCount_ >= ((float)data_.arriveCount / 2.0f)) {
+		isActive_ = true;
+	}
 
 	//進行度T取得
 	float t = (float)currentCount_ / (float)data_.arriveCount;

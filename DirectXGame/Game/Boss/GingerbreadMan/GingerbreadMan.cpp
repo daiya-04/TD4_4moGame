@@ -10,6 +10,15 @@ GingerbreadMan::GingerbreadMan(const std::string& objectName, FollowCamera* came
 {
 	IBoss::Init(objectName, camera, playerWorld);
 
+	//状態を設定
+	std::vector<std::string>names = {
+		"None",
+		"Idle",
+		"AreaAttack",
+		"WeaponRollAttack"
+	};
+	IBoss::SetDebugBehaviorName(names);
+
 	//マネージャの生成
 	IBoss::SetBulletType(BulletType::Fall);
 

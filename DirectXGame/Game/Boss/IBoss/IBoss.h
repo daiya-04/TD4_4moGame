@@ -46,6 +46,8 @@ public://**パブリック関数**//
 	/// <param name="playerWorld"></param>
 	void Init(const std::string& objectName, FollowCamera* camera, const DaiEngine::WorldTransform* playerWorld);
 
+	void SetDebugBehaviorName(std::vector<std::string>names);
+
 	/// <summary>
 	/// 弾タイプ設定
 	/// </summary>
@@ -226,14 +228,9 @@ private://**デバッグ用変数**//
 	Vector4 colliderColor_ = { 1.0f, 0.0f, 0.0f, 1.0f };
 
 	//攻撃指定
-	std::string debugBehavior_ = "None";
+	int debugBehavior_ = 0;
 
-	std::vector<std::string> behaviorNames_ = {
-	"None",
-	"Idle",
-	"Attack1",
-	"Attack2"
-	};
+	std::vector<std::string> behaviorNames_;
 
 	//無敵フラグ
 	bool isImmortal_ = false;
