@@ -1,8 +1,8 @@
 #pragma once
 #include"InstancingGameObject/InstancingGameObject.h"
 #include"Boss/Bullet/IBossBullet/IBossBullet.h"
-
 #include"GlobalVariable/Tree/GlobalVariableTree.h"
+#include"Collider/CylinderCollider.h"
 
 class BossBulletManager : public InstancingGameObject {
 
@@ -78,5 +78,13 @@ private:
 
 	//放物線の高さ
 	float parabolaHeight_ = 5.0f;
+
+
+private://波の判定
+
+	//ワールド
+	DaiEngine::WorldTransform world_;
+	float radius_ = 10.0f;
+	std::unique_ptr<DaiEngine::CylinderCollider>collider_;
 
 };
