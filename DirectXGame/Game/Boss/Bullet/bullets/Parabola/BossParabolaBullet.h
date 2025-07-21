@@ -1,5 +1,6 @@
 #pragma once
 #include"Boss/Bullet/IBossBullet/IBossBullet.h"
+#include "Audio.h"
 
 class BossParabolaBullet : public IBossBullet {
 public:
@@ -25,5 +26,7 @@ public:
 private:
 
 	float currentCount_ = 0;
+
+	DaiEngine::Audio* whipSE_ = nullptr;
 
 };
