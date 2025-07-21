@@ -39,6 +39,8 @@
         ],
         "MaxHP": 10,
         "Move": {
+            "degreeSpd": 1.0,
+            "jumpStSpd": 10.0,
             "speed": 0.20000000298023224
         },
         "OffsetPos": [
@@ -47,7 +49,7 @@
             0.0
         ],
         "Roll": {
-            "StSpeed": 0.800000011920929,
+            "StSpeed": 1.0,
             "cooldownCount": 16.5,
             "decelRate": 0.05000000074505806,
             "downhillAccel": 1.2000000476837158,
