@@ -11,7 +11,6 @@ Boss2SpinAttack::Boss2SpinAttack(BossParameters* param)
 	//コライダー生成
 	collider_ = std::make_unique<DaiEngine::SphereCollider>();
 	collider_->Init("bossCharge",*param_->world , radius_);
-	collider_->ColliderOn();
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
 	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {OnCollision(collider); });
 	collider_->ColliderOff();
@@ -76,6 +75,7 @@ void Boss2SpinAttack::InitBehavior1()
 	velo_ = param_->lookAtPlayerVec_.Normalize() * speed_;
 	param_->isHitMapEdge_ = false;
 	collider_->ColliderOn();
+	collider_->SetRadius(radius_);
 
 	emitPos_ = collider_->GetWorldPos() - Vector3(0.0f, 1.0f, 0.0f);
 	EffectManager::GetInstance()->Start("DonutsRollEffect", &emitPos_);
