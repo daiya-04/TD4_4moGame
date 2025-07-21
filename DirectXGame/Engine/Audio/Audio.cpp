@@ -14,7 +14,7 @@ namespace DaiEngine {
 
 	ComPtr<IXAudio2> Audio::xAudio2_;
 	IXAudio2MasteringVoice* Audio::masterVoice_ = nullptr;
-	float Audio::bgmVolume_ = 0.5f;
+	float Audio::bgmVolume_ = 0.3f;
 	float Audio::seVolume_ = 0.5;
 
 	void Audio::Init() {
@@ -41,11 +41,11 @@ namespace DaiEngine {
 
 			if (audioType_ == AudioType::BGM) {
 				sourceVolume *= bgmVolume_;
-				SetVolume(sourceVolume);
+				sourceVoices_->SetVolume(sourceVolume);
 			}
 			else if (audioType_ == AudioType::SE) {
 				sourceVolume *= seVolume_;
-				SetVolume(sourceVolume);
+				sourceVoices_->SetVolume(sourceVolume);
 			}
 			XAUDIO2_VOICE_STATE state{};
 			sourceVoices_->GetState(&state);
@@ -95,11 +95,11 @@ namespace DaiEngine {
 
 		if (audioType_ == AudioType::BGM) {
 			sourceVolume *= bgmVolume_;
-			SetVolume(sourceVolume);
+			sourceVoices_->SetVolume(sourceVolume);
 		}
 		else if (audioType_ == AudioType::SE) {
 			sourceVolume *= seVolume_;
-			SetVolume(sourceVolume);
+			sourceVoices_->SetVolume(sourceVolume);
 		}
 
 	}
@@ -125,12 +125,13 @@ namespace DaiEngine {
 	}
 
 	void Audio::SetVolume(float volume) {
-		sourceVoices_->SetVolume(volume);
+		volume_ = volume;
 	}
 
 	bool Audio::IsValidPlayhandle() {
 		return sourceVoices_ != nullptr;
 	}
+
 
 	void Audio::DestroyPlayHandle() {
 		if (sourceVoices_) {

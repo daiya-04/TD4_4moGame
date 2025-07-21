@@ -5,6 +5,7 @@
 #include"Camera.h"
 #include "EffectManager.h"
 #include "GingerbreadMan.h"
+#include "AudioManager.h"
 
 BossWeaponRollAttack::BossWeaponRollAttack(BossParameters* parame)
 {
@@ -32,6 +33,9 @@ BossWeaponRollAttack::BossWeaponRollAttack(BossParameters* parame)
 	tree_.SetValue("preActionRate",&preActionRate_);
 	tree_.SetValue("actionRate", &actionRate_);
 	tree_.SetValue("endActionRate", &endActionRate_);
+
+	swingSE_ = DaiEngine::AudioManager::Load("SE/StickSwing.mp3");
+	
 
 }
 
@@ -85,6 +89,8 @@ void BossWeaponRollAttack::InitBehavior1()
 	collider_->SetRadius(param.maxRadius);
 
 	EffectManager::GetInstance()->Start("StickAttackEffect", &jointPos_);
+	swingSE_->SetVolume(2.0f);
+	swingSE_->Play();
 	
 }
 

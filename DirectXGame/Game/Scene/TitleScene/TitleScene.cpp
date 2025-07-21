@@ -75,6 +75,9 @@ void TitleScene::Init() {
 	bgm_ = DaiEngine::AudioManager::Load("BGM/Title.mp3");
 	bgm_->Play();
 
+	choiceSE_ = DaiEngine::AudioManager::Load("SE/Choice.mp3");
+	doneSE_ = DaiEngine::AudioManager::Load("SE/Done.mp3");
+
 	titleLogo_.reset(DaiEngine::Sprite::Create(titleLogoTex, {}));
 
 	gameStartUI_.reset(DaiEngine::Sprite::Create(gameStartTex, {}));
@@ -139,9 +142,11 @@ void TitleScene::Update() {
 				select_ = Select::Finish;
 				gStartUISwitch_ = UISwitch::Off;
 				gFinishUISwitch_ = UISwitch::On;
+				choiceSE_->Play();
 			}
 
 			if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
+				doneSE_->Play();
 				DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
 			}
 
@@ -152,9 +157,11 @@ void TitleScene::Update() {
 				select_ = Select::Start;
 				gStartUISwitch_ = UISwitch::On;
 				gFinishUISwitch_ = UISwitch::Off;
+				choiceSE_->Play();
 			}
 
 			if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
+				doneSE_->Play();
 				DaiEngine::WinApp::GetInstance()->GameEnd();
 			}
 

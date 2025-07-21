@@ -4,6 +4,8 @@
 #include"SphereCollider.h"
 #include<memory>
 
+#include "Audio.h"
+
 class GingerbreadMan;
 
 //プレイヤーに弾を落とす攻撃を行う
@@ -82,4 +84,7 @@ private://**パラメータ変数**//
 	float preActionRate_ = 1.0f;
 	float actionRate_ = 1.0f;
 	float endActionRate_ = 1.0f;
+
+	DaiEngine::Audio* swingSE_ = nullptr;
+
 };
