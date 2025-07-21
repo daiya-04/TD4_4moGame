@@ -41,11 +41,11 @@ namespace DaiEngine {
 
 			if (audioType_ == AudioType::BGM) {
 				sourceVolume *= bgmVolume_;
-				SetVolume(sourceVolume);
+				sourceVoices_->SetVolume(sourceVolume);
 			}
 			else if (audioType_ == AudioType::SE) {
 				sourceVolume *= seVolume_;
-				SetVolume(sourceVolume);
+				sourceVoices_->SetVolume(sourceVolume);
 			}
 			XAUDIO2_VOICE_STATE state{};
 			sourceVoices_->GetState(&state);

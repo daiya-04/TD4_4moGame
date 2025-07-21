@@ -36,7 +36,7 @@ Boss2SpinAttack::Boss2SpinAttack(BossParameters* param)
 Boss2SpinAttack::~Boss2SpinAttack()
 {
 	DaiEngine::ColliderManager::GetInstance()->RemoveCollider(collider_.get());
-
+	EffectManager::GetInstance()->End("DonutsRollEffect");
 }
 
 void Boss2SpinAttack::Draw()
