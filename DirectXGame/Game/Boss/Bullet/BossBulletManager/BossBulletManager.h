@@ -84,7 +84,7 @@ private://波の判定
 
 	//ワールド
 	DaiEngine::WorldTransform world_;
-	float radius_ = 10.0f;
+	float radius_ = 1.0f;
 	std::unique_ptr<DaiEngine::CylinderCollider>collider_;
 
 };

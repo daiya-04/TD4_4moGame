@@ -16,6 +16,7 @@ namespace ShapesDraw {
 	void DrawAABB(const Shapes::AABB& aabb, const DaiEngine::Camera& camera, const Vector4& color = { 1.0f,1.0f,1.0f,1.0f });
 	//OBB描画
 	void DrawOBB(const Shapes::OBB& obb, const DaiEngine::Camera& camera, const Vector4& color = { 1.0f,1.0f,1.0f,1.0f });
-
+	//Cylinder描画
+	void DrawCylinder(const Shapes::Cylinder& cylinder, const DaiEngine::Camera& camera, const Vector4& color = { 1.0f,1.0f,1.0f,1.0f });
 
 }

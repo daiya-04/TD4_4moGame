@@ -19,7 +19,7 @@ BossBulletManager::BossBulletManager(bool isCandy)
 	}
 
 	collider_ = std::make_unique<DaiEngine::CylinderCollider>();
-	collider_->Init("wave", world_, radius_);
+	collider_->Init("wave", world_, radius_ , 2.0f);
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
 	collider_->SetStayCallback([this](DaiEngine::Collider*colidier) {if(colidier->GetTag()=="player")collider_->ColliderOff(); });
 	collider_->ColliderOff();
@@ -99,7 +99,7 @@ void BossBulletManager::Draw()
 
 	//弾コライダー描画
 #ifdef _DEBUG
-	//ShapesDraw::DrawSphere(std::get<Shapes::Cylinder>(collider_->GetShape()), *camera_, { 1,1,1,1 });
+	ShapesDraw::DrawCylinder(std::get<Shapes::Cylinder>(collider_->GetShape()), *camera_, { 1,1,1,1 });
 	for (auto& bullet : bullets_) {
 		bullet->ColliderDraw();
 	}

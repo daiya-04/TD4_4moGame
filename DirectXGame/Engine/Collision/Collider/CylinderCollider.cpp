@@ -1,7 +1,7 @@
 #include "CylinderCollider.h"
 
 namespace DaiEngine {
-	void CylinderCollider::Init(const std::string& tag, const WorldTransform& parent, float radius) {
+	void CylinderCollider::Init(const std::string& tag, const WorldTransform& parent, float radius, float height) {
 
 		tag_ = tag;
 		worldTransform_.Init();
@@ -13,7 +13,7 @@ namespace DaiEngine {
 
 		cylinder_ = std::get_if<Shapes::Cylinder>(&shape_);
 		cylinder_->radius = radius;
-
+		height_ = height;
 	}
 
 	void CylinderCollider::Update(const Matrix4x4& rotateMat) {
