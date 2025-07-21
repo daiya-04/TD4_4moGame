@@ -249,7 +249,7 @@
                 "PreActionRate_": 1.0,
                 "WaitCount": 300.0
             },
-            "MaxHP": 3,
+            "MaxHP": 60,
             "OffsetPos": [
                 0.0,
                 0.0,
