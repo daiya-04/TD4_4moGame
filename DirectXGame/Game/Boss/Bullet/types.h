@@ -5,5 +5,6 @@ enum class BulletType {
 	None,		//動かず判定のみ
 	Parabola,	//放物線を描く
 	Wave,		//波を起こす判定
+	Dive,		//飛び込む攻撃
 	Count
 };

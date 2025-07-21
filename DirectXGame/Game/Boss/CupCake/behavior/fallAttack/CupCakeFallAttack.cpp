@@ -1,5 +1,7 @@
 #include "CupCakeFallAttack.h"
 
+#include "EffectManager.h"
+
 CupCakeFallAttack::CupCakeFallAttack(BossParameters* parameters)
 {
 	param_ = parameters;
@@ -67,11 +69,15 @@ void CupCakeFallAttack::UpdateBehavior2()
 	if (param_->currentSec >= attackCount_) {
 		if (currentJumpNum_ >= jumpNum_) {
 			countRequest_ = 3;
+			EffectManager::GetInstance()->Trigger("CapCakeStampEffect", param_->world->translation_ - Vector3(0.0f, 1.0f, 0.0f));
 		}
 		else {
+			param_->bulletTypeRequest_ = BulletType::Dive;
+			param_->SpawnDangerZone_ = true;
 			//前の状態に戻る
 			countRequest_ = 1;
 		}
+		EffectManager::GetInstance()->Trigger("CapCakeStampEffect", param_->world->translation_ - Vector3(0.0f, 1.0f, 0.0f));
 	}
 }
 

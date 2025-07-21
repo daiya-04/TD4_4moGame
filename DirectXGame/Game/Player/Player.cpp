@@ -3,7 +3,7 @@
 #include"GlobalVariable/Group/GlobalVariableGroup.h"
 #include"ColliderManager.h"
 #include"ShapesDraw.h"
-
+#include "EffectManager.h"
 
 #pragma region 状態クラス
 #include"behavior/Entry/PlayerEntry.h"
@@ -149,7 +149,7 @@ void Player::Update()
 	behaviors_[(int)behaviorName_]->Update();
 
 	//落下
-	//parameters_.velocity.y -= gravity_;
+	parameters_.velocity.y -= gravity_;
 
 	//座標更新
 	UpdatePositionWithCollision();
@@ -170,7 +170,7 @@ void Player::Update()
 	UIUpdate();
 
 	//エフェクト更新
-	//attackEffect_->Update();
+	//attackEffect_->UpdateObject();
 
 }
 
@@ -242,11 +242,16 @@ void Player::DrawUI() {
 
 void Player::UpdateOnField(float y)
 {
+	parameters_.blockY = y;
 	//飛行中なら高さ修正しない
 	if (parameters_.isFlying)return;
 
 	//高さ修正
-	world_->translation_.y = y;
+	if (world_->translation_.y < y) {
+		world_->translation_.y = y;
+		position_.y = world_->translation_.y - offsetPos_.y;
+		//position_.y = y;
+	}
 	//行列更新
 	UpdateMatrix();
 }
@@ -256,7 +261,7 @@ void Player::Draw()
 	//円コライダー描画
 #ifdef _DEBUG
 	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()), *camera_,colliderColor_);
-	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(attackCollider_->GetShape()), *camera_,colliderColor_);
+	//ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(attackCollider_->GetShape()), *camera_,colliderColor_);
 #endif // _DEBUG
 
 	//描画
@@ -314,10 +319,17 @@ void Player::OnCollisionATKCollider(DaiEngine::Collider* collider)
 	//攻撃コライダーをOFF
 	if (collider->GetTag() == "boss") {
 		attackCollider_->ColliderOff();
+
+		Matrix4x4 rotateMat_ = MakeRotateAxisAngle(Vector3(0.0f, 1.0f, 0.0f), GetWorld().rotation_.y);
+		Vector3 offset = { 0.0f,0.0f,2.0f };
+		offset = TransformNormal(offset, rotateMat_);
+
+		EffectManager::GetInstance()->Trigger("BiteHitEffect", GetWorld().GetWorldPos() + offset);
 	}
+	
+	
 
 }
-
 
 float GetYRotate(const Vector2& v) {
 	Vector2 offset = { 0,1 };

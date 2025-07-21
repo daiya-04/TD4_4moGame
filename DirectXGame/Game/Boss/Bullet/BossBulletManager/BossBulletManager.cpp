@@ -1,5 +1,10 @@
 #include "BossBulletManager.h"
 
+#include"Boss//Bullet//bullets/Fall/BossFallBullet.h"
+#include"Boss//Bullet//bullets/None/BossNoneBullet.h"
+#include"Boss//Bullet//bullets/Parabola/BossParabolaBullet.h"
+
+
 BossBulletManager::BossBulletManager(bool isCandy)
 {
 	//オブジェクト生成
@@ -40,14 +45,14 @@ void BossBulletManager::Update()
 			objData.worldTransform_ = data->GetWorld();
 			//行列更新
 			objData.worldTransform_.UpdateMatrix();
-			
+
 			//通常時のみ警告円群の更新
-			if(data->GetType() != BulletType::None&&data->GetType()!=BulletType::Wave) {
+			if (data->GetType() != BulletType::None && data->GetType() != BulletType::Wave) {
 				//データセット
 				SetData(objData);
 				//警告円の更新
 				DaiEngine::InstancingObjData dangerData;
-				dangerData.worldTransform_ = data->GetWarningWorld();
+				dangerData.worldTransform_ = data->data_.warningWorld;
 				dangerData.worldTransform_.UpdateMatrix();
 				dangerZone_->SetData(dangerData);
 			}
@@ -57,7 +62,12 @@ void BossBulletManager::Update()
 
 	//死んだ弾を削除
 	bullets_.remove_if([](auto& data) {
-		return data->GetDead();
+		if (data->GetDead()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 		});
 }
 
@@ -72,13 +82,13 @@ void BossBulletManager::Draw()
 	//弾コライダー描画
 #ifdef _DEBUG
 	for (auto& bullet : bullets_) {
-		bullet->DrawCollider();
+		bullet->ColliderDraw();
 	}
 #endif // _DEBUG
 
 }
 
-void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos, BulletType type,const DaiEngine::WorldTransform& boss)
+void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos, BulletType type, const DaiEngine::WorldTransform& boss)
 {
 	//座標作成
 	Vector3 position = pos.translation_;
@@ -87,16 +97,9 @@ void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos, Bullet
 	data.type = type;
 	data.bossWorld = boss;
 
-	if(type == BulletType::Fall) {
-		//指定値高くする
-		position.y = bulletStartHeight_;
-		data.velocity = Vector3{ 0,-1.0f,0 }*fallSpeed_;
-
-	}
-	else if (type == BulletType::None||type==BulletType::Wave) {
-		//position.y = 0.0f;
-		data.velocity = Vector3{ 0,0,0 };
-	}
+	//指定値高くする
+	position.y = bulletStartHeight_;
+	data.velocity = Vector3{ 0,-1.0f,0 }*fallSpeed_;
 
 	//警告円
 	data.warningWorld.Init();
@@ -112,8 +115,27 @@ void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos, Bullet
 	data.arriveCount = arriveCount_;
 	data.parabolaHeight = parabolaHeight_;
 
-	//生成
-	std::unique_ptr<BossBullet>bullet = std::make_unique<BossBullet>(data,camera_);
+	std::unique_ptr<IBossBullet>bullet;
+	//落下弾の場合
+	if (type == BulletType::Fall) {
+		bullet = std::make_unique<BossFallBullet>(data, camera_);
+	}
+	else if (type == BulletType::Parabola) {
+		bullet = std::make_unique<BossParabolaBullet>(data, camera_);
+	}
+	else {
+
+		//Diveはボス位置に生成
+		if (type == BulletType::Dive) {
+			data.world.translation_ = boss.translation_;
+		}
+
+		data.world.translation_.y = pos.translation_.y;
+
+		bullet = std::make_unique<BossNoneBullet>(data, camera_);
+	}
+
+	
 	//配列に追加
 	bullets_.emplace_back(std::move(bullet));
 }

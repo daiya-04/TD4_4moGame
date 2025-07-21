@@ -62,6 +62,9 @@ struct BossParameters {
 	//プレイヤー方向ベクトル
 	Vector3 lookAtPlayerVec_ = {0,0,-1};
 
+	//死亡フラグ
+	bool isDead_ = false;
+
 };
 
 int GetRandomInt(int min, int max);

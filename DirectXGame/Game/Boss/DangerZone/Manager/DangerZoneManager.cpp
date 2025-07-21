@@ -2,6 +2,11 @@
 #include<memory>
 #include <random>
 
+#include"Boss/DangerZone/Zones/Simple/SinpleDangerZone.h"
+#include"Boss/DangerZone/Zones/Follow/FollowDangerZone.h"
+#include"Boss/DangerZone/Zones/Quick/QuickDangerZone.h"
+
+
 DangerZoneManager::DangerZoneManager()
 {
 	//オブジェクト生成
@@ -84,7 +89,7 @@ void DangerZoneManager::SpawnDangerZone(const Vector3& Ppos,BulletType type)
 		SetParameters(param);
 
 		//新しく生成
-		std::unique_ptr<DangerZone>dangerZone = std::make_unique<DangerZone>(param);
+		std::unique_ptr<IDangerZone>dangerZone = std::make_unique<SinpleDangerZone>(param);
 		dangerZone->SetPlayerPos(&Ppos);
 		//配列に追加
 		dangerZones_.emplace_back(std::move(dangerZone));
@@ -130,7 +135,7 @@ void DangerZoneManager::SpawnDangerZone(const Vector3& Ppos,BulletType type)
 			param.type = type;
 			SetParameters(param);
 			//新しく生成
-			std::unique_ptr<DangerZone>dangerZone = std::make_unique<DangerZone>(param);
+			std::unique_ptr<IDangerZone>dangerZone = std::make_unique<FollowDangerZone>(param);
 			dangerZone->SetPlayerPos(&Ppos);
 			//配列に追加
 			dangerZones_.emplace_back(std::move(dangerZone));
@@ -161,7 +166,7 @@ void DangerZoneManager::SpawnDangerZone(const Vector3& Ppos,BulletType type)
 			param.type = type;
 			SetParameters(param);
 			//新しく生成
-			std::unique_ptr<DangerZone>dangerZone = std::make_unique<DangerZone>(param);
+			std::unique_ptr<IDangerZone>dangerZone = std::make_unique<SinpleDangerZone>(param);
 			dangerZone->SetPlayerPos(&Ppos);
 			//配列に追加
 			dangerZones_.emplace_back(std::move(dangerZone));
@@ -169,19 +174,29 @@ void DangerZoneManager::SpawnDangerZone(const Vector3& Ppos,BulletType type)
 	}
 	else if (type == BulletType::Wave) {
 		Vector3 pos = {0,0,0};
-		////高さ設定
-		pos.y = warningHeight_;
 		//値生成
 		DangerZoneParameters param;
 		param.world.translation_ = pos;
 		param.type = type;
 		SetParameters(param);
 		//新しく生成
-		std::unique_ptr<DangerZone>dangerZone = std::make_unique<DangerZone>(param);
+		std::unique_ptr<IDangerZone>dangerZone = std::make_unique<QuickDangerZone>(param);
 		//
 		dangerZone->SetPlayerPos(&Ppos);
-		//即死設定
-		dangerZone->SetDead(true);
+		//配列に追加
+		dangerZones_.emplace_back(std::move(dangerZone));
+	}
+	else if (type == BulletType::Dive) {
+		Vector3 pos = { 0,0,0 };
+		//値生成
+		DangerZoneParameters param;
+		param.world.translation_ = pos;
+		param.type = type;
+		SetParameters(param);
+		//新しく生成
+		std::unique_ptr<IDangerZone>dangerZone = std::make_unique<QuickDangerZone>(param);
+		//
+		dangerZone->SetPlayerPos(&Ppos);
 		//配列に追加
 		dangerZones_.emplace_back(std::move(dangerZone));
 	}

@@ -157,8 +157,13 @@ void GameScene::Init() {
 	///エフェクト
 
 	EffectManager::GetInstance()->AddEffect("BiteEffect","Tooth");
+	EffectManager::GetInstance()->AddEffect("BiteHitEffect");
 	EffectManager::GetInstance()->AddEffect("PlayerMoveEffect");
 	EffectManager::GetInstance()->AddEffect("CandyFinishEffect");
+	EffectManager::GetInstance()->AddEffect("DonutsRollEffect");
+	EffectManager::GetInstance()->AddEffect("DonutsStageApperEffect");
+	EffectManager::GetInstance()->AddEffect("StickAttackEffect");
+	EffectManager::GetInstance()->AddEffect("CapCakeStampEffect");
 
 	///
 
@@ -249,7 +254,7 @@ void GameScene::Update() {
 
 #pragma region ブロックと弾の判定
 	//弾の更新
-	for (std::unique_ptr<BossBullet>& bullet : bossSpawnManager_->GetBullets()) {
+	for (auto& bullet : bossSpawnManager_->GetBullets()) {
 		if (bullet->GetDead())continue;
 		Vector2 targetBlock = field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
 		Block* block = field_->GetBlock(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
@@ -263,31 +268,37 @@ void GameScene::Update() {
 			//波の発生
 			field_->AddWave(bPos, 30, 1.0f, 1, 0.01f);
 			//弾の削除処理
-			bullet->OnCollision();
+			bullet->OnCollisionBlock();
 			//この弾の処理を終了
 			continue;
 		}
 
-		//もし上げる弾なら向きを変更して処理
-		if (bullet->GetType() == BulletType::None) {
+		//盛り上げ弾orDiveがある場合
+		if (bullet->GetType() == BulletType::None||bullet->GetType()==BulletType::Dive) {
 			//下げる値取得
 			float deltaY = field_->GetDeltaY();
-			//落下弾以外は上方向に
-			deltaY *= -1.0f;
-			//えふぇこ発生
+			//盛り上げる弾なら反転
+			if (bullet->GetType() == BulletType::None) {
+				deltaY *= -1.0f;		
+			}
 
 			//フィールドに影響
 			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, deltaY);
-			bullet->OnCollision();
-
+			bullet->OnCollisionBlock();
 			continue;
 		}
 
 		// Y範囲にあるか判定
 		if (block->world.translation_.y >= bullet->GetWorld().translation_.y && block->world.translation_.y <= bullet->GetWorld().translation_.y + bullet->GetWorld().scale_.y) {
+			//下げる値取得
+			float deltaY = field_->GetDeltaY();
+			if (bullet->GetType() == BulletType::Parabola) {
+				deltaY *= -1.0f;
+			}
+			
 			//フィールドに影響
-			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, field_->GetDeltaY());
-			bullet->OnCollision();
+			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, deltaY);
+			bullet->OnCollisionBlock();
 		}
 	}
 #pragma endregion

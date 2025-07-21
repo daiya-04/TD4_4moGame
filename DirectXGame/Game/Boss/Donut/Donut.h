@@ -18,6 +18,7 @@ private:
 		Idle	,			//アイドル
 		Attack1,			//追従弾
 		Attack2,			//タックル
+		Dead,
 		Count				//カウント
 	};
 };

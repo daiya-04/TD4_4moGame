@@ -1,20 +1,20 @@
 #include "SingleDangerZone.h"
+#include"Boss/DangerZone/Zones/Simple/SinpleDangerZone.h"
+
 
 SingleDangerZone::SingleDangerZone(const DangerZoneParameters& param)
 {
 	//警告円生成
-	dangerZone_ = std::make_unique<DangerZone>(param);
+	dangerZone_ = std::make_unique<SinpleDangerZone>(param);
 	dangerZone_->SetPlayerPos(&pPos_);
 	//オブジェクト生成
 	gameObject_ = std::make_unique<GameObject>();
 	gameObject_->Init("DangerZone");
-
-
 }
 
 void SingleDangerZone::Init(const DangerZoneParameters& param)
 {
-	dangerZone_->SetParameter(param);
+	dangerZone_ = std::make_unique<SinpleDangerZone>(param);
 	dangerZone_->Reset();
 	isDraw_ = true;
 }

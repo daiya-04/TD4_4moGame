@@ -4,11 +4,20 @@
 #include"Boss/GingerbreadMan/Behavior/Idle/BossIdle.h"
 #include"Boss/Donut/Behavior/AttackSpin/BossSpinAttack.h"
 #include"Boss/Donut/Behavior/AttackPFollowBullet/Boss2AttackPFollowBullet.h"
+#include"Boss/Donut/Behavior/Dead/DonutDead.h"
 #pragma endregion
 
 Donut::Donut(const std::string& objectName, FollowCamera* camera, const DaiEngine::WorldTransform* playerWorld)
 {
 	IBoss::Init(objectName, camera, playerWorld);
+	//状態を設定
+	std::vector<std::string>names = {
+		"None",
+		"Idle",
+		"Spin",
+		"ShotBullet"
+	};
+	IBoss::SetDebugBehaviorName(names);
 
 	//マネージャの生成
 	IBoss::SetBulletType(BulletType::None);
@@ -21,6 +30,7 @@ Donut::Donut(const std::string& objectName, FollowCamera* camera, const DaiEngin
 	behaviors_[(size_t)BossBehavior::Idle] = std::make_unique<BossIdle>(&parameters_);
 	behaviors_[(size_t)BossBehavior::Attack1] = std::make_unique<Boss2SpinAttack>(&parameters_);
 	behaviors_[(size_t)BossBehavior::Attack2] = std::make_unique<Boss2AttackPFollowBullet>(&parameters_);
+	behaviors_[(size_t)BossBehavior::Dead] = std::make_unique<DonutDead>(&parameters_);
 
 	//ツリーを追加
 	for (auto& behavior : behaviors_) {

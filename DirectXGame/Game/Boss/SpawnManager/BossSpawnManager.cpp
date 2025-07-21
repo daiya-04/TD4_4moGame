@@ -58,6 +58,7 @@ void BossSpawnManager::Update()
 			bossType_ = (BossType)typeRequest_.value();
 			//リクエストをクリア
 			typeRequest_ = std::nullopt; 
+			changeBoss_ = false;
 
 		}
 		else {
@@ -73,7 +74,6 @@ void BossSpawnManager::Update()
 	else {
 		//次のボスが出るまでの待機時間
 		if (currentChangeCount_++ >= changeCount_) {
-			changeBoss_ = false;
 			//次のボスをリクエスト
 			typeRequest_ = (int)bossType_ + 1;
 		}
@@ -104,14 +104,12 @@ void BossSpawnManager::SetOnField(float y)
 	}
 	//フィールドのY取得
 	boss->parameters_.fieldY_ = y;
-	
-
 }
 
 void BossSpawnManager::CheckBossDead()
 {
 	//現在のボスが死んだ場合
-	if((bosses_[(int)bossType_]->GetIsDead()||isNextBoss_)&&bosses_[(int)bossType_]->parameters_.currentBulletNum_==0) {
+	if(!changeBoss_&&(bosses_[(int)bossType_]->GetIsDead()||isNextBoss_)&&bosses_[(int)bossType_]->parameters_.currentBulletNum_==0) {
 		//デバッグ用次ボス生成をOFF
 		isNextBoss_=false;
 

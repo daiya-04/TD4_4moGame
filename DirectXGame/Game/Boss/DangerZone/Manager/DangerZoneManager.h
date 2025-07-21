@@ -1,6 +1,6 @@
 #pragma once
 #include"InstancingGameObject/InstancingGameObject.h"
-#include"Boss/DangerZone/DangerZone.h"
+#include"Boss/DangerZone/IDangerZone/IDangerZone.h"
 #include"GlobalVariable/Tree/GlobalVariableTree.h"
 
 class DangerZoneManager :public InstancingGameObject {
@@ -37,7 +37,7 @@ public:
 	/// 警告円データ群取得
 	/// </summary>
 	/// <returns></returns>
-	std::list<std::unique_ptr<DangerZone>>&GetDangerZone() { return dangerZones_; }
+	std::list<std::unique_ptr<IDangerZone>>&GetDangerZone() { return dangerZones_; }
 
 private://**パラメータを設定**//
 
@@ -48,7 +48,7 @@ private:
 	GvariTree tree_;
 
 	//プレイヤーのワールド座標取得
-	std::list<std::unique_ptr<DangerZone>>dangerZones_;
+	std::list<std::unique_ptr<IDangerZone>>dangerZones_;
 
 private:
 

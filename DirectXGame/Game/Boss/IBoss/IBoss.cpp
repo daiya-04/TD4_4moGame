@@ -63,7 +63,8 @@ void IBoss::Init(const std::string& objectName, FollowCamera* camera, const DaiE
 	tree_.SetMonitorValue("HealHP", &isHeal_);
 	tree_.SetMonitorValue("HP", &HP_);
 	tree_.SetMonitorValue("currentCount", &parameters_.currentSec);
-	tree_.SetMonitorCombo("setBehavior", &debugBehavior_, behaviorNames_);
+	
+	tree_.SetMonitorValue("position", &world_->translation_);
 
 	tree_.SetValue("MaxHP", &maxHP_);
 	tree_.SetValue("Speed", &speed_);
@@ -78,6 +79,12 @@ void IBoss::Init(const std::string& objectName, FollowCamera* camera, const DaiE
 
 	tree_.SetTreeData(dangerZoneManager_->GetTree());
 	tree_.SetTreeData(bulletManager_->GetTree());
+}
+
+void IBoss::SetDebugBehaviorName(std::vector<std::string> names)
+{
+	tree_.SetMonitorCombo("setBehavior", &debugBehavior_, names);
+	behaviorNames_ = names;
 }
 
 void IBoss::InitParameters()
@@ -114,21 +121,10 @@ void IBoss::Update() {
 	if (parameters_.behaviorRequest_) {
 
 #ifdef _DEBUG
-		//デバッグ時の攻撃指定
-		if (debugBehavior_ == behaviorNames_[0]) {
-			//指定なし
-		}
-		else if (debugBehavior_ == behaviorNames_[1]) {
-			//待機
-			parameters_.behaviorRequest_ = 0;
-		}
-		else if (debugBehavior_ == behaviorNames_[2]) {
-			//攻撃1
-			parameters_.behaviorRequest_ = 1;
-		}
-		else {
-			//攻撃2
-			parameters_.behaviorRequest_ = 2;
+		if (behaviorNames_.size() != 0&&debugBehavior_) {
+			//デバッグ時の攻撃指定
+			//debugBehaviorが0の時は未指定
+			parameters_.behaviorRequest_= debugBehavior_-1;
 		}
 #endif // _DEBUG
 
@@ -279,12 +275,13 @@ void IBoss::OnCollision(DaiEngine::Collider* collider)
 		//HPが0以下なら死亡
 		//不死フラグが無効の場合
 		if (!isImmortal_) {
-			//死亡フラグ有効
-			isDead_ = true;
 			//体コライダーオフ
 			collider_->ColliderOff();
 			//全ての弾と警告円削除
 			ClearAllBulletAndZone();
+
+			//一番下の状態に変更（死亡状態
+			parameters_.behaviorRequest_ = (int)behaviors_.size() - 1;
 		}
 	}
 }

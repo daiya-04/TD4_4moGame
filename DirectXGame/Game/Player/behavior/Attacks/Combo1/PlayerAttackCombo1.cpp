@@ -20,7 +20,7 @@ void PlayerAttackCombo1::InitAction()
 void PlayerAttackCombo1::InitRigorAction()
 {
 	//攻撃コライダーを無効化
-	//player_->SetAttackColliderActive(false);
+	player_->SetAttackColliderActive(false);
 }
 
 void PlayerAttackCombo1::UpdatePreliminaryAction()

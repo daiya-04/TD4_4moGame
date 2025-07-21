@@ -58,8 +58,9 @@ void CupCakeWaveDive::UpdateBehavior2()
 {
 	//落下処理
 	param_->velocity_ = Vector3{ 0,-1.0f,0 }*fallSpd_;
-	//地面以下で終了
-	if (param_->world->translation_.y <= param_->fieldY_) {
+
+	//地面以下or0以下で終了
+	if (param_->world->translation_.y <= param_->fieldY_||param_->world->translation_.y<=0) {
 		countRequest_ = 3;
 
 		param_->bulletTypeRequest_ = BulletType::Wave;

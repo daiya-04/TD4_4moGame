@@ -1,5 +1,5 @@
 #pragma once
-#include"Boss/DangerZone/DangerZone.h"
+#include"Boss/DangerZone/IDangerZone/IDangerZone.h"
 #include"GameObject/GameObject.h"
 
 //警告円の描画を含むクラス
@@ -50,7 +50,7 @@ public://**パブリック関数**//
 private:
 
 	//警告円
-	std::unique_ptr<DangerZone>dangerZone_;
+	std::unique_ptr<IDangerZone>dangerZone_;
 
 	//インスタンス化されたゲームオブジェクト
 	std::unique_ptr<GameObject> gameObject_;

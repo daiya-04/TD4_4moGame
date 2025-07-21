@@ -74,6 +74,8 @@ private://**パラメータ変数**//
 	//警戒エリアのパラメータ
 	DangerZoneParameters param;
 
+	Vector3 jointPos_{};
+
 	//円のオフセット
 	Vector3 offsetZone_ = Vector3(0.0f, 0.0f, 0.0f);
 

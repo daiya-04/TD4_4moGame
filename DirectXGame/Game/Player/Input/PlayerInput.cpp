@@ -37,6 +37,8 @@ bool PlayerInput::GetInput(Type type)
 		return RollInput();
 	case PlayerInput::Attack:
 		return AttackInput();
+	case PlayerInput::Jump:
+		return JumpInput();
 	case PlayerInput::Count:
 		break;
 	default:
@@ -72,6 +74,21 @@ bool PlayerInput::AttackInput()
 
 	//コントローラー入力チェック
 	ans += input_->TriggerButton(DaiEngine::Input::Button::A);
+
+	//返却
+	return (bool)ans;
+}
+
+bool PlayerInput::JumpInput()
+{
+	//入力チェック変数生成と初期化
+	int ans = 0;
+
+	//キー入力チェック
+	ans = input_->TriggerKey(DIK_Z);
+
+	//コントローラー入力チェック
+	ans += input_->TriggerButton(DaiEngine::Input::Button::B);
 
 	//返却
 	return (bool)ans;

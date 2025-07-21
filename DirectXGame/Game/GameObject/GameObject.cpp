@@ -50,8 +50,7 @@ Vector3 GameObject::GetJointWorldPosition(const std::string& jointName) {
 	Vector3 localPos = model_->GetSkeleton().GetSkeletonPos(jointName);
 
 	// ワールド変換を適用（位置ベクトルなので第4引数は1）
-	Vector4 localPos4 = { localPos.x, localPos.y, localPos.z, 1.0f };
-	Vector4 worldPos4 = world_->matWorld_ * localPos4;
+	Vector3 worldPos = Transform(localPos, world_->matWorld_);
 
-	return { worldPos4.x, worldPos4.y, worldPos4.z };
+	return worldPos;
 }

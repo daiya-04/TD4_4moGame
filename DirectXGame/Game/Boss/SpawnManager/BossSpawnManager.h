@@ -36,7 +36,7 @@ public://**パブリック関数**//
 	/// 現在のボスの弾リストを取得
 	/// </summary>
 	/// <returns></returns>
-	std::list<std::unique_ptr<BossBullet>>& GetBullets() { return bosses_[(int)bossType_]->GetBullets(); }
+	std::list<std::unique_ptr<IBossBullet>>& GetBullets() { return bosses_[(int)bossType_]->GetBullets(); }
 
 	/// <summary>
 	/// 全てのボスの死亡フラグ取得

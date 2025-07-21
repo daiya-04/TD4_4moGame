@@ -121,8 +121,8 @@ void DebugTestScene::Update() {
 	/*human_->worldTransform_.UpdateMatrix();
 	animation_.Play(skeleton_);
 	
-	skeleton_.Update();
-	skinCluster_.Update(skeleton_);*/
+	skeleton_.UpdateObject();
+	skinCluster_.UpdateObject(skeleton_);*/
 	human_->Update();
 
 	obj_->worldTransform_.UpdateMatrix();

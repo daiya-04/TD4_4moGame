@@ -4,7 +4,7 @@
 #include"../IBehavior/IBossBehavior.h"
 #include"SphereCollider.h"
 #include"../Bullet/BossBulletManager/BossBulletManager.h"
-#include"../DangerZoneManager/DangerZoneManager.h"
+#include"Boss/DangerZone/Manager/DangerZoneManager.h"
 #include"../UI/BossUI.h"
 #include"../Blinking/Blinking.h"
 #include"../../GlobalVariable/Tree/GlobalVariableTree.h"
@@ -46,6 +46,8 @@ public://**パブリック関数**//
 	/// <param name="playerWorld"></param>
 	void Init(const std::string& objectName, FollowCamera* camera, const DaiEngine::WorldTransform* playerWorld);
 
+	void SetDebugBehaviorName(std::vector<std::string>names);
+
 	/// <summary>
 	/// 弾タイプ設定
 	/// </summary>
@@ -76,13 +78,13 @@ public://**パブリック関数**//
 	/// 死亡フラグ取得
 	/// </summary>
 	/// <returns></returns>
-	bool GetIsDead() { return isDead_; }
+	bool GetIsDead() { return parameters_.isDead_; }
 
 	/// <summary>
 	/// 弾データの取得
 	/// </summary>
 	/// <returns></returns>
-	std::list<std::unique_ptr<BossBullet>>& GetBullets() { return bulletManager_->GetBullets(); }
+	std::list<std::unique_ptr<IBossBullet>>& GetBullets() { return bulletManager_->GetBullets(); }
 
 	/// <summary>
 	/// ツリー取得
@@ -198,8 +200,7 @@ private://**パラメータ変数**//
 	int HP_ = 100;
 	//最大HP
 	int maxHP_ = 100;
-	//死亡フラグ
-	bool isDead_ = false;
+
 	//体コライダー半径
 	float radius_ = 1.0f;
 	//開始位置
@@ -226,14 +227,9 @@ private://**デバッグ用変数**//
 	Vector4 colliderColor_ = { 1.0f, 0.0f, 0.0f, 1.0f };
 
 	//攻撃指定
-	std::string debugBehavior_ = "None";
+	int debugBehavior_ = 0;
 
-	std::vector<std::string> behaviorNames_ = {
-	"None",
-	"Idle",
-	"Attack1",
-	"Attack2"
-	};
+	std::vector<std::string> behaviorNames_;
 
 	//無敵フラグ
 	bool isImmortal_ = false;
