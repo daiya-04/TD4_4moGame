@@ -1,8 +1,5 @@
 #include "BossBulletManager.h"
 
-#include"ColliderManager.h"
-#include"ShapesDraw.h"
-
 #include"Boss//Bullet//bullets/Fall/BossFallBullet.h"
 #include"Boss//Bullet//bullets/None/BossNoneBullet.h"
 #include"Boss//Bullet//bullets/Parabola/BossParabolaBullet.h"
@@ -18,12 +15,7 @@ BossBulletManager::BossBulletManager(bool isCandy)
 		InstancingGameObject::Init("Cream", 100);
 	}
 
-	collider_ = std::make_unique<DaiEngine::CylinderCollider>();
-	collider_->Init("wave", world_, radius_ , 2.0f);
-	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
-	collider_->SetStayCallback([this](DaiEngine::Collider*colidier) {if(colidier->GetTag()=="player")collider_->ColliderOff(); });
-	collider_->ColliderOff();
-
+	waveColliderMotion_ = std::make_unique<WaveColliderMotion>();
 
 	//警告円の生成
 	dangerZone_ = std::make_unique<InstancingGameObject>();
@@ -40,6 +32,7 @@ BossBulletManager::BossBulletManager(bool isCandy)
 	tree.SetValue("arriveCount", &arriveCount_);
 	//ツリーに追加
 	tree_.SetTreeData(tree);
+	tree_.SetTreeData(waveColliderMotion_->GetTree());
 }
 
 void BossBulletManager::Update()
@@ -75,7 +68,7 @@ void BossBulletManager::Update()
 	bullets_.remove_if([&](auto& data) {
 		if (data->GetDead()) {
 			if (data->GetType() == BulletType::Wave) {
-				collider_->ColliderOn();
+				waveColliderMotion_->Emit(data->GetWorld().translation_);
 			}
 			return true;
 		}
@@ -84,9 +77,7 @@ void BossBulletManager::Update()
 		}
 		});
 
-
-	Matrix4x4 rotateM = MakeRotateXMatrix(0) * MakeRotateYMatrix(0) * MakeRotateZMatrix(0);
-	collider_->Update(rotateM);
+	waveColliderMotion_->Update();
 }
 
 void BossBulletManager::Draw()
@@ -99,7 +90,7 @@ void BossBulletManager::Draw()
 
 	//弾コライダー描画
 #ifdef _DEBUG
-	ShapesDraw::DrawCylinder(std::get<Shapes::Cylinder>(collider_->GetShape()), *camera_, { 1,1,1,1 });
+	waveColliderMotion_->Draw(camera_);
 	for (auto& bullet : bullets_) {
 		bullet->ColliderDraw();
 	}

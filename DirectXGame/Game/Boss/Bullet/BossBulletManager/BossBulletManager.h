@@ -3,6 +3,7 @@
 #include"Boss/Bullet/IBossBullet/IBossBullet.h"
 #include"GlobalVariable/Tree/GlobalVariableTree.h"
 #include"Collider/CylinderCollider.h"
+#include"Boss/WaveColliderMotion/WaveColliderMotion.h"
 
 class BossBulletManager : public InstancingGameObject {
 
@@ -62,6 +63,9 @@ private:
 	//警告円用
 	std::unique_ptr<InstancingGameObject>dangerZone_;
 
+
+	std::unique_ptr<WaveColliderMotion>waveColliderMotion_;
+
 private:
 
 	//弾の初期高度
@@ -81,10 +85,5 @@ private:
 
 
 private://波の判定
-
-	//ワールド
-	DaiEngine::WorldTransform world_;
-	float radius_ = 1.0f;
-	std::unique_ptr<DaiEngine::CylinderCollider>collider_;
 
 };

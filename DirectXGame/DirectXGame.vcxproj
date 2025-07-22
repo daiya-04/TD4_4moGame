@@ -125,6 +125,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Game\Boss\Donut\Behavior\Dead\DonutDead.cpp" />
     <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\Dead\GingerbreadManDead.cpp" />
     <ClCompile Include="Game\Boss\SquareDangerZone\SquareDangerZone.cpp" />
+    <ClCompile Include="Game\Boss\WaveColliderMotion\WaveColliderMotion.cpp" />
     <ClCompile Include="Game\Effect\Effect.cpp" />
     <ClCompile Include="Game\Effect\EffectManager.cpp" />
     <ClCompile Include="Game\Boss\Blinking\Blinking.cpp" />
@@ -255,6 +256,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Boss\Donut\Behavior\Dead\DonutDead.h" />
     <ClInclude Include="Game\Boss\GingerbreadMan\Behavior\Dead\GingerbreadManDead.h" />
     <ClInclude Include="Game\Boss\SquareDangerZone\SquareDangerZone.h" />
+    <ClInclude Include="Game\Boss\WaveColliderMotion\WaveColliderMotion.h" />
     <ClInclude Include="Game\Effect\Effect.h" />
     <ClInclude Include="Game\Effect\EffectManager.h" />
     <ClInclude Include="Game\Boss\Blinking\Blinking.h" />
