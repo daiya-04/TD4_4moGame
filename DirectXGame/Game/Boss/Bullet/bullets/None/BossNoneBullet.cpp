@@ -5,6 +5,7 @@ BossNoneBullet::BossNoneBullet(const BossBulletData& data, DaiEngine::Camera* ca
 {
 	IBossBullet::Init(data, camera);
 	data_.world.translation_.y = 0;
+
 }
 
 void BossNoneBullet::Update()
@@ -12,6 +13,7 @@ void BossNoneBullet::Update()
 	//行列更新のみ
 	IBossBullet::UpdateObject();
 }
+
 
 void BossNoneBullet::AddOnCollisionBlock() {
 	if (data_.type == BulletType::None) {

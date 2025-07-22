@@ -21,11 +21,23 @@ BossBulletManager::BossBulletManager(bool isCandy)
 	dangerZone_ = std::make_unique<InstancingGameObject>();
 	dangerZone_->Init("DangerZone", 100);
 
-	tree_.name_ = "FallingBullet";
+	tree_.name_ = "Bullet";
 	tree_.SetValue("spawnHeight", &bulletStartHeight_);
 	tree_.SetValue("fallSpeed", &fallSpeed_);
-	tree_.SetValue("colliderRadius", &colliderRadius_);
 
+	std::string typeStrings[(int)BulletType::Count] = {
+		"Fall",
+		"None",
+		"Parabola",
+		"Wave",
+		"Dive"
+	};
+
+	int count = 0;
+	for (auto radius : colliderRadius_) {
+		tree_.SetValue(typeStrings[count] + "Radius", &radius);
+		count++;
+	}
 	GvariTree tree;
 	tree.name_ = "parabolaBullet";
 	tree.SetValue("parabolaHeight", &parabolaHeight_);
@@ -117,7 +129,7 @@ void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos, Bullet
 	//ワールド初期化
 	data.world.Init();
 	data.radius = pos.scale_.x;
-	data.colliderRadius = colliderRadius_;
+	data.colliderRadius = colliderRadius_[(int)type];
 	//座標設定
 	data.world.translation_ = position;
 

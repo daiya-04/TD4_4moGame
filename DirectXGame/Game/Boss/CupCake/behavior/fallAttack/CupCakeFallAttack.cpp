@@ -1,5 +1,5 @@
 #include "CupCakeFallAttack.h"
-
+#include"ColliderManager.h"
 #include "EffectManager.h"
 #include "AudioManager.h"
 
@@ -7,14 +7,28 @@ CupCakeFallAttack::CupCakeFallAttack(BossParameters* parameters)
 {
 	param_ = parameters;
 
+	collider_ = std::make_unique<DaiEngine::SphereCollider>();
+	collider_->Init("jumpATK", *param_->world, colliderRadius_);
+	collider_->ColliderOff();
+	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
+	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {if (collider->GetTag() == "player")collider_->ColliderOff(); });
+
+
 	tree_.name_ = "jumpAttack";
 	tree_.SetValue("waitCount", &waitCount_);
 	tree_.SetValue("attackCount", &attackCount_);
 	tree_.SetValue("jumpHeight", &jumpHeight_);
 	tree_.SetValue("jumpNum", &jumpNum_);
 	tree_.SetValue("stopCount", &stopCount_);
+	tree_.SetValue("colliderRadius", &colliderRadius_);
 
 	stampSE_ = DaiEngine::AudioManager::Load("SE/CapCakeDownAttack.mp3");
+}
+
+CupCakeFallAttack::~CupCakeFallAttack()
+{
+	//コライダー削除
+	DaiEngine::ColliderManager::GetInstance()->RemoveCollider(collider_.get());
 }
 
 void CupCakeFallAttack::InitBehavior0()
@@ -22,6 +36,7 @@ void CupCakeFallAttack::InitBehavior0()
 	//ステリセット
 	currentJumpNum_ = 0;
 	countRequest_ = 1;
+	collider_->SetRadius(colliderRadius_);
 }
 
 void CupCakeFallAttack::InitBehavior1()
@@ -38,11 +53,14 @@ void CupCakeFallAttack::InitBehavior2()
 
 	//ターゲット座標取得
 	targetPos = param_->playerWorld_->translation_;
+
+	collider_->ColliderOn();
 }
 
 void CupCakeFallAttack::InitBehavior3()
 {
 	//ジャンプ後交直
+	collider_->ColliderOff();
 }
 
 
@@ -72,7 +90,7 @@ void CupCakeFallAttack::UpdateBehavior2()
 	if (param_->currentSec >= attackCount_) {
 		if (currentJumpNum_ >= jumpNum_) {
 			countRequest_ = 3;
-			EffectManager::GetInstance()->Trigger("CapCakeStampEffect", param_->world->translation_ - Vector3(0.0f, 1.0f, 0.0f));
+			
 		}
 		else {
 			param_->bulletTypeRequest_ = BulletType::Dive;
@@ -82,7 +100,10 @@ void CupCakeFallAttack::UpdateBehavior2()
 		}
 		EffectManager::GetInstance()->Trigger("CapCakeStampEffect", param_->world->translation_ - Vector3(0.0f, 1.0f, 0.0f));
 		stampSE_->Play();
+		collider_->ColliderOff();
 	}
+
+	collider_->Update();
 }
 
 void CupCakeFallAttack::UpdateBehavior3()

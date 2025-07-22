@@ -1,5 +1,7 @@
 #pragma once
 #include"Player/behavior/Attacks/IPlayerAttack.h"
+#include"SphereCollider.h"
+#include<memory>
 
 class SpinAttack : public IPlayerAttack {
 
@@ -28,6 +30,10 @@ public://**パブリック関数**//
 
 
 private:
+
+	std::unique_ptr<DaiEngine::SphereCollider>collider_;
+
+	float radius_ = 2.0f;
 
 	//上昇速度
 	float upSpeed_ = 0.1f;

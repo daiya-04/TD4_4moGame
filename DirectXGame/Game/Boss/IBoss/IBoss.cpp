@@ -79,6 +79,13 @@ void IBoss::Init(const std::string& objectName, FollowCamera* camera, const DaiE
 
 	tree_.SetTreeData(dangerZoneManager_->GetTree());
 	tree_.SetTreeData(bulletManager_->GetTree());
+
+	GvariTree pDTree;
+	pDTree.name_ = "damageFromPlayer";
+	pDTree.SetValue("normal", &playerDamage_);
+	pDTree.SetValue("spin", &playerSpinATKDamage_);
+
+	tree_.SetTreeData(pDTree);
 }
 
 void IBoss::SetDebugBehaviorName(std::vector<std::string> names)
@@ -267,10 +274,17 @@ void IBoss::OnCollision(DaiEngine::Collider* collider)
 {
 	//プレイヤーの攻撃ならHP減少
 	if (collider->GetTag() == "playerAttack") {
-		HP_--;
+		HP_ -= playerDamage_;
+		//カウント初期化
+		blinking_->StartBlinking();
+
+	} else if(collider->GetTag() == "playerSpin") {
+		HP_ -= playerSpinATKDamage_;;
 		//カウント初期化
 		blinking_->StartBlinking();
 	}
+
+	//0なら死亡モーション
 	if (HP_ <= 0) {
 		//HPが0以下なら死亡
 		//不死フラグが無効の場合

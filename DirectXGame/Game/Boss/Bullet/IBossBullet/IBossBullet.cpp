@@ -19,6 +19,11 @@ void IBossBullet::Init(const BossBulletData& data, DaiEngine::Camera* camera) {
 	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {OnCollision(collider); });
 	//コライダーを有効に
 	collider_->ColliderOn();
+
+	//Diveのみコライダー判定無し
+	if (data.type == BulletType::Dive) {
+		collider_->ColliderOff();
+	}
 }
 
 void IBossBullet::ColliderDraw()

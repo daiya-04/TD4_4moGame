@@ -219,6 +219,11 @@ private://**パラメータ変数**//
 
 	BulletType bulletType_ = BulletType::Fall; //弾の種類
 
+
+	int playerDamage_ = 1;
+
+	int playerSpinATKDamage_ = 2;
+
 private://**デバッグ用変数**//
 
 
