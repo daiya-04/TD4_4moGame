@@ -283,7 +283,7 @@ void GameScene::Update() {
 			}
 
 			//フィールドに影響
-			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, deltaY);
+			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetColliderRadius() * 1.5f, deltaY);
 			bullet->OnCollisionBlock();
 			continue;
 		}

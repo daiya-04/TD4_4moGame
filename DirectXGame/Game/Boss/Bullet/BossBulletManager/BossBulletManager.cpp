@@ -34,7 +34,7 @@ BossBulletManager::BossBulletManager(bool isCandy)
 	};
 
 	int count = 0;
-	for (auto radius : colliderRadius_) {
+	for (auto& radius : colliderRadius_) {
 		tree_.SetValue(typeStrings[count] + "Radius", &radius);
 		count++;
 	}
