@@ -36,7 +36,7 @@ private:
 	float radius_ = 2.0f;
 
 	//上昇速度
-	float upSpeed_ = 0.1f;
+	float upSpeed_ = 1.1f;
 
 	//落下速度
 	float downSpeed_ = 0.01f;

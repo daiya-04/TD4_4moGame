@@ -64,6 +64,7 @@ Player::Player()
 #pragma region デバッグパラメータ設定
 	std::unique_ptr<GVariGroup>gvg = std::make_unique<GVariGroup>("Player");
 
+	gvg->SetMonitorValue("isDead", &isDead_);
 	gvg->SetMonitorValue("Immortal!!!!!!!!!!!!!!!!!", &isImmortal_);
 	gvg->SetMonitorValue("HealHP", &isHeal_);
 	gvg->SetMonitorValue("HP", &parameters_.hp);

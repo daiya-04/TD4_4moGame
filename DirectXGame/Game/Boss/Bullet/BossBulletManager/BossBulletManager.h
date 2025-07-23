@@ -75,7 +75,7 @@ private:
 	float fallSpeed_ = 1.0f;
 
 	//コライダー半径
-	float colliderRadius_[(int)BulletType::Count];
+	float colliderRadius_[(int)BulletType::Count] = {1.0f,1.0f ,1.0f ,1.0f,1.0f };
 
 	//放物線処理到着時間
 	int arriveCount_ = 60;

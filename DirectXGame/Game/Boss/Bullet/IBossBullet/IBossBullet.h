@@ -104,7 +104,7 @@ public:
 	/// コライダー半径
 	/// </summary>
 	/// <returns></returns>
-	float GetColliderRadius() { collider_->GetRadius(); }
+	float GetColliderRadius() { return collider_->GetRadius(); }
 
 private:
 
