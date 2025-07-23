@@ -39,6 +39,7 @@
         ],
         "MaxHP": 10,
         "Move": {
+            "degreeGravityOnTop": 4.0,
             "degreeSpd": 1.0,
             "jumpStSpd": 10.0,
             "speed": 0.20000000298023224
@@ -76,7 +77,7 @@
         ],
         "gravity": 0.10000000149011612,
         "playerEntry": {
-            "animRate": 1.0,
+            "animRate": 3.0,
             "maxRate": 60.0,
             "startPos": [
                 0.0,

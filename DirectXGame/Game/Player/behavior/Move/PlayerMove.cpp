@@ -11,6 +11,7 @@ PlayerMove::PlayerMove()
 	tree_.SetValue("speed",&moveSpped_);
 	tree_.SetValue("jumpStSpd", &stSpd_);
 	tree_.SetValue("degreeSpd", &gravity_);
+	tree_.SetValue("degreeGravityOnTop", &degreeGravityOnTop_);
 
 	player_->SetAnimationName("PlayerIdle");
 }
@@ -54,7 +55,7 @@ void PlayerMove::JumpUpdate(Vector3&move)
 	if (isJump_) {		
 		move.y = nowSpd_;
 		if(nowSpd_<=1.0f&&nowSpd_>=-1.0f){
-			nowSpd_ -= gravity_/4;
+			nowSpd_ -= gravity_/degreeGravityOnTop_;
 		}
 		else {
 			nowSpd_ -= gravity_;
