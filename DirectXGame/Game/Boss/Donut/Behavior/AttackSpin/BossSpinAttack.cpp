@@ -134,7 +134,7 @@ void Boss2SpinAttack::UpdateBehavior1()
 	}
 
 	collider_->Update();
-	emitPos_ = collider_->GetWorldPos() - Vector3(0.0f, 1.0f, 0.0f);
+	emitPos_ = collider_->GetWorldPos();
 }
 
 void Boss2SpinAttack::UpdateBehavior2()

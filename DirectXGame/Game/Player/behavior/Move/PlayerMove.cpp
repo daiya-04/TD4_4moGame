@@ -87,10 +87,7 @@ void PlayerMove::BehaviorChange()
 
 void PlayerMove::MoveVeloUpdate(const Vector3 &move)
 {
-	if (isMove_) {
-		Vector3 emitPos = player_->GetWorld().GetWorldPos() - Vector3(0.0f, 1.0f, 0.0f);
-		EffectManager::GetInstance()->Start("PlayerMoveEffect", &emitPos);
-	}
+	
 	emitPos_ = player_->GetWorld().GetWorldPos() - Vector3(0.0f, 1.0f, 0.0f);
 
 	//ジャンプ中ならスキップ
@@ -99,7 +96,7 @@ void PlayerMove::MoveVeloUpdate(const Vector3 &move)
 	//入力がない場合
 	if (move.x == 0 && move.y == 0 && move.z == 0) {
 
-		if (isMove_) {
+ 		if (isMove_) {
 			isMove_ = false;
 			//待機モーション
 			player_->SetAnimationName("PlayerIdle");
