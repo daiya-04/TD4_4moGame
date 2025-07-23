@@ -4,7 +4,7 @@
 BossNoneBullet::BossNoneBullet(const BossBulletData& data, DaiEngine::Camera* camera)
 {
 	IBossBullet::Init(data, camera);
-	data_.world.translation_.y = 0;
+	data_.world.translation_.y = data.warningWorld.translation_.y;
 
 }
 

@@ -392,6 +392,7 @@ Vector3 Player::SetBody2Input()
 		world_->rotation_.y = GetYRotate({ velocity.x,velocity.z });
 	}
 
+
 	return velocity;
 }
 
