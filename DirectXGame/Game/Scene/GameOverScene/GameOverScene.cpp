@@ -16,18 +16,22 @@ void GameOverScene::SetGlobalVariables() {
 	DaiEngine::GlobalVariables* globalVariables = DaiEngine::GlobalVariables::GetInstance();
 
 
-	//AボタンUIの調整項目追加
+	//ゲームオーバーテキスト
 	std::string groupName = "GameOverText";
 	globalVariables->CreateGroup(groupName);
 	globalVariables->AddItem(groupName, "Translation", gameOverText_->GetPosition());
-	//ワープホールの調整項目追加
+	//
 	groupName = "GO_UI_TitleBack";
 	globalVariables->CreateGroup(groupName);
 	globalVariables->AddItem(groupName, "Translation", titleBackUI_->GetPosition());
-	//ゲーム開始演出の調整項目追加
+	//
 	groupName = "GO_UI_ReStart";
 	globalVariables->CreateGroup(groupName);
 	globalVariables->AddItem(groupName, "Translation", reStartUI_->GetPosition());
+	//
+	groupName = "GO_UI_Continue";
+	globalVariables->CreateGroup(groupName);
+	globalVariables->AddItem(groupName, "Translation", continueUI_->GetPosition());
 
 
 }
@@ -35,18 +39,21 @@ void GameOverScene::SetGlobalVariables() {
 void GameOverScene::ApplyGlobalVariables() {
 	DaiEngine::GlobalVariables* globalVariables = DaiEngine::GlobalVariables::GetInstance();
 
-	//AボタンUIのパラメータ設定
+	//
 	std::string groupName = "GameOverText";
 	gameOverText_->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
 
-	//ワープホールのパラメータ設定
+	//
 	groupName = "GO_UI_TitleBack";
 	titleBackUI_->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
 
-	//ゲーム開始演出のパラメータ設定
+	//
 	groupName = "GO_UI_ReStart";
 	reStartUI_->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
 
+	//
+	groupName = "GO_UI_Continue";
+	continueUI_->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
 
 }
 
@@ -69,6 +76,7 @@ void GameOverScene::Init() {
 	uint32_t gameOverTextTex = DaiEngine::TextureManager::Load("gameOver.png");
 	uint32_t titleBackTex = DaiEngine::TextureManager::Load("TitleBack.png");
 	uint32_t reStartTex = DaiEngine::TextureManager::Load("StartBiging.png");
+	uint32_t continueTex = DaiEngine::TextureManager::Load("Continue.png");
 	///
 
 	bgm_ = DaiEngine::AudioManager::Load("BGM/GameOver.mp3");
@@ -86,6 +94,10 @@ void GameOverScene::Init() {
 	reStartUI_.reset(DaiEngine::Sprite::Create(reStartTex, {}));
 	reStartUI_->SetSize({ 350.0f, 70.0f });
 	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,70.0f });
+
+	continueUI_.reset(DaiEngine::Sprite::Create(continueTex, {}));
+	continueUI_->SetSize({ 350.0f, 70.0f });
+	continueUI_->SetTextureArea({ 350.0f * static_cast<float>(gContinueUISwitch_),0.0f }, { 350.0f,70.0f });
 
 	SetGlobalVariables();
 	ApplyGlobalVariables();
@@ -123,12 +135,14 @@ void GameOverScene::Update() {
 #endif // _DEBUG
 
 
+	MenuInput();
 
-	switch (select_) {
+
+	/*switch (select_) {
 	case Select::TitleBack:
 
 		if (input->TriggerKey(DIK_UP) || input->TriggerButton(DaiEngine::Input::Button::DPAD_UP) || input->TriggerLStick(DaiEngine::Input::Stick::Up)) {
-			select_ = Select::ReStrat;
+			select_ = Select::ReStart;
 			gTitleBackUISwitch_ = UISwitch::Off;
 			gReStartUISwitch_ = UISwitch::On;
 			choiceSE_->Play();
@@ -141,7 +155,7 @@ void GameOverScene::Update() {
 		}
 
 		break;
-	case Select::ReStrat:
+	case Select::ReStart:
 
 		if (input->TriggerKey(DIK_DOWN) || input->TriggerButton(DaiEngine::Input::Button::DPAD_DOWN) || input->TriggerLStick(DaiEngine::Input::Stick::Down)) {
 			select_ = Select::TitleBack;
@@ -156,10 +170,16 @@ void GameOverScene::Update() {
 		}
 
 		break;
-	}
+	}*/
+
+
+	gReStartUISwitch_ = (select_ == Select::ReStart) ? UISwitch::On : UISwitch::Off;
+	gTitleBackUISwitch_ = (select_ == Select::TitleBack) ? UISwitch::On : UISwitch::Off;
+	gContinueUISwitch_ = (select_ == Select::Continue) ? UISwitch::On : UISwitch::Off;
 
 	titleBackUI_->SetTextureArea({ 350.0f * static_cast<float>(gTitleBackUISwitch_),0.0f }, { 350.0f,70 });
 	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,70 });
+	continueUI_->SetTextureArea({ 350.0f * static_cast<float>(gContinueUISwitch_),0.0f }, { 350.0f,70 });
 
 
 	///
@@ -196,7 +216,8 @@ void GameOverScene::DrawUI() {
 	gameOverText_->Draw();
 	titleBackUI_->Draw();
 	reStartUI_->Draw();
-
+	continueUI_->Draw()
+		;
 }
 
 void GameOverScene::DrawPostEffect() {
@@ -217,4 +238,45 @@ void GameOverScene::DebugGUI() {
 
 
 #endif // _DEBUG
+}
+
+void GameOverScene::MenuInput() {
+
+	int currentIndex = static_cast<int>(std::distance(order_.begin(), std::find(order_.begin(), order_.end(), select_)));
+
+	auto* input = DaiEngine::Input::GetInstance();
+	if (input->TriggerKey(DIK_UP) || input->TriggerButton(DaiEngine::Input::Button::DPAD_UP) || input->TriggerLStick(DaiEngine::Input::Stick::Up)) {
+		if (currentIndex > 0) {
+			select_ = order_[currentIndex - 1];
+			choiceSE_->Play();
+		}
+	}
+
+	if (input->TriggerKey(DIK_DOWN) || input->TriggerButton(DaiEngine::Input::Button::DPAD_DOWN) || input->TriggerLStick(DaiEngine::Input::Stick::Down)) {
+		if (currentIndex < order_.size() - 1) {
+			select_ = order_[currentIndex + 1];
+			choiceSE_->Play();
+		}
+	}
+
+	if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
+		onSelect_[select_]();
+	}
+
+}
+
+void GameOverScene::ToTitleBack() {
+	doneSE_->Play();
+	DaiEngine::SceneManager::GetInstance()->ChangeScene("Title");
+	bossManager_->SetBossType(BossType::GingerbreadMan);
+}
+
+void GameOverScene::ToContinue() {
+	doneSE_->Play();
+	DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
+}
+
+void GameOverScene::ToReStart() {
+	doneSE_->Play();
+	DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
 }

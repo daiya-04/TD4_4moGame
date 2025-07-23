@@ -93,7 +93,7 @@ private:
 
 	enum class Select {
 		TitleBack,
-		ReStrat,
+		ReStart,
 	};
 
 	Select select_ = Select::TitleBack;
