@@ -499,6 +499,7 @@
     <ClCompile Include="Game\Boss\Donut\Behavior\Dead\DonutDead.cpp" />
     <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\Dead\GingerbreadManDead.cpp" />
     <ClCompile Include="Game\Boss\WaveColliderMotion\WaveColliderMotion.cpp" />
+    <ClCompile Include="Game\Boss\BossManager\BossManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -852,5 +853,7 @@
     <ClInclude Include="Game\Boss\Donut\Behavior\Dead\DonutDead.h" />
     <ClInclude Include="Game\Boss\GingerbreadMan\Behavior\Dead\GingerbreadManDead.h" />
     <ClInclude Include="Game\Boss\WaveColliderMotion\WaveColliderMotion.h" />
+    <ClInclude Include="Game\Boss\BossManager\BossManager.h" />
+    <ClInclude Include="Game\Boss\BossType\BossType.h" />
   </ItemGroup>
 </Project>

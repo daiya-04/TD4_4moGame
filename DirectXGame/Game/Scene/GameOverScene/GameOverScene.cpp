@@ -90,6 +90,8 @@ void GameOverScene::Init() {
 	SetGlobalVariables();
 	ApplyGlobalVariables();
 
+	bossManager_ = BossManager::GetInstance();
+
 }
 
 void GameOverScene::Update() {
@@ -135,6 +137,7 @@ void GameOverScene::Update() {
 		if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
 			doneSE_->Play();
 			DaiEngine::SceneManager::GetInstance()->ChangeScene("Title");
+			bossManager_->SetBossType(BossType::GingerbreadMan);
 		}
 
 		break;

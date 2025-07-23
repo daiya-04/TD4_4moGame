@@ -5,6 +5,8 @@
 #include "Sprite.h"
 #include <memory>
 
+#include "Boss/BossManager/BossManager.h"
+
 namespace DaiEngine {
 	class SceneManager final {
 	private:
@@ -43,5 +45,6 @@ namespace DaiEngine {
 		SceneManager(const SceneManager&) = delete;
 		SceneManager& operator=(const SceneManager&) = delete;
 
+		BossManager* bossSpawnManager_ = nullptr;
 	};
 }
