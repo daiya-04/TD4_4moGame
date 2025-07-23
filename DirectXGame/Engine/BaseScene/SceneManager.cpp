@@ -33,6 +33,9 @@ namespace DaiEngine {
 		scene_ = sceneFactory_->CreateScene("Game");
 #endif // _DEBUG
 
+		bossSpawnManager_ = BossManager::GetInstance();
+		bossSpawnManager_->Initialize(BossType::GingerbreadMan);
+
 		scene_->Init();
 
 	}

@@ -38,6 +38,8 @@
 
 #include "PlayerAttackEffect.h"
 
+#include "Boss/BossManager/BossManager.h"
+
 //ゲームシーンクラス
 class GameScene : public DaiEngine::IScene {
 public:
@@ -129,5 +131,6 @@ private:
 	//UI（とりあえず雑に）
 	std::map<std::string, std::unique_ptr<DaiEngine::Sprite>> uis_;
 
+	BossManager* bossManager_ = nullptr;
 };
 

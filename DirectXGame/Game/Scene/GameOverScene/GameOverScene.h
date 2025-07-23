@@ -11,6 +11,8 @@
 #include "SpotLight.h"
 #include "Audio.h"
 
+#include "Boss/BossManager/BossManager.h"
+
 
 class GameOverScene : public DaiEngine::IScene {
 public:
@@ -105,5 +107,6 @@ private:
 	UISwitch gTitleBackUISwitch_ = UISwitch::Off;
 	UISwitch gReStartUISwitch_ = UISwitch::On;
 
+	BossManager* bossManager_ = nullptr;
 };
 

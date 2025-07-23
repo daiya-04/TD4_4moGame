@@ -177,7 +177,8 @@ void GameScene::Init() {
 	//セットされたデータで初期化
 	player_->Init();
 	//boss_->Initialize();
-	bossSpawnManager_->Initialize();
+	bossManager_ = BossManager::GetInstance();
+	bossSpawnManager_->Initialize(bossManager_->GetBossType());
 
 	field_->CreateStage();
 	field_->StartStage();
