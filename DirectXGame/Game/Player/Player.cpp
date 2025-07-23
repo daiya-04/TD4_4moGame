@@ -12,6 +12,7 @@
 #include"Player/behavior/Move/PlayerMove.h"
 #include"Player/behavior/AttackManager/PlayerAttackManager.h"
 #include"Player/behavior/SpinAttack/SpinAttack.h"
+#include"Player/behavior/Dead/PlayerDead.h"
 #pragma endregion
 
 #include<numbers>
@@ -51,6 +52,7 @@ Player::Player()
 	behaviors_[(size_t)Behavior::Roll] = std::make_unique<PlayerRoll>();
 	behaviors_[(size_t)Behavior::Attack] = std::make_unique<PlayerAttackManager>();
 	behaviors_[(size_t)Behavior::SpinAttack] = std::make_unique<SpinAttack>();
+	behaviors_[(size_t)Behavior::Dead] = std::make_unique<PlayerDead>();
 
 	//描画フラグON
 	SetDraw(false);
@@ -318,7 +320,8 @@ void Player::OnCollison(DaiEngine::Collider* collider)
 
 		//不死フラグが無効の場合
 		if (!isImmortal_) {
-			isDead_ = true;
+			//死亡シーンへ移行
+			behaviorRequest_ = Behavior::Dead;
 		}
 	}
 

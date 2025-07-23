@@ -82,6 +82,12 @@ public://**パブリック変数**//
 	void SetWorldTranslate(const Vector3& translate);
 
 	/// <summary>
+	/// 死亡フラグセット
+	/// </summary>
+	/// <param name="isDead"></param>
+	void SetDead(bool isDead) { isDead_ = isDead; };
+
+	/// <summary>
 	/// 当たり判定処理
 	/// </summary>
 	void OnCollison(DaiEngine::Collider* collider);
@@ -215,6 +221,7 @@ public://**状態**//
 		Roll,	//回避
 		Attack,	//攻撃
 		SpinAttack,		//スピンアタック
+		Dead,	//死亡
 		Count	//状態の数
 	}behaviorName_ = Behavior::Move;
 

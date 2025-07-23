@@ -15,8 +15,6 @@ void DonutDead::Init()
 	param_->isLoopAnime_ = false;
 	//再生速度変更
 	param_->animationLeverage_ = animeLeverage_;
-
-	count_ = 0;
 }
 
 void DonutDead::Update()

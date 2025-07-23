@@ -500,6 +500,7 @@
     <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\Dead\GingerbreadManDead.cpp" />
     <ClCompile Include="Game\Boss\WaveColliderMotion\WaveColliderMotion.cpp" />
     <ClCompile Include="Game\Boss\BossManager\BossManager.cpp" />
+    <ClCompile Include="Game\Player\behavior\Dead\PlayerDead.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -855,5 +856,6 @@
     <ClInclude Include="Game\Boss\WaveColliderMotion\WaveColliderMotion.h" />
     <ClInclude Include="Game\Boss\BossManager\BossManager.h" />
     <ClInclude Include="Game\Boss\BossType\BossType.h" />
+    <ClInclude Include="Game\Player\behavior\Dead\PlayerDead.h" />
   </ItemGroup>
 </Project>

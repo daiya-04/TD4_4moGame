@@ -16,7 +16,6 @@ void GingerbreadManDead::Init()
 	//再生速度変更
 	param_->animationLeverage_ = animeLeverage_;
 
-	count_ = 0;
 }
 
 void GingerbreadManDead::Update()
