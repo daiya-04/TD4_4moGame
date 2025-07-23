@@ -114,7 +114,7 @@ private:
 		{ Select::ReStart, [this]() { ToReStart(); } },
 	};
 
-	Select select_ = Select::TitleBack;
+	Select select_ = Select::Continue;
 
 	enum class UISwitch {
 		On,
