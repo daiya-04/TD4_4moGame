@@ -279,4 +279,5 @@ void GameOverScene::ToContinue() {
 void GameOverScene::ToReStart() {
 	doneSE_->Play();
 	DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
+	bossManager_->SetBossType(BossType::GingerbreadMan);
 }
