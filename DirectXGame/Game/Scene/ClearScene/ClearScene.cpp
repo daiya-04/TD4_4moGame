@@ -126,7 +126,7 @@ void ClearScene::Update() {
 	case Select::TitleBack:
 
 		if (input->TriggerKey(DIK_DOWN) || input->TriggerButton(DaiEngine::Input::Button::DPAD_DOWN) || input->TriggerLStick(DaiEngine::Input::Stick::Down)) {
-			select_ = Select::ReStrat;
+			select_ = Select::ReStart;
 			gTitleBackUISwitch_ = UISwitch::Off;
 			gReStartUISwitch_ = UISwitch::On;
 			choiceSE_->Play();
@@ -138,7 +138,7 @@ void ClearScene::Update() {
 		}
 
 		break;
-	case Select::ReStrat:
+	case Select::ReStart:
 
 		if (input->TriggerKey(DIK_UP) || input->TriggerButton(DaiEngine::Input::Button::DPAD_UP) || input->TriggerLStick(DaiEngine::Input::Stick::Up)) {
 			select_ = Select::TitleBack;
