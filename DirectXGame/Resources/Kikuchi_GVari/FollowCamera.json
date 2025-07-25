@@ -1,8 +1,18 @@
 {
     "FollowCamera": {
-        "followSpd": 0.30000001192092896,
+        "devOff": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "devRotate": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "followSpd": 0.5,
         "followSpdMaxDistance": 4.929999828338623,
-        "maxEsingCount": 20.0,
+        "maxEsingCount": 60.0,
         "maxFollowSpdMultiply": 4.0,
         "offset_Follow": [
             0.0,
