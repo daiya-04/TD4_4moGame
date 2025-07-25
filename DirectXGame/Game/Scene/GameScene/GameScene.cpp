@@ -234,6 +234,7 @@ void GameScene::Init() {
 	EffectManager::GetInstance()->AddEffect("DonutsStageApperEffect");
 	EffectManager::GetInstance()->AddEffect("StickAttackEffect");
 	EffectManager::GetInstance()->AddEffect("CapCakeStampEffect");
+	EffectManager::GetInstance()->AddEffect("WhipFinishEffect");
 
 	///
 

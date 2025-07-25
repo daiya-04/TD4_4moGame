@@ -1,9 +1,11 @@
 #include "BossFallBullet.h"
 #include "EffectManager.h"
+#include "AudioManager.h"
 
 BossFallBullet::BossFallBullet(const BossBulletData& data, DaiEngine::Camera* camera)
 {
 	IBossBullet::Init(data, camera);
+	candySE_ = DaiEngine::AudioManager::Load("SE/CandyBreak.mp3");
 }
 
 void BossFallBullet::Update()
@@ -21,4 +23,5 @@ void BossFallBullet::AddOnCollisionBlock()
 {
 	//エフェクトを生成
 	EffectManager::GetInstance()->Trigger("CandyFinishEffect", data_.world.GetWorldPos());
+	candySE_->Play();
 }
