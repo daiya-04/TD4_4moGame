@@ -75,6 +75,9 @@ void EffectManager::Start(const std::string& effectName, const Vector3* pos) {
 //}
 
 void EffectManager::End(const std::string& effectName) {
+
+	
+
 	auto it = effectPool_.find(effectName);
 	if (it != effectPool_.end()) {
 		for (auto& effect : it->second) {
