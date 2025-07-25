@@ -1,11 +1,13 @@
 #include "BossParabolaBullet.h"
 #include "EffectManager.h"
+#include "AudioManager.h"
 
 BossParabolaBullet::BossParabolaBullet(const BossBulletData& data, DaiEngine::Camera* camera)
 {
 	IBossBullet::Init(data, camera);
 	data_.world.translation_.y = 0;
 	isActive_ = false;
+	whipSE_ = DaiEngine::AudioManager::Load("SE/CreamAttack.mp3");
 }
 
 void BossParabolaBullet::Update()
@@ -44,5 +46,6 @@ void BossParabolaBullet::Update()
 
 void BossParabolaBullet::AddOnCollisionBlock()
 {
-	EffectManager::GetInstance()->Trigger("CandyFinishEffect", data_.world.GetWorldPos());
+	EffectManager::GetInstance()->Trigger("WhipFinishEffect", data_.world.GetWorldPos());
+	whipSE_->Play();
 }

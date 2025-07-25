@@ -1,5 +1,6 @@
 #pragma once
 #include"Boss/Bullet/IBossBullet/IBossBullet.h"
+#include "Audio.h"
 
 class BossFallBullet : public IBossBullet {
 public:
@@ -21,5 +22,9 @@ public:
 	/// ブロック接触時の追加処理
 	/// </summary>
 	void AddOnCollisionBlock()override;
+
+private:
+
+	DaiEngine::Audio* candySE_ = nullptr;
 
 };

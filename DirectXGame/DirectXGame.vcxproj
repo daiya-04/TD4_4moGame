@@ -5,6 +5,10 @@
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Demo|x64">
+      <Configuration>Demo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
@@ -31,6 +35,13 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Demo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -40,6 +51,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Demo|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -53,11 +67,16 @@
     <IntDir>$(SolutionDir)..\Generated\Obj\$(ProjectName)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)..\Generated\Outputs\$(Configuration)\</OutDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">
+    <IncludePath>$(SolutionDir)externals\DirectXTex;$(SolutionDir)externals\imgui;$(SolutionDir)externals\nlohmann;$(SolutionDir)externals\assimp;$(SolutionDir)externals\assimp;$(IncludePath)</IncludePath>
+    <IntDir>$(SolutionDir)..\Generated\Obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)..\Generated\Outputs\$(Configuration)\</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;USE_IMGUI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
@@ -86,6 +105,36 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)externals\assimp\include;$(ProjectDir)Engine\Base;$(ProjectDir)Engine\BaseScene;$(ProjectDir)Engine\2d;$(ProjectDir)Engine\3d;$(ProjectDir)Engine\Camera;$(ProjectDir)Engine\DebugText;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine\3d\Particle;$(ProjectDir)Engine\3d\Light;$(ProjectDir)Engine\3d\Model;$(ProjectDir)Engine\3d\Animation;$(ProjectDir)Engine\Framework;$(ProjectDir)Engine\Collision;$(ProjectDir)Engine\Collision\Collider;$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Loader;$(ProjectDir)Engine\Easing;$(ProjectDir)Engine\GraphicsPipeline;$(ProjectDir)Engine\ComputePipeline;$(ProjectDir)Engine\PostEffect;$(ProjectDir)Engine\Line;$(ProjectDir)Game\;$(ProjectDir)Game\Effect;$(ProjectDir)Game\Scene;$(ProjectDir)Game\Scene\DebugTestScene;$(ProjectDir)Game\Scene\GameScene;$(ProjectDir)Game\Scene\ClearScene;$(ProjectDir)Game\Scene\GameOverScene;$(ProjectDir)Game\Scene\TitleScene;$(ProjectDir)Game\GameObject;$(ProjectDir)Game\InstancingGameObject;$(ProjectDir)Game\Player;$(ProjectDir)Game\Player\behavior;$(ProjectDir)Game\Player\Input;$(ProjectDir)Game\Player\UI;$(ProjectDir)Game\Boss;$(ProjectDir)Game\Boss\IBoss;$(ProjectDir)Game\Boss\IBehavior;$(ProjectDir)Game\Boss\IBossAttack;$(ProjectDir)Game\Boss\UI;$(ProjectDir)Game\Boss\SpawnManager;$(ProjectDir)Game\Boss\SingleDangerZone;$(ProjectDir)Game\Boss\BossBullet;$(ProjectDir)Game\Boss\BossBulletManager;$(ProjectDir)Game\Boss\DangerZone;$(ProjectDir)Game\Boss\DangerDoneManager;$(ProjectDir)Game\Boss\Blinking;$(ProjectDir)Game\Boss\GingerbreadMan;$(ProjectDir)Game\Boss\GingerbreadMan\Behavior;$(ProjectDir)Game\Boss\Donut;$(ProjectDir)Game\Boss\Donut\Behavior;$(ProjectDir)Game\Boss\CupCake;$(ProjectDir)Game\Boss\CupCake\behavior;$(ProjectDir)Game\Field;$(ProjectDir)Game\FollowCamera;$(ProjectDir)Game\Charactor\Boss;$(ProjectDir)Game\Charactor\Boss\Icicle;$(ProjectDir)Game\Charactor\Boss\PlasmaShot;$(ProjectDir)Game\Charactor\Boss\ElementBall;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <AdditionalOptions>/ignore:4049 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalLibraryDirectories>$(ProjectDir)externals\assimp\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" "$(TargetDir)dxcompiler.dll"
+copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dxil.dll"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;USE_IMGUI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>

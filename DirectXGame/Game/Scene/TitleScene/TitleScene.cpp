@@ -126,7 +126,7 @@ void TitleScene::Update() {
 
 #endif // _DEBUG
 
-#ifndef _DEBUG
+#ifndef USE_IMGUI
 	if (isDeleteCursor_ == false) {
 		isDeleteCursor_ = true;
 		input->ToggleCursor();

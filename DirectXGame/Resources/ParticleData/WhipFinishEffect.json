@@ -1,0 +1,97 @@
+{
+    "WhipFinishEffect": {
+        "particle1": {
+            "Emitter": {
+                "BillboardType": 0,
+                "Color": [
+                    1.0,
+                    0.9843137264251709,
+                    0.9843137264251709,
+                    1.0
+                ],
+                "Count": 100,
+                "EmitterType": 2,
+                "Frequency": 0.01600000075995922,
+                "LifeTime": 0.5,
+                "Radius": 1.5,
+                "Rotate": 0.0,
+                "Scale": 0.10000000149011612,
+                "Size": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "Speed": 5.0,
+                "Translate": [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            },
+            "OverLifeTime": {
+                "Gravity": 0.10000000149011612,
+                "Velocity": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "density": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "endAlpha": 0.0,
+                "endColor": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "endScale": 0.0,
+                "endSpeed": 0.0,
+                "endVelocity": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "isAlpha": 0,
+                "isColor": 0,
+                "isConstantVelocity": 0,
+                "isNoise": 0,
+                "isRandom": 0,
+                "isRoring": 0,
+                "isScale": 1,
+                "isTransSpeed": 1,
+                "isTransVelocity": 0,
+                "maxRoringSpeed": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "midAlpha": 1.0,
+                "minRoringSpeed": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "startAlpha": 0.0,
+                "startColor": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "startScale": 1.0,
+                "startSpeed": 10.0,
+                "startVelocity": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "strength": 0.0
+            },
+            "isLoop": false,
+            "isModel": true,
+            "modelName": "Sphere",
+            "textureName": "teeth.png"
+        }
+    }
+}

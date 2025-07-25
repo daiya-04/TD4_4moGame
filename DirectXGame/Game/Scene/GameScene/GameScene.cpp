@@ -234,6 +234,7 @@ void GameScene::Init() {
 	EffectManager::GetInstance()->AddEffect("DonutsStageApperEffect");
 	EffectManager::GetInstance()->AddEffect("StickAttackEffect");
 	EffectManager::GetInstance()->AddEffect("CapCakeStampEffect");
+	EffectManager::GetInstance()->AddEffect("WhipFinishEffect");
 
 	///
 
@@ -279,7 +280,7 @@ void GameScene::Update() {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Debug");
 	}
 
-	ApplyGlobalVariables();
+	
 
 #endif // _DEBUG
 
@@ -372,11 +373,12 @@ void GameScene::DrawRenderTexture() {
 }
 
 void GameScene::DebugGUI() {
-#ifdef _DEBUG
+#ifdef USE_IMGUI
 
 	//デバッグマネージャの更新
 	globalVariableManager_->Update();
 
+	ApplyGlobalVariables();
 
 #endif // _DEBUG
 }
