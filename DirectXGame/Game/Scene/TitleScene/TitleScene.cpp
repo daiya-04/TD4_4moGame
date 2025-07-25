@@ -135,38 +135,10 @@ void TitleScene::Update() {
 
 	
 
-	switch (select_) {
-		case Select::Start:
+	MenuInput();
 
-			if (input->TriggerKey(DIK_DOWN) || input->TriggerButton(DaiEngine::Input::Button::DPAD_DOWN) || input->TriggerLStick(DaiEngine::Input::Stick::Down)) {
-				select_ = Select::Finish;
-				gStartUISwitch_ = UISwitch::Off;
-				gFinishUISwitch_ = UISwitch::On;
-				choiceSE_->Play();
-			}
-
-			if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
-				doneSE_->Play();
-				DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
-			}
-
-			break;
-		case Select::Finish:
-
-			if (input->TriggerKey(DIK_UP) || input->TriggerButton(DaiEngine::Input::Button::DPAD_UP) || input->TriggerLStick(DaiEngine::Input::Stick::Up)) {
-				select_ = Select::Start;
-				gStartUISwitch_ = UISwitch::On;
-				gFinishUISwitch_ = UISwitch::Off;
-				choiceSE_->Play();
-			}
-
-			if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
-				doneSE_->Play();
-				DaiEngine::WinApp::GetInstance()->GameEnd();
-			}
-
-			break;
-	}
+	gStartUISwitch_ = (select_ == Select::Start) ? UISwitch::On : UISwitch::Off;
+	gFinishUISwitch_ = (select_ == Select::Finish) ? UISwitch::On : UISwitch::Off;
 
 	gameStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gStartUISwitch_),0.0f }, { 350.0f,70 });
 	gameFinishUI_->SetTextureArea({ 350.0f * static_cast<float>(gFinishUISwitch_),0.0f }, { 350.0f,70 });
@@ -224,4 +196,39 @@ void TitleScene::DebugGUI(){
 
 
 #endif // _DEBUG
+}
+
+void TitleScene::MenuInput() {
+
+	int currentIndex = static_cast<int>(std::distance(order_.begin(), std::find(order_.begin(), order_.end(), select_)));
+
+	auto* input = DaiEngine::Input::GetInstance();
+	if (input->TriggerKey(DIK_UP) || input->TriggerButton(DaiEngine::Input::Button::DPAD_UP) || input->TriggerLStick(DaiEngine::Input::Stick::Up)) {
+		if (currentIndex > 0) {
+			select_ = order_[currentIndex - 1];
+			choiceSE_->Play();
+		}
+	}
+
+	if (input->TriggerKey(DIK_DOWN) || input->TriggerButton(DaiEngine::Input::Button::DPAD_DOWN) || input->TriggerLStick(DaiEngine::Input::Stick::Down)) {
+		if (currentIndex < order_.size() - 1) {
+			select_ = order_[currentIndex + 1];
+			choiceSE_->Play();
+		}
+	}
+
+	if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
+		onSelect_[select_]();
+	}
+
+}
+
+void TitleScene::ToGame() {
+	doneSE_->Play();
+	DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
+}
+
+void TitleScene::ToEnd() {
+	doneSE_->Play();
+	DaiEngine::WinApp::GetInstance()->GameEnd();
 }
