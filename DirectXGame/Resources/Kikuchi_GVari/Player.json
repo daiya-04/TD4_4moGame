@@ -29,6 +29,10 @@
             }
         },
         "ColliderRadius": 1.0,
+        "Dead": {
+            "animRate": 1.0,
+            "maxCount": 120
+        },
         "Hit": {
             "MaxNoHitSec": 60.0,
             "TenmetuNum": 10
@@ -39,7 +43,7 @@
         ],
         "MaxHP": 10,
         "Move": {
-            "degreeGravityOnTop": 4.0,
+            "degreeGravityOnTop": 1.5,
             "degreeSpd": 1.0,
             "jumpStSpd": 10.0,
             "speed": 0.20000000298023224
