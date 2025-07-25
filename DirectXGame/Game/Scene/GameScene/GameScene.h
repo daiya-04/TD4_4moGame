@@ -98,15 +98,6 @@ private:
 	/// </summary>
 	void ApplyGlobalVariables();
 
-	/// <summary>
-	/// ブロックと弾との判定
-	/// </summary>
-	void OnCollisionBlocksAndBullets();
-
-	/// <summary>
-	/// シーン遷移処理
-	/// </summary>
-	void SceneChange();
 private:
 	//カメラ
 	DaiEngine::Camera camera_;
