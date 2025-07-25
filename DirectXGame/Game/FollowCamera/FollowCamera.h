@@ -85,5 +85,9 @@ private://**パラメータ変数**//
 	//遷移時間
 	float maxEsingCount_ = 60;
 
+	bool isDebug_ = false;
+
+	Vector3 devOffset_ = { 0,0,0 };
+	Vector3 devRotate_ = { 0,0,0 };
 
 };

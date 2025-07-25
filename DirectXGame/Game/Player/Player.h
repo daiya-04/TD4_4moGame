@@ -18,10 +18,10 @@ struct PlayerParameters {
 	Vector3 velocity;
 
 	//地面の傾き方向
-	Vector3 grandNormal = {0,1,0};
+	Vector3 grandNormal = { 0,1,0 };
 
 	//傾きの威力
-	float grandInfluence =0;
+	float grandInfluence = 0;
 
 	//体力
 	int hp = 10;
@@ -76,15 +76,16 @@ public://**パブリック変数**//
 	void Draw()override;
 
 	/// <summary>
-	/// 行列更新
-	/// </summary>
-	void UpdateMatrix();
-
-	/// <summary>
 	/// 座標をセットして更新
 	/// </summary>
 	/// <param name="translate">セットする座標</param>
 	void SetWorldTranslate(const Vector3& translate);
+
+	/// <summary>
+	/// 死亡フラグセット
+	/// </summary>
+	/// <param name="isDead"></param>
+	void SetDead(bool isDead) { isDead_ = isDead; };
 
 	/// <summary>
 	/// 当たり判定処理
@@ -106,6 +107,11 @@ public://**パブリック変数**//
 	void DrawUI();
 
 private:
+
+	/// <summary>
+	/// 行列更新
+	/// </summary>
+	void UpdateMatrix();
 
 	/// <summary>
 	/// UI更新
@@ -183,7 +189,7 @@ public://**セッター
 	/// </summary>
 	/// <param name="hill">地面の法線（上下を考慮しない）</param>
 	/// <param name="inflence">影響度</param>
-	void SetFieldNormalVec(const Vector3& normalVec) { parameters_.grandNormal = normalVec;}
+	void SetFieldNormalVec(const Vector3& normalVec) { parameters_.grandNormal = normalVec; }
 
 	void SetAttackEffect(PlayerAttackEffect* attackEffect) { attackEffect_ = attackEffect; }
 
@@ -215,6 +221,7 @@ public://**状態**//
 		Roll,	//回避
 		Attack,	//攻撃
 		SpinAttack,		//スピンアタック
+		Dead,	//死亡
 		Count	//状態の数
 	}behaviorName_ = Behavior::Move;
 

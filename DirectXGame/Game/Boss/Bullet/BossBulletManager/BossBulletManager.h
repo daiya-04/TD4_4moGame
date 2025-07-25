@@ -1,8 +1,9 @@
 #pragma once
 #include"InstancingGameObject/InstancingGameObject.h"
 #include"Boss/Bullet/IBossBullet/IBossBullet.h"
-
 #include"GlobalVariable/Tree/GlobalVariableTree.h"
+#include"Collider/CylinderCollider.h"
+#include"Boss/WaveColliderMotion/WaveColliderMotion.h"
 
 class BossBulletManager : public InstancingGameObject {
 
@@ -62,6 +63,9 @@ private:
 	//警告円用
 	std::unique_ptr<InstancingGameObject>dangerZone_;
 
+
+	std::unique_ptr<WaveColliderMotion>waveColliderMotion_;
+
 private:
 
 	//弾の初期高度
@@ -71,12 +75,15 @@ private:
 	float fallSpeed_ = 1.0f;
 
 	//コライダー半径
-	float colliderRadius_ = 1.0f;
+	float colliderRadius_[(int)BulletType::Count] = {1.0f,1.0f ,1.0f ,1.0f,1.0f };
 
 	//放物線処理到着時間
 	int arriveCount_ = 60;
 
 	//放物線の高さ
 	float parabolaHeight_ = 5.0f;
+
+
+private://波の判定
 
 };

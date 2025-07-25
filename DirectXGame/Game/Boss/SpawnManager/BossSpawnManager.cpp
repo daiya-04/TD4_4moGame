@@ -27,16 +27,18 @@ BossSpawnManager::BossSpawnManager(FollowCamera* camera, const DaiEngine::WorldT
 				//ボスのツリーをセット
 		group->SetTreeData(boss->tree_);
 	}
+
+	bossManager_ = BossManager::GetInstance();
 }
 
-void BossSpawnManager::Initialize()
+void BossSpawnManager::Initialize(BossType bosstype)
 {
 	//ボスの初期化
 	for (auto& boss : bosses_) {
 		boss->InitParameters();
 	}
 
-	typeRequest_ = (int)BossType::GingerbreadMan;
+	typeRequest_ = (int)bosstype;
 }
 
 void BossSpawnManager::Update()
@@ -59,11 +61,13 @@ void BossSpawnManager::Update()
 			//リクエストをクリア
 			typeRequest_ = std::nullopt; 
 			changeBoss_ = false;
+			bossManager_->SetBossType(bossType_);
 
 		}
 		else {
 			//全員死んだのでフラグON
 			allBossDead_ = true;
+			bossManager_->SetBossType(BossType::GingerbreadMan);
 		}
 	}
 

@@ -1,5 +1,6 @@
 #include "SpinAttack.h"
 #include"Player/Player.h"
+#include"ColliderManager.h"
 
 SpinAttack::SpinAttack()
 {
@@ -8,6 +9,14 @@ SpinAttack::SpinAttack()
 	tree_.SetValue("upSpeed", &upSpeed_);
 	tree_.SetValue("downSpeed", &downSpeed_);
 	tree_.SetValue("stopDistance", &stopDistance_);
+
+	//コライダー生成
+	collider_ = std::make_unique<DaiEngine::SphereCollider>();
+	collider_->Init("playerSpin", *player_->world_, radius_);
+	collider_->ColliderOff();
+	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
+	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {if (collider->GetTag() == "boss")collider_->ColliderOff(); });
+
 }
 
 
@@ -21,13 +30,13 @@ void SpinAttack::InitPreliminaryAction()
 void SpinAttack::InitAction()
 {
 	//攻撃コライダーを有効化
-	player_->SetAttackColliderActive(true);
+	collider_->ColliderOn();
 }
 
 void SpinAttack::InitRigorAction()
 {
 	//攻撃コライダーを無効化
-	player_->SetAttackColliderActive(false);
+	collider_->ColliderOff();
 }
 
 void SpinAttack::UpdatePreliminaryAction()
@@ -51,7 +60,10 @@ void SpinAttack::UpdateAction()
 		//ボスとの距離が攻撃をやめる距離以下の場合、終了
 		player_->parameters_.isFlying = false;
 		player_->behaviorRequest_ = Player::Behavior::Move; // 通常状態に戻るリクエスト
+		//攻撃コライダーを無効化
+		collider_->ColliderOff();
 	}
+	collider_->Update();
 }
 
 void SpinAttack::UpdateRigorAction()

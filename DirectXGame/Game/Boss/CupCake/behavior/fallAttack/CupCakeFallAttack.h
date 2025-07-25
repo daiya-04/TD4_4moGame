@@ -1,11 +1,12 @@
 #pragma once
 #include"Boss/IBossAttack/IBossAttack.h"
+#include"SphereCollider.h"
 #include "Audio.h"
 
 class CupCakeFallAttack : public IBossAttack {
 public:
 	CupCakeFallAttack(BossParameters* parameters);
-	~CupCakeFallAttack() = default;
+	~CupCakeFallAttack();
 
 public://**状態**//
 
@@ -32,6 +33,9 @@ private:
 
 private:
 
+	std::unique_ptr<DaiEngine::SphereCollider>collider_;
+
+	float colliderRadius_ = 2.0f;
 
 	//ジャンプ待機
 	float waitCount_ = 60.0f;

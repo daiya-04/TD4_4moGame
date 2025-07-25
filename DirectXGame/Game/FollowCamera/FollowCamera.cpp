@@ -11,6 +11,9 @@ FollowCamera::FollowCamera(DaiEngine::Camera* camera, const Vector3& targetTrans
 
 	std::string stateNames[] = { "None" ,"Follow" };
 
+	gvg->SetMonitorValue("Debug", &isDebug_);
+	gvg->SetValue("devOff", &devOffset_);
+	gvg->SetValue("devRotate", &devRotate_);
 	gvg->SetValue("maxEsingCount", &maxEsingCount_);
 	gvg->SetValue("followSpd", &followSpd_);
 	gvg->SetValue("followSpdMaxDistance", &followSpdMaxDistance_);
@@ -30,14 +33,14 @@ void FollowCamera::Update()
 	//遷移中の場合
 	if (isEsing_) {
 		esingCount_++;
-		
+
 		//割合計算
 		float t = (float)esingCount_ / (float)maxEsingCount_;
 		//割合に応じて補間
-		offset = Lerp(t,preOffset_, targetOffset_);
-		rotation = Lerp(t,preRotation_, targetRotation_);
+		offset = Lerp(t, preOffset_, targetOffset_);
+		rotation = Lerp(t, preRotation_, targetRotation_);
 		//遷移完了チェック
-		if(t>= 1.0f){
+		if (t >= 1.0f) {
 			//フラグをオフ
 			isEsing_ = false;
 			//遷移完了時に目標値を設定
@@ -53,26 +56,17 @@ void FollowCamera::Update()
 		}
 
 	}
-	
-	
 
-	switch (state_)
-	{
-	case FollowCamera::State::None:
-		//座標と回転を渡す
-		camera_->translation_ = offset;
-		camera_->rotation_ = rotation;
-		break;
-	case FollowCamera::State::Follow:
-		//追従点を
-		camera_->translation_ = offset;
-		camera_->rotation_ = rotation;
-		break;
-	case FollowCamera::State::Count:
-		break;
-	default:
-		break;
+	if (isDebug_) {
+		offset = devOffset_;
+		rotation = devRotate_;
 	}
+
+	//座標と回転を渡す
+	camera_->translation_ = offset;
+	camera_->rotation_ = rotation;
+
+
 }
 
 void FollowCamera::SetState(State state)
@@ -97,7 +91,7 @@ void FollowCamera::CameraDelay(Vector3& offset)
 {
 
 	//カメラに向かうベクトル取得
-	Vector3 targetPos = offset- camera_->translation_ ;
+	Vector3 targetPos = offset - camera_->translation_;
 
 	//追従速度より近くの場合はそのまま
 	if (targetPos.Length() <= followSpd_) {
@@ -113,7 +107,7 @@ void FollowCamera::CameraDelay(Vector3& offset)
 		float t = length / followSpdMaxDistance_;
 
 		//追従速度分だけ近づく
-		offset =camera_->translation_ + targetPos.Normalize() * (followSpd_*maxFollowSpdMultiply_*t);
+		offset = camera_->translation_ + targetPos.Normalize() * (followSpd_ * maxFollowSpdMultiply_ * t);
 	}
 
 

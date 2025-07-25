@@ -3,6 +3,8 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <map>
+#include <functional>
 
 #include "Sprite.h"
 #include "Object3d.h"
@@ -10,6 +12,8 @@
 #include "PointLight.h"
 #include "SpotLight.h"
 #include "Audio.h"
+
+#include "Boss/BossManager/BossManager.h"
 
 
 class GameOverScene : public DaiEngine::IScene {
@@ -87,15 +91,30 @@ private:
 	std::unique_ptr<DaiEngine::Sprite> titleBackUI_;
 	//最初から始める
 	std::unique_ptr<DaiEngine::Sprite> reStartUI_;
+	//途中から
+	std::unique_ptr<DaiEngine::Sprite> continueUI_;
 
 private:
 
 	enum class Select {
 		TitleBack,
-		ReStrat,
+		Continue,
+		ReStart,
 	};
 
-	Select select_ = Select::ReStrat;
+	std::vector<Select> order_{
+		Select::ReStart,
+		Select::Continue,
+		Select::TitleBack,
+	};
+
+	std::map<Select, std::function<void()>> onSelect_ = {
+		{ Select::TitleBack, [this]() { ToTitleBack(); } },
+		{ Select::Continue, [this]() { ToContinue(); } },
+		{ Select::ReStart, [this]() { ToReStart(); } },
+	};
+
+	Select select_ = Select::Continue;
 
 	enum class UISwitch {
 		On,
@@ -103,7 +122,18 @@ private:
 	};
 
 	UISwitch gTitleBackUISwitch_ = UISwitch::Off;
-	UISwitch gReStartUISwitch_ = UISwitch::On;
+	UISwitch gReStartUISwitch_ = UISwitch::Off;
+	UISwitch gContinueUISwitch_ = UISwitch::On;
+
+	BossManager* bossManager_ = nullptr;
+
+private:
+
+	void MenuInput();
+
+	void ToTitleBack();
+	void ToContinue();
+	void ToReStart();
 
 };
 

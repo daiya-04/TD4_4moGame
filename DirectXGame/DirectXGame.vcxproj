@@ -112,6 +112,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <ClCompile Include="BaseUI.cpp" />
     <ClCompile Include="Engine\Collision\Collider\CylinderCollider.cpp" />
+    <ClCompile Include="Game\Boss\BossManager\BossManager.cpp" />
     <ClCompile Include="Game\Boss\Bullet\bullets\Fall\BossFallBullet.cpp" />
     <ClCompile Include="Game\Boss\Bullet\bullets\None\BossNoneBullet.cpp" />
     <ClCompile Include="Game\Boss\Bullet\bullets\Parabola\BossParabolaBullet.cpp" />
@@ -125,6 +126,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Game\Boss\Donut\Behavior\Dead\DonutDead.cpp" />
     <ClCompile Include="Game\Boss\GingerbreadMan\Behavior\Dead\GingerbreadManDead.cpp" />
     <ClCompile Include="Game\Boss\SquareDangerZone\SquareDangerZone.cpp" />
+    <ClCompile Include="Game\Boss\WaveColliderMotion\WaveColliderMotion.cpp" />
     <ClCompile Include="Game\Effect\Effect.cpp" />
     <ClCompile Include="Game\Effect\EffectManager.cpp" />
     <ClCompile Include="Game\Boss\Blinking\Blinking.cpp" />
@@ -140,6 +142,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Game\Boss\IBoss\IBoss.cpp" />
     <ClCompile Include="Game\Boss\SpawnManager\BossSpawnManager.cpp" />
     <ClCompile Include="Game\Boss\UI\BossUI.cpp" />
+    <ClCompile Include="Game\Player\behavior\Dead\PlayerDead.cpp" />
     <ClCompile Include="Game\Player\behavior\SpinAttack\SpinAttack.cpp" />
     <ClCompile Include="Game\Player\UI\PlayerUI.cpp" />
     <ClCompile Include="Game\Scene\ClearScene\ClearScene.cpp" />
@@ -242,6 +245,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <ClInclude Include="BaseUI.h" />
     <ClInclude Include="Engine\Collision\Collider\CylinderCollider.h" />
+    <ClInclude Include="Game\Boss\BossManager\BossManager.h" />
+    <ClInclude Include="Game\Boss\BossType\BossType.h" />
     <ClInclude Include="Game\Boss\Bullet\bullets\Fall\BossFallBullet.h" />
     <ClInclude Include="Game\Boss\Bullet\bullets\None\BossNoneBullet.h" />
     <ClInclude Include="Game\Boss\Bullet\bullets\Parabola\BossParabolaBullet.h" />
@@ -255,6 +260,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Boss\Donut\Behavior\Dead\DonutDead.h" />
     <ClInclude Include="Game\Boss\GingerbreadMan\Behavior\Dead\GingerbreadManDead.h" />
     <ClInclude Include="Game\Boss\SquareDangerZone\SquareDangerZone.h" />
+    <ClInclude Include="Game\Boss\WaveColliderMotion\WaveColliderMotion.h" />
     <ClInclude Include="Game\Effect\Effect.h" />
     <ClInclude Include="Game\Effect\EffectManager.h" />
     <ClInclude Include="Game\Boss\Blinking\Blinking.h" />
@@ -271,6 +277,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Boss\IBoss\IBoss.h" />
     <ClInclude Include="Game\Boss\SpawnManager\BossSpawnManager.h" />
     <ClInclude Include="Game\Boss\UI\BossUI.h" />
+    <ClInclude Include="Game\Player\behavior\Dead\PlayerDead.h" />
     <ClInclude Include="Game\Player\behavior\SpinAttack\SpinAttack.h" />
     <ClInclude Include="Game\Player\UI\PlayerUI.h" />
     <ClInclude Include="Game\Scene\ClearScene\ClearScene.h" />

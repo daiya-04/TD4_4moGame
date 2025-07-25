@@ -100,6 +100,12 @@ public:
 	/// <returns></returns>
 	const DaiEngine::WorldTransform& GetWorld()const { return data_.world; }
 
+	/// <summary>
+	/// コライダー半径
+	/// </summary>
+	/// <returns></returns>
+	float GetColliderRadius() { return collider_->GetRadius(); }
+
 private:
 
 	//カメラポインタ

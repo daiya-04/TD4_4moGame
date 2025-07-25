@@ -14,21 +14,37 @@ BossBulletManager::BossBulletManager(bool isCandy)
 	else {
 		InstancingGameObject::Init("Cream", 100);
 	}
+
+	waveColliderMotion_ = std::make_unique<WaveColliderMotion>();
+
 	//警告円の生成
 	dangerZone_ = std::make_unique<InstancingGameObject>();
 	dangerZone_->Init("DangerZone", 100);
 
-	tree_.name_ = "FallingBullet";
+	tree_.name_ = "Bullet";
 	tree_.SetValue("spawnHeight", &bulletStartHeight_);
 	tree_.SetValue("fallSpeed", &fallSpeed_);
-	tree_.SetValue("colliderRadius", &colliderRadius_);
 
+	std::string typeStrings[(int)BulletType::Count] = {
+		"Fall",
+		"None",
+		"Parabola",
+		"Wave",
+		"Dive"
+	};
+
+	int count = 0;
+	for (auto& radius : colliderRadius_) {
+		tree_.SetValue(typeStrings[count] + "Radius", &radius);
+		count++;
+	}
 	GvariTree tree;
 	tree.name_ = "parabolaBullet";
 	tree.SetValue("parabolaHeight", &parabolaHeight_);
 	tree.SetValue("arriveCount", &arriveCount_);
 	//ツリーに追加
 	tree_.SetTreeData(tree);
+	tree_.SetTreeData(waveColliderMotion_->GetTree());
 }
 
 void BossBulletManager::Update()
@@ -61,14 +77,19 @@ void BossBulletManager::Update()
 	}
 
 	//死んだ弾を削除
-	bullets_.remove_if([](auto& data) {
+	bullets_.remove_if([&](auto& data) {
 		if (data->GetDead()) {
+			if (data->GetType() == BulletType::Wave) {
+				waveColliderMotion_->Emit(data->GetWorld().translation_);
+			}
 			return true;
 		}
 		else {
 			return false;
 		}
 		});
+
+	waveColliderMotion_->Update();
 }
 
 void BossBulletManager::Draw()
@@ -81,6 +102,7 @@ void BossBulletManager::Draw()
 
 	//弾コライダー描画
 #ifdef _DEBUG
+	waveColliderMotion_->Draw(camera_);
 	for (auto& bullet : bullets_) {
 		bullet->ColliderDraw();
 	}
@@ -107,7 +129,7 @@ void BossBulletManager::SpawnBullet(const DaiEngine::WorldTransform& pos, Bullet
 	//ワールド初期化
 	data.world.Init();
 	data.radius = pos.scale_.x;
-	data.colliderRadius = colliderRadius_;
+	data.colliderRadius = colliderRadius_[(int)type];
 	//座標設定
 	data.world.translation_ = position;
 

@@ -37,7 +37,7 @@ void PlayerRoll::Init()
 		currentVelo_ = {0,0,1};
 		
 		//プレイヤー方向に向ける
-		//currentVelo_=TransformNormal(currentVelo_, player_->GetWorld().matWorld_);
+		currentVelo_=TransformNormal(currentVelo_, player_->GetWorld().matWorld_);
 	}
 
 	//初速を与える

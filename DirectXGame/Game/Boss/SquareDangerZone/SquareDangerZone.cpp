@@ -16,6 +16,7 @@ void SquareDangerZone::Init() {
 	isEnd_ = false;
 	count_ = 0;
 	state_ = State::WARNING;
+	isDraw_ = true;
 }
 
 void SquareDangerZone::Update() {

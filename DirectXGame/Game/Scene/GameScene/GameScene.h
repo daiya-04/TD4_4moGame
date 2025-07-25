@@ -38,6 +38,8 @@
 
 #include "PlayerAttackEffect.h"
 
+#include "Boss/BossManager/BossManager.h"
+
 //ゲームシーンクラス
 class GameScene : public DaiEngine::IScene {
 public:
@@ -96,6 +98,15 @@ private:
 	/// </summary>
 	void ApplyGlobalVariables();
 
+	/// <summary>
+	/// ブロックと弾との判定
+	/// </summary>
+	void OnCollisionBlocksAndBullets();
+
+	/// <summary>
+	/// シーン遷移処理
+	/// </summary>
+	void SceneChange();
 private:
 	//カメラ
 	DaiEngine::Camera camera_;
@@ -129,5 +140,6 @@ private:
 	//UI（とりあえず雑に）
 	std::map<std::string, std::unique_ptr<DaiEngine::Sprite>> uis_;
 
+	BossManager* bossManager_ = nullptr;
 };
 

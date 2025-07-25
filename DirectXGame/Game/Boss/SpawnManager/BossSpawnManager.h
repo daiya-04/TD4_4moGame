@@ -1,6 +1,8 @@
 #pragma once
 #include"../IBoss/IBoss.h"
 
+#include "Boss/BossManager/BossManager.h"
+
 //ボス生成マネージャ
 class BossSpawnManager {
 
@@ -15,7 +17,7 @@ public://**パブリック関数**//
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize();
+	void Initialize(BossType bosstype);
 
 	/// <summary>
 	/// 更新
@@ -63,17 +65,10 @@ private://**プライベート変数**//
 
 	FollowCamera* camera_ = nullptr;
 
-	//ボスの生成タイプ
-	enum class BossType {
-		GingerbreadMan,
-		Donut,
-		CupCake,
-		Count
-	}bossType_ = BossType::GingerbreadMan;
-
-
 	//ボスのデータ群
 	std::vector<std::unique_ptr<IBoss>> bosses_ ;
+
+	BossType bossType_ = BossType::GingerbreadMan;
 
 	//状態リクエスト
 	std::optional<int>typeRequest_ = std::nullopt;
@@ -102,4 +97,5 @@ private://**デバッグ用**//
 
 	std::string nowBossName_ = "";
 
+	BossManager* bossManager_ = nullptr;
 };

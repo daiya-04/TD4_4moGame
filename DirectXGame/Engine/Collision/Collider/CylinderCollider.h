@@ -6,7 +6,7 @@ namespace DaiEngine {
 	class CylinderCollider : public Collider {
 	public:
 
-		void Init(const std::string& tag, const WorldTransform& parent, float radius);
+		void Init(const std::string& tag, const WorldTransform& parent, float radius , float height);
 
 		void Update(const Matrix4x4& rotateMat);
 

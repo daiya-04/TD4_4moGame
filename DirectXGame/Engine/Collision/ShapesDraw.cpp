@@ -2,6 +2,7 @@
 #include <cmath>
 #include <numbers>
 #include "Line.h"
+#include <vector>
 
 namespace ShapesDraw {
 
@@ -135,6 +136,43 @@ namespace ShapesDraw {
 		DaiEngine::Line::Draw(points[1], points[7], camera, color);
 		DaiEngine::Line::Draw(points[2], points[4], camera, color);
 		DaiEngine::Line::Draw(points[3], points[5], camera, color);
+	}
+
+	void DrawCylinder(const Shapes::Cylinder& cylinder, const DaiEngine::Camera& camera, const Vector4& color) {
+		const int segmentCount = 24;  // 円周分割数
+		std::vector<Vector3> topPoints(segmentCount);
+		std::vector<Vector3> bottomPoints(segmentCount);
+
+		// 軸ベクトルと方向ベクトル
+		Vector3 axis = cylinder.topCenter - cylinder.bottomCenter;
+		Vector3 axisDir = axis;
+		axisDir.Normalize(); // ここで正しく正規化
+
+		// 軸に垂直な2ベクトルを作る
+		Vector3 up = (std::abs(axisDir.y) < 0.99f) ? Vector3{ 0, 1, 0 } : Vector3{ 1, 0, 0 };
+		Vector3 right = Cross(up, axisDir).Normalize();
+		Vector3 forward = Cross(axisDir, right).Normalize();
+
+		// 円周上の点を計算
+		for (int i = 0; i < segmentCount; ++i) {
+			float angle = (2.0f * std::numbers::pi_v<float> *i) / segmentCount;
+			Vector3 radial = std::cos(angle) * right + std::sin(angle) * forward;
+			radial *= cylinder.radius * 1.5f;
+
+			topPoints[i] = cylinder.topCenter + radial;
+			bottomPoints[i] = cylinder.bottomCenter + radial;
+		}
+
+		// ライン描画
+		for (int i = 0; i < segmentCount; ++i) {
+			int next = (i + 1) % segmentCount;
+			// 上面
+			DaiEngine::Line::Draw(topPoints[i], topPoints[next], camera, color);
+			// 下面
+			DaiEngine::Line::Draw(bottomPoints[i], bottomPoints[next], camera, color);
+			// 側面
+			DaiEngine::Line::Draw(topPoints[i], bottomPoints[i], camera, color);
+		}
 	}
 
 }

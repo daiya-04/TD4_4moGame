@@ -19,8 +19,8 @@ public:
 	void Update()override;
 private:
 
-	float count_ = 0;
+	float count_ = 60;
 
-	float animeLeverage_ = 1.0f;
+	float animeLeverage_ = 4.0f;
 
 };
