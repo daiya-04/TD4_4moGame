@@ -56,7 +56,7 @@
         "Roll": {
             "StSpeed": 0.5,
             "cooldownCount": 16.0,
-            "decelRate": 0.02500000037252903,
+            "decelRate": 0.014999999664723873,
             "downhillAccel": 1.100000023841858,
             "flatThreshold": 0.004999999888241291,
             "maxCharge": 1.0,

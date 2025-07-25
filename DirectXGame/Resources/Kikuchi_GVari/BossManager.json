@@ -68,13 +68,13 @@
                 0.0
             ],
             "Scale": [
-                2.0,
-                2.0,
-                2.0
+                2.5,
+                2.5,
+                2.5
             ],
             "ShotBullet": {
-                "attackCount": 120.0,
-                "waitCount": 90.0
+                "attackCount": 180.0,
+                "waitCount": 150.0
             },
             "Speed": 0.0,
             "StartPos": [
@@ -92,7 +92,7 @@
             ],
             "jumpAttack": {
                 "attackCount": 60.0,
-                "colliderRadius": 2.0,
+                "colliderRadius": 2.5,
                 "jumpHeight": 20.0,
                 "jumpNum": 3,
                 "stopCount": 60.0,
@@ -100,10 +100,10 @@
             },
             "waveDive": {
                 "fallSpd": 5.0,
-                "jumpCount": 60.0,
+                "jumpCount": 120.0,
                 "jumpHeight": 50.0,
                 "stopCount": 200.0,
-                "waitCount": 60.0
+                "waitCount": 120.0
             }
         },
         "Donut": {
@@ -140,7 +140,7 @@
                 "BlinkingNum": 3,
                 "FollowParam": {
                     "distance": 10.0,
-                    "followSpd": 0.10000000149011612
+                    "followSpd": 0.10999999940395355
                 },
                 "alpha": [
                     1.0,
@@ -155,9 +155,9 @@
                         3.0
                     ]
                 },
-                "finalWarningCount": 30.0,
+                "finalWarningCount": 60.0,
                 "radius": 1.9500000476837158,
-                "warningCount": 60.0,
+                "warningCount": 120.0,
                 "warningSphereHeight": 3.0
             },
             "Dead": {
@@ -224,7 +224,7 @@
             },
             "Bullet": {
                 "DiveRadius": 1.0,
-                "FallRadius": 2.5,
+                "FallRadius": 2.0,
                 "NoneRadius": 1.0,
                 "ParabolaRadius": 1.0,
                 "WaveColliuder": {
@@ -267,7 +267,7 @@
                     ]
                 },
                 "finalWarningCount": 100.0,
-                "radius": 2.5999999046325684,
+                "radius": 1.899999976158142,
                 "warningCount": 180.0,
                 "warningSphereHeight": 1.0
             },

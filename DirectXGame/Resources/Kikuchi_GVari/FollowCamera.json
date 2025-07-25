@@ -12,7 +12,7 @@
         ],
         "followSpd": 0.5,
         "followSpdMaxDistance": 4.929999828338623,
-        "maxEsingCount": 60.0,
+        "maxEsingCount": 50.0,
         "maxFollowSpdMultiply": 4.0,
         "offset_Follow": [
             0.0,
