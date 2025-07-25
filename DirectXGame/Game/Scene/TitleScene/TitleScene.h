@@ -11,6 +11,7 @@
 #include <list>
 #include <map>
 #include <string>
+#include <functional>
 
 #include "Sprite.h"
 #include "Object3d.h"
@@ -110,6 +111,16 @@ private://パラメータまとめたやつら
 		Finish,
 	};
 
+	std::vector<Select> order_{
+		Select::Start,
+		Select::Finish,
+	};
+
+	std::map<Select, std::function<void()>> onSelect_ = {
+		{ Select::Start, [this]() { ToGame(); } },
+		{ Select::Finish, [this]() { ToEnd(); } },
+	};
+
 	Select select_ = Select::Start;
 
 	enum class UISwitch {
@@ -119,6 +130,14 @@ private://パラメータまとめたやつら
 
 	UISwitch gStartUISwitch_ = UISwitch::On;
 	UISwitch gFinishUISwitch_ = UISwitch::Off;
+
+
+private:
+
+	void MenuInput();
+
+	void ToGame();
+	void ToEnd();
 
 };
 

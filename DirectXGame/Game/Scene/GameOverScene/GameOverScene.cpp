@@ -138,41 +138,6 @@ void GameOverScene::Update() {
 	MenuInput();
 
 
-	/*switch (select_) {
-	case Select::TitleBack:
-
-		if (input->TriggerKey(DIK_UP) || input->TriggerButton(DaiEngine::Input::Button::DPAD_UP) || input->TriggerLStick(DaiEngine::Input::Stick::Up)) {
-			select_ = Select::ReStart;
-			gTitleBackUISwitch_ = UISwitch::Off;
-			gReStartUISwitch_ = UISwitch::On;
-			choiceSE_->Play();
-		}
-
-		if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
-			doneSE_->Play();
-			DaiEngine::SceneManager::GetInstance()->ChangeScene("Title");
-			bossManager_->SetBossType(BossType::GingerbreadMan);
-		}
-
-		break;
-	case Select::ReStart:
-
-		if (input->TriggerKey(DIK_DOWN) || input->TriggerButton(DaiEngine::Input::Button::DPAD_DOWN) || input->TriggerLStick(DaiEngine::Input::Stick::Down)) {
-			select_ = Select::TitleBack;
-			gTitleBackUISwitch_ = UISwitch::On;
-			gReStartUISwitch_ = UISwitch::Off;
-			choiceSE_->Play();
-		}
-
-		if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
-			doneSE_->Play();
-			DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
-		}
-
-		break;
-	}*/
-
-
 	gReStartUISwitch_ = (select_ == Select::ReStart) ? UISwitch::On : UISwitch::Off;
 	gTitleBackUISwitch_ = (select_ == Select::TitleBack) ? UISwitch::On : UISwitch::Off;
 	gContinueUISwitch_ = (select_ == Select::Continue) ? UISwitch::On : UISwitch::Off;
