@@ -65,7 +65,7 @@ namespace DaiEngine {
 
 		fade_->SetColor({ 1.0f,1.0f,1.0f,alpha_ });
 
-#ifdef _DEBUG
+#ifdef USE_IMGUI
 
 		ImGui::Begin("window");
 

@@ -279,7 +279,7 @@ void GameScene::Update() {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("Debug");
 	}
 
-	ApplyGlobalVariables();
+	
 
 #endif // _DEBUG
 
@@ -372,11 +372,12 @@ void GameScene::DrawRenderTexture() {
 }
 
 void GameScene::DebugGUI() {
-#ifdef _DEBUG
+#ifdef USE_IMGUI
 
 	//デバッグマネージャの更新
 	globalVariableManager_->Update();
 
+	ApplyGlobalVariables();
 
 #endif // _DEBUG
 }
