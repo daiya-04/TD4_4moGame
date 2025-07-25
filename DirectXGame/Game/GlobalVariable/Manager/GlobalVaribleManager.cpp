@@ -23,7 +23,7 @@ const char** CreateCStringArray(const std::vector<std::string>& strings) {
 //アイテムのImGui表記
 void ItemImGui(const std::string name, std::variant<bool*, int32_t*, float*, Vector2*, Vector3*, Vector4*> value) {
 	value;
-#ifdef _DEBUG
+#ifdef USE_IMGUI
 	//各アイテムをImGuiで操作
 
 	//intの場合
@@ -61,7 +61,7 @@ void ItemImGui(const std::string name, std::variant<bool*, int32_t*, float*, Vec
 void MonitorItemImGui(const std::string name, MonitorItemData& data) {
 
 	name; data;
-#ifdef _DEBUG
+#ifdef USE_IMGUI
 
 	//値を参照
 	std::variant<bool*, int32_t*, float*, Vector2*, Vector3*, std::string*>& value = data.value;
@@ -156,7 +156,7 @@ void MonitorItemImGui(const std::string name, MonitorItemData& data) {
 
 //ツリーのImGui表示処理
 void TreeImGui(const std::string& name, TreeData& treeData, size_t size) {
-#ifdef _DEBUG
+#ifdef USE_IMGUI
 	//ツリー処理開始
 	if (ImGui::TreeNode(name.c_str())) {
 
@@ -301,7 +301,7 @@ void GlobalVariableManager::SetGroup(const std::string& group, GroupData& data)
 void GlobalVariableManager::Update()
 {
 
-#ifdef _DEBUG
+#ifdef USE_IMGUI
 	//デバッグウィンドウ表示
 	ImGui::Begin(baseName_.c_str());
 	if (ImGui::BeginTabBar("LWP")) {

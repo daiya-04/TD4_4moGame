@@ -46,7 +46,7 @@ void Field::Initialize() {
 
 void Field::Update() {
 
-#ifdef _DEBUG
+#ifdef USE_IMGUI
 	ImGui::Begin("TestOperate");
 	if (ImGui::Button("TestRaiseBlocksAround")) {
 		//現在のnowPos_の位置からradius_範囲をdeltaY_分下げる
@@ -97,7 +97,7 @@ void Field::Update() {
 	//各ブロックの高さに応じて色を変更
 	ColorAdjustmentByHeight(highColor_, lowColor_, 0.0f, heightLimit_);
 
-#ifdef _DEBUG
+#ifdef USE_IMGUI
 	//現在のnowPos_に対応するブロックを赤くする
 	Vector2 selected = GetBlockAt(nowPos_.x, nowPos_.y);
 	for (Block& block : blocks_) {

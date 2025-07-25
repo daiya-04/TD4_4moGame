@@ -20,7 +20,7 @@ namespace DaiEngine {
 	}
 
 	void GlobalVariables::Update() {
-#ifdef _DEBUG
+#ifdef USE_IMGUI
 		if (!ImGui::Begin("Global Variables", nullptr, ImGuiWindowFlags_MenuBar)) {
 			ImGui::End();
 			return;
