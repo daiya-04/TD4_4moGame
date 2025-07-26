@@ -54,13 +54,20 @@ void CupCakeFallAttack::InitBehavior2()
 	//ターゲット座標取得
 	targetPos = param_->playerWorld_->translation_;
 
-	collider_->ColliderOn();
+	targetPos.y = param_->fieldY_;
+
+	collider_->ColliderOff();
+
+	param_->isFly_ = true;
+	//
+	isHit_ = false;
 }
 
 void CupCakeFallAttack::InitBehavior3()
 {
 	//ジャンプ後交直
 	collider_->ColliderOff();
+	param_->isFly_ = false;
 }
 
 
@@ -77,6 +84,8 @@ void CupCakeFallAttack::UpdateBehavior1()
 void CupCakeFallAttack::UpdateBehavior2()
 {
 	float t = param_->currentSec / attackCount_;
+
+	if (t >= 0.5f&&!isHit_)collider_->ColliderOn(); isHit_ = true;
 
 	Vector3 newpos = Lerp(t, basePos, targetPos);
 	//放物線の高さを加える

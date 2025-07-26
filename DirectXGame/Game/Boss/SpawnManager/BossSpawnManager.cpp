@@ -103,7 +103,7 @@ void BossSpawnManager::SetOnField(float y)
 	//現在のボス取得
 	IBoss* boss = bosses_[(int)bossType_].get();
 	//現在の位置
-	if (boss->GetPosition().y < y) {
+	if (!boss->parameters_.isFly_) {
 		boss->SetPositionY(y);
 	}
 	//フィールドのY取得

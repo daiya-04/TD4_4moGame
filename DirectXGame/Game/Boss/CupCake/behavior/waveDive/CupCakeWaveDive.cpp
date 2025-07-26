@@ -17,6 +17,7 @@ CupCakeWaveDive::CupCakeWaveDive(BossParameters* parameters)
 
 void CupCakeWaveDive::InitBehavior0()
 {
+	param_->isFly_ = true;
 }
 
 void CupCakeWaveDive::InitBehavior1()
@@ -34,6 +35,7 @@ void CupCakeWaveDive::InitBehavior2()
 
 void CupCakeWaveDive::InitBehavior3()
 {
+	param_->isFly_ = false;
 }
 
 void CupCakeWaveDive::UpdateBehavior0()
