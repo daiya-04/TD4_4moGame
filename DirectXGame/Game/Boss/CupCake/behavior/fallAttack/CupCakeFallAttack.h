@@ -52,6 +52,8 @@ private:
 	//ジャンプ後交直
 	float stopCount_ = 60.0f;
 
+	bool isHit_ = false;
+
 	DaiEngine::Audio* stampSE_ = nullptr;
 
 };
