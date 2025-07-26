@@ -57,6 +57,9 @@ private://**プライベート変数**//
 	//減速量
 	float gravity_ = 1.0f;
 
+	//頂点での減速量
+	float topDegree_ = 4.0f;
+
 	float nowSpd_;
 
 	Vector3 emitPos_{};
