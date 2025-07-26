@@ -155,8 +155,9 @@ void Player::Update()
 	behaviors_[(int)behaviorName_]->Update();
 
 	//落下
-	parameters_.velocity.y -= gravity_;
-
+	if (!parameters_.isFlying) {
+		parameters_.velocity.y -= gravity_;
+	}
 	//座標更新
 	UpdatePositionWithCollision();
 

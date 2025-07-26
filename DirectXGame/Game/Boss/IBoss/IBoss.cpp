@@ -128,7 +128,7 @@ void IBoss::Update() {
 	if (parameters_.behaviorRequest_) {
 
 #ifdef _DEBUG
-		if (behaviorNames_.size() != 0&&debugBehavior_) {
+		if (behaviorNames_.size() != 0&&debugBehavior_!=0) {
 			//デバッグ時の攻撃指定
 			//debugBehaviorが0の時は未指定
 			parameters_.behaviorRequest_= debugBehavior_-1;
