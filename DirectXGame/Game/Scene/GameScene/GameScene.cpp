@@ -338,7 +338,6 @@ void GameScene::DrawModel() {
 void GameScene::DrawParticle() {
 
 	EffectManager::GetInstance()->Draw(camera_);
-
 }
 
 void GameScene::DrawUI() {

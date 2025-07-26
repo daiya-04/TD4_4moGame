@@ -27,7 +27,7 @@ void BossIdle::Update()
 		int num = GetRandomInt(1, 3);
 		if (num == 3)num = 2;
 
-		if (savedATK_.size() != 3) {
+		if (savedATK_.size() != 2) {
 			savedATK_.push_back(num);
 		}
 		else {

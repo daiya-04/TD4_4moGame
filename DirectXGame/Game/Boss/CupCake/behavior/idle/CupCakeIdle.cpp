@@ -29,15 +29,16 @@ void CupCakeIdle::Update()
 		int num = GetRandomInt(1, 4);
 		if (num == 4)num = 3;
 
-		if (savedATK_.size() != 3) {
+		if (savedATK_.size() != 2) {
 			savedATK_.push_back(num);
 		}
 		else {
 			//三連続同じ値なら違うものに変更
 			if (savedATK_[0] == num && savedATK_[1] == num) {
 				while (num == savedATK_[0] || num == savedATK_[1]) {
-					num = GetRandomInt(1, 3);
-					if (num == 3)num = 2;
+					//ランダムな値取得
+					num = GetRandomInt(1, 4);
+					if (num == 4)num = 3;
 				}
 				savedATK_.clear();
 				savedATK_.push_back(num);
