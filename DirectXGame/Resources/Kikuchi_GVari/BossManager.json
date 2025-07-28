@@ -56,7 +56,7 @@
             },
             "Dead": {
                 "animeLeverage": 1.0,
-                "count": 0.0
+                "count": 90.0
             },
             "Idle": {
                 "second": 60.0
@@ -161,8 +161,8 @@
                 "warningSphereHeight": 3.0
             },
             "Dead": {
-                "animeLeverage": 1.0,
-                "count": 0.0
+                "animeLeverage": 1.2999999523162842,
+                "count": 150.0
             },
             "FollowBullet": {
                 "countCount": 480.0,
@@ -268,12 +268,12 @@
                 },
                 "finalWarningCount": 30.0,
                 "radius": 1.899999976158142,
-                "warningCount": 100.0,
+                "warningCount": 50.0,
                 "warningSphereHeight": 1.0
             },
             "Dead": {
-                "animeLeverage": 1.0,
-                "count": 0.0
+                "animeLeverage": 1.2999999523162842,
+                "count": 150.0
             },
             "Idle": {
                 "second": 60.0
