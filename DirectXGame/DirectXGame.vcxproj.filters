@@ -182,6 +182,15 @@
     <Filter Include="Game\Effect">
       <UniqueIdentifier>{371fe40b-0c26-4cd9-ac17-1c1ad5cca657}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Logo">
+      <UniqueIdentifier>{f336a505-f1f0-40a0-add6-cb53df77495d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Logo\ClearLogo">
+      <UniqueIdentifier>{a8d3cb5f-0765-48f6-9f9b-6a023ce46c72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Logo\GameOverLogo">
+      <UniqueIdentifier>{fe0b2cae-c127-4e90-ac0a-6a80c1485455}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -501,6 +510,19 @@
     <ClCompile Include="Game\Boss\WaveColliderMotion\WaveColliderMotion.cpp" />
     <ClCompile Include="Game\Boss\BossManager\BossManager.cpp" />
     <ClCompile Include="Game\Player\behavior\Dead\PlayerDead.cpp" />
+    <ClCompile Include="Game\Logo\BaseChar.cpp">
+      <Filter>Game\Logo</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Logo\GameOverLogo\GameOverLogo.cpp">
+      <Filter>Game\Logo\GameOverLogo</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Logo\ClearLogo\ClearLogo.cpp">
+      <Filter>Game\Logo\ClearLogo</Filter>
+    </ClCompile>
+    <ClCompile Include="ClearChar.cpp">
+      <Filter>Game\Logo\ClearLogo</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverChar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -857,5 +879,18 @@
     <ClInclude Include="Game\Boss\BossManager\BossManager.h" />
     <ClInclude Include="Game\Boss\BossType\BossType.h" />
     <ClInclude Include="Game\Player\behavior\Dead\PlayerDead.h" />
+    <ClInclude Include="Game\Logo\BaseChar.h">
+      <Filter>Game\Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Logo\GameOverLogo\GameOverLogo.h">
+      <Filter>Game\Logo\GameOverLogo</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Logo\ClearLogo\ClearLogo.h">
+      <Filter>Game\Logo\ClearLogo</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearChar.h">
+      <Filter>Game\Logo\ClearLogo</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverChar.h" />
   </ItemGroup>
 </Project>
