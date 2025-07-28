@@ -62,6 +62,13 @@ void WaveColliderMotion::Draw(DaiEngine::Camera* camera) {
 
 void WaveColliderMotion::OnCollision(DaiEngine::Collider* collider) {
 	if (collider->GetTag() == "player") { 
+
+		//プレイヤーとの距離計算
+		//float dis = Vector3(collider->GetWorldPos() - collider_->GetWorldPos()).Length();
+
+		//コライダーサイズ取得
+		//float size = collider_->GetRadius();
+
 		collider_->ColliderOff();
 		isEnd_ = true;
 	}
