@@ -6,7 +6,7 @@
                 "maxBlinkingNum": 3
             },
             "Bullet": {
-                "DiveRadius": 1.5,
+                "DiveRadius": 2.0,
                 "FallRadius": 1.0,
                 "NoneRadius": 1.0,
                 "ParabolaRadius": 1.0,
@@ -248,7 +248,7 @@
             ],
             "ColliderRadius": 1.0,
             "DangerZone": {
-                "BlinkingNum": 3,
+                "BlinkingNum": 5,
                 "FollowParam": {
                     "distance": 10.0,
                     "followSpd": 0.10000000149011612
@@ -266,9 +266,9 @@
                         3.0
                     ]
                 },
-                "finalWarningCount": 100.0,
+                "finalWarningCount": 30.0,
                 "radius": 1.899999976158142,
-                "warningCount": 180.0,
+                "warningCount": 100.0,
                 "warningSphereHeight": 1.0
             },
             "Dead": {

@@ -81,7 +81,7 @@
         ],
         "gravity": 0.10000000149011612,
         "playerEntry": {
-            "animRate": 3.0,
+            "animRate": 1.5,
             "maxRate": 45.0,
             "startPos": [
                 0.0,
