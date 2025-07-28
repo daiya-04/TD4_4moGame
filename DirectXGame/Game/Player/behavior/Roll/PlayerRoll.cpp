@@ -1,6 +1,8 @@
 #include "PlayerRoll.h"
 #include"Player/Player.h"
 
+#include "EffectManager.h"
+
 #include"Input.h"
 
 PlayerRoll::PlayerRoll()
@@ -44,6 +46,9 @@ void PlayerRoll::Init()
 	currentVelo_ = currentVelo_.Normalize() * startSpeed_;
 
 	player_->SetAnimationName("PlayerAvoidance");
+
+    emitPos_ = player_->GetWorld().GetWorldPos();
+    EffectManager::GetInstance()->Start("PlayerMoveEffect", &emitPos_);
 }
 
 //0-1
@@ -58,9 +63,12 @@ Vector3 ProjectOnPlane(const Vector3& vec, const Vector3& planeNormal) {
 
 void PlayerRoll::Update() {
 
+    emitPos_ = player_->GetWorld().GetWorldPos();
+
     if (!player_->GetInput()->GetInput(PlayerInput::Roll)) {
         player_->behaviorRequest_ = Player::Behavior::Move;
         player_->parameters_.currentRollCount = cooldownCount_;
+        EffectManager::GetInstance()->End("PlayerMoveEffect");
         return;
     }
 
@@ -149,6 +157,7 @@ void PlayerRoll::Update() {
     // チャージ完了時スピン
     if (DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE) && chargeJump_ >= maxCharge_) {
         player_->behaviorRequest_ = Player::Behavior::SpinAttack;
+        EffectManager::GetInstance()->End("PlayerMoveEffect");
         chargeJump_ = 0.0f;
     }
 }
