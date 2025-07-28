@@ -43,9 +43,10 @@
         ],
         "MaxHP": 10,
         "Move": {
-            "degreeSpd": 1.0,
+            "degreeSpd": 1.5,
             "jumpStSpd": 10.0,
-            "speed": 0.20000000298023224
+            "speed": 0.20000000298023224,
+            "topDegree": 20.0
         },
         "OffsetPos": [
             0.0,

@@ -6,7 +6,7 @@
                 "maxBlinkingNum": 3
             },
             "Bullet": {
-                "DiveRadius": 1.0,
+                "DiveRadius": 1.5,
                 "FallRadius": 1.0,
                 "NoneRadius": 1.0,
                 "ParabolaRadius": 1.0,
