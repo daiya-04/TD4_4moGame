@@ -85,7 +85,10 @@ void CupCakeFallAttack::UpdateBehavior2()
 {
 	float t = param_->currentSec / attackCount_;
 
-	if (t >= 0.5f&&!isHit_)collider_->ColliderOn(); isHit_ = true;
+	if (t >= 0.5f && !isHit_) {
+		collider_->ColliderOn();
+		isHit_ = true;
+	}
 
 	Vector3 newpos = Lerp(t, basePos, targetPos);
 	//放物線の高さを加える

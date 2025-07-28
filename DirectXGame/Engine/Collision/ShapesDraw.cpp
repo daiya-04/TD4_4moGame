@@ -157,7 +157,7 @@ namespace ShapesDraw {
 		for (int i = 0; i < segmentCount; ++i) {
 			float angle = (2.0f * std::numbers::pi_v<float> *i) / segmentCount;
 			Vector3 radial = std::cos(angle) * right + std::sin(angle) * forward;
-			radial *= cylinder.radius * 1.5f;
+			radial *= cylinder.radius;
 
 			topPoints[i] = cylinder.topCenter + radial;
 			bottomPoints[i] = cylinder.bottomCenter + radial;
