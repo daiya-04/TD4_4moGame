@@ -501,6 +501,7 @@
     <ClCompile Include="Game\Boss\WaveColliderMotion\WaveColliderMotion.cpp" />
     <ClCompile Include="Game\Boss\BossManager\BossManager.cpp" />
     <ClCompile Include="Game\Player\behavior\Dead\PlayerDead.cpp" />
+    <ClCompile Include="Game\TitleSceneDirection\TitleSceneDirection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -857,5 +858,6 @@
     <ClInclude Include="Game\Boss\BossManager\BossManager.h" />
     <ClInclude Include="Game\Boss\BossType\BossType.h" />
     <ClInclude Include="Game\Player\behavior\Dead\PlayerDead.h" />
+    <ClInclude Include="Game\TitleSceneDirection\TitleSceneDirection.h" />
   </ItemGroup>
 </Project>

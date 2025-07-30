@@ -2,6 +2,8 @@
 #include "DirectXCommon.h"
 #include <cassert>
 
+#include "imgui.h"
+
 namespace DaiEngine {
 	void Camera::Init() {
 
@@ -65,6 +67,21 @@ namespace DaiEngine {
 	void Camera::UpdateProjectionMatrix() {
 		matProjection_ = MakePerspectiveFovMatrix(fovAngleY, aspectRatio, nearZ, farZ);
 		cMap_->matProjection = matProjection_;
+	}
+
+	void Camera::DrawImGui() {
+		if (ImGui::Begin("DebugCamera")) {
+			ImGui::DragFloat3("Rotation", &rotation_.x, 0.1f);
+			ImGui::DragFloat3("Translation", &translation_.x, 0.1f);
+		}
+		ImGui::End();
+	}
+
+	void Camera::SetCamera(Vector3 translation, Vector3 rotation) {
+		translation_ = translation;
+		rotation_ = rotation;
+	
+		UpdateMatrix();
 	}
 
 	void Camera::UpdateCameraPos() {
