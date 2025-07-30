@@ -14,7 +14,7 @@ public:
 private:
 
 	//アニメーション名
-	std::string animeName_ = "";
+	std::string animeName_ = "PlayerEntry";
 
 	//再生倍率
 	float playRate_ = 1.0f;

@@ -296,6 +296,9 @@ void Player::SetWorldTranslate(const Vector3& translate)
 
 void Player::OnCollison(DaiEngine::Collider* collider)
 {
+	//死亡時何もなし
+	if (behaviorName_ == Behavior::Dead) { collider_->ColliderOff(); return; }
+
 	//ボスコライダーの場合スキップ
 	if (collider->GetTag() == "boss" ||
 		collider->GetTag() == "playerAttack" ||
