@@ -7,7 +7,7 @@ void ClearChar::Init(uint32_t textureHandle, size_t charNum) {
 	BaseChar::Init(textureHandle, charNum);
 
 	scale_ = 0.0f;
-	state_ = AnimeState::Apper;
+	state_ = AnimeState::Idle;
 	
 	ch_->SetTextureArea({ 128.0f * charNum_, 0.0f }, { 128.0f,128.0f });
 	ch_->SetSize(size_);
@@ -26,7 +26,7 @@ void ClearChar::ApperUpdate() {
 
 	pos_ = Lerp(param_, startPos_, endPos_);
 	scale_ = Lerp(param_, 0.0f, 1.0f);
-	rotate_ = Lerp(param_, 0.0f, 3.14f * 2.0f);
+	rotate_ = Lerp(param_, 0.0f, 3.14f * 8.0f);
 	ch_->SetScale(scale_);
 	ch_->SetRotate(rotate_);
 }
@@ -38,12 +38,12 @@ void ClearChar::BounceUpdate() {
 
 	if (pos_.y >= endPos_.y) {
 		pos_.y = endPos_.y;
-		state_ = AnimeState::Idel;
+		state_ = AnimeState::Idle;
 	}
 
 }
 
-void ClearChar::IdelUpdate() {
+void ClearChar::IdleUpdate() {
 
 
 

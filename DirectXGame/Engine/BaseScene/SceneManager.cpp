@@ -30,7 +30,7 @@ namespace DaiEngine {
 #endif // NDEBUG
 
 #ifdef _DEBUG
-		scene_ = sceneFactory_->CreateScene("Clear");
+		scene_ = sceneFactory_->CreateScene("Game");
 #endif // _DEBUG
 
 		bossSpawnManager_ = BossManager::GetInstance();

@@ -519,10 +519,12 @@
     <ClCompile Include="Game\Logo\ClearLogo\ClearLogo.cpp">
       <Filter>Game\Logo\ClearLogo</Filter>
     </ClCompile>
-    <ClCompile Include="ClearChar.cpp">
+    <ClCompile Include="Game\Logo\ClearLogo\ClearChar.cpp">
       <Filter>Game\Logo\ClearLogo</Filter>
     </ClCompile>
-    <ClCompile Include="GameOverChar.cpp" />
+    <ClCompile Include="Game\Logo\GameOverLogo\GameOverChar.cpp">
+      <Filter>Game\Logo\GameOverLogo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -888,9 +890,11 @@
     <ClInclude Include="Game\Logo\ClearLogo\ClearLogo.h">
       <Filter>Game\Logo\ClearLogo</Filter>
     </ClInclude>
-    <ClInclude Include="ClearChar.h">
+    <ClInclude Include="Game\Logo\ClearLogo\ClearChar.h">
       <Filter>Game\Logo\ClearLogo</Filter>
     </ClInclude>
-    <ClInclude Include="GameOverChar.h" />
+    <ClInclude Include="Game\Logo\GameOverLogo\GameOverChar.h">
+      <Filter>Game\Logo\GameOverLogo</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

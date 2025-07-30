@@ -63,6 +63,10 @@ public:
 	friend inline Vector2 operator*(const Vector2& vector, float scalar){
 		return scalar * vector;
 	}
+	friend inline Vector2 operator*(const Vector2& v1, const Vector2& v2) {
+		return Vector2(v1.x * v1.x, v2.y * v2.y);
+	}
+
 	//割り算
 	friend inline Vector2 operator/(const Vector2& vector, float scalar){
 		return { vector.x / scalar, vector.y / scalar };
@@ -112,4 +116,13 @@ public:
 
 		return p;
 	}
+
 };
+
+inline float Frac(float x) {
+	return x - std::floor(x);
+}
+
+inline Vector2 Frac(const Vector2& v) {
+	return Vector2({ Frac(v.x), Frac(v.y) });
+}

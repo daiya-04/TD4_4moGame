@@ -4,11 +4,7 @@
 #include <functional>
 #include <optional>
 
-enum class AnimeState {
-	Apper,
-	Bounce,
-	Idel,
-};
+
 
 class ClearChar : public BaseChar {
 public:
@@ -41,18 +37,24 @@ private:
 
 private:
 
-	AnimeState state_ = AnimeState::Apper;
+	enum class AnimeState {
+		Apper,
+		Bounce,
+		Idle,
+	};
+
+	AnimeState state_ = AnimeState::Idle;
 	std::optional<AnimeState> stateRequest_ = std::nullopt;
 
 	std::map<AnimeState, std::function<void()>> stateUpdateTable_ = {
 		{AnimeState::Apper, [this]() {ApperUpdate(); }},
 		{AnimeState::Bounce, [this]() { BounceUpdate(); }},
-		{AnimeState::Idel, [this]() {IdelUpdate(); }},
+		{AnimeState::Idle, [this]() {IdleUpdate(); }},
 	};
 
 private:
 
-	void IdelUpdate();
+	void IdleUpdate();
 
 	void ApperUpdate();
 

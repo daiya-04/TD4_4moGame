@@ -159,8 +159,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ClearChar.cpp" />
-    <ClCompile Include="GameOverChar.cpp" />
+    <ClCompile Include="Game\Logo\ClearLogo\ClearChar.cpp" />
+    <ClCompile Include="Game\Logo\GameOverLogo\GameOverChar.cpp" />
     <ClCompile Include="Game\Logo\BaseChar.cpp" />
     <ClCompile Include="Game\Logo\ClearLogo\ClearLogo.cpp" />
     <ClCompile Include="Game\Logo\GameOverLogo\GameOverLogo.cpp" />
@@ -297,8 +297,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ClearChar.h" />
-    <ClInclude Include="GameOverChar.h" />
+    <ClInclude Include="Game\Logo\ClearLogo\ClearChar.h" />
+    <ClInclude Include="Game\Logo\GameOverLogo\GameOverChar.h" />
     <ClInclude Include="Game\Logo\BaseChar.h" />
     <ClInclude Include="Game\Logo\ClearLogo\ClearLogo.h" />
     <ClInclude Include="Game\Logo\GameOverLogo\GameOverLogo.h" />

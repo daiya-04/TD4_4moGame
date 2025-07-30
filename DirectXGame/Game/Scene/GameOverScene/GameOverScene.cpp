@@ -18,8 +18,8 @@ void GameOverScene::SetGlobalVariables() {
 
 	//ゲームオーバーテキスト
 	std::string groupName = "GameOverText";
-	globalVariables->CreateGroup(groupName);
-	globalVariables->AddItem(groupName, "Translation", gameOverText_->GetPosition());
+	/*globalVariables->CreateGroup(groupName);
+	globalVariables->AddItem(groupName, "Translation", gameOverText_->GetPosition());*/
 	//
 	groupName = "GO_UI_TitleBack";
 	globalVariables->CreateGroup(groupName);
@@ -41,7 +41,7 @@ void GameOverScene::ApplyGlobalVariables() {
 
 	//
 	std::string groupName = "GameOverText";
-	gameOverText_->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
+	//gameOverText_->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
 
 	//
 	groupName = "GO_UI_TitleBack";
@@ -73,7 +73,7 @@ void GameOverScene::Init() {
 	///
 
 	///
-	uint32_t gameOverTextTex = DaiEngine::TextureManager::Load("gameOver.png");
+	//uint32_t gameOverTextTex = DaiEngine::TextureManager::Load("gameOver.png");
 	uint32_t titleBackTex = DaiEngine::TextureManager::Load("TitleBack.png");
 	uint32_t reStartTex = DaiEngine::TextureManager::Load("StartBiging.png");
 	uint32_t continueTex = DaiEngine::TextureManager::Load("Continue.png");
@@ -85,7 +85,9 @@ void GameOverScene::Init() {
 	choiceSE_ = DaiEngine::AudioManager::Load("SE/Choice.mp3");
 	doneSE_ = DaiEngine::AudioManager::Load("SE/Done.mp3");
 
-	gameOverText_.reset(DaiEngine::Sprite::Create(gameOverTextTex, {}));
+	//gameOverText_.reset(DaiEngine::Sprite::Create(gameOverTextTex, {}));
+	gameOverText_ = std::make_unique<GameOverLogo>();
+	gameOverText_->Init(L"ゲームオーバー");
 
 	titleBackUI_.reset(DaiEngine::Sprite::Create(titleBackTex, {}));
 	titleBackUI_->SetSize({ 350.0f, 70.0f });
@@ -146,6 +148,7 @@ void GameOverScene::Update() {
 	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,70 });
 	continueUI_->SetTextureArea({ 350.0f * static_cast<float>(gContinueUISwitch_),0.0f }, { 350.0f,70 });
 
+	gameOverText_->Update();
 
 	///
 	//ライト更新

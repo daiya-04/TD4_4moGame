@@ -12,7 +12,7 @@ void ClearLogo::Init(const std::wstring& text) {
 		//追加
 		auto& newChar = text_.emplace_back(std::make_unique<ClearChar>());
 		newChar->Init(texHandle, index);
-		newChar->SetPos({ 680.0f, 400.0f });
+		newChar->SetPos({ 640.0f, 400.0f });
 	}
 
 	stateRequest_ = AnimeState::Apper;

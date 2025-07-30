@@ -21,6 +21,11 @@ private:
 
 private:
 
+	enum class AnimeState {
+		Apper,
+		Bounce,
+	};
+
 	AnimeState state_ = AnimeState::Apper;
 	std::optional<AnimeState> stateRequest_ = std::nullopt;
 
