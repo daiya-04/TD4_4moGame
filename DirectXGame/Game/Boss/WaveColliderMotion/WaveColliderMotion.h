@@ -71,6 +71,4 @@ private:
 
 	//広がる速度
 	float addRadius_ = 1.0f;
-
-
 };

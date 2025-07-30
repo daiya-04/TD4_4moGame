@@ -17,17 +17,17 @@ public://**パブリック関数**//
 
 public://**状態**//
 
-	void InitBehavior0()override;
-	void InitBehavior1()override;
-	void InitBehavior2()override;
-	void InitBehavior3()override {};
-	void InitBehavior4()override {};
+	void InitBehavior0()override;//タックル待機
+	void InitBehavior1()override;//タックル
+	void InitBehavior2()override;//ダウン
+	void InitBehavior3()override;//おきあがる
+	void InitBehavior4()override;//プレイヤー方向向く
 
 	void UpdateBehavior0()override;
 	void UpdateBehavior1()override;
 	void UpdateBehavior2()override;
-	void UpdateBehavior3()override {};
-	void UpdateBehavior4()override {};
+	void UpdateBehavior3()override;
+	void UpdateBehavior4()override;
 
 private:
 
@@ -42,6 +42,8 @@ private:
 	
 	//実行回数
 	int currentExecuteCount_ = 0;
+
+	float count_ = 0;
 
 private:
 
@@ -61,6 +63,12 @@ private:
 
 	//ダウンタイム
 	float downCount_ = 60.0f;
+
+	//起き上がる時間
+	float awakeCount_ = 60.0f;
+
+	//プレイヤーに向く時間
+	float setPlayerFocus_ = 60.0f;
 
 	Vector3 emitPos_{};
 

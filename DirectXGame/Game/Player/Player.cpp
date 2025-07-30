@@ -78,6 +78,7 @@ Player::Player()
 	gvg->SetValue("Limitation", &limitationXZ_);
 	gvg->SetValue("ColliderRadius", &radius_);
 	gvg->SetValue("colliderColor", &colliderColor_);
+	gvg->SetValue("waveWide", &hitWide_);
 	//全ての状態のツリーをセット
 	for (auto& behavior : behaviors_) {
 		if (behavior) {
@@ -302,6 +303,24 @@ void Player::OnCollison(DaiEngine::Collider* collider)
 		!parameters_.isHit||
 		behaviorName_ == Behavior::SpinAttack) {
 		return;
+	}
+
+	if (collider->GetTag() == "wave") {
+		//プレイヤーとの距離計算
+		float dis = Vector3(collider->GetWorldPos() - collider_->GetWorldPos()).Length();
+
+		//コライダーサイズ取得
+		float size = collider_->GetRadius();
+
+		//差分求める
+		float distance = size - dis;
+
+		if (hitWide_ <= distance && distance > 0) {
+			//続ける
+		}
+		else {
+			return;
+		}
 	}
 
 

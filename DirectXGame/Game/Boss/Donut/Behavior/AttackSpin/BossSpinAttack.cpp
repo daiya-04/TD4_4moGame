@@ -96,6 +96,16 @@ void Boss2SpinAttack::InitBehavior2()
 	param_->cameraBehaviorRequest_ = FollowCamera::State::Follow;
 }
 
+void Boss2SpinAttack::InitBehavior3()
+{
+	count_ = 0;
+}
+
+void Boss2SpinAttack::InitBehavior4()
+{
+	count_ = 0;
+}
+
 void Boss2SpinAttack::UpdateBehavior0()
 {
 	dangerZone_->Update();
@@ -140,6 +150,25 @@ void Boss2SpinAttack::UpdateBehavior1()
 void Boss2SpinAttack::UpdateBehavior2()
 {
 	if(param_->currentSec >= downCount_) {
+		//終了
+		countRequest_ = 3;
+	}
+}
+
+void Boss2SpinAttack::UpdateBehavior3()
+{
+	if (param_->currentSec >= awakeCount_) {
+		//終了
+		countRequest_ = 4;
+	}
+}
+
+void Boss2SpinAttack::UpdateBehavior4()
+{
+
+	param_->isLookAtPlayer_ = true;
+
+	if (param_->currentSec >= setPlayerFocus_) {
 		//終了
 		param_->behaviorRequest_ = 0;
 	}

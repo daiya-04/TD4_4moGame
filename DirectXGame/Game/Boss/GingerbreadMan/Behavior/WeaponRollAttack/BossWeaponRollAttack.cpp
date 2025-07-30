@@ -91,6 +91,8 @@ void BossWeaponRollAttack::InitBehavior1()
 	EffectManager::GetInstance()->Start("StickAttackEffect", &jointPos_);
 	swingSE_->SetVolume(2.0f);
 	swingSE_->Play();
+
+	dangerZone_->SetDraw(true);
 	
 }
 
