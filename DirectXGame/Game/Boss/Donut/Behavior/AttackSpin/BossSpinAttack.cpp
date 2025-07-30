@@ -79,7 +79,7 @@ void Boss2SpinAttack::InitBehavior1()
 	collider_->ColliderOn();
 	collider_->SetRadius(radius_);
 
-	emitPos_ = collider_->GetWorldPos() - Vector3(0.0f, 1.0f, 0.0f);
+	emitPos_ = collider_->GetWorldPos() + Vector3(0.0f, 2.0f, 0.0f);
 	EffectManager::GetInstance()->Start("DonutsRollEffect", &emitPos_);
 	isDrawZone_ = false;
 
@@ -144,7 +144,7 @@ void Boss2SpinAttack::UpdateBehavior1()
 	}
 
 	collider_->Update();
-	emitPos_ = collider_->GetWorldPos() - Vector3(0.0f, 1.0f, 0.0f);
+	emitPos_ = collider_->GetWorldPos() + Vector3(0.0f, 2.0f, 0.0f);
 }
 
 void Boss2SpinAttack::UpdateBehavior2()

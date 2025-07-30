@@ -52,4 +52,7 @@ private://**パラメータ**//
 
 	float chargeJump_ = 0.0f; // ジャンプ攻撃のチャージ
 	float maxCharge_ = 120.0f; // ジャンプ攻撃のチャージ満タンの値
+
+
+	Vector3 emitPos_{};
 };
