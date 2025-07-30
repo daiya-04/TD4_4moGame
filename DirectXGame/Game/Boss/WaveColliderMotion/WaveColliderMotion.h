@@ -10,7 +10,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	WaveColliderMotion();
+	WaveColliderMotion(const DaiEngine::WorldTransform& pWorld);
 	~WaveColliderMotion();
 
 	/// <summary>
@@ -60,6 +60,8 @@ private:
 	DaiEngine::WorldTransform world_;
 	std::unique_ptr<DaiEngine::CylinderCollider>collider_;
 
+	const DaiEngine::WorldTransform* pWorld_;
+
 	//高さ
 	float height_ = 2.0f;
 
@@ -71,4 +73,7 @@ private:
 
 	//広がる速度
 	float addRadius_ = 1.0f;
+
+	//判定幅
+	float hitWide_ = 2.0f;
 };

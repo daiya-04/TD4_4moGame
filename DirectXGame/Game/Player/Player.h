@@ -297,9 +297,6 @@ private://**ヒット時処理*//
 	//描画フラグ
 	bool isDraw_ = true;
 
-	//判定する範囲
-	float hitWide_ = 1.0f;
-
 private://**行動制限**//
 
 	//XZ軸の制限
