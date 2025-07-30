@@ -13,6 +13,7 @@
                 "WaveColliuder": {
                     "addRadius": 0.30000001192092896,
                     "height": 2.0,
+                    "hitWide": 2.0,
                     "maxCount": 180.0
                 },
                 "WaveRadius": 2.0,
@@ -119,6 +120,7 @@
                 "WaveColliuder": {
                     "addRadius": 1.0,
                     "height": 2.0,
+                    "hitWide": 2.0,
                     "maxCount": 180.0
                 },
                 "WaveRadius": 1.0,
@@ -230,6 +232,7 @@
                 "WaveColliuder": {
                     "addRadius": 1.0,
                     "height": 2.0,
+                    "hitWide": 2.0,
                     "maxCount": 180.0
                 },
                 "WaveRadius": 1.0,
@@ -324,7 +327,13 @@
                 ],
                 "preActionRate": 1.0,
                 "rotateNum": 6.0,
-                "warningCount": 180.0
+                "warningCount": 180.0,
+                "zoneColor": [
+                    1.0,
+                    0.2647058963775635,
+                    0.2647058963775635,
+                    1.0
+                ]
             }
         }
     }

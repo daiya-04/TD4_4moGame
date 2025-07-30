@@ -19,6 +19,7 @@ BossWeaponRollAttack::BossWeaponRollAttack(BossParameters* parame)
 
 	param.world = *param_->world;
 	dangerZone_ = std::make_unique<SingleDangerZone>(param);
+	dangerZone_->SetColorPointer(zoneColor_);
 
 	tree_.name_ = "weaponRollAttack";
 	tree_.SetValue("warningCount", &param.maxWarningCount);
@@ -33,6 +34,8 @@ BossWeaponRollAttack::BossWeaponRollAttack(BossParameters* parame)
 	tree_.SetValue("preActionRate",&preActionRate_);
 	tree_.SetValue("actionRate", &actionRate_);
 	tree_.SetValue("endActionRate", &endActionRate_);
+
+	tree_.SetValue("zoneColor", &zoneColor_);
 
 	swingSE_ = DaiEngine::AudioManager::Load("SE/StickSwing.mp3");
 	
@@ -122,6 +125,9 @@ void BossWeaponRollAttack::UpdateBehavior0()
 
 void BossWeaponRollAttack::UpdateBehavior1()
 {
+	//警告円の描画
+	dangerZone_->Update();
+	dangerZone_->SetDraw(true);
 	//割合Tを計算
 	//float t = param_->currentSec / attackCount_;
 
