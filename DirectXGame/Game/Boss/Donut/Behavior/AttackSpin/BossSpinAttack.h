@@ -43,8 +43,6 @@ private:
 	//実行回数
 	int currentExecuteCount_ = 0;
 
-	float count_ = 0;
-
 private:
 
 	std::unique_ptr<SquareDangerZone>dangerZone_;
@@ -62,13 +60,13 @@ private:
 	int executeCount_ = 3;
 
 	//ダウンタイム
-	float downCount_ = 60.0f;
+	float downCount_ = 120.0f;
 
 	//起き上がる時間
-	float awakeCount_ = 60.0f;
+	float awakeCount_ = 120.0f;
 
 	//プレイヤーに向く時間
-	float setPlayerFocus_ = 60.0f;
+	float setPlayerFocus_ = 120.0f;
 
 	Vector3 emitPos_{};
 
@@ -76,8 +74,15 @@ private:
 	float preActionRate_ = 1.0f;
 	//実行動作再生倍率
 	float actionRate_ = 1.0f;
-	//ダウン動作再生倍率
+
+	//クラッシュ
+	float crashRate_ = 1.0f;
+	//復帰
+	float returnRate_ = 1.0f;
+	//正面をむくアニメーション
 	float downActionRate_ = 1.0f;
+
+
 
 	//移動速度
 	float speed_ = 1.0f;
