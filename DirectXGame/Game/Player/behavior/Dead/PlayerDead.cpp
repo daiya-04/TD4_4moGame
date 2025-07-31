@@ -13,7 +13,7 @@ void PlayerDead::Init()
 	//描画フラグON
 	player_->SetDraw(true);
 	//アニメーションと再生倍率設定
-	player_->SetAnimationName(animeName_);
+	player_->SetAnimationName(animeName_,false);
 	player_->SetAnimationLeverage(playRate_);
 }
 

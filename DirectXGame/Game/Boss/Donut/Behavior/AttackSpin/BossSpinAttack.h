@@ -17,17 +17,17 @@ public://**パブリック関数**//
 
 public://**状態**//
 
-	void InitBehavior0()override;
-	void InitBehavior1()override;
-	void InitBehavior2()override;
-	void InitBehavior3()override {};
-	void InitBehavior4()override {};
+	void InitBehavior0()override;//タックル待機
+	void InitBehavior1()override;//タックル
+	void InitBehavior2()override;//ダウン
+	void InitBehavior3()override;//おきあがる
+	void InitBehavior4()override;//プレイヤー方向向く
 
 	void UpdateBehavior0()override;
 	void UpdateBehavior1()override;
 	void UpdateBehavior2()override;
-	void UpdateBehavior3()override {};
-	void UpdateBehavior4()override {};
+	void UpdateBehavior3()override;
+	void UpdateBehavior4()override;
 
 private:
 
@@ -60,7 +60,13 @@ private:
 	int executeCount_ = 3;
 
 	//ダウンタイム
-	float downCount_ = 60.0f;
+	float downCount_ = 120.0f;
+
+	//起き上がる時間
+	float awakeCount_ = 120.0f;
+
+	//プレイヤーに向く時間
+	float setPlayerFocus_ = 120.0f;
 
 	Vector3 emitPos_{};
 
@@ -68,8 +74,15 @@ private:
 	float preActionRate_ = 1.0f;
 	//実行動作再生倍率
 	float actionRate_ = 1.0f;
-	//ダウン動作再生倍率
+
+	//クラッシュ
+	float crashRate_ = 1.0f;
+	//復帰
+	float returnRate_ = 1.0f;
+	//正面をむくアニメーション
 	float downActionRate_ = 1.0f;
+
+
 
 	//移動速度
 	float speed_ = 1.0f;

@@ -1,6 +1,6 @@
 #pragma once
 #include"Boss/DangerZone/IDangerZone/IDangerZone.h"
-#include"GameObject/GameObject.h"
+#include"InstancingGameObject.h"
 
 //警告円の描画を含むクラス
 class SingleDangerZone
@@ -13,6 +13,8 @@ public://**パブリック関数**//
 	/// <param name="param">パラメータ</param>
 	SingleDangerZone(const DangerZoneParameters& param);
 	~SingleDangerZone()=default;
+
+	void SetColorPointer(const Vector4& color) { color_ = &color; }
 
 	/// <summary>
 	/// 初期化
@@ -53,11 +55,13 @@ private:
 	std::unique_ptr<IDangerZone>dangerZone_;
 
 	//インスタンス化されたゲームオブジェクト
-	std::unique_ptr<GameObject> gameObject_;
+	std::unique_ptr<InstancingGameObject> gameObject_;
 
 	Vector3 pPos_ = { 0,0,0 };
 
 	//描画フラグ
 	bool isDraw_ = true;
+
+	const Vector4* color_=nullptr;
 };
 

@@ -36,10 +36,10 @@ void IBoss::Init(const std::string& objectName, FollowCamera* camera, const DaiE
 	
 
 	if (objectName != "CapCakeStandby") {
-		bulletManager_ = std::make_unique<BossBulletManager>();
+		bulletManager_ = std::make_unique<BossBulletManager>(*playerWorld_);
 	}
 	else {
-		bulletManager_ = std::make_unique<BossBulletManager>(false);
+		bulletManager_ = std::make_unique<BossBulletManager>(*playerWorld_,false);
 	}
 	bulletManager_->SetCamera(followCamera_->GetCamera());
 

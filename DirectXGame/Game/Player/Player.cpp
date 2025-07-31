@@ -32,6 +32,8 @@ Player::Player()
 	collider_->ColliderOff();
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
 	collider_->SetStayCallback([this](DaiEngine::Collider* collider) { OnCollison(collider); });
+	collider_->SetEnterCallback([this](DaiEngine::Collider* collider) { OnCollison(collider); });
+
 	//攻撃コライダー生成
 	attackWorld_.Init();
 	attackWorld_.parent_ = world_;
@@ -296,6 +298,9 @@ void Player::SetWorldTranslate(const Vector3& translate)
 
 void Player::OnCollison(DaiEngine::Collider* collider)
 {
+	//死亡時何もなし
+ 	if (behaviorName_ == Behavior::Dead) { collider_->ColliderOff(); return; }
+
 	//ボスコライダーの場合スキップ
 	if (collider->GetTag() == "boss" ||
 		collider->GetTag() == "playerAttack" ||
@@ -303,7 +308,6 @@ void Player::OnCollison(DaiEngine::Collider* collider)
 		behaviorName_ == Behavior::SpinAttack) {
 		return;
 	}
-
 
 	//ヒットフラグOFF
 	parameters_.isHit = false;

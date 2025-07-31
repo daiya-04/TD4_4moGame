@@ -58,6 +58,7 @@ void TitleScene::Init() {
 	//カメラ初期化
 	camera_.Init();
 	camera_.SetFOV(45.0f);
+	camera_.SetCamera(Vector3{ 0.0f,1.65f,-14.0f }, Vector3{ -0.1f,0.0f,0.0f });
 	//ポイントライト初期化
 	pointLight_.Init();
 	//スポットライト初期化
@@ -75,6 +76,11 @@ void TitleScene::Init() {
 	bgm_ = DaiEngine::AudioManager::Load("BGM/Title.mp3");
 	bgm_->Play();
 
+	//ゲームオブジェクトにカメラ設定
+	GameObject::SetCamera(&camera_);
+	//陰士単シングオブジェクトにカメラ設定
+	InstancingGameObject::SetCamera(&camera_);
+
 	choiceSE_ = DaiEngine::AudioManager::Load("SE/Choice.mp3");
 	doneSE_ = DaiEngine::AudioManager::Load("SE/Done.mp3");
 
@@ -88,7 +94,8 @@ void TitleScene::Init() {
 	gameFinishUI_->SetSize({ 350.0f,70.0f });
 	gameFinishUI_->SetTextureArea({ 350.0f * static_cast<float>(gFinishUISwitch_),0.0f }, { 350.0f,70.0f });
 	
-
+	titleSceneDirection_ = std::make_unique<TitleSceneDirection>();
+	titleSceneDirection_->Initialize();
 
 	//調整項目の追加と代入
 	SetGlobalVariables();
@@ -142,12 +149,15 @@ void TitleScene::Update() {
 
 	gameStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gStartUISwitch_),0.0f }, { 350.0f,70 });
 	gameFinishUI_->SetTextureArea({ 350.0f * static_cast<float>(gFinishUISwitch_),0.0f }, { 350.0f,70 });
+
+	titleSceneDirection_->Update();
 	
 	//ライト更新
 	pointLight_.Update();
 	spotLight_.Update();
 
 	//カメラ更新
+	camera_.DrawImGui();
 	camera_.UpdateViewMatrix();
 }
 
@@ -158,7 +168,7 @@ void TitleScene::DrawBackGround(){
 }
 
 void TitleScene::DrawModel(){
-
+	titleSceneDirection_->Draw();
 	
 
 }
@@ -220,7 +230,6 @@ void TitleScene::MenuInput() {
 	if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
 		onSelect_[select_]();
 	}
-
 }
 
 void TitleScene::ToGame() {

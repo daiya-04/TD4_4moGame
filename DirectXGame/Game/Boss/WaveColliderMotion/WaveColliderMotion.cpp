@@ -2,8 +2,10 @@
 #include"ColliderManager.h"
 #include"ShapesDraw.h"
 
-WaveColliderMotion::WaveColliderMotion()
+WaveColliderMotion::WaveColliderMotion(const DaiEngine::WorldTransform&pWorld)
 {
+	pWorld_ = &pWorld;
+
 	collider_ = std::make_unique<DaiEngine::CylinderCollider>();
 	collider_->Init("wave", world_, radius_,height_);
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
@@ -17,6 +19,7 @@ WaveColliderMotion::WaveColliderMotion()
 	tree_.SetValue("addRadius", &addRadius_);
 	tree_.SetValue("maxCount", &maxCount_);
 	tree_.SetValue("height", &height_);
+	tree_.SetValue("hitWide", &hitWide_);
 }
 
 WaveColliderMotion::~WaveColliderMotion()
@@ -49,6 +52,28 @@ void WaveColliderMotion::Update() {
 
 		Matrix4x4 rotateM = MakeRotateXMatrix(0) * MakeRotateYMatrix(0) * MakeRotateZMatrix(0);
 		collider_->Update(rotateM);
+
+
+
+		//範囲内の時有効処理
+		Vector3 pPos = pWorld_->GetWorldPos();
+		//高さを合わせる
+		pPos.y = world_.translation_.y;
+
+		//距離取得
+		float direc = Vector3(pPos - world_.GetWorldPos()).Length();
+
+		//距離と現在の長さ取得
+		direc = radius_ - direc;
+
+		//現在のサイズより小さい＆指定範囲内ならコライダーON
+		if (direc > 0 && direc <= hitWide_) {
+			collider_->ColliderOn();
+		}
+		else {
+			collider_->ColliderOff();
+		}
+
 	}
 }
 
@@ -61,13 +86,9 @@ void WaveColliderMotion::Draw(DaiEngine::Camera* camera) {
 }
 
 void WaveColliderMotion::OnCollision(DaiEngine::Collider* collider) {
+	
+	//今は当たれば問答無用で削除
 	if (collider->GetTag() == "player") { 
-
-		//プレイヤーとの距離計算
-		//float dis = Vector3(collider->GetWorldPos() - collider_->GetWorldPos()).Length();
-
-		//コライダーサイズ取得
-		//float size = collider_->GetRadius();
 
 		collider_->ColliderOff();
 		isEnd_ = true;

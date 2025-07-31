@@ -11,8 +11,9 @@
                 "NoneRadius": 1.0,
                 "ParabolaRadius": 1.0,
                 "WaveColliuder": {
-                    "addRadius": 1.0,
+                    "addRadius": 0.30000001192092896,
                     "height": 2.0,
+                    "hitWide": 2.0,
                     "maxCount": 180.0
                 },
                 "WaveRadius": 2.0,
@@ -119,6 +120,7 @@
                 "WaveColliuder": {
                     "addRadius": 1.0,
                     "height": 2.0,
+                    "hitWide": 2.0,
                     "maxCount": 180.0
                 },
                 "WaveRadius": 1.0,
@@ -190,18 +192,22 @@
                     "warningCount": 120.0
                 },
                 "actionAnimationRate": 1.0,
+                "awakeCount": 120.0,
                 "color": [
                     1.0,
                     0.0,
                     0.0,
                     1.0
                 ],
-                "downActionRate": 60.0,
-                "downCount": 200.0,
+                "crashCount": 120.0,
+                "crashRate": 2.0,
+                "downActionRate": 2.0,
                 "executeCount": 2,
                 "ptrAnimationRate": 0.0,
                 "radius": 2.0,
-                "speed": 0.4000000059604645
+                "returnRate": 2.0,
+                "setFront": 120.0,
+                "speed": 0.800000011920929
             },
             "StartPos": [
                 0.0,
@@ -230,6 +236,7 @@
                 "WaveColliuder": {
                     "addRadius": 1.0,
                     "height": 2.0,
+                    "hitWide": 2.0,
                     "maxCount": 180.0
                 },
                 "WaveRadius": 1.0,
@@ -322,9 +329,15 @@
                     0.0,
                     0.0
                 ],
-                "preActionRate": 0.5,
-                "rotateNum": 12.0,
-                "warningCount": 360.0
+                "preActionRate": 1.0,
+                "rotateNum": 6.0,
+                "warningCount": 180.0,
+                "zoneColor": [
+                    1.0,
+                    0.2647058963775635,
+                    0.2647058963775635,
+                    1.0
+                ]
             }
         }
     }

@@ -20,11 +20,17 @@ Boss2SpinAttack::Boss2SpinAttack(BossParameters* param)
 
 	tree_.SetMonitorValue("currentExecuteCount", &currentExecuteCount_);
 
-	tree_.SetValue("downCount", &downCount_);
 	tree_.SetValue("executeCount", &executeCount_);
+	tree_.SetValue("crashCount", &downCount_);
+	tree_.SetValue("awakeCount", &awakeCount_);
+	tree_.SetValue("setFront", &setPlayerFocus_);
+
 	tree_.SetValue("ptrAnimationRate", &preActionRate_);
 	tree_.SetValue("actionAnimationRate", &actionRate_);
+	tree_.SetValue("crashRate", &crashRate_);
+	tree_.SetValue("returnRate",&returnRate_);
 	tree_.SetValue("downActionRate", &downActionRate_);
+
 	tree_.SetValue("speed", &speed_);
 	tree_.SetValue("radius", &radius_);
 	tree_.SetValue("color", &color_);
@@ -89,12 +95,31 @@ void Boss2SpinAttack::InitBehavior1()
 void Boss2SpinAttack::InitBehavior2()
 {
 	//アニメーション変更
+	param_->setAnimeName_ = "Donut_AttackClash";
+	param_->isLoopAnime_ = false;
+	//再生速度変更
+	param_->animationLeverage_ = crashRate_;
+	param_->cameraBehaviorRequest_ = FollowCamera::State::Follow;
+}
+
+void Boss2SpinAttack::InitBehavior3()
+{
+	//アニメーション変更
+	param_->setAnimeName_ = "Donut_AttackReturn";
+	param_->isLoopAnime_ = false;
+	//再生速度変更
+	param_->animationLeverage_ = returnRate_;
+}
+
+void Boss2SpinAttack::InitBehavior4()
+{
+	//アニメーション変更
 	param_->setAnimeName_ = "Donut_AttackEnd";
 	param_->isLoopAnime_ = false;
 	//再生速度変更
 	param_->animationLeverage_ = downActionRate_;
-	param_->cameraBehaviorRequest_ = FollowCamera::State::Follow;
 }
+
 
 void Boss2SpinAttack::UpdateBehavior0()
 {
@@ -140,6 +165,25 @@ void Boss2SpinAttack::UpdateBehavior1()
 void Boss2SpinAttack::UpdateBehavior2()
 {
 	if(param_->currentSec >= downCount_) {
+		//終了
+		countRequest_ = 3;
+	}
+}
+
+void Boss2SpinAttack::UpdateBehavior3()
+{
+	if (param_->currentSec >= awakeCount_) {
+		//終了
+		countRequest_ = 4;
+	}
+}
+
+void Boss2SpinAttack::UpdateBehavior4()
+{
+
+	//param_->isLookAtPlayer_ = true;
+
+	if (param_->currentSec >= setPlayerFocus_) {
 		//終了
 		param_->behaviorRequest_ = 0;
 	}

@@ -16,7 +16,7 @@ void IBossBullet::Init(const BossBulletData& data, DaiEngine::Camera* camera) {
 	collider_ = std::make_unique<DaiEngine::SphereCollider>();
 	collider_->Init("敵の弾", data_.world, data_.colliderRadius);
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
-	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {OnCollision(collider); });
+	collider_->SetEnterCallback([this](DaiEngine::Collider* collider) {OnCollision(collider); });
 	//コライダーを有効に
 	collider_->ColliderOn();
 
