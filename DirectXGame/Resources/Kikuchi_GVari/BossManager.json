@@ -192,22 +192,22 @@
                     "warningCount": 120.0
                 },
                 "actionAnimationRate": 1.0,
-                "awakeCount": 120.0,
+                "awakeCount": 60.0,
                 "color": [
                     1.0,
                     0.0,
                     0.0,
                     1.0
                 ],
-                "crashCount": 120.0,
+                "crashCount": 240.0,
                 "crashRate": 2.0,
                 "downActionRate": 2.0,
                 "executeCount": 2,
                 "ptrAnimationRate": 0.0,
                 "radius": 2.0,
                 "returnRate": 2.0,
-                "setFront": 120.0,
-                "speed": 0.800000011920929
+                "setFront": 0.0,
+                "speed": 0.4000000059604645
             },
             "StartPos": [
                 0.0,
@@ -295,7 +295,7 @@
             "MaxHP": 60,
             "OffsetPos": [
                 0.0,
-                0.0,
+                -1.4500000476837158,
                 0.30000001192092896
             ],
             "Scale": [
