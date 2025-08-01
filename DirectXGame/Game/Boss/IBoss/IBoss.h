@@ -115,6 +115,10 @@ public://**パブリック関数**//
 	/// <param name="y"></param>
 	void SetPositionY(float y) { position_.y = y; }
 
+	int GetHP() const { return HP_; }
+
+	int GetMaxHP() const { return maxHP_; }
+
 private://**プライベート関数**//
 
 	/// <summary>
@@ -165,7 +169,6 @@ private://**プライベート関数**//
 	/// 壁衝突判定
 	/// </summary>
 	void SetInField();
-
 
 private://**プライベート変数**//
 
