@@ -1,8 +1,8 @@
 #pragma once
-#include"GameObject/GameObject.h"
+#include"InstancingGameObject.h"
 #include"GlobalVariable/Tree/GlobalVariableTree.h"
 
-class SquareDangerZone :public GameObject {
+class SquareDangerZone {
 
 public:
 
@@ -30,6 +30,10 @@ private:
 	//ツリー
 	GvariTree tree_;
 
+	std::unique_ptr<InstancingGameObject>object_;
+
+	DaiEngine::WorldTransform world_;
+
 	//終了フラグ
 	bool isEnd_ = false;
 	//描画フラグ
@@ -46,4 +50,7 @@ private:
 	int currentBlink_ = 0;
 	//最大点滅回数
 	int blinkNum_ = 3;
+
+	//色
+	Vector4 color_;
 };
