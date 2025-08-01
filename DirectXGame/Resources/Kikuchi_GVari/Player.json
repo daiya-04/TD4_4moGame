@@ -10,25 +10,29 @@
         },
         "AttackManager": {
             "Com1": {
-                "AnimationFactor": 3.799999952316284,
-                "Attack": 10.0,
-                "EndAttack": 10.0,
-                "PreAttack": 10.0
+                "AnimationFactor": 7.0,
+                "Attack": 40.0,
+                "EndAttack": 5.0,
+                "PreAttack": 0.0
             },
             "Com2": {
-                "AnimationFactor": 3.799999952316284,
-                "Attack": 10.0,
-                "EndAttack": 10.0,
-                "PreAttack": 10.0
+                "AnimationFactor": 7.0,
+                "Attack": 40.0,
+                "EndAttack": 5.0,
+                "PreAttack": 0.0
             },
             "Com3": {
-                "AnimationFactor": 3.799999952316284,
-                "Attack": 10.0,
-                "EndAttack": 10.0,
-                "PreAttack": 10.0
+                "AnimationFactor": 7.0,
+                "Attack": 40.0,
+                "EndAttack": 5.0,
+                "PreAttack": 0.0
             }
         },
         "ColliderRadius": 1.0,
+        "Dead": {
+            "animRate": 1.0,
+            "maxCount": 120
+        },
         "Hit": {
             "MaxNoHitSec": 60.0,
             "TenmetuNum": 10
@@ -39,9 +43,10 @@
         ],
         "MaxHP": 10,
         "Move": {
-            "degreeSpd": 1.0,
+            "degreeSpd": 1.5,
             "jumpStSpd": 10.0,
-            "speed": 0.20000000298023224
+            "speed": 0.20000000298023224,
+            "topDegree": 20.0
         },
         "OffsetPos": [
             0.0,
@@ -49,23 +54,24 @@
             0.0
         ],
         "Roll": {
-            "StSpeed": 1.0,
-            "cooldownCount": 16.5,
-            "decelRate": 0.05000000074505806,
-            "downhillAccel": 1.2000000476837158,
-            "flatThreshold": 0.009999999776482582,
+            "StSpeed": 0.5,
+            "cooldownCount": 16.0,
+            "decelRate": 0.014999999664723873,
+            "downhillAccel": 1.100000023841858,
+            "flatThreshold": 0.004999999888241291,
             "maxCharge": 120.0,
-            "slopeGravity": 0.30000001192092896,
-            "turnInfluence": 0.15000000596046448,
-            "uphillDecel": 0.800000011920929
+            "maxRollSpeed": 0.4000000059604645,
+            "slopeGravity": 0.15000000596046448,
+            "turnInfluence": 0.30000001192092896,
+            "uphillDecel": 1.100000023841858
         },
         "SpinAttack": {
             "AnimationFactor": 1.0,
             "Attack": 60.0,
             "EndAttack": 60.0,
             "PreAttack": 30.0,
-            "downSpeed": 0.5,
-            "stopDistance": 2.0,
+            "downSpeed": 0.4000000059604645,
+            "stopDistance": 0.10000000149011612,
             "upSpeed": 0.5
         },
         "colliderColor": [
@@ -76,8 +82,8 @@
         ],
         "gravity": 0.10000000149011612,
         "playerEntry": {
-            "animRate": 1.0,
-            "maxRate": 60.0,
+            "animRate": 1.5,
+            "maxRate": 45.0,
             "startPos": [
                 0.0,
                 0.0,

@@ -6,7 +6,7 @@
                 "maxBlinkingNum": 3
             },
             "Bullet": {
-                "DiveRadius": 1.0,
+                "DiveRadius": 2.0,
                 "FallRadius": 1.0,
                 "NoneRadius": 1.0,
                 "ParabolaRadius": 1.0,
@@ -57,7 +57,7 @@
             },
             "Dead": {
                 "animeLeverage": 1.0,
-                "count": 0.0
+                "count": 90.0
             },
             "Idle": {
                 "second": 60.0
@@ -69,13 +69,13 @@
                 0.0
             ],
             "Scale": [
-                2.0,
-                2.0,
-                2.0
+                2.5,
+                2.5,
+                2.5
             ],
             "ShotBullet": {
-                "attackCount": 120.0,
-                "waitCount": 90.0
+                "attackCount": 180.0,
+                "waitCount": 150.0
             },
             "Speed": 0.0,
             "StartPos": [
@@ -85,7 +85,7 @@
             ],
             "damageFromPlayer": {
                 "normal": 1,
-                "spin": 2
+                "spin": 5
             },
             "fieldSize": [
                 23.0,
@@ -93,7 +93,7 @@
             ],
             "jumpAttack": {
                 "attackCount": 60.0,
-                "colliderRadius": 2.0,
+                "colliderRadius": 2.5,
                 "jumpHeight": 20.0,
                 "jumpNum": 3,
                 "stopCount": 60.0,
@@ -101,10 +101,10 @@
             },
             "waveDive": {
                 "fallSpd": 5.0,
-                "jumpCount": 60.0,
+                "jumpCount": 120.0,
                 "jumpHeight": 50.0,
                 "stopCount": 200.0,
-                "waitCount": 60.0
+                "waitCount": 120.0
             }
         },
         "Donut": {
@@ -142,7 +142,7 @@
                 "BlinkingNum": 3,
                 "FollowParam": {
                     "distance": 10.0,
-                    "followSpd": 0.10000000149011612
+                    "followSpd": 0.10999999940395355
                 },
                 "alpha": [
                     1.0,
@@ -157,14 +157,14 @@
                         3.0
                     ]
                 },
-                "finalWarningCount": 30.0,
+                "finalWarningCount": 60.0,
                 "radius": 1.9500000476837158,
-                "warningCount": 60.0,
+                "warningCount": 120.0,
                 "warningSphereHeight": 3.0
             },
             "Dead": {
-                "animeLeverage": 1.0,
-                "count": 0.0
+                "animeLeverage": 1.2999999523162842,
+                "count": 150.0
             },
             "FollowBullet": {
                 "countCount": 240.0,
@@ -195,25 +195,25 @@
                     ],
                     "finalWarningCount": 30.0,
                     "maxScale": 30.0,
-                    "warningCount": 60.0
+                    "warningCount": 120.0
                 },
                 "actionAnimationRate": 1.0,
-                "awakeCount": 120.0,
+                "awakeCount": 60.0,
                 "color": [
                     1.0,
                     0.0,
                     0.0,
                     1.0
                 ],
-                "crashCount": 120.0,
+                "crashCount": 240.0,
                 "crashRate": 2.0,
                 "downActionRate": 2.0,
                 "executeCount": 2,
                 "ptrAnimationRate": 0.0,
                 "radius": 2.0,
                 "returnRate": 2.0,
-                "setFront": 120.0,
-                "speed": 0.800000011920929
+                "setFront": 0.0,
+                "speed": 0.4000000059604645
             },
             "StartPos": [
                 0.0,
@@ -222,7 +222,7 @@
             ],
             "damageFromPlayer": {
                 "normal": 1,
-                "spin": 2
+                "spin": 5
             },
             "fieldSize": [
                 23.0,
@@ -236,7 +236,7 @@
             },
             "Bullet": {
                 "DiveRadius": 1.0,
-                "FallRadius": 2.5,
+                "FallRadius": 2.0,
                 "NoneRadius": 1.0,
                 "ParabolaRadius": 1.0,
                 "WaveColliuder": {
@@ -246,7 +246,7 @@
                     "maxCount": 180.0
                 },
                 "WaveRadius": 1.0,
-                "fallSpeed": 1.0,
+                "fallSpeed": 0.5,
                 "parabolaBullet": {
                     "arriveCount": 60,
                     "parabolaHeight": 5.0
@@ -261,7 +261,7 @@
             ],
             "ColliderRadius": 1.0,
             "DangerZone": {
-                "BlinkingNum": 3,
+                "BlinkingNum": 5,
                 "FollowParam": {
                     "distance": 10.0,
                     "followSpd": 0.10000000149011612
@@ -280,13 +280,13 @@
                     ]
                 },
                 "finalWarningCount": 30.0,
-                "radius": 2.5999999046325684,
-                "warningCount": 120.0,
+                "radius": 1.899999976158142,
+                "warningCount": 50.0,
                 "warningSphereHeight": 1.0
             },
             "Dead": {
-                "animeLeverage": 1.0,
-                "count": 0.0
+                "animeLeverage": 1.2999999523162842,
+                "count": 150.0
             },
             "Idle": {
                 "second": 60.0
@@ -294,14 +294,14 @@
             "ItemFallAttack": {
                 "ActionRate_": 1.0,
                 "ActiveCount": 280.0,
-                "Num": 4,
+                "Num": 5,
                 "PreActionRate_": 1.0,
                 "WaitCount": 300.0
             },
             "MaxHP": 60,
             "OffsetPos": [
                 0.0,
-                0.0,
+                -1.4500000476837158,
                 0.30000001192092896
             ],
             "Scale": [
@@ -317,19 +317,19 @@
             ],
             "damageFromPlayer": {
                 "normal": 1,
-                "spin": 2
+                "spin": 5
             },
             "fieldSize": [
                 23.0,
                 23.0
             ],
             "weaponRollAttack": {
-                "actionRate": 2.5,
-                "activeCount": 60.0,
-                "afterCount": 60.0,
+                "actionRate": 1.25,
+                "activeCount": 120.0,
+                "afterCount": 120.0,
                 "attackRadius_": 5.0,
-                "endActionRate": 1.75,
-                "finalWarningCount": 45.0,
+                "endActionRate": 1.0,
+                "finalWarningCount": 90.0,
                 "offsetZone": [
                     0.0,
                     0.0,
