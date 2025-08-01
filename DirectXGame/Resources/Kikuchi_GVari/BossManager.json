@@ -100,7 +100,7 @@
                 "zone": {
                     "binking": 3,
                     "finalWarningCount": 30.0,
-                    "radius": 1.0,
+                    "radius": 2.5999999046325684,
                     "warningCount": 60.0
                 }
             },
