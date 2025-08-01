@@ -24,6 +24,9 @@
 #include "GPUParticle.h"
 #include "Audio.h"
 
+#include "TitleSceneDirection/TitleSceneDirection.h"
+#include"FollowCamera/FollowCamera.h"
+
 
 //タイトルシーンクラス
 class TitleScene : public DaiEngine::IScene {
@@ -100,9 +103,13 @@ private:
 	std::unique_ptr<DaiEngine::Sprite> gameStartUI_;
 	//ゲーム終了UI
 	std::unique_ptr<DaiEngine::Sprite> gameFinishUI_;
-	
+
+	std::unique_ptr<TitleSceneDirection> titleSceneDirection_;
+
 	//カーソル消去フラグ
 	bool isDeleteCursor_ = false;
+
+	float time_ = 0.0f;
 
 private://パラメータまとめたやつら
 
