@@ -70,11 +70,13 @@ namespace DaiEngine {
 	}
 
 	void Camera::DrawImGui() {
+#ifdef _DEBUG
 		if (ImGui::Begin("DebugCamera")) {
 			ImGui::DragFloat3("Rotation", &rotation_.x, 0.1f);
 			ImGui::DragFloat3("Translation", &translation_.x, 0.1f);
-		}
+	}
 		ImGui::End();
+#endif // _DEBUG
 	}
 
 	void Camera::SetCamera(Vector3 translation, Vector3 rotation) {
