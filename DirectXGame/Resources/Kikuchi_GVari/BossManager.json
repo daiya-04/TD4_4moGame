@@ -187,6 +187,12 @@
             "Speed": 0.0,
             "SpinAttack2Player": {
                 "SquareDangerZone": {
+                    "color": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        0.5058823823928833
+                    ],
                     "finalWarningCount": 30.0,
                     "maxScale": 30.0,
                     "warningCount": 60.0
