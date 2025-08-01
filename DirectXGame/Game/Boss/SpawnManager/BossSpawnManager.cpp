@@ -63,6 +63,8 @@ void BossSpawnManager::Update()
 			changeBoss_ = false;
 			bossManager_->SetBossType(bossType_);
 
+			bossJustDied_ = false;
+
 		}
 		else {
 			//全員死んだのでフラグON
@@ -122,5 +124,7 @@ void BossSpawnManager::CheckBossDead()
 		//カウントリセット
 		currentChangeCount_ = 0;
 		camera_->SetState(FollowCamera::State::Follow);
+
+		bossJustDied_ = true;
 	}
 }

@@ -29,6 +29,15 @@ namespace std {
 	};
 }
 
+struct Vector2Hash {
+	std::size_t operator()(const Vector2& v) const noexcept {
+		std::hash<float> hasher;
+		std::size_t h1 = hasher(v.x);
+		std::size_t h2 = hasher(v.y);
+		return h1 ^ (h2 << 1);
+	}
+};
+
 struct Block {
 	DaiEngine::WorldTransform world;
 	Vector4 color;
@@ -49,6 +58,11 @@ struct WaveInfo {
 	int currentWave = 0;
 	std::unordered_map<Vector2, float> baseHeights;
 	std::unordered_set<Vector2> finishedBlocks;
+};
+
+struct TargetInfo {
+	Vector2 massLocation;  // 対象ブロックのマス座標（識別用）
+	Vector3 targetPosition; // ブロックを移動させたい最終ワールド座標
 };
 
 
@@ -125,6 +139,11 @@ public:
 
 	float GetBlockWidth() { return blockWidth_; }
 
+	//指定した座標へ動かす
+	void MoveBlocksToTargets(const std::vector<TargetInfo>& targets, float deltaTime);
+	std::vector<TargetInfo> GetBlockPositions() const;
+	void MoveStage(const std::vector<TargetInfo>& targets);
+
 private:
 	//各ブロックの生成
 	void CreateBlocks(const int x, const int z);
@@ -182,4 +201,10 @@ private:
 	float waveSpeed_ = 0.01f;//波の速度
 
 	std::vector<WaveInfo> waves_; //現在アクティブな波のリスト
+
+	bool targetMoveFinished_ = false;   // ブロック移動完了したか
+	bool isTargets_ = false;
+
+	std::vector<TargetInfo> targets_;   // 移動先の座標群
+	std::vector<TargetInfo> targets2_;   // 移動先の座標群
 };

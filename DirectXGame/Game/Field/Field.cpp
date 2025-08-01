@@ -36,12 +36,6 @@ void Field::Initialize() {
 	gvg->SetValue("VerticalSize", &verticalSize_);
 	gvg->SetValue("HorizontalSize", &horizontalSize_);
 	gvg->SetValue("BlockSize", &blockSize_);
-
-	//ステージを生成
-	CreateStage();
-
-	//ステージ開始演出
-	StartStage();
 }
 
 void Field::Update() {
@@ -57,7 +51,7 @@ void Field::Update() {
 		RaiseBlocksAroundWithAttenuation(GetBlockAt(nowPos_.x, nowPos_.y), radius_, deltaY_);
 	}
 	if (ImGui::Button("WaveBlocks")) {
-		AddWave(GetBlockAt(nowPos_.x, nowPos_.y), radius_, heightLimit_, waveCount_ , waveSpeed_);
+		AddWave(GetBlockAt(nowPos_.x, nowPos_.y), radius_, heightLimit_, waveCount_, waveSpeed_);
 	}
 	if (ImGui::Button("TestSetBlockHeightLimit")) {
 		//各ブロックの高さを限界値で固定
@@ -75,14 +69,26 @@ void Field::Update() {
 		//ステージ状態をリセット
 		ResetStage();
 	}
+	if (ImGui::Button("SetStage")) {
+		targets2_ = GetBlockPositions();
+	}
+	if (ImGui::Button("LoadStage")) {
+		MoveStage(targets2_);
+	}
 	ImGui::End();
 
 #endif // _DEBUG
 
 	//ステージ開始/リセット演出
-	if (isAnimationReset_ == true) {
+	if (isAnimationReset_) {
+		// ステージ開始アニメーション進行中
 		deltaTime_ += deltaPlusTime_;
 		PlayStageIntroAnimation(deltaTime_);
+	}
+	else if (!targetMoveFinished_ && isTargets_) {
+		// ブロック移動アニメーション（演出終了後に開始）
+		deltaPlusTime_ = 1.0f / 30.0f;
+		MoveBlocksToTargets(targets_, deltaPlusTime_);
 	}
 
 	//変数呼び出し
@@ -136,7 +142,7 @@ void Field::Update() {
 
 	//専用描画構造体に切り換えて設定
 	for (Block& block : blocks_) {
-		
+
 		//変数呼び出し
 		DaiEngine::InstancingObjData data;
 		data.worldTransform_ = block.world;
@@ -530,6 +536,64 @@ std::optional<Vector3> Field::FindNearestWalkable(const Vector3& from) {
 		}
 	}
 	return std::nullopt;
+}
+
+void Field::MoveBlocksToTargets(const std::vector<TargetInfo>& targets, float deltaTime) {
+	// targets を map に変換
+	std::unordered_map<Vector2, Vector3, Vector2Hash> targetMap;
+	for (const auto& t : targets) {
+		targetMap[t.massLocation] = t.targetPosition;
+	}
+
+	bool allReached = true;
+
+	for (Block& block : blocks_) {
+		auto it = targetMap.find(block.massLocation);
+		if (it == targetMap.end()) continue;
+
+		Vector3& pos = block.world.translation_;
+		const Vector3& target = it->second;
+
+		Vector3 diff = target - pos;
+		float distance = diff.Length();
+
+		if (distance > 0.01f) {
+			Vector3 dir = diff.Normalize();
+			float moveStep = 5.0f * deltaTime;
+			if (moveStep > distance) moveStep = distance;
+
+			pos += dir * moveStep;
+			allReached = false;
+		}
+		else {
+			pos = target;
+		}
+	}
+
+	if (allReached) {
+		targetMoveFinished_ = true;
+		isTargets_ = false;
+	}
+}
+
+std::vector<TargetInfo> Field::GetBlockPositions() const {
+	std::vector<TargetInfo> result;
+	result.reserve(blocks_.size());
+
+	for (const Block& block : blocks_) {
+		result.push_back({
+			block.massLocation,
+			block.world.translation_
+			});
+	}
+
+	return result;
+}
+
+void Field::MoveStage(const std::vector<TargetInfo>& targets) {
+	targetMoveFinished_ = false;
+	isTargets_ = true;
+	targets_ = targets;
 }
 
 void Field::FixedHeightCorrection() {
