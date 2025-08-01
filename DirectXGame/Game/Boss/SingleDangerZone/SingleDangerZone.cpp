@@ -29,9 +29,10 @@ void SingleDangerZone::Update()
 
 	DaiEngine::InstancingObjData data;
 	data.worldTransform_ = dangerZone_->GetWorld();
-	data.color_ = *color_;
-	data.alpha_ = color_->w;
-
+	if (color_) {
+		data.color_ = *color_;
+		data.alpha_ = color_->w;
+	}
 	gameObject_->SetData(data);
 
 
