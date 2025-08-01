@@ -26,6 +26,7 @@ PlayerRoll::PlayerRoll()
     tree_.SetValue("turnInfluence", &turnInfluence_);
 
     tree_.SetValue("maxCharge", &maxCharge_);
+    tree_.SetValue("maxRollSpeed", &maxRollSpeed_);
 }
 
 void PlayerRoll::Init()
@@ -153,6 +154,11 @@ void PlayerRoll::Update() {
 
     // プレイヤーに速度反映
     params.velocity += currentVelo_;
+
+    //最大速度にスケーリング
+    if (params.velocity.Length() > maxRollSpeed_) {
+        params.velocity = params.velocity.Normalize() * maxRollSpeed_;
+    }
 
     // チャージ完了時スピン
     if (DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE) && chargeJump_ >= maxCharge_) {

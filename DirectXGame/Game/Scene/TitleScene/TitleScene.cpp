@@ -71,8 +71,8 @@ void TitleScene::Init() {
 	uint32_t titleLogoTex = DaiEngine::TextureManager::Load("titleLogo.png");
 	uint32_t gameStartTex = DaiEngine::TextureManager::Load("GameStart.png");
 	uint32_t gameFinifhTex = DaiEngine::TextureManager::Load("GameFinish.png");
-	///
-
+	
+	//
 	bgm_ = DaiEngine::AudioManager::Load("BGM/Title.mp3");
 	bgm_->Play();
 
@@ -147,6 +147,11 @@ void TitleScene::Update() {
 	gStartUISwitch_ = (select_ == Select::Start) ? UISwitch::On : UISwitch::Off;
 	gFinishUISwitch_ = (select_ == Select::Finish) ? UISwitch::On : UISwitch::Off;
 
+	//TitleLogo揺らす処理
+	time_ += 0.016f;
+	float angle = sinf(time_ * 2.0f) * 0.15f; //2Hzの揺れ
+
+	titleLogo_->SetRotate(angle);
 	gameStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gStartUISwitch_),0.0f }, { 350.0f,70 });
 	gameFinishUI_->SetTextureArea({ 350.0f * static_cast<float>(gFinishUISwitch_),0.0f }, { 350.0f,70 });
 

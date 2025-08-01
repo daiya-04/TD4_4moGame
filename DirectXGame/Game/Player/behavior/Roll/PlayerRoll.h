@@ -53,6 +53,7 @@ private://**パラメータ**//
 	float chargeJump_ = 0.0f; // ジャンプ攻撃のチャージ
 	float maxCharge_ = 120.0f; // ジャンプ攻撃のチャージ満タンの値
 
+	float maxRollSpeed_ = 1.0f; // ロールの最大速度
 
 	Vector3 emitPos_{};
 };

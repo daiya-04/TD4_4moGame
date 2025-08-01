@@ -109,6 +109,8 @@ private:
 	//カーソル消去フラグ
 	bool isDeleteCursor_ = false;
 
+	float time_ = 0.0f;
+
 private://パラメータまとめたやつら
 
 	enum class Select {
