@@ -94,6 +94,7 @@ void Boss2SpinAttack::InitBehavior1()
 
 void Boss2SpinAttack::InitBehavior2()
 {
+	collider_->ColliderOff();
 	//アニメーション変更
 	param_->setAnimeName_ = "Donut_AttackClash";
 	param_->isLoopAnime_ = false;
