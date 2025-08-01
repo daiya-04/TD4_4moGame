@@ -6,7 +6,7 @@ PlayerUI::PlayerUI()
 	///セト
 	hpGauge_.reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("playerHPGage.png"), {}));
 	hpGauge_->SetAnchorpoint({ 0.0f,0.5f });
-	hpGauge_->SetPosition({ 700.0f,670.0f });
+	hpGauge_->SetPosition({ 757.0f,670.0f });
 	gaugeSize_ = hpGauge_->GetSize();
 
 	hpFream_.reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("playerHPGageFram.png"), { 700.0f,670.0f }));
