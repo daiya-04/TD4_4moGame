@@ -11,7 +11,7 @@ struct DangerZoneParameters {
 	float maxWarningCount = 60.0f;		//警告時間
 	float maxFinalWarningCount = 30.0f;		//最終警告時間時間
 	int blinkingNum = 3;				//点滅回数
-
+	const DaiEngine::WorldTransform* target = nullptr;//ターゲット
 	float followSpd = 1.0f;			//追従速度
 };
 

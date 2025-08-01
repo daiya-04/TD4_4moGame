@@ -13,14 +13,26 @@ CupCakeFallAttack::CupCakeFallAttack(BossParameters* parameters)
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
 	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {if (collider->GetTag() == "player")collider_->ColliderOff(); });
 
+	
+	dZoneParam_.world.Init();
+	dZoneParam_.target = parameters->playerWorld_;
+	dangerZone_ = std::make_unique<SingleDangerZone>(dZoneParam_);
 
 	tree_.name_ = "jumpAttack";
-	tree_.SetValue("waitCount", &waitCount_);
 	tree_.SetValue("attackCount", &attackCount_);
 	tree_.SetValue("jumpHeight", &jumpHeight_);
 	tree_.SetValue("jumpNum", &jumpNum_);
 	tree_.SetValue("stopCount", &stopCount_);
 	tree_.SetValue("colliderRadius", &colliderRadius_);
+
+	GvariTree zoneTree;
+	zoneTree.name_ = "zone";
+	zoneTree.SetValue("radius", &dZoneParam_.maxRadius);
+	zoneTree.SetValue("warningCount", &dZoneParam_.maxWarningCount);
+	zoneTree.SetValue("finalWarningCount", &dZoneParam_.maxFinalWarningCount);
+	zoneTree.SetValue("binking", &dZoneParam_.blinkingNum);
+
+	tree_.SetTreeData(zoneTree);
 
 	stampSE_ = DaiEngine::AudioManager::Load("SE/CapCakeDownAttack.mp3");
 }
@@ -37,11 +49,13 @@ void CupCakeFallAttack::InitBehavior0()
 	currentJumpNum_ = 0;
 	countRequest_ = 1;
 	collider_->SetRadius(colliderRadius_);
+	dangerZone_->Init(dZoneParam_);
 }
 
 void CupCakeFallAttack::InitBehavior1()
 {
 	//ジャンプ前
+	dangerZone_->Init(dZoneParam_);
 }
 
 void CupCakeFallAttack::InitBehavior2()
@@ -76,13 +90,18 @@ void CupCakeFallAttack::UpdateBehavior1()
 {
 	param_->isLookAtPlayer_ = true;
 
-	if (param_->currentSec >= waitCount_) {
+	dangerZone_->Update();
+
+	if (dangerZone_->GetIsDead()) {
 		countRequest_ = 2;
 	}
 }
 
 void CupCakeFallAttack::UpdateBehavior2()
 {
+
+	dangerZone_->Update();
+
 	float t = param_->currentSec / attackCount_;
 
 	if (t >= 0.5f && !isHit_) {
@@ -123,4 +142,9 @@ void CupCakeFallAttack::UpdateBehavior3()
 	if (param_->currentSec >= stopCount_) {
 		param_->behaviorRequest_=0;
 	}
+}
+
+void CupCakeFallAttack::Draw()
+{
+	dangerZone_->Draw();
 }

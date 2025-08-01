@@ -161,7 +161,7 @@ void PlayerRoll::Update() {
     }
 
     // チャージ完了時スピン
-    if (DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE) && chargeJump_ >= maxCharge_) {
+    if ((DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE)|| DaiEngine::Input::GetInstance()->TriggerButton(DaiEngine::Input::Button::A)) && chargeJump_ >= maxCharge_) {
         player_->behaviorRequest_ = Player::Behavior::SpinAttack;
         EffectManager::GetInstance()->End("PlayerMoveEffect");
         chargeJump_ = 0.0f;
