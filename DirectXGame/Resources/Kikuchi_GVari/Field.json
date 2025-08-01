@@ -3,7 +3,7 @@
         "BlockSize": 0.30000001192092896,
         "BlockWidth": 0.6499999761581421,
         "DeltaY": -1.5,
-        "HeightLimit": 2.5,
+        "HeightLimit": 0.800000011920929,
         "HorizontalSize": 70,
         "Radius": 30.0,
         "VerticalSize": 70,
