@@ -85,7 +85,7 @@
             ],
             "damageFromPlayer": {
                 "normal": 1,
-                "spin": 2
+                "spin": 5
             },
             "fieldSize": [
                 23.0,
@@ -167,8 +167,8 @@
                 "count": 150.0
             },
             "FollowBullet": {
-                "countCount": 480.0,
-                "waitCount": 240.0
+                "countCount": 240.0,
+                "waitCount": 120.0
             },
             "Idle": {
                 "second": 60.0
