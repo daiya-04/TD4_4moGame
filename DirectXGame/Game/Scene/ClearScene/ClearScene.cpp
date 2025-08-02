@@ -83,11 +83,11 @@ void ClearScene::Init() {
 
 	titleBackUI_.reset(DaiEngine::Sprite::Create(titleBackTex, {}));
 	titleBackUI_->SetSize({ 350.0f, 70.0f });
-	titleBackUI_->SetTextureArea({ 350.0f * static_cast<float>(gTitleBackUISwitch_),0.0f }, { 350.0f,70.0f });
+	titleBackUI_->SetTextureArea({ 350.0f * static_cast<float>(gTitleBackUISwitch_),0.0f }, { 350.0f,80.0f });
 
 	reStartUI_.reset(DaiEngine::Sprite::Create(reStartTex, {}));
 	reStartUI_->SetSize({ 350.0f, 70.0f });
-	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,70.0f });
+	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,80.0f });
 
 
 	SetGlobalVariables();
@@ -157,8 +157,8 @@ void ClearScene::Update() {
 		break;
 	}
 
-	titleBackUI_->SetTextureArea({ 350.0f * static_cast<float>(gTitleBackUISwitch_),0.0f }, { 350.0f,70 });
-	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,70 });
+	titleBackUI_->SetTextureArea({ 350.0f * static_cast<float>(gTitleBackUISwitch_),0.0f }, { 350.0f,80.0f });
+	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,80.0f });
 
 
 	clearText_->Update();

@@ -46,8 +46,7 @@ void IBoss::Init(const std::string& objectName, FollowCamera* camera, const DaiE
 	//点滅処理クラス生成
 	blinking_ = std::make_unique<Blinking>();
 	isDraw_ = &blinking_->GetIsDrawFlag();
-	//UIクラス生成
-	ui_ = std::make_unique<BossUI>();
+	
 
 	//コライダー生成
 	collider_ = std::make_unique<DaiEngine::SphereCollider>();
@@ -177,8 +176,6 @@ void IBoss::Update() {
 	bulletManager_->Update();
 	//コライダー更新
 	collider_->Update();
-	//UI更新
-	ui_->Update(HP_, maxHP_);
 
 }
 
@@ -266,8 +263,7 @@ void IBoss::Draw()
 
 void IBoss::DrawUI()
 {
-	//UI描画
-	ui_->Draw();
+	
 }
 
 void IBoss::OnCollision(DaiEngine::Collider* collider)

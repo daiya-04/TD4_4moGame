@@ -5,6 +5,9 @@
 
 #include <vector>
 #include<memory>
+#include <optional>
+#include <functional>
+#include <map>
 
 
 struct GaugeSetData {
@@ -28,6 +31,14 @@ public:
 
 	void SetData(const GaugeSetData& data);
 
+	void StartExtend(const Vector2& size, const Vector2& pos);
+
+	void DrawOn() { hpFream_->DrawOn(); hpGauge_->DrawOn(); }
+
+	void DrawOff() { hpFream_->DrawOff(); hpGauge_->DrawOff(); }
+
+	void SetAlpha(float alpha) { hpGauge_->SetColor({ 1.0f,1.0f,1.0f,alpha }); hpFream_->SetColor({ 1.0f,1.0f,1.0f,alpha }); }
+
 private:
 
 	std::unique_ptr<DaiEngine::Sprite> hpFream_;
@@ -36,6 +47,34 @@ private:
 	float curPer_ = 1.0f;
 	float percent_ = 1.0f;
 	Vector2 gaugeSize_ = {};
+
+private:
+
+	enum class State {
+		Idle,
+		Extend,
+	};
+
+	State state_ = State::Idle;
+
+	std::map<State, std::function<void()>> stateUpdateTable_ = {
+		{State::Idle, [this]() { IdleUpdate(); }},
+		{State::Extend, [this]() {EntendUpdate(); }},
+	};
+
+	float startSize_{};
+	float endSize_{};
+
+	float startPos_{};
+	float endPos_{};
+
+	float param_ = 0.0f;
+	float paramSpeed_ = 0.02f;
+
+public:
+
+	void IdleUpdate() {}
+	void EntendUpdate();
 
 };
 
@@ -69,6 +108,9 @@ public:
 
 	void SetBossData(const std::vector<std::unique_ptr<IBoss>>& bosses);
 
+	void StartFadeOut();
+	void StartIconSlide();
+
 private:
 
 	std::vector<IBoss*> bosses_;
@@ -78,5 +120,36 @@ private:
 	//UI
 	std::vector<std::unique_ptr<DaiEngine::Sprite>> icons_;
 	std::vector<IconSetData> iconSetData_;
+
+private:
+
+	enum class State {
+		Idle,
+		FadeOut,
+		IconSlide,
+	};
+
+	State state_ = State::Idle;
+
+	std::map<State, std::function<void()>> stateUpdateTable = {
+		{State::Idle, [this]() {IdleUpdate(); }},
+		{State::FadeOut, [this]() {FadeOutUpdate(); }},
+		{State::IconSlide, [this]() {IconSlideUpdate(); }},
+	};
+
+	float param_ = 0.0f;
+	float fadeSpeed_ = 1.0f / 30.0f;
+
+	float slideSpeed_ = 0.0f;
+	float slideAccel_ = 0.001f;
+
+	Vector2 startPos_{};
+	Vector2 endPos_{};
+
+private:
+
+	void IdleUpdate() {}
+	void FadeOutUpdate();
+	void IconSlideUpdate();
 
 };

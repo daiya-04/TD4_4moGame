@@ -82,11 +82,11 @@ void TitleScene::Init() {
 
 	gameStartUI_.reset(DaiEngine::Sprite::Create(gameStartTex, {}));
 	gameStartUI_->SetSize({ 350.0f,70.0f });
-	gameStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gStartUISwitch_),0.0f }, { 350.0f,70.0f });
+	gameStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gStartUISwitch_),0.0f }, { 350.0f,80.0f });
 
 	gameFinishUI_.reset(DaiEngine::Sprite::Create(gameFinifhTex, {}));
 	gameFinishUI_->SetSize({ 350.0f,70.0f });
-	gameFinishUI_->SetTextureArea({ 350.0f * static_cast<float>(gFinishUISwitch_),0.0f }, { 350.0f,70.0f });
+	gameFinishUI_->SetTextureArea({ 350.0f * static_cast<float>(gFinishUISwitch_),0.0f }, { 350.0f,80.0f });
 	
 
 
@@ -140,8 +140,8 @@ void TitleScene::Update() {
 	gStartUISwitch_ = (select_ == Select::Start) ? UISwitch::On : UISwitch::Off;
 	gFinishUISwitch_ = (select_ == Select::Finish) ? UISwitch::On : UISwitch::Off;
 
-	gameStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gStartUISwitch_),0.0f }, { 350.0f,70 });
-	gameFinishUI_->SetTextureArea({ 350.0f * static_cast<float>(gFinishUISwitch_),0.0f }, { 350.0f,70 });
+	gameStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gStartUISwitch_),0.0f }, { 350.0f,80.0f });
+	gameFinishUI_->SetTextureArea({ 350.0f * static_cast<float>(gFinishUISwitch_),0.0f }, { 350.0f,80.0f });
 	
 	//ライト更新
 	pointLight_.Update();
