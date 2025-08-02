@@ -11,7 +11,7 @@ CupCakeDead::CupCakeDead(BossParameters* param)
 void CupCakeDead::Init()
 {
 	//アニメーション変更
-	param_->setAnimeName_ = "Capcake";
+	param_->setAnimeName_ = "CapCakeDown";
 	param_->isLoopAnime_ = false;
 	//再生速度変更
 	param_->animationLeverage_ = animeLeverage_;

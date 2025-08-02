@@ -1,6 +1,7 @@
 #pragma once
 #include"Boss/IBossAttack/IBossAttack.h"
 #include"SphereCollider.h"
+#include"SingleDangerZone/SingleDangerZone.h"
 #include "Audio.h"
 
 class CupCakeFallAttack : public IBossAttack {
@@ -22,6 +23,8 @@ public://**状態**//
 	void UpdateBehavior3()override;
 	void UpdateBehavior4()override {};
 
+
+	void Draw()override;
 private:
 
 	int currentJumpNum_ = 0;
@@ -35,10 +38,11 @@ private:
 
 	std::unique_ptr<DaiEngine::SphereCollider>collider_;
 
-	float colliderRadius_ = 2.0f;
+	std::unique_ptr<SingleDangerZone>dangerZone_;
 
-	//ジャンプ待機
-	float waitCount_ = 60.0f;
+	DangerZoneParameters dZoneParam_;
+
+	float colliderRadius_ = 2.0f;
 
 	//ジャンプ攻撃時間
 	float attackCount_ = 60.0f;
@@ -51,6 +55,8 @@ private:
 
 	//ジャンプ後交直
 	float stopCount_ = 60.0f;
+
+	bool isHit_ = false;
 
 	DaiEngine::Audio* stampSE_ = nullptr;
 

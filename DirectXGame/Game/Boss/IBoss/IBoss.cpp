@@ -36,10 +36,10 @@ void IBoss::Init(const std::string& objectName, FollowCamera* camera, const DaiE
 	
 
 	if (objectName != "CapCakeStandby") {
-		bulletManager_ = std::make_unique<BossBulletManager>();
+		bulletManager_ = std::make_unique<BossBulletManager>(*playerWorld_);
 	}
 	else {
-		bulletManager_ = std::make_unique<BossBulletManager>(false);
+		bulletManager_ = std::make_unique<BossBulletManager>(*playerWorld_,false);
 	}
 	bulletManager_->SetCamera(followCamera_->GetCamera());
 
@@ -127,7 +127,7 @@ void IBoss::Update() {
 	if (parameters_.behaviorRequest_) {
 
 #ifdef _DEBUG
-		if (behaviorNames_.size() != 0&&debugBehavior_) {
+		if (behaviorNames_.size() != 0&&debugBehavior_!=0) {
 			//デバッグ時の攻撃指定
 			//debugBehaviorが0の時は未指定
 			parameters_.behaviorRequest_= debugBehavior_-1;

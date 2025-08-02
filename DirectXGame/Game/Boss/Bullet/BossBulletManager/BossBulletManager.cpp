@@ -5,7 +5,7 @@
 #include"Boss//Bullet//bullets/Parabola/BossParabolaBullet.h"
 
 
-BossBulletManager::BossBulletManager(bool isCandy)
+BossBulletManager::BossBulletManager(const DaiEngine::WorldTransform& world,bool isCandy)
 {
 	//オブジェクト生成
 	if (isCandy) {
@@ -15,7 +15,7 @@ BossBulletManager::BossBulletManager(bool isCandy)
 		InstancingGameObject::Init("Cream", 100);
 	}
 
-	waveColliderMotion_ = std::make_unique<WaveColliderMotion>();
+	waveColliderMotion_ = std::make_unique<WaveColliderMotion>(world);
 
 	//警告円の生成
 	dangerZone_ = std::make_unique<InstancingGameObject>();

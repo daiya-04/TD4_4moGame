@@ -7,7 +7,14 @@ SinpleDangerZone::SinpleDangerZone(const DangerZoneParameters& param)
 
 void SinpleDangerZone::Update()
 {
+
+	if (isDead_)return;
+
 	sec_++;
+
+	if (param_.target) {
+		param_.world.translation_ = param_.target->translation_;
+	}
 
 	if (behavior_ == Behavior::Warning) {
 		//時間の割合を取得（0.0f~1.0f）
@@ -27,6 +34,8 @@ void SinpleDangerZone::Update()
 	}
 	else {
 
+
+
 		//時間の割合を取得（0.0f~1.0f）
 		if (sec_ >= (param_.maxFinalWarningCount / param_.maxFinalWarningCount) * blinkingCount_) {
 			blinkingCount_++;
@@ -42,9 +51,9 @@ void SinpleDangerZone::Update()
 		if (sec_ >= param_.maxFinalWarningCount) {
 			//時間経過でフラグON
 			isDead_ = true;
-			isDraw_ = false; // 描画フラグをリセット
+			isDraw_ = true;
 			//プレイヤー高度にセット
-			if (pPos_) {
+			if (pPos_) {		
 				param_.world.translation_.y = pPos_->y;
 			}
 

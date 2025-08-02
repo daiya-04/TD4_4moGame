@@ -47,6 +47,7 @@ void DangerZoneManager::Update()
 			//行列更新
 			objData.worldTransform_.UpdateMatrix();
 			objData.color_ = color_;
+			objData.alpha_ = color_.w;
 			//データセット
 			SetData(objData);
 		}

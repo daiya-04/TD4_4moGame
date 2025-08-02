@@ -255,6 +255,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\GraphicsPipeline\LineGraphicsPipeline.cpp" />
     <ClCompile Include="Engine\3d\InstancingObject3d.cpp" />
     <ClCompile Include="Engine\GraphicsPipeline\InstancingObject3dGraphicsPipeline.cpp" />
+    <ClCompile Include="Game\TitleSceneDirection\TitleSceneDirection.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Engine\3d\Model\ModelManager.cpp" />
     <ClCompile Include="Engine\3d\Object3d.cpp" />
@@ -444,6 +445,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\3d\InstancingObject3d.h" />
     <ClInclude Include="Engine\GraphicsPipeline\InstancingObject3dGraphicsPipeline.h" />
     <ClInclude Include="Engine\3d\Skeleton.h" />
+    <ClInclude Include="Game\TitleSceneDirection\TitleSceneDirection.h" />
     <ClInclude Include="PlayerAttackEffect.h" />
     <ClInclude Include="UIManager.h" />
   </ItemGroup>

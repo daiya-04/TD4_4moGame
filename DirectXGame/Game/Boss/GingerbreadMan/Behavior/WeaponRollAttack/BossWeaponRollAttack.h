@@ -85,6 +85,8 @@ private://**パラメータ変数**//
 	float actionRate_ = 1.0f;
 	float endActionRate_ = 1.0f;
 
+	Vector4 zoneColor_ = { 1,1,1,1 };
+
 	DaiEngine::Audio* swingSE_ = nullptr;
 
 };

@@ -11,11 +11,12 @@
                 "NoneRadius": 1.0,
                 "ParabolaRadius": 1.0,
                 "WaveColliuder": {
-                    "addRadius": 1.0,
-                    "height": 2.0,
+                    "addRadius": 0.3499999940395355,
+                    "height": 0.0010000000474974513,
+                    "hitWide": 0.5,
                     "maxCount": 180.0
                 },
-                "WaveRadius": 2.0,
+                "WaveRadius": 0.20000000298023224,
                 "fallSpeed": 1.0,
                 "parabolaBullet": {
                     "arriveCount": 60,
@@ -96,7 +97,12 @@
                 "jumpHeight": 20.0,
                 "jumpNum": 3,
                 "stopCount": 60.0,
-                "waitCount": 90.0
+                "zone": {
+                    "binking": 3,
+                    "finalWarningCount": 30.0,
+                    "radius": 1.0,
+                    "warningCount": 60.0
+                }
             },
             "waveDive": {
                 "fallSpd": 5.0,
@@ -119,6 +125,7 @@
                 "WaveColliuder": {
                     "addRadius": 1.0,
                     "height": 2.0,
+                    "hitWide": 2.0,
                     "maxCount": 180.0
                 },
                 "WaveRadius": 1.0,
@@ -185,22 +192,32 @@
             "Speed": 0.0,
             "SpinAttack2Player": {
                 "SquareDangerZone": {
+                    "color": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        0.5058823823928833
+                    ],
                     "finalWarningCount": 30.0,
                     "maxScale": 30.0,
                     "warningCount": 60.0
                 },
                 "actionAnimationRate": 1.0,
+                "awakeCount": 120.0,
                 "color": [
                     1.0,
                     0.0,
                     0.0,
                     1.0
                 ],
-                "downActionRate": 60.0,
-                "downCount": 200.0,
+                "crashCount": 120.0,
+                "crashRate": 2.0,
+                "downActionRate": 2.0,
                 "executeCount": 2,
                 "ptrAnimationRate": 0.0,
                 "radius": 2.0,
+                "returnRate": 2.0,
+                "setFront": 120.0,
                 "speed": 0.800000011920929
             },
             "StartPos": [
@@ -230,6 +247,7 @@
                 "WaveColliuder": {
                     "addRadius": 1.0,
                     "height": 2.0,
+                    "hitWide": 2.0,
                     "maxCount": 180.0
                 },
                 "WaveRadius": 1.0,
@@ -324,7 +342,13 @@
                 ],
                 "preActionRate": 1.0,
                 "rotateNum": 6.0,
-                "warningCount": 180.0
+                "warningCount": 180.0,
+                "zoneColor": [
+                    1.0,
+                    0.2647058963775635,
+                    0.2647058963775635,
+                    1.0
+                ]
             }
         }
     }

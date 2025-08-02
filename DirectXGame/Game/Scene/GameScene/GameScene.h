@@ -98,15 +98,6 @@ private:
 	/// </summary>
 	void ApplyGlobalVariables();
 
-	/// <summary>
-	/// ブロックと弾との判定
-	/// </summary>
-	void OnCollisionBlocksAndBullets();
-
-	/// <summary>
-	/// シーン遷移処理
-	/// </summary>
-	void SceneChange();
 private:
 	//カメラ
 	DaiEngine::Camera camera_;
@@ -132,6 +123,8 @@ private://**キクチ
 	
 	//地面
 	std::unique_ptr<Field> field_ = nullptr;
+	float deltaTime_ = 0.0f;//フレーム時間間隔
+	float deltaPlusTime_ = 0.0f;//deltaTime_に加算する値設定用
 
 private:
 

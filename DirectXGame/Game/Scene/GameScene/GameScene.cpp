@@ -112,74 +112,6 @@ void GameScene::ApplyGlobalVariables() {
 
 }
 
-void GameScene::OnCollisionBlocksAndBullets()
-{
-#pragma region ブロックと弾の判定
-	//弾の更新
-	for (auto& bullet : bossSpawnManager_->GetBullets()) {
-		if (bullet->GetDead())continue;
-		Vector2 targetBlock = field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
-		Block* block = field_->GetBlock(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
-
-		//WAVE発生タイプの場合
-		if (bullet->GetType() == BulletType::Wave) {
-
-			//中心の場所検索
-			Vector2 bPos = field_->GetBlockAt(0, 0);
-
-			//波の発生
-			field_->AddWave(bPos, 30, 1.0f, 1, 0.01f);
-			//弾の削除処理
-			bullet->OnCollisionBlock();
-			//この弾の処理を終了
-			continue;
-		}
-
-		//盛り上げ弾orDiveがある場合
-		if (bullet->GetType() == BulletType::None || bullet->GetType() == BulletType::Dive) {
-			//下げる値取得
-			float deltaY = field_->GetDeltaY();
-			//盛り上げる弾なら反転
-			if (bullet->GetType() == BulletType::None) {
-				deltaY *= -1.0f;
-			}
-
-			//フィールドに影響
-			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetColliderRadius() * 1.5f, deltaY);
-			bullet->OnCollisionBlock();
-			continue;
-		}
-
-		// Y範囲にあるか判定
-		if (block->world.translation_.y >= bullet->GetWorld().translation_.y && block->world.translation_.y <= bullet->GetWorld().translation_.y + bullet->GetWorld().scale_.y) {
-			//下げる値取得
-			float deltaY = field_->GetDeltaY();
-			if (bullet->GetType() == BulletType::Parabola) {
-				deltaY *= -1.0f;
-			}
-
-			//フィールドに影響
-			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, deltaY);
-			bullet->OnCollisionBlock();
-		}
-	}
-#pragma endregion
-
-}
-
-void GameScene::SceneChange()
-{
-	//死亡時ゲームおーばーへ
-	if (player_->GetIsDead()) {
-		DaiEngine::SceneManager::GetInstance()->ChangeScene("GameOver");
-	}
-
-	//ボスのHPが0以下になったらクリアへ
-	if (bossSpawnManager_->GetAllBossDead()) {
-		DaiEngine::SceneManager::GetInstance()->ChangeScene("Clear");
-	}
-}
-
 void GameScene::Init() {
 	//カメラ初期化
 	camera_.Init();
@@ -212,16 +144,12 @@ void GameScene::Init() {
 	//陰士単シングオブジェクトにカメラ設定
 	InstancingGameObject::SetCamera(&camera_);
 	
-	//地面生成
-	field_ = std::make_unique<Field>();
-	field_->Initialize();
 
 	//プレイヤー生成
 	player_ = std::make_unique<Player>();
 	playerAttackEffect_ = std::make_unique<PlayerAttackEffect>();
 	playerAttackEffect_->Init();
 	player_->SetAttackEffect(playerAttackEffect_.get());
-	player_->SetField(field_.get());
 
 	//追従カメラ処理生成
 	followCamera_ = std::make_unique<FollowCamera>(&camera_, player_->GetWorld().translation_);
@@ -231,7 +159,9 @@ void GameScene::Init() {
 	player_->SetBossWorld(&bossSpawnManager_->GetBossWorld());
 
 
-
+	//地面生成
+	field_ = std::make_unique<Field>();
+	field_->Initialize();
 	///
 
 	///UI
@@ -276,6 +206,9 @@ void GameScene::Init() {
 
 	field_->CreateStage();
 	field_->StartStage();
+	if (bossManager_->GetBossType() != BossType::GingerbreadMan) {
+		field_->MoveStage(bossManager_->GetTargetInfos());
+	}
 }
 
 void GameScene::Update() {
@@ -318,19 +251,21 @@ void GameScene::Update() {
 	camera_.UpdateViewMatrix();
 	camera_.UpdateCameraPos();
 
-	//プレイヤー更新
-	player_->Update();
-
 	//ステージ初期化済でプレイヤー更新
 	if (!field_->GetStageAnimationFinishedFlag()) {
+		//プレイヤー更新
+		player_->Update();
+		player_->UpdateOnField(field_->GetMassLocationPosY(player_->GetWorld().translation_) + player_->GetWorld().scale_.y);
+		player_->SetField(field_.get());
+
 		//ボス更新
 		bossSpawnManager_->Update();
 		bossSpawnManager_->SetOnField(field_->GetMassLocationPosY(bossSpawnManager_->GetBossWorld().translation_) + bossSpawnManager_->GetBossWorld().scale_.y);
 
-		//ボスのワールド座標取得(現在のボスのポインタを取得)
+		//ボスのワールド座標取得
 		player_->SetBossWorld(&bossSpawnManager_->GetBossWorld());
     
-		 playerAttackEffect_->Update();
+		playerAttackEffect_->Update();
 
 	}
 		
@@ -341,15 +276,73 @@ void GameScene::Update() {
 
 	//地面更新
 	field_->Update();
+	if (bossSpawnManager_->IsBossJustDied()) {
+		bossManager_->SetTargetInfos(field_->GetBlockPositions());
+	}
 
 	//当たり判定処理
 	DaiEngine::ColliderManager::GetInstance()->CheckAllCollision();
 
-	//ブロックと弾の接触判定
-	OnCollisionBlocksAndBullets();
+#pragma region ブロックと弾の判定
+	//弾の更新
+	for (auto& bullet : bossSpawnManager_->GetBullets()) {
+		if (bullet->GetDead())continue;
+		Vector2 targetBlock = field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
+		Block* block = field_->GetBlock(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z);
 
-	//シーン遷移の処理
-	SceneChange();
+		//WAVE発生タイプの場合
+		if (bullet->GetType() == BulletType::Wave) {
+
+			//中心の場所検索
+			Vector2 bPos = field_->GetBlockAt(0, 0);
+
+			//波の発生
+			field_->AddWave(bPos, 30, 1.0f, 1, 0.01f);
+			//弾の削除処理
+			bullet->OnCollisionBlock();
+			//この弾の処理を終了
+			continue;
+		}
+
+		//盛り上げ弾orDiveがある場合
+		if (bullet->GetType() == BulletType::None||bullet->GetType()==BulletType::Dive) {
+			//下げる値取得
+			float deltaY = field_->GetDeltaY();
+			//盛り上げる弾なら反転
+			if (bullet->GetType() == BulletType::None) {
+				deltaY *= -1.0f;		
+			}
+
+			//フィールドに影響
+			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetColliderRadius() * 1.5f, deltaY);
+			bullet->OnCollisionBlock();
+			continue;
+		}
+
+		// Y範囲にあるか判定
+		if (block->world.translation_.y >= bullet->GetWorld().translation_.y && block->world.translation_.y <= bullet->GetWorld().translation_.y + bullet->GetWorld().scale_.y) {
+			//下げる値取得
+			float deltaY = field_->GetDeltaY();
+			if (bullet->GetType() == BulletType::Parabola) {
+				deltaY *= -1.0f;
+			}
+			
+			//フィールドに影響
+			field_->RaiseBlocksAroundWithAttenuation(field_->GetNearestBlockAt(bullet->GetWorld().translation_.x, bullet->GetWorld().translation_.z), bullet->GetWorld().scale_.x * 1.5f, deltaY);
+			bullet->OnCollisionBlock();
+		}
+	}
+#pragma endregion
+
+	//死亡時ゲームおーばーへ
+	if (player_->GetIsDead()) {
+		DaiEngine::SceneManager::GetInstance()->ChangeScene("GameOver");
+	}
+
+	//ボスのHPが0以下になったらクリアへ
+	if (bossSpawnManager_->GetAllBossDead()) {
+		DaiEngine::SceneManager::GetInstance()->ChangeScene("Clear");
+	}
 }
 
 void GameScene::DrawBackGround() {
@@ -374,7 +367,6 @@ void GameScene::DrawModel() {
 void GameScene::DrawParticle() {
 
 	EffectManager::GetInstance()->Draw(camera_);
-
 }
 
 void GameScene::DrawUI() {

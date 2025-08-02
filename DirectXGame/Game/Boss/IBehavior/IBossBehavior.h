@@ -27,6 +27,7 @@ struct BossParameters {
 	Vector3 velocity_;
 	Vector3 rotation_;
 
+	bool isFly_ = false;
 	float fieldY_= 0;
 
 	//アニメーション変更名（””なら空）
