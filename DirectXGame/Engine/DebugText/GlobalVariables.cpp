@@ -21,69 +21,46 @@ namespace DaiEngine {
 
 	void GlobalVariables::Update() {
 #ifdef USE_IMGUI
-		if (!ImGui::Begin("Global Variables", nullptr, ImGuiWindowFlags_MenuBar)) {
-			ImGui::End();
-			return;
-		}
+		ImGui::Begin("Global Variables");
 
-		if (!ImGui::BeginMenuBar()) { return; }
-
-		for (std::map<std::string, Group>::iterator itGroup = datas_.begin(); itGroup != datas_.end();
-			++itGroup) {
-			//グループ名を取得
-			const std::string& groupName = itGroup->first;
-			//グループの参照を取得
-			Group& group = itGroup->second;
-			if (!ImGui::BeginMenu(groupName.c_str())) {
-				continue;
+		ImGui::BeginChild("GroupList", ImVec2(200, 0), true); // ← 左のグループ一覧
+		for (auto& [groupName, group] : datas_) {
+			if (ImGui::Selectable(groupName.c_str(), selectedGroup == groupName)) {
+				selectedGroup = groupName;
 			}
+		}
+		ImGui::EndChild();
 
-			for (std::map<std::string, Item>::iterator itItem = group.items.begin();
-				itItem != group.items.end(); ++itItem) {
-				//項目名を取得
-				const std::string& itemName = itItem->first;
-				//項目の参照を取得
-				Item& item = itItem->second;
-				//int32_t型の値を保持していれば
+		ImGui::SameLine();
+
+		ImGui::BeginChild("GroupContent", ImVec2(0, 0), true); // ← 右の内容
+		if (!selectedGroup.empty()) {
+			Group& group = datas_.at(selectedGroup);
+			for (auto& [itemName, item] : group.items) {
 				if (std::holds_alternative<int32_t>(item.value)) {
-					int32_t* ptr = std::get_if<int32_t>(&item.value);
-					ImGui::InputInt(itemName.c_str(), ptr, 1);
-					//float型の値を保持していれば
+					ImGui::InputInt(itemName.c_str(), std::get_if<int32_t>(&item.value));
 				}
 				else if (std::holds_alternative<float>(item.value)) {
-					float* ptr = std::get_if<float>(&item.value);
-					ImGui::DragFloat(itemName.c_str(), ptr, 0.01f);
-					//Vec3型の値を保持していれば
-				}
-				else if (std::holds_alternative<Vector3>(item.value)) {
-					Vector3* ptr = std::get_if<Vector3>(&item.value);
-					ImGui::DragFloat3(itemName.c_str(), reinterpret_cast<float*>(ptr), 0.01f);
-					//Vec2型の値保持していれば
+					ImGui::DragFloat(itemName.c_str(), std::get_if<float>(&item.value), 0.01f);
 				}
 				else if (std::holds_alternative<Vector2>(item.value)) {
-					Vector2* ptr = std::get_if<Vector2>(&item.value);
-					ImGui::DragFloat2(itemName.c_str(), reinterpret_cast<float*>(ptr), 0.1f);
+					ImGui::DragFloat2(itemName.c_str(), reinterpret_cast<float*>(std::get_if<Vector2>(&item.value)), 0.1f);
 				}
-
+				else if (std::holds_alternative<Vector3>(item.value)) {
+					ImGui::DragFloat3(itemName.c_str(), reinterpret_cast<float*>(std::get_if<Vector3>(&item.value)), 0.01f);
+				}
 			}
-
-			//改行
-			ImGui::Text("\n");
 
 			if (ImGui::Button("Save")) {
-
-				SaveFile(groupName);
-				std::string message = std::format("{}.json saved.", groupName);
-				MessageBoxA(nullptr, message.c_str(), "GlobalVariables", 0);
+				SaveFile(selectedGroup);
+				std::string msg = std::format("{}.json saved.", selectedGroup);
+				MessageBoxA(nullptr, msg.c_str(), "GlobalVariables", 0);
 			}
-
-
-			ImGui::EndMenu();
 		}
+		ImGui::EndChild();
 
-
-		ImGui::EndMenuBar();
 		ImGui::End();
+
 #endif // _DEBUG
 	}
 
