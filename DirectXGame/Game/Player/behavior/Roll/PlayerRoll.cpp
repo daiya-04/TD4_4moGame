@@ -27,6 +27,9 @@ PlayerRoll::PlayerRoll()
 
     tree_.SetValue("maxCharge", &maxCharge_);
     tree_.SetValue("maxRollSpeed", &maxRollSpeed_);
+
+    player_->GetUI()->SetCharge(&chargeJump_, maxCharge_);
+
 }
 
 void PlayerRoll::Init()
