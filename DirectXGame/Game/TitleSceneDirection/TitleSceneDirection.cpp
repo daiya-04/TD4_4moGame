@@ -8,6 +8,7 @@ void TitleSceneDirection::Initialize() {
 
 	worldTransform_.Init();
 	worldTransform_.scale_ *= 10.0f;
+    worldTransform_.scale_.x *= 5.0f;
 	worldTransform_.UpdateMatrix();
 
 	targetPos_ = GetRandomXZPosition(); // 初期目標
@@ -48,7 +49,7 @@ void TitleSceneDirection::UpdateWander() {
     toTarget.y = 0.0f;
 
     float distance = toTarget.Length();
-    if (distance < 0.2f) {
+    if (distance < 0.5f) {
         if (isGameStart_ == false) {
             // 到達 → 新しい目標設定
             targetPos_ = GetRandomXZPosition();

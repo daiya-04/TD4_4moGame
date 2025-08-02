@@ -103,6 +103,8 @@ private:
 	std::unique_ptr<DaiEngine::Sprite> gameStartUI_;
 	//ゲーム終了UI
 	std::unique_ptr<DaiEngine::Sprite> gameFinishUI_;
+	//タイトル用背景
+	std::unique_ptr<DaiEngine::Sprite> titleBG_;
 
 	std::unique_ptr<TitleSceneDirection> titleSceneDirection_;
 

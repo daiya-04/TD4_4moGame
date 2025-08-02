@@ -199,6 +199,7 @@ private:
 	Vector4 lowColor_ = { 0.0f, 0.0f, 1.0f, 1.0f };//Yが低い時の色
 	int waveCount_ = 1;//波の発生回数
 	float waveSpeed_ = 0.01f;//波の速度
+	float waveHeight_ = 1.0f;//波の高さ
 
 	std::vector<WaveInfo> waves_; //現在アクティブな波のリスト
 

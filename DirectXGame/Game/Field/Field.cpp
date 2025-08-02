@@ -32,6 +32,7 @@ void Field::Initialize() {
 	gvg->SetValue("DeltaY", &deltaY_);
 	gvg->SetValue("WaveCount", &waveCount_);
 	gvg->SetValue("WaveSpeed", &waveSpeed_);
+	gvg->SetValue("WaveHeight", &waveHeight_);
 	gvg->SetValue("HeightLimit", &heightLimit_);
 	gvg->SetValue("VerticalSize", &verticalSize_);
 	gvg->SetValue("HorizontalSize", &horizontalSize_);
@@ -51,7 +52,7 @@ void Field::Update() {
 		RaiseBlocksAroundWithAttenuation(GetBlockAt(nowPos_.x, nowPos_.y), radius_, deltaY_);
 	}
 	if (ImGui::Button("WaveBlocks")) {
-		AddWave(GetBlockAt(nowPos_.x, nowPos_.y), radius_, heightLimit_, waveCount_, waveSpeed_);
+		AddWave(GetBlockAt(nowPos_.x, nowPos_.y), radius_, waveHeight_, waveCount_, waveSpeed_);
 	}
 	if (ImGui::Button("TestSetBlockHeightLimit")) {
 		//各ブロックの高さを限界値で固定
