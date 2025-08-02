@@ -5,7 +5,6 @@
 #include"SphereCollider.h"
 #include"../Bullet/BossBulletManager/BossBulletManager.h"
 #include"Boss/DangerZone/Manager/DangerZoneManager.h"
-#include"../UI/BossUI.h"
 #include"../Blinking/Blinking.h"
 #include"../../GlobalVariable/Tree/GlobalVariableTree.h"
 
@@ -115,6 +114,10 @@ public://**パブリック関数**//
 	/// <param name="y"></param>
 	void SetPositionY(float y) { position_.y = y; }
 
+	int GetHP() const { return HP_; }
+
+	int GetMaxHP() const { return maxHP_; }
+
 private://**プライベート関数**//
 
 	/// <summary>
@@ -166,7 +169,6 @@ private://**プライベート関数**//
 	/// </summary>
 	void SetInField();
 
-
 private://**プライベート変数**//
 
 	//追従カメラ
@@ -182,9 +184,6 @@ private://**プライベート変数**//
 	std::unique_ptr<BossBulletManager>bulletManager_ = nullptr;
 	//警戒エリアマネージャ
 	std::unique_ptr<DangerZoneManager>dangerZoneManager_ = nullptr;
-
-	//ボスUI
-	std::unique_ptr<BossUI> ui_ = nullptr;
 
 	//点滅処理
 	std::unique_ptr<Blinking> blinking_ = nullptr;

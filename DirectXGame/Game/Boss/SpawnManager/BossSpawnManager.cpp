@@ -19,6 +19,9 @@ BossSpawnManager::BossSpawnManager(FollowCamera* camera, const DaiEngine::WorldT
 	bosses_[int(BossType::Donut)] =			 std::make_unique<Donut>("Donut", camera, playerWorld);
 	bosses_[int(BossType::CupCake)] =		 std::make_unique<CupCake>("CapCakeStandby", camera, playerWorld);
 
+	ui_ = std::make_unique<BossUI>();
+	ui_->SetBossData(bosses_);
+
 	std::unique_ptr<GVariGroup> group = std::make_unique<GVariGroup>("BossManager");
 	group->SetMonitorValue("nowBoss", &nowBossName_);
 	group->SetMonitorValue("nextBoss", &isNextBoss_);
@@ -58,10 +61,19 @@ void BossSpawnManager::Update()
 		{
 			//リクエストの値にする
 			bossType_ = (BossType)typeRequest_.value();
+
+			if (typeRequest_.value() == static_cast<int>(BossType::CupCake)) {
+				//UI演出
+				ui_->StartFadeOut();
+
+			}
+
 			//リクエストをクリア
 			typeRequest_ = std::nullopt; 
 			changeBoss_ = false;
 			bossManager_->SetBossType(bossType_);
+
+			bossJustDied_ = false;
 
 		}
 		else {
@@ -82,6 +94,8 @@ void BossSpawnManager::Update()
 			typeRequest_ = (int)bossType_ + 1;
 		}
 	}
+
+	ui_->Update();
 }
 
 void BossSpawnManager::Draw()
@@ -96,6 +110,8 @@ void BossSpawnManager::UIDraw()
 {
 	//ボスの描画
 	bosses_[(int)bossType_]->DrawUI();
+	
+	ui_->Draw();
 }
 
 void BossSpawnManager::SetOnField(float y)
@@ -122,5 +138,7 @@ void BossSpawnManager::CheckBossDead()
 		//カウントリセット
 		currentChangeCount_ = 0;
 		camera_->SetState(FollowCamera::State::Follow);
+
+		bossJustDied_ = true;
 	}
 }

@@ -12,6 +12,10 @@ void SinpleDangerZone::Update()
 
 	sec_++;
 
+	if (param_.target) {
+		param_.world.translation_ = param_.target->translation_;
+	}
+
 	if (behavior_ == Behavior::Warning) {
 		//時間の割合を取得（0.0f~1.0f）
 		float t = sec_ / param_.maxWarningCount;
@@ -47,8 +51,9 @@ void SinpleDangerZone::Update()
 		if (sec_ >= param_.maxFinalWarningCount) {
 			//時間経過でフラグON
 			isDead_ = true;
+			isDraw_ = true;
 			//プレイヤー高度にセット
-			if (pPos_) {
+			if (pPos_) {		
 				param_.world.translation_.y = pPos_->y;
 			}
 

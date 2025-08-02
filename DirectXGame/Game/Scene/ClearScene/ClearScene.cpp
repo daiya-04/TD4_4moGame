@@ -16,10 +16,10 @@ void ClearScene::SetGlobalVariables() {
 	DaiEngine::GlobalVariables* globalVariables = DaiEngine::GlobalVariables::GetInstance();
 
 
-	//AボタンUIの調整項目追加
+	////AボタンUIの調整項目追加
 	std::string groupName = "ClearText";
-	globalVariables->CreateGroup(groupName);
-	globalVariables->AddItem(groupName, "Translation", clearText_->GetPosition());
+	//globalVariables->CreateGroup(groupName);
+	//globalVariables->AddItem(groupName, "Translation", clearText_->GetPosition());
 	//ワープホールの調整項目追加
 	groupName = "UI_TitleBack";
 	globalVariables->CreateGroup(groupName);
@@ -35,9 +35,9 @@ void ClearScene::SetGlobalVariables() {
 void ClearScene::ApplyGlobalVariables() {
 	DaiEngine::GlobalVariables* globalVariables = DaiEngine::GlobalVariables::GetInstance();
 
-	//AボタンUIのパラメータ設定
+	////AボタンUIのパラメータ設定
 	std::string groupName = "ClearText";
-	clearText_->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
+	//clearText_->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
 
 	//ワープホールのパラメータ設定
 	groupName = "UI_TitleBack";
@@ -66,7 +66,7 @@ void ClearScene::Init() {
 	///
 
 	///
-	uint32_t clearTextTex = DaiEngine::TextureManager::Load("gameClear.png");
+	//uint32_t clearTextTex = DaiEngine::TextureManager::Load("gameClear.png");
 	uint32_t titleBackTex = DaiEngine::TextureManager::Load("TitleBack.png");
 	uint32_t reStartTex = DaiEngine::TextureManager::Load("StartBiging.png");
 	///
@@ -77,15 +77,17 @@ void ClearScene::Init() {
 	choiceSE_ = DaiEngine::AudioManager::Load("SE/Choice.mp3");
 	doneSE_ = DaiEngine::AudioManager::Load("SE/Done.mp3");
 
-	clearText_.reset(DaiEngine::Sprite::Create(clearTextTex, {}));
+	//clearText_.reset(DaiEngine::Sprite::Create(clearTextTex, {}));
+	clearText_ = std::make_unique<ClearLogo>();
+	clearText_->Init(L"ゲームクリア");
 
 	titleBackUI_.reset(DaiEngine::Sprite::Create(titleBackTex, {}));
 	titleBackUI_->SetSize({ 350.0f, 70.0f });
-	titleBackUI_->SetTextureArea({ 350.0f * static_cast<float>(gTitleBackUISwitch_),0.0f }, { 350.0f,70.0f });
+	titleBackUI_->SetTextureArea({ 350.0f * static_cast<float>(gTitleBackUISwitch_),0.0f }, { 350.0f,80.0f });
 
 	reStartUI_.reset(DaiEngine::Sprite::Create(reStartTex, {}));
 	reStartUI_->SetSize({ 350.0f, 70.0f });
-	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,70.0f });
+	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,80.0f });
 
 
 	SetGlobalVariables();
@@ -122,42 +124,16 @@ void ClearScene::Update() {
 #endif // _DEBUG
 
 	
-	switch (select_) {
-	case Select::TitleBack:
+	MenuInput();
 
-		if (input->TriggerKey(DIK_DOWN) || input->TriggerButton(DaiEngine::Input::Button::DPAD_DOWN) || input->TriggerLStick(DaiEngine::Input::Stick::Down)) {
-			select_ = Select::ReStart;
-			gTitleBackUISwitch_ = UISwitch::Off;
-			gReStartUISwitch_ = UISwitch::On;
-			choiceSE_->Play();
-		}
+	gTitleBackUISwitch_ = (select_ == Select::TitleBack) ? UISwitch::On : UISwitch::Off;
+	gReStartUISwitch_ = (select_ == Select::ReStart) ? UISwitch::On : UISwitch::Off;
 
-		if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
-			doneSE_->Play();
-			DaiEngine::SceneManager::GetInstance()->ChangeScene("Title");
-		}
+	titleBackUI_->SetTextureArea({ 350.0f * static_cast<float>(gTitleBackUISwitch_),0.0f }, { 350.0f,80.0f });
+	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,80.0f });
 
-		break;
-	case Select::ReStart:
 
-		if (input->TriggerKey(DIK_UP) || input->TriggerButton(DaiEngine::Input::Button::DPAD_UP) || input->TriggerLStick(DaiEngine::Input::Stick::Up)) {
-			select_ = Select::TitleBack;
-			gTitleBackUISwitch_ = UISwitch::On;
-			gReStartUISwitch_ = UISwitch::Off;
-			choiceSE_->Play();
-		}
-
-		if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
-			doneSE_->Play();
-			DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
-		}
-
-		break;
-	}
-
-	titleBackUI_->SetTextureArea({ 350.0f * static_cast<float>(gTitleBackUISwitch_),0.0f }, { 350.0f,70 });
-	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,70 });
-
+	clearText_->Update();
 
 	///
 	//ライト更新
@@ -214,4 +190,40 @@ void ClearScene::DebugGUI() {
 
 
 #endif // _DEBUG
+}
+
+void ClearScene::MenuInput() {
+
+	int currentIndex = static_cast<int>(std::distance(order_.begin(), std::find(order_.begin(), order_.end(), select_)));
+
+	auto* input = DaiEngine::Input::GetInstance();
+
+	if (input->TriggerKey(DIK_UP) || input->TriggerButton(DaiEngine::Input::Button::DPAD_UP) || input->TriggerLStick(DaiEngine::Input::Stick::Up)) {
+		if (currentIndex > 0) {
+			select_ = order_[currentIndex - 1];
+			choiceSE_->Play();
+		}
+	}
+
+	if (input->TriggerKey(DIK_DOWN) || input->TriggerButton(DaiEngine::Input::Button::DPAD_DOWN) || input->TriggerLStick(DaiEngine::Input::Stick::Down)) {
+		if (currentIndex < order_.size() - 1) {
+			select_ = order_[currentIndex + 1];
+			choiceSE_->Play();
+		}
+	}
+
+	if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
+		onSelect_[select_]();
+	}
+
+}
+
+void ClearScene::ToTitle() {
+	doneSE_->Play();
+	DaiEngine::SceneManager::GetInstance()->ChangeScene("Title");
+}
+
+void ClearScene::ToGame() {
+	doneSE_->Play();
+	DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
 }

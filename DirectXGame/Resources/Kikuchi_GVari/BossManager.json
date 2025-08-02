@@ -11,12 +11,12 @@
                 "NoneRadius": 1.0,
                 "ParabolaRadius": 1.0,
                 "WaveColliuder": {
-                    "addRadius": 0.30000001192092896,
-                    "height": 2.0,
-                    "hitWide": 2.0,
+                    "addRadius": 0.3499999940395355,
+                    "height": 0.0010000000474974513,
+                    "hitWide": 0.5,
                     "maxCount": 180.0
                 },
-                "WaveRadius": 2.0,
+                "WaveRadius": 0.20000000298023224,
                 "fallSpeed": 1.0,
                 "parabolaBullet": {
                     "arriveCount": 60,
@@ -97,7 +97,12 @@
                 "jumpHeight": 20.0,
                 "jumpNum": 3,
                 "stopCount": 60.0,
-                "waitCount": 90.0
+                "zone": {
+                    "binking": 3,
+                    "finalWarningCount": 30.0,
+                    "radius": 1.0,
+                    "warningCount": 60.0
+                }
             },
             "waveDive": {
                 "fallSpd": 5.0,

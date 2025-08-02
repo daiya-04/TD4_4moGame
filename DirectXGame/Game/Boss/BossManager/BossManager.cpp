@@ -13,3 +13,11 @@ void BossManager::Initialize(BossType bosstype) {
 void BossManager::SetBossType(BossType bosstype) {
 	bosstype_ = bosstype;
 }
+
+void BossManager::SetTargetInfos(const std::vector<TargetInfo>& targets) {
+	targetInfos_ = targets;
+}
+
+const std::vector<TargetInfo>& BossManager::GetTargetInfos() const {
+	return targetInfos_;
+}

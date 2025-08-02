@@ -46,6 +46,9 @@ void PlayerRoll::Init()
 	//初速を与える
 	currentVelo_ = currentVelo_.Normalize() * startSpeed_;
 
+    //チャージの初期化
+    chargeJump_ = 0.0f;
+
 	player_->SetAnimationName("PlayerAvoidance");
 
     emitPos_ = player_->GetWorld().GetWorldPos();
@@ -140,6 +143,9 @@ void PlayerRoll::Update() {
             chargeJump_ = maxCharge_;
         }
     }
+    else {
+        chargeJump_ = 0.0f;
+    }
 
     // 入力取得（方向制御に使う）
     Vector3 move = player_->SetBody2Input();
@@ -161,7 +167,7 @@ void PlayerRoll::Update() {
     }
 
     // チャージ完了時スピン
-    if (DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE) && chargeJump_ >= maxCharge_) {
+    if ((DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE)|| DaiEngine::Input::GetInstance()->TriggerButton(DaiEngine::Input::Button::A)) && chargeJump_ >= maxCharge_) {
         player_->behaviorRequest_ = Player::Behavior::SpinAttack;
         EffectManager::GetInstance()->End("PlayerMoveEffect");
         chargeJump_ = 0.0f;
