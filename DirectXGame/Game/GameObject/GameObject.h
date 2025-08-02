@@ -63,6 +63,12 @@ public:
 	void SetAnimationLeverage(float leverage);
 
 	/// <summary>
+	/// 色を設定（０）のみ
+	/// </summary>
+	/// <param name="color"></param>
+	void SetColor(const Vector4& color) { model_->GetModel()->materials_[0].SetColor(color); }
+
+	/// <summary>
 	/// 指定したジョイントのワールド座標取得
 	/// </summary>
 	Vector3 GetJointWorldPosition(const std::string& jointName);

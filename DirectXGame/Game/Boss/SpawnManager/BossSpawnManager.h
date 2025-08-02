@@ -55,6 +55,11 @@ public://**パブリック関数**//
 	/// <param name="y"></param>
 	void SetOnField(float y);
 
+	/// <summary>
+	/// ボスが死んだ瞬間を検知
+	/// </summary>
+	bool IsBossJustDied() const { return bossJustDied_; }
+
 private://**プライベート関数**//
 
 	/// <summary>
@@ -83,6 +88,8 @@ private://**プライベート変数**//
 	int changeCount_ = 60;
 
 	int currentChangeCount_ = 0;
+
+	bool bossJustDied_ = false;
 
 	//全てのボスの死亡フラグ
 	bool allBossDead_ = false;

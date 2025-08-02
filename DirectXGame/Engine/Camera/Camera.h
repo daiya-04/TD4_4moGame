@@ -61,6 +61,15 @@ namespace DaiEngine {
 		/// </summary>
 		void UpdateCameraPos();
 
+		/// <summary>
+		/// カメラ位置UI操作
+		/// </summary>
+		void DrawImGui();
+		/// <summary>
+		/// カメラ位置設定
+		/// </summary>
+		void SetCamera(Vector3 translation, Vector3 rotation);
+
 		void SetMatView(const Matrix4x4& matView) {
 			matView_ = matView;
 			cMap_->matView = matView;

@@ -11,7 +11,7 @@ public://**パブリック関数**//
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	BossBulletManager(bool isCandy =true);
+	BossBulletManager(const DaiEngine::WorldTransform& world,bool isCandy =true);
 	~BossBulletManager() = default;
 
 	/// <summary>

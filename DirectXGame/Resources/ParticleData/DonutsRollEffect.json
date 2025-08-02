@@ -4,16 +4,16 @@
             "Emitter": {
                 "BillboardType": 0,
                 "Color": [
-                    0.8333333134651184,
-                    0.08578429371118546,
-                    0.6134660840034485,
+                    1.0,
+                    1.0,
+                    1.0,
                     0.0
                 ],
-                "Count": 100,
-                "EmitterType": 5,
-                "Frequency": 0.01600000075995922,
-                "LifeTime": 1.0,
-                "Radius": 0.30000001192092896,
+                "Count": 20,
+                "EmitterType": 2,
+                "Frequency": 0.10000000149011612,
+                "LifeTime": 0.699999988079071,
+                "Radius": 1.0,
                 "Rotate": 360.0,
                 "Scale": 0.10000000149011612,
                 "Size": [
@@ -21,7 +21,7 @@
                     1.0,
                     1.0
                 ],
-                "Speed": 3.0,
+                "Speed": 5.0,
                 "Translate": [
                     0.0,
                     0.0,
@@ -29,7 +29,7 @@
                 ]
             },
             "OverLifeTime": {
-                "Gravity": 0.05000000074505806,
+                "Gravity": 0.0,
                 "Velocity": [
                     0.0,
                     2.0,
@@ -40,13 +40,13 @@
                     0.0,
                     0.0
                 ],
-                "endAlpha": 0.0,
+                "endAlpha": 0.30000001192092896,
                 "endColor": [
                     0.09335349500179291,
                     0.8350824117660522,
                     0.906862735748291
                 ],
-                "endScale": 0.0,
+                "endScale": 0.5,
                 "endSpeed": 0.0,
                 "endVelocity": [
                     0.0,
@@ -59,7 +59,7 @@
                 "isNoise": 0,
                 "isRandom": 0,
                 "isRoring": 1,
-                "isScale": 0,
+                "isScale": 1,
                 "isTransSpeed": 0,
                 "isTransVelocity": 0,
                 "maxRoringSpeed": [
@@ -88,10 +88,10 @@
                 ],
                 "strength": 0.0
             },
-            "isLoop": false,
+            "isLoop": true,
             "isModel": false,
             "modelName": "",
-            "textureName": "chocospray.png"
+            "textureName": "walkParticle.png"
         }
     }
 }

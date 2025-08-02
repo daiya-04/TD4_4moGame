@@ -1,6 +1,8 @@
 #include "PlayerRoll.h"
 #include"Player/Player.h"
 
+#include "EffectManager.h"
+
 #include"Input.h"
 
 PlayerRoll::PlayerRoll()
@@ -24,6 +26,7 @@ PlayerRoll::PlayerRoll()
     tree_.SetValue("turnInfluence", &turnInfluence_);
 
     tree_.SetValue("maxCharge", &maxCharge_);
+    tree_.SetValue("maxRollSpeed", &maxRollSpeed_);
 }
 
 void PlayerRoll::Init()
@@ -43,7 +46,13 @@ void PlayerRoll::Init()
 	//初速を与える
 	currentVelo_ = currentVelo_.Normalize() * startSpeed_;
 
+    //チャージの初期化
+    chargeJump_ = 0.0f;
+
 	player_->SetAnimationName("PlayerAvoidance");
+
+    emitPos_ = player_->GetWorld().GetWorldPos();
+    EffectManager::GetInstance()->Start("PlayerMoveEffect", &emitPos_);
 }
 
 //0-1
@@ -58,9 +67,12 @@ Vector3 ProjectOnPlane(const Vector3& vec, const Vector3& planeNormal) {
 
 void PlayerRoll::Update() {
 
+    emitPos_ = player_->GetWorld().GetWorldPos();
+
     if (!player_->GetInput()->GetInput(PlayerInput::Roll)) {
         player_->behaviorRequest_ = Player::Behavior::Move;
         player_->parameters_.currentRollCount = cooldownCount_;
+        EffectManager::GetInstance()->End("PlayerMoveEffect");
         return;
     }
 
@@ -131,6 +143,9 @@ void PlayerRoll::Update() {
             chargeJump_ = maxCharge_;
         }
     }
+    else {
+        chargeJump_ = 0.0f;
+    }
 
     // 入力取得（方向制御に使う）
     Vector3 move = player_->SetBody2Input();
@@ -146,9 +161,15 @@ void PlayerRoll::Update() {
     // プレイヤーに速度反映
     params.velocity += currentVelo_;
 
+    //最大速度にスケーリング
+    if (params.velocity.Length() > maxRollSpeed_) {
+        params.velocity = params.velocity.Normalize() * maxRollSpeed_;
+    }
+
     // チャージ完了時スピン
-    if (DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE) && chargeJump_ >= maxCharge_) {
+    if ((DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE)|| DaiEngine::Input::GetInstance()->TriggerButton(DaiEngine::Input::Button::A)) && chargeJump_ >= maxCharge_) {
         player_->behaviorRequest_ = Player::Behavior::SpinAttack;
+        EffectManager::GetInstance()->End("PlayerMoveEffect");
         chargeJump_ = 0.0f;
     }
 }

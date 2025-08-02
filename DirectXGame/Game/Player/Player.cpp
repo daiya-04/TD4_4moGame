@@ -32,6 +32,8 @@ Player::Player()
 	collider_->ColliderOff();
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
 	collider_->SetStayCallback([this](DaiEngine::Collider* collider) { OnCollison(collider); });
+	collider_->SetEnterCallback([this](DaiEngine::Collider* collider) { OnCollison(collider); });
+
 	//攻撃コライダー生成
 	attackWorld_.Init();
 	attackWorld_.parent_ = world_;
@@ -117,8 +119,6 @@ void Player::Init() {
 
 void Player::Update()
 {
-	//フィールド生成がまだの場合返却
-	if (field_->GetStageAnimationFinishedFlag())return;
 
 #ifdef _DEBUG
 	collider_->SetRadius(radius_);
@@ -157,15 +157,23 @@ void Player::Update()
 	behaviors_[(int)behaviorName_]->Update();
 
 	//落下
-	parameters_.velocity.y -= gravity_;
-
-
+	if (!parameters_.isFlying) {
+		parameters_.velocity.y -= gravity_;
+	}
+	//座標更新
+	UpdatePositionWithCollision();
 
 	//制限チェック
 	LimitationXZ();
 
+	//オフセット分足してワールド座標更新
+	world_->translation_ = position_ + offsetPos_;
+
 	//点滅更新
 	Blinking();
+
+	//行列更新
+	UpdateMatrix();
 
 	//UI更新
 	UIUpdate();
@@ -173,14 +181,6 @@ void Player::Update()
 	//エフェクト更新
 	//attackEffect_->UpdateObject();
 
-		//座標更新
-	UpdatePositionWithCollision();
-
-	//オフセット分足してワールド座標更新
-	world_->translation_ = position_ + offsetPos_;
-
-	//行列更新
-	UpdateMatrix();
 }
 
 
@@ -239,10 +239,6 @@ void Player::UpdatePositionWithCollision()
 	else {
 		position_ = nextPos;
 	}
-
-
-	//地面の高さに合わせる処理
-	UpdateOnField(field_->GetMassLocationPosY(position_ + offsetPos_) + world_->scale_.y);
 }
 
 void Player::DrawUI() {
@@ -260,16 +256,20 @@ void Player::UpdateOnField(float y)
 	if (parameters_.isFlying)return;
 
 	//高さ修正
-	if (position_.y + offsetPos_.y < y) {
-		position_.y = y - offsetPos_.y;
+	if (world_->translation_.y < y) {
+		world_->translation_.y = y;
+		position_.y = world_->translation_.y - offsetPos_.y;
+		//position_.y = y;
 	}
+	//行列更新
+	UpdateMatrix();
 }
 
 void Player::Draw()
 {
 	//円コライダー描画
 #ifdef _DEBUG
-	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()), *camera_, colliderColor_);
+	ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(collider_->GetShape()), *camera_,colliderColor_);
 	//ShapesDraw::DrawSphere(std::get<Shapes::Sphere>(attackCollider_->GetShape()), *camera_,colliderColor_);
 #endif // _DEBUG
 
@@ -298,14 +298,16 @@ void Player::SetWorldTranslate(const Vector3& translate)
 
 void Player::OnCollison(DaiEngine::Collider* collider)
 {
+	//死亡時何もなし
+ 	if (behaviorName_ == Behavior::Dead) { collider_->ColliderOff(); return; }
+
 	//ボスコライダーの場合スキップ
 	if (collider->GetTag() == "boss" ||
 		collider->GetTag() == "playerAttack" ||
-		!parameters_.isHit ||
+		!parameters_.isHit||
 		behaviorName_ == Behavior::SpinAttack) {
 		return;
 	}
-
 
 	//ヒットフラグOFF
 	parameters_.isHit = false;
@@ -341,8 +343,8 @@ void Player::OnCollisionATKCollider(DaiEngine::Collider* collider)
 
 		EffectManager::GetInstance()->Trigger("BiteHitEffect", GetWorld().GetWorldPos() + offset);
 	}
-
-
+	
+	
 
 }
 
@@ -364,7 +366,7 @@ float GetYRotate(const Vector2& v) {
 
 Vector3 Player::Get2BossDirection()
 {
-
+	
 	//ボスのワールド座標を取得
 	Vector3 bossPos = bossWorld_->GetWorldPos();
 	//プレイヤーのワールド座標を取得

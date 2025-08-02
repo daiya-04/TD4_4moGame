@@ -18,6 +18,6 @@ void BossNoneBullet::Update()
 void BossNoneBullet::AddOnCollisionBlock() {
 	if (data_.type == BulletType::None) {
 		//えふぇこ発生
-		EffectManager::GetInstance()->Trigger("DonutsStageApperEffect", data_.warningWorld.GetWorldPos());
+		EffectManager::GetInstance()->Trigger("DonutsStageApperEffect", data_.world.GetWorldPos());
 	}
 }

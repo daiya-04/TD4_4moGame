@@ -9,7 +9,7 @@
                     1.0,
                     0.0
                 ],
-                "Count": 4,
+                "Count": 2,
                 "EmitterType": 5,
                 "Frequency": 0.10000000149011612,
                 "LifeTime": 0.6000000238418579,
@@ -88,7 +88,7 @@
                 ],
                 "strength": 0.0
             },
-            "isLoop": false,
+            "isLoop": true,
             "isModel": false,
             "modelName": "",
             "textureName": "walkParticle.png"

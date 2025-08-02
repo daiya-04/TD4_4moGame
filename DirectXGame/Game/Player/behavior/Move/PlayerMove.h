@@ -57,8 +57,8 @@ private://**プライベート変数**//
 	//減速量
 	float gravity_ = 1.0f;
 
-	//頂上付近での重力影響減速量
-	float degreeGravityOnTop_ = 4;
+	//頂点での減速量
+	float topDegree_ = 4.0f;
 
 	float nowSpd_;
 

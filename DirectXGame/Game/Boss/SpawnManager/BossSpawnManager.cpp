@@ -73,6 +73,8 @@ void BossSpawnManager::Update()
 			changeBoss_ = false;
 			bossManager_->SetBossType(bossType_);
 
+			bossJustDied_ = false;
+
 		}
 		else {
 			//全員死んだのでフラグON
@@ -117,7 +119,7 @@ void BossSpawnManager::SetOnField(float y)
 	//現在のボス取得
 	IBoss* boss = bosses_[(int)bossType_].get();
 	//現在の位置
-	if (boss->GetPosition().y < y) {
+	if (!boss->parameters_.isFly_) {
 		boss->SetPositionY(y);
 	}
 	//フィールドのY取得
@@ -136,5 +138,7 @@ void BossSpawnManager::CheckBossDead()
 		//カウントリセット
 		currentChangeCount_ = 0;
 		camera_->SetState(FollowCamera::State::Follow);
+
+		bossJustDied_ = true;
 	}
 }

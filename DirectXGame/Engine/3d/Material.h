@@ -19,6 +19,8 @@ namespace DaiEngine {
 
 	public:
 
+		void SetColor(const Vector4& color) { data_->color_ = color; }
+
 		void Init();
 
 		void SetUVHandle(uint32_t uvHandle) { uvHandle_ = uvHandle; }
