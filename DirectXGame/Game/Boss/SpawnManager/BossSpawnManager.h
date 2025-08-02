@@ -2,6 +2,7 @@
 #include"../IBoss/IBoss.h"
 
 #include "Boss/BossManager/BossManager.h"
+#include "Boss/UI/BossUI.h"
 
 //ボス生成マネージャ
 class BossSpawnManager {
@@ -54,6 +55,11 @@ public://**パブリック関数**//
 	/// <param name="y"></param>
 	void SetOnField(float y);
 
+	/// <summary>
+	/// ボスが死んだ瞬間を検知
+	/// </summary>
+	bool IsBossJustDied() const { return bossJustDied_; }
+
 private://**プライベート関数**//
 
 	/// <summary>
@@ -68,6 +74,8 @@ private://**プライベート変数**//
 	//ボスのデータ群
 	std::vector<std::unique_ptr<IBoss>> bosses_ ;
 
+	std::unique_ptr<BossUI> ui_;
+
 	BossType bossType_ = BossType::GingerbreadMan;
 
 	//状態リクエスト
@@ -80,6 +88,8 @@ private://**プライベート変数**//
 	int changeCount_ = 60;
 
 	int currentChangeCount_ = 0;
+
+	bool bossJustDied_ = false;
 
 	//全てのボスの死亡フラグ
 	bool allBossDead_ = false;

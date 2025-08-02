@@ -183,6 +183,9 @@ void GameScene::Init() {
 
 	field_->CreateStage();
 	field_->StartStage();
+	if (bossManager_->GetBossType() != BossType::GingerbreadMan) {
+		field_->MoveStage(bossManager_->GetTargetInfos());
+	}
 }
 
 void GameScene::Update() {
@@ -239,7 +242,7 @@ void GameScene::Update() {
 		//ボスのワールド座標取得
 		player_->SetBossWorld(&bossSpawnManager_->GetBossWorld());
     
-		 playerAttackEffect_->Update();
+		playerAttackEffect_->Update();
 
 	}
 		
@@ -250,6 +253,9 @@ void GameScene::Update() {
 
 	//地面更新
 	field_->Update();
+	if (bossSpawnManager_->IsBossJustDied()) {
+		bossManager_->SetTargetInfos(field_->GetBlockPositions());
+	}
 
 	//当たり判定処理
 	DaiEngine::ColliderManager::GetInstance()->CheckAllCollision();

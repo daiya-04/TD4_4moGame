@@ -71,6 +71,7 @@ void TitleScene::Init() {
 	uint32_t titleLogoTex = DaiEngine::TextureManager::Load("titleLogo.png");
 	uint32_t gameStartTex = DaiEngine::TextureManager::Load("GameStart.png");
 	uint32_t gameFinifhTex = DaiEngine::TextureManager::Load("GameFinish.png");
+	uint32_t titleBackGroundTex = DaiEngine::TextureManager::Load("titleBG.png");
 	
 	//
 	bgm_ = DaiEngine::AudioManager::Load("BGM/Title.mp3");
@@ -88,12 +89,14 @@ void TitleScene::Init() {
 
 	gameStartUI_.reset(DaiEngine::Sprite::Create(gameStartTex, {}));
 	gameStartUI_->SetSize({ 350.0f,70.0f });
-	gameStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gStartUISwitch_),0.0f }, { 350.0f,70.0f });
+	gameStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gStartUISwitch_),0.0f }, { 350.0f,80.0f });
 
 	gameFinishUI_.reset(DaiEngine::Sprite::Create(gameFinifhTex, {}));
 	gameFinishUI_->SetSize({ 350.0f,70.0f });
-	gameFinishUI_->SetTextureArea({ 350.0f * static_cast<float>(gFinishUISwitch_),0.0f }, { 350.0f,70.0f });
+	gameFinishUI_->SetTextureArea({ 350.0f * static_cast<float>(gFinishUISwitch_),0.0f }, { 350.0f,80.0f });
 	
+	titleBG_.reset(DaiEngine::Sprite::Create(titleBackGroundTex, {}));
+
 	titleSceneDirection_ = std::make_unique<TitleSceneDirection>();
 	titleSceneDirection_->Initialize();
 
@@ -168,7 +171,7 @@ void TitleScene::Update() {
 
 void TitleScene::DrawBackGround(){
 
-	
+	titleBG_->Draw();
 
 }
 

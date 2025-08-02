@@ -3,11 +3,12 @@
         "BlockSize": 0.30000001192092896,
         "BlockWidth": 0.6499999761581421,
         "DeltaY": -1.5,
-        "HeightLimit": 0.800000011920929,
+        "HeightLimit": 2.5,
         "HorizontalSize": 70,
         "Radius": 30.0,
         "VerticalSize": 70,
         "WaveCount": 1,
-        "WaveSpeed": 0.004999999888241291
+        "WaveHeight": 0.800000011920929,
+        "WaveSpeed": 0.009999999776482582
     }
 }

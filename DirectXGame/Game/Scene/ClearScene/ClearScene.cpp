@@ -16,10 +16,10 @@ void ClearScene::SetGlobalVariables() {
 	DaiEngine::GlobalVariables* globalVariables = DaiEngine::GlobalVariables::GetInstance();
 
 
-	//AボタンUIの調整項目追加
+	////AボタンUIの調整項目追加
 	std::string groupName = "ClearText";
-	globalVariables->CreateGroup(groupName);
-	globalVariables->AddItem(groupName, "Translation", clearText_->GetPosition());
+	//globalVariables->CreateGroup(groupName);
+	//globalVariables->AddItem(groupName, "Translation", clearText_->GetPosition());
 	//ワープホールの調整項目追加
 	groupName = "UI_TitleBack";
 	globalVariables->CreateGroup(groupName);
@@ -35,9 +35,9 @@ void ClearScene::SetGlobalVariables() {
 void ClearScene::ApplyGlobalVariables() {
 	DaiEngine::GlobalVariables* globalVariables = DaiEngine::GlobalVariables::GetInstance();
 
-	//AボタンUIのパラメータ設定
+	////AボタンUIのパラメータ設定
 	std::string groupName = "ClearText";
-	clearText_->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
+	//clearText_->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
 
 	//ワープホールのパラメータ設定
 	groupName = "UI_TitleBack";
@@ -66,7 +66,7 @@ void ClearScene::Init() {
 	///
 
 	///
-	uint32_t clearTextTex = DaiEngine::TextureManager::Load("gameClear.png");
+	//uint32_t clearTextTex = DaiEngine::TextureManager::Load("gameClear.png");
 	uint32_t titleBackTex = DaiEngine::TextureManager::Load("TitleBack.png");
 	uint32_t reStartTex = DaiEngine::TextureManager::Load("StartBiging.png");
 	///
@@ -77,15 +77,17 @@ void ClearScene::Init() {
 	choiceSE_ = DaiEngine::AudioManager::Load("SE/Choice.mp3");
 	doneSE_ = DaiEngine::AudioManager::Load("SE/Done.mp3");
 
-	clearText_.reset(DaiEngine::Sprite::Create(clearTextTex, {}));
+	//clearText_.reset(DaiEngine::Sprite::Create(clearTextTex, {}));
+	clearText_ = std::make_unique<ClearLogo>();
+	clearText_->Init(L"ゲームクリア");
 
 	titleBackUI_.reset(DaiEngine::Sprite::Create(titleBackTex, {}));
 	titleBackUI_->SetSize({ 350.0f, 70.0f });
-	titleBackUI_->SetTextureArea({ 350.0f * static_cast<float>(gTitleBackUISwitch_),0.0f }, { 350.0f,70.0f });
+	titleBackUI_->SetTextureArea({ 350.0f * static_cast<float>(gTitleBackUISwitch_),0.0f }, { 350.0f,80.0f });
 
 	reStartUI_.reset(DaiEngine::Sprite::Create(reStartTex, {}));
 	reStartUI_->SetSize({ 350.0f, 70.0f });
-	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,70.0f });
+	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,80.0f });
 
 
 	SetGlobalVariables();
@@ -155,9 +157,11 @@ void ClearScene::Update() {
 		break;
 	}
 
-	titleBackUI_->SetTextureArea({ 350.0f * static_cast<float>(gTitleBackUISwitch_),0.0f }, { 350.0f,70 });
-	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,70 });
+	titleBackUI_->SetTextureArea({ 350.0f * static_cast<float>(gTitleBackUISwitch_),0.0f }, { 350.0f,80.0f });
+	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,80.0f });
 
+
+	clearText_->Update();
 
 	///
 	//ライト更新

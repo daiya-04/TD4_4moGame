@@ -46,6 +46,9 @@ void PlayerRoll::Init()
 	//初速を与える
 	currentVelo_ = currentVelo_.Normalize() * startSpeed_;
 
+    //チャージの初期化
+    chargeJump_ = 0.0f;
+
 	player_->SetAnimationName("PlayerAvoidance");
 
     emitPos_ = player_->GetWorld().GetWorldPos();
@@ -139,6 +142,9 @@ void PlayerRoll::Update() {
         if (chargeJump_ > maxCharge_) {
             chargeJump_ = maxCharge_;
         }
+    }
+    else {
+        chargeJump_ = 0.0f;
     }
 
     // 入力取得（方向制御に使う）
