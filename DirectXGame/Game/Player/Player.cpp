@@ -42,6 +42,10 @@ Player::Player()
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(attackCollider_.get());
 	attackCollider_->SetStayCallback([this](DaiEngine::Collider* collider) { OnCollisionATKCollider(collider); });
 
+	//UI
+	ui_ = std::make_unique<PlayerUI>();
+	ui_->SetHp(&parameters_.hp, maxHP_);
+
 	//プレイヤーポインタ設定
 	IPlayerBehavior::SetPlayer(this);
 
@@ -58,8 +62,7 @@ Player::Player()
 
 	//描画フラグON
 	SetDraw(false);
-
-	ui_ = std::make_unique<PlayerUI>();
+	
 
 	///
 
@@ -188,7 +191,7 @@ void Player::Update()
 void Player::UIUpdate() {
 
 
-	ui_->Update(parameters_.hp, maxHP_);
+	ui_->Update();
 }
 
 void Player::UpdatePositionWithCollision()

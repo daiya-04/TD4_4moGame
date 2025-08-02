@@ -132,6 +132,7 @@ private:
 
 	//UI（とりあえず雑に）
 	std::map<std::string, std::unique_ptr<DaiEngine::Sprite>> uis_;
+	float uiScale_ = 0.7f;
 
 	BossManager* bossManager_ = nullptr;
 };

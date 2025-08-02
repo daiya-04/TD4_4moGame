@@ -145,6 +145,8 @@ public://**ゲッター**//
 	/// <returns></returns>
 	Vector3 Get2BossDirection();
 
+	PlayerUI* GetUI() { return ui_.get(); }
+
 
 public://**セッター
 
