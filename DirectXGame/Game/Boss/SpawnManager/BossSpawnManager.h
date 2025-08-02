@@ -2,6 +2,7 @@
 #include"../IBoss/IBoss.h"
 
 #include "Boss/BossManager/BossManager.h"
+#include "Boss/UI/BossUI.h"
 
 //ボス生成マネージャ
 class BossSpawnManager {
@@ -72,6 +73,8 @@ private://**プライベート変数**//
 
 	//ボスのデータ群
 	std::vector<std::unique_ptr<IBoss>> bosses_ ;
+
+	std::unique_ptr<BossUI> ui_;
 
 	BossType bossType_ = BossType::GingerbreadMan;
 

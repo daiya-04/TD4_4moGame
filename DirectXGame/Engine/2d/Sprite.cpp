@@ -91,6 +91,7 @@ namespace DaiEngine {
 
 	void Sprite::Draw() {
 
+		if (!isDraw_) { return; }
 
 		Matrix4x4 worldMatrix = MakeAffineMatrix({ 1.0f,1.0f,1.0f }, { 0.0f,0.0f,rotate_ }, { position_.x,position_.y,0.0f });
 		Matrix4x4 viewMatrix = MakeIdentity44();

@@ -14,6 +14,7 @@
 #include "Audio.h"
 
 #include "Boss/BossManager/BossManager.h"
+#include "GameOverLogo.h"
 
 
 class GameOverScene : public DaiEngine::IScene {
@@ -86,7 +87,7 @@ private:
 	DaiEngine::Audio* doneSE_ = nullptr;
 
 	//エームオーバー文字
-	std::unique_ptr<DaiEngine::Sprite> gameOverText_;
+	std::unique_ptr<GameOverLogo> gameOverText_;
 	//タイトルに戻る
 	std::unique_ptr<DaiEngine::Sprite> titleBackUI_;
 	//最初から始める

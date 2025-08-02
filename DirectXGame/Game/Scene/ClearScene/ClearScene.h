@@ -11,6 +11,8 @@
 #include "SpotLight.h"
 #include "Audio.h"
 
+#include "ClearLogo.h"
+
 
 class ClearScene : public DaiEngine::IScene {
 public:
@@ -83,7 +85,7 @@ private:
 	DaiEngine::Audio* doneSE_ = nullptr;
 
 	//クリア文字
-	std::unique_ptr<DaiEngine::Sprite> clearText_;
+	std::unique_ptr<ClearLogo> clearText_;
 	//タイトルに戻る
 	std::unique_ptr<DaiEngine::Sprite> titleBackUI_;
 	//最初から始める
