@@ -56,8 +56,8 @@
 	"images":[
 		{
 			"mimeType":"image/png",
-			"name":"tex",
-			"uri":"tex.png"
+			"name":"Floor",
+			"uri":"Floor.png"
 		}
 	],
 	"accessors":[
