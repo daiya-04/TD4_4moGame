@@ -11,9 +11,9 @@
                 "NoneRadius": 1.0,
                 "ParabolaRadius": 1.0,
                 "WaveColliuder": {
-                    "addRadius": 0.3700000047683716,
+                    "addRadius": 0.2800000011920929,
                     "height": 0.0010000000474974513,
-                    "hitWide": 0.5,
+                    "hitWide": 0.25,
                     "maxCount": 180.0
                 },
                 "WaveRadius": 0.20000000298023224,
