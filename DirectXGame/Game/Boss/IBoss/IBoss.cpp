@@ -51,7 +51,7 @@ void IBoss::Init(const std::string& objectName, FollowCamera* camera, const DaiE
 	//コライダー生成
 	collider_ = std::make_unique<DaiEngine::SphereCollider>();
 	collider_->Init("boss", *world_, radius_);
-	collider_->ColliderOn();
+	collider_->ColliderOff();
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
 	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {OnCollision(collider); });
 
@@ -125,6 +125,10 @@ void IBoss::Update() {
 
 	//リクエストがある場合
 	if (parameters_.behaviorRequest_) {
+
+		if (parameters_.behaviorRequest_ == 0) {
+			collider_->ColliderOn();
+		}
 
 #ifdef _DEBUG
 		if (behaviorNames_.size() != 0&&debugBehavior_!=0) {
