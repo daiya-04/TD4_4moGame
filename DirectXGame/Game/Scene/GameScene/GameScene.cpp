@@ -339,6 +339,21 @@ void GameScene::Update() {
 	}
 #pragma endregion
 
+	if (player_->IsJumpAttack()) {
+		timer_ += kDeltaTime_;
+
+		bool isAlt = fmod(timer_, 0.6f) < 0.3f;
+
+		attackUIColor_ = isAlt ? baseColor_ : flashColor_;
+	}
+	else {
+		timer_ = 0.0f;
+		attackUIColor_ = baseColor_;
+	}
+
+	uis_["Attack_Text"]->SetColor(attackUIColor_);
+	uis_["AttackButton"]->SetColor(attackUIColor_);
+
 	//死亡時ゲームおーばーへ
 	if (player_->GetIsDead()) {
 		DaiEngine::SceneManager::GetInstance()->ChangeScene("GameOver");
