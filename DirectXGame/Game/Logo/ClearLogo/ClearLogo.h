@@ -15,6 +15,11 @@ public:
 
 	void Draw();
 
+	void StartApper() { stateRequest_ = AnimeState::Apper; }
+	void StartBounce() { stateRequest_ = AnimeState::Bounce; }
+
+	bool IsAppered() const { return param_ >= 1.0f; }
+
 private:
 
 	std::vector<std::unique_ptr<ClearChar>> text_;
@@ -24,19 +29,22 @@ private:
 	enum class AnimeState {
 		Apper,
 		Bounce,
+		Idle,
 	};
 
-	AnimeState state_ = AnimeState::Apper;
+	AnimeState state_ = AnimeState::Idle;
 	std::optional<AnimeState> stateRequest_ = std::nullopt;
 
 	std::map<AnimeState, std::function<void()>> stateInitTable_ = {
 		{AnimeState::Apper, [this]() {ApperInit(); }},
 		{AnimeState::Bounce, [this]() { BounceInit(); }},
+		{AnimeState::Idle, [this]() { IdleInit(); }},
 	};
 
 	std::map<AnimeState, std::function<void()>> stateUpdateTable_ = {
 		{AnimeState::Apper, [this]() {ApperUpdate(); }},
 		{AnimeState::Bounce, [this]() { BounceUpdate(); }},
+		{AnimeState::Idle, [this]() { IdleUpdate(); }},
 	};
 
 
@@ -57,6 +65,9 @@ private:
 
 	void BounceInit();
 	void BounceUpdate();
+
+	void IdleInit() {}
+	void IdleUpdate() {}
 
 
 };
