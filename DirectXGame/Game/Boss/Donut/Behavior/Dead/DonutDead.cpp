@@ -1,5 +1,7 @@
 #include "DonutDead.h"
 
+#include "EffectManager.h"
+
 DonutDead::DonutDead(BossParameters* param)
 {
 	param_ = param;
@@ -15,6 +17,8 @@ void DonutDead::Init()
 	param_->isLoopAnime_ = false;
 	//再生速度変更
 	param_->animationLeverage_ = animeLeverage_;
+
+	EffectManager::GetInstance()->End("DonutsRollEffect");
 }
 
 void DonutDead::Update()

@@ -14,6 +14,7 @@
 #include "Audio.h"
 
 #include "ClearLogo.h"
+#include "CrossMark.h"
 
 
 class ClearScene : public DaiEngine::IScene {
@@ -93,6 +94,11 @@ private:
 	//最初から始める
 	std::unique_ptr<DaiEngine::Sprite> reStartUI_;
 
+	std::map<std::string, std::unique_ptr<DaiEngine::Sprite>> bossUIs_;
+	float bossUIScale_ = 1.0f;
+
+	std::vector<std::unique_ptr<CrossMark>> crossMarks_;
+
 private:
 
 	enum class Select {
@@ -126,6 +132,56 @@ private:
 
 	void ToGame();
 	void ToTitle();
+
+private:
+
+	enum EffectState {
+		BossDefeat,
+		LogoApper,
+		MenuReady,
+	};
+
+	EffectState state_ = EffectState::BossDefeat;
+	std::optional<EffectState> stateRequest_ = std::nullopt;
+
+	std::map<EffectState, std::function<void()>> stateInitTable_ = {
+		{EffectState::BossDefeat, [this]() {BossDefeatInit(); }},
+		{EffectState::LogoApper, [this]() {LogoApperInit(); }},
+		{EffectState::MenuReady, [this]() {MenuReadyInit(); }},
+	};
+
+	std::map<EffectState, std::function<void()>> stateUpdateTable_ = {
+		{EffectState::BossDefeat, [this]() {BossDefeatUpdate(); }},
+		{EffectState::LogoApper, [this]() {LogoApperUpdate(); }},
+		{EffectState::MenuReady, [this]() {MenuReadyUpdate(); }},
+	};
+
+	float timer_ = 0.0f;
+	const float kDeltaTime_ = 1.0f / 60.0f;
+	float stampInterval_ = 1.0f;
+	size_t stampedIndex_ = 0;
+
+	struct StampStartData {
+		float speed;
+		float startScale;
+	};
+
+	std::vector<StampStartData> stampStartDatas_{
+		{1.0f / 30.0f, 2.0f},
+		{1.0f / 30.0f, 2.0f},
+		{1.0f / 60.0f, 2.7f},
+	};
+	
+private:
+
+	void BossDefeatInit();
+	void BossDefeatUpdate();
+
+	void LogoApperInit();
+	void LogoApperUpdate();
+
+	void MenuReadyInit();
+	void MenuReadyUpdate();
 
 };
 
