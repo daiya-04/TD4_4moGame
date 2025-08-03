@@ -43,6 +43,7 @@ public://**状態関数**//
 	void UpdateBehavior3()override {};
 	void UpdateBehavior4()override {};
 
+	void OffAttackCollider()override;
 
 private://**プライベート変数**//
 

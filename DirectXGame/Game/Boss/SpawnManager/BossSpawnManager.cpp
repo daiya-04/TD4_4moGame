@@ -130,6 +130,9 @@ void BossSpawnManager::CheckBossDead()
 {
 	//現在のボスが死んだ場合
 	if(!changeBoss_&&(bosses_[(int)bossType_]->GetIsDead()||isNextBoss_)&&bosses_[(int)bossType_]->parameters_.currentBulletNum_==0) {
+		
+		bosses_[(int)bossType_]->SetAttackColliderOff();
+		
 		//デバッグ用次ボス生成をOFF
 		isNextBoss_=false;
 

@@ -144,6 +144,11 @@ void CupCakeFallAttack::UpdateBehavior3()
 	}
 }
 
+void CupCakeFallAttack::OffAttackCollider()
+{
+	collider_->ColliderOff();
+}
+
 void CupCakeFallAttack::Draw()
 {
 	dangerZone_->Draw();
