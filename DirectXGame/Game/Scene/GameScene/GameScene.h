@@ -144,6 +144,6 @@ private:
 
 	float radius_ = 30.0f;
 	float height_ = 1.0f;
-
+	float speed_ =0.01f;
 };
 

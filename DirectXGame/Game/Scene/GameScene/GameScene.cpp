@@ -168,7 +168,7 @@ void GameScene::Init() {
 	std::unique_ptr<GlobalVariableGroup>gvg = std::make_unique<GVariGroup>("waveParam");
 	gvg->SetValue("radius", &radius_);
 	gvg->SetValue("height", &height_);
-
+	gvg->SetValue("speed", &speed_);
 	///UI
 
 	uis_["Attack_Text"].reset(DaiEngine::Sprite::Create(attackTextTex, {}));
@@ -302,7 +302,7 @@ void GameScene::Update() {
 			Vector2 bPos = field_->GetBlockAt(0, 0);
 
 			//波の発生
-			field_->AddWave(bPos, radius_, height_, 1, 0.01f);
+			field_->AddWave(bPos, radius_, height_, 1, speed_);
 			//弾の削除処理
 			bullet->OnCollisionBlock();
 			//この弾の処理を終了
