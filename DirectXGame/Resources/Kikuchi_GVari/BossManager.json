@@ -62,7 +62,7 @@
             "Idle": {
                 "second": 60.0
             },
-            "MaxHP": 100,
+            "MaxHP": 85,
             "OffsetPos": [
                 0.0,
                 0.0,
