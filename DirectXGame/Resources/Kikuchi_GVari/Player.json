@@ -34,7 +34,7 @@
             "maxCount": 120
         },
         "Hit": {
-            "MaxNoHitSec": 60.0,
+            "MaxNoHitSec": 110.0,
             "TenmetuNum": 10
         },
         "Limitation": [
