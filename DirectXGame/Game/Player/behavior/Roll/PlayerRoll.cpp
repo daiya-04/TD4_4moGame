@@ -56,6 +56,8 @@ void PlayerRoll::Init()
 
     emitPos_ = player_->GetWorld().GetWorldPos();
     EffectManager::GetInstance()->Start("PlayerMoveEffect", &emitPos_);
+
+    lastPos_ = player_->GetWorld().GetWorldPos();
 }
 
 //0-1
@@ -140,15 +142,26 @@ void PlayerRoll::Update() {
     }
 
     // 滑り中にチャージ
-    if (isSliding && currentVelo_.Length() > 0.1f) {
+    Vector3 currentPos = player_->GetWorld().GetWorldPos();
+    float movedDistance = (currentPos - lastPos_).Length();
+
+    // 滑っており、かつ移動している場合のみチャージ
+    if (isSliding && movedDistance > 0.01f) {
         chargeJump_ += 1.0f;
         if (chargeJump_ > maxCharge_) {
             chargeJump_ = maxCharge_;
         }
     }
     else {
-        chargeJump_ = 0.0f;
+        if (chargeJump_ < 0.0f) {
+            chargeJump_ = 0.0f;
+        }
     }
+
+    // 最後に位置を更新
+    lastPos_ = currentPos;
+
+    player_->GetUI()->SetCharge(&chargeJump_, maxCharge_);
 
     // 入力取得（方向制御に使う）
     Vector3 move = player_->SetBody2Input();

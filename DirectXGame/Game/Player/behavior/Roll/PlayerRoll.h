@@ -56,4 +56,6 @@ private://**パラメータ**//
 	float maxRollSpeed_ = 1.0f; // ロールの最大速度
 
 	Vector3 emitPos_{};
+
+	Vector3 lastPos_ = {};
 };
