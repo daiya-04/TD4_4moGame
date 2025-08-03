@@ -165,10 +165,11 @@ void GameScene::Init() {
 	field_->Initialize();
 	///
 
-	std::unique_ptr<GlobalVariableGroup>gvg = std::make_unique<GVariGroup>("waveParam");
+	GlobalVariableGroup*gvg = new GVariGroup("waveParam");
 	gvg->SetValue("radius", &radius_);
 	gvg->SetValue("height", &height_);
 	gvg->SetValue("speed", &speed_);
+	delete gvg;
 	///UI
 
 	uis_["Attack_Text"].reset(DaiEngine::Sprite::Create(attackTextTex, {}));
