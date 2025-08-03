@@ -29,6 +29,30 @@ void ClearScene::SetGlobalVariables() {
 	globalVariables->CreateGroup(groupName);
 	globalVariables->AddItem(groupName, "Translation", reStartUI_->GetPosition());
 
+	groupName = "UI_Icon1";
+	globalVariables->CreateGroup(groupName);
+	globalVariables->AddItem(groupName, "Translation", bossUIs_["Icon1"]->GetPosition());
+
+	groupName = "UI_Icon2";
+	globalVariables->CreateGroup(groupName);
+	globalVariables->AddItem(groupName, "Translation", bossUIs_["Icon2"]->GetPosition());
+
+	groupName = "UI_Icon3";
+	globalVariables->CreateGroup(groupName);
+	globalVariables->AddItem(groupName, "Translation", bossUIs_["Icon3"]->GetPosition());
+
+	groupName = "UI_Gauge1";
+	globalVariables->CreateGroup(groupName);
+	globalVariables->AddItem(groupName, "Translation", bossUIs_["Gauge1"]->GetPosition());
+
+	groupName = "UI_Gauge2";
+	globalVariables->CreateGroup(groupName);
+	globalVariables->AddItem(groupName, "Translation", bossUIs_["Gauge2"]->GetPosition());
+
+
+	groupName = "ClearScene_BUIScale";
+	globalVariables->CreateGroup(groupName);
+	globalVariables->AddItem(groupName, "Scale", bossUIScale_);
 
 }
 
@@ -47,6 +71,27 @@ void ClearScene::ApplyGlobalVariables() {
 	groupName = "UI_ReStart";
 	reStartUI_->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
 
+	groupName = "UI_Icon1";
+	bossUIs_["Icon1"]->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
+
+	groupName = "UI_Icon2";
+	bossUIs_["Icon2"]->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
+
+	groupName = "UI_Icon3";
+	bossUIs_["Icon3"]->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
+
+	groupName = "UI_Gauge1";
+	bossUIs_["Gauge1"]->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
+
+	groupName = "UI_Gauge2";
+	bossUIs_["Gauge2"]->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
+
+	groupName = "ClearScene_BUIScale";
+	bossUIScale_ = globalVariables->GetFloatValue(groupName, "Scale");
+
+	for (auto& [tag, ui] : bossUIs_) {
+		ui->SetScale(bossUIScale_);
+	}
 
 }
 
@@ -89,9 +134,24 @@ void ClearScene::Init() {
 	reStartUI_->SetSize({ 350.0f, 70.0f });
 	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,80.0f });
 
+	bossUIs_["Icon1"].reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("bossIcon1.png"), {}));
+	bossUIs_["Icon2"].reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("bossIcon2.png"), {}));
+	bossUIs_["Icon3"].reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("bossIcon3.png"), {}));
+	bossUIs_["Gauge1"].reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("enemyHPGaugeFram.png"), {}));
+	bossUIs_["Gauge2"].reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("enemyHPGaugeFram.png"), {}));
+
+	stateRequest_ = EffectState::BossDefeat;
 
 	SetGlobalVariables();
 	ApplyGlobalVariables();
+
+	crossMarks_.resize(3);
+	for (auto& mark : crossMarks_) {
+		mark = std::make_unique<CrossMark>();
+	}
+	crossMarks_[0]->Init(bossUIs_["Icon1"]->GetPosition());
+	crossMarks_[1]->Init(bossUIs_["Icon2"]->GetPosition());
+	crossMarks_[2]->Init(bossUIs_["Icon3"]->GetPosition());
 
 }
 
@@ -123,17 +183,22 @@ void ClearScene::Update() {
 
 #endif // _DEBUG
 
+	if (stateRequest_) {
+		state_ = stateRequest_.value();
+
+		stateInitTable_[state_]();
+
+		stateRequest_ = std::nullopt;
+	}
 	
-	MenuInput();
-
-	gTitleBackUISwitch_ = (select_ == Select::TitleBack) ? UISwitch::On : UISwitch::Off;
-	gReStartUISwitch_ = (select_ == Select::ReStart) ? UISwitch::On : UISwitch::Off;
-
-	titleBackUI_->SetTextureArea({ 350.0f * static_cast<float>(gTitleBackUISwitch_),0.0f }, { 350.0f,80.0f });
-	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,80.0f });
+	stateUpdateTable_[state_]();
 
 
 	clearText_->Update();
+
+	for (auto& mark : crossMarks_) {
+		mark->Update();
+	}
 
 	///
 	//ライト更新
@@ -167,8 +232,18 @@ void ClearScene::DrawParticle() {
 void ClearScene::DrawUI() {
 
 	clearText_->Draw();
-	titleBackUI_->Draw();
-	reStartUI_->Draw();
+	if (state_ == EffectState::MenuReady) {
+		titleBackUI_->Draw();
+		reStartUI_->Draw();
+	}
+
+	for (auto& [tag, ui] : bossUIs_) {
+		ui->Draw();
+	}
+
+	for (auto& mark : crossMarks_) {
+		mark->Draw();
+	}
 
 }
 
@@ -190,6 +265,66 @@ void ClearScene::DebugGUI() {
 
 
 #endif // _DEBUG
+}
+
+void ClearScene::BossDefeatInit() {
+
+	timer_ = 0.0f;
+	stampedIndex_ = 0;
+
+}
+
+void ClearScene::BossDefeatUpdate() {
+
+	timer_ += kDeltaTime_;
+
+	if (stampedIndex_ < crossMarks_.size()) {
+		if (timer_ >= stampInterval_) {
+			crossMarks_[stampedIndex_]->StartStamp(stampStartDatas_[stampedIndex_].speed, stampStartDatas_[stampedIndex_].startScale);
+
+			stampedIndex_++;
+			timer_ = 0.0f;
+		}
+	}
+	else {
+		if (timer_ >= 2.0f) {
+			stateRequest_ = EffectState::LogoApper;
+		}
+	}
+	
+
+}
+
+void ClearScene::LogoApperInit() {
+
+	clearText_->StartApper();
+
+}
+
+void ClearScene::LogoApperUpdate() {
+
+	if (clearText_->IsAppered()) {
+		stateRequest_ = EffectState::MenuReady;
+	}
+
+}
+
+void ClearScene::MenuReadyInit() {
+
+	clearText_->StartBounce();
+
+}
+
+void ClearScene::MenuReadyUpdate() {
+
+	MenuInput();
+
+	gTitleBackUISwitch_ = (select_ == Select::TitleBack) ? UISwitch::On : UISwitch::Off;
+	gReStartUISwitch_ = (select_ == Select::ReStart) ? UISwitch::On : UISwitch::Off;
+
+	titleBackUI_->SetTextureArea({ 350.0f * static_cast<float>(gTitleBackUISwitch_),0.0f }, { 350.0f,80.0f });
+	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,80.0f });
+
 }
 
 void ClearScene::MenuInput() {

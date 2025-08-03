@@ -526,6 +526,7 @@
       <Filter>Game\Logo\GameOverLogo</Filter>
     </ClCompile>
     <ClCompile Include="Game\TitleSceneDirection\TitleSceneDirection.cpp" />
+    <ClCompile Include="CrossMark.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\DirectXCommon.h">
@@ -898,5 +899,6 @@
       <Filter>Game\Logo\GameOverLogo</Filter>
     </ClInclude>
     <ClInclude Include="Game\TitleSceneDirection\TitleSceneDirection.h" />
+    <ClInclude Include="CrossMark.h" />
   </ItemGroup>
 </Project>

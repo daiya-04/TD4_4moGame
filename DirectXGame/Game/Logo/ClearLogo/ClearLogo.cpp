@@ -15,7 +15,7 @@ void ClearLogo::Init(const std::wstring& text) {
 		newChar->SetPos({ 640.0f, 400.0f });
 	}
 
-	stateRequest_ = AnimeState::Apper;
+	stateRequest_ = AnimeState::Idle;
 
 }
 
@@ -79,10 +79,6 @@ void ClearLogo::ApperUpdate() {
 		ch->SetParam(T);
 	}
 
-	if (param_ >= 1.0f) {
-		stateRequest_ = AnimeState::Bounce;
-	}
-
 }
 
 void ClearLogo::BounceInit() {
@@ -109,7 +105,5 @@ void ClearLogo::BounceUpdate() {
 			bounceIndex_ = 0;
 		}
 	}
-
-	
 
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include"Boss/Bullet/IBossBullet/IBossBullet.h"
+#include "Audio.h"
 
 class BossNoneBullet : public IBossBullet {
 
@@ -20,4 +21,9 @@ public:
 	/// ブロック接触時の追加処理
 	/// </summary>
 	void AddOnCollisionBlock();
+
+private:
+
+	DaiEngine::Audio* se_ = nullptr;
+
 };
