@@ -141,5 +141,9 @@ private:
 	Vector4 flashColor_ = { 1.0f,1.0f,0.0f,1.0f };
 
 	BossManager* bossManager_ = nullptr;
+
+	float radius_ = 30.0f;
+	float height_ = 1.0f;
+
 };
 

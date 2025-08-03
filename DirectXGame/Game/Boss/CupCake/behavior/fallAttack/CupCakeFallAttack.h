@@ -23,7 +23,7 @@ public://**状態**//
 	void UpdateBehavior3()override;
 	void UpdateBehavior4()override {};
 
-
+	void OffAttackCollider()override;
 	void Draw()override;
 private:
 

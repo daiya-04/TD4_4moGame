@@ -29,6 +29,7 @@ public://**状態**//
 	void UpdateBehavior3()override;
 	void UpdateBehavior4()override;
 
+	void OffAttackCollider()override;
 private:
 
 	void OnCollision(DaiEngine::Collider* collider);

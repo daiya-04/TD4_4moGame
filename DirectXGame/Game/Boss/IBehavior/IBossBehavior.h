@@ -97,7 +97,6 @@ public://パブリック関数**//
 	IBossBehavior()=default;
 	virtual ~IBossBehavior() = default;
 
-
 	/// <summary>
 	/// 初期化
 	/// </summary>
@@ -112,4 +111,9 @@ public://パブリック関数**//
 	/// 描画
 	/// </summary>
 	virtual void Draw() {};
+
+	/// <summary>
+	/// 攻撃コライダーのオフ処理
+	/// </summary>
+	virtual void OffAttackCollider() {};
 };

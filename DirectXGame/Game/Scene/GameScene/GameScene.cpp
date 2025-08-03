@@ -15,6 +15,7 @@
 #include "AudioManager.h"
 #include "GlobalVariables.h"
 #include "EffectManager.h"
+#include"GlobalVariable/Group/GlobalVariableGroup.h"
 
 
 GameScene::GameScene() {
@@ -164,6 +165,10 @@ void GameScene::Init() {
 	field_->Initialize();
 	///
 
+	std::unique_ptr<GlobalVariableGroup>gvg = std::make_unique<GVariGroup>("waveParam");
+	gvg->SetValue("radius", &radius_);
+	gvg->SetValue("height", &height_);
+
 	///UI
 
 	uis_["Attack_Text"].reset(DaiEngine::Sprite::Create(attackTextTex, {}));
@@ -297,7 +302,7 @@ void GameScene::Update() {
 			Vector2 bPos = field_->GetBlockAt(0, 0);
 
 			//波の発生
-			field_->AddWave(bPos, 30, 1.0f, 1, 0.01f);
+			field_->AddWave(bPos, radius_, height_, 1, 0.01f);
 			//弾の削除処理
 			bullet->OnCollisionBlock();
 			//この弾の処理を終了
