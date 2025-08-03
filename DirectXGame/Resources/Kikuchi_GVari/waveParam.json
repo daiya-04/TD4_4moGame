@@ -1,6 +1,7 @@
 {
     "waveParam": {
         "height": 3.5,
-        "radius": 30.0
+        "radius": 30.0,
+        "speed": 0.004999999888241291
     }
 }
