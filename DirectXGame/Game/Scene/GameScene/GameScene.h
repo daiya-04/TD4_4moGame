@@ -134,6 +134,12 @@ private:
 	std::map<std::string, std::unique_ptr<DaiEngine::Sprite>> uis_;
 	float uiScale_ = 0.7f;
 
+	float timer_ = 0.0f;
+	const float kDeltaTime_ = 1.0f / 60.0f;
+	Vector4 attackUIColor_ = { 1.0f,1.0f,1.0f,1.0f };
+	Vector4 baseColor_ = { 1.0f,1.0f,1.0f,1.0f };
+	Vector4 flashColor_ = { 1.0f,1.0f,0.0f,1.0f };
+
 	BossManager* bossManager_ = nullptr;
 
 	float radius_ = 30.0f;

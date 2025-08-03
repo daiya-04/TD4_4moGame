@@ -169,6 +169,13 @@ void PlayerRoll::Update() {
         params.velocity = params.velocity.Normalize() * maxRollSpeed_;
     }
 
+    if (chargeJump_ >= maxCharge_) {
+        player_->SetJumpAttackFlag(true);
+    }
+    else {
+        player_->SetJumpAttackFlag(false);
+    }
+
     // チャージ完了時スピン
     if ((DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE)|| DaiEngine::Input::GetInstance()->TriggerButton(DaiEngine::Input::Button::A)) && chargeJump_ >= maxCharge_) {
         player_->behaviorRequest_ = Player::Behavior::SpinAttack;

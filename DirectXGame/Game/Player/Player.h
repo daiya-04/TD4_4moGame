@@ -147,6 +147,8 @@ public://**ゲッター**//
 
 	PlayerUI* GetUI() { return ui_.get(); }
 
+	bool IsJumpAttack() const { return isJumpAttack_; }
+	void SetJumpAttackFlag(bool flag) { isJumpAttack_ = flag; }
 
 public://**セッター
 
@@ -281,6 +283,8 @@ private://**プライベート変数**//
 
 	///
 	Vector3 lastSafePos_ = { 0,0,0 };
+
+	bool isJumpAttack_ = false;
 
 private://**ヒット時処理*//
 
