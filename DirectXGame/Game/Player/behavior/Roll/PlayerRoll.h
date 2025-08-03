@@ -51,7 +51,7 @@ private://**パラメータ**//
 	float turnInfluence_ = 0.15f; // カーブしやすさ（0〜1）
 
 	float chargeJump_ = 0.0f; // ジャンプ攻撃のチャージ
-	float maxCharge_ = 120.0f; // ジャンプ攻撃のチャージ満タンの値
+	float maxCharge_ = 20.0f; // ジャンプ攻撃のチャージ満タンの値
 
 	float maxRollSpeed_ = 1.0f; // ロールの最大速度
 
