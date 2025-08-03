@@ -150,6 +150,9 @@ public://**ゲッター**//
 	bool IsJumpAttack() const { return isJumpAttack_; }
 	void SetJumpAttackFlag(bool flag) { isJumpAttack_ = flag; }
 
+	bool IsSlide() const { return isSlide_; }
+	void SetSlideFlag(bool isSlide) { isSlide_ = isSlide; }
+
 public://**セッター
 
 	/// <summary>
@@ -285,6 +288,8 @@ private://**プライベート変数**//
 	Vector3 lastSafePos_ = { 0,0,0 };
 
 	bool isJumpAttack_ = false;
+
+	bool isSlide_ = false;
 
 private://**ヒット時処理*//
 

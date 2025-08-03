@@ -31,9 +31,6 @@ void PlayerUI::Update()
 	percent_ = *jumpCharge_ / maxCharge_;
 	percent_ = std::clamp(percent_, 0.0f, 1.0f);
 
-	percent_ = *jumpCharge_ / maxCharge_;
-	percent_ = std::clamp(percent_, 0.0f, 1.0f);
-
 	int index = static_cast<uint8_t>(percent_ * 5.0f);
 
 	jumpGauge_->SetTextureArea({200.0f * index, 0.0f}, { 200.0f, 200.0f });
@@ -44,7 +41,7 @@ void PlayerUI::DrawUI()
 	hpFream_->Draw();
 	hpGauge_->Draw();
 
-	if (*jumpCharge_ > 0.0f) {
+	if (*isSlide_) {
 		jumpGauge_->Draw();
 	}
 

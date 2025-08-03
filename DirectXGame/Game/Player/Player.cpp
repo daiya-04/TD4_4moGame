@@ -45,6 +45,7 @@ Player::Player()
 	//UI
 	ui_ = std::make_unique<PlayerUI>();
 	ui_->SetHp(&parameters_.hp, maxHP_);
+	ui_->SetIsSlide(&isSlide_);
 
 	//プレイヤーポインタ設定
 	IPlayerBehavior::SetPlayer(this);

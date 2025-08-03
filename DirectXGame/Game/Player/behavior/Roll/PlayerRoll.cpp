@@ -79,6 +79,7 @@ void PlayerRoll::Update() {
         player_->parameters_.currentRollCount = cooldownCount_;
         EffectManager::GetInstance()->End("PlayerMoveEffect");
         player_->SetJumpAttackFlag(false);
+        player_->SetSlideFlag(false);
         return;
     }
 
@@ -100,6 +101,7 @@ void PlayerRoll::Update() {
     Block* nextBlock = player_->GetField()->GetBlock(nextPos.x, nextPos.z);
 
     bool isSliding = false;
+    
 
     if (currentBlock && nextBlock) {
         float yDiff = nextBlock->world.translation_.y - currentBlock->world.translation_.y;
@@ -129,6 +131,7 @@ void PlayerRoll::Update() {
             const float slideThreshold = 0.0001f * 3.14159f / 180.0f;
             if (std::fabs(slopeAngle) > slideThreshold && std::fabs(yDiff) > 0.01f) {
                 isSliding = true;
+                player_->SetSlideFlag(true);
             }
         }
     }
@@ -189,5 +192,6 @@ void PlayerRoll::Update() {
         EffectManager::GetInstance()->End("PlayerMoveEffect");
         chargeJump_ = 0.0f;
         player_->SetJumpAttackFlag(false);
+        player_->SetSlideFlag(false);
     }
 }

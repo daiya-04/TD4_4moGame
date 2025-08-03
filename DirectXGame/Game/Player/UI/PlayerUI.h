@@ -28,6 +28,7 @@ public:
 
 	void SetCharge(float* charge, float maxCharge) { jumpCharge_ = charge; maxCharge_ = maxCharge; }
 	
+	void SetIsSlide(bool* isSlide) { isSlide_ = isSlide; }
 
 private:
 
@@ -45,5 +46,7 @@ private:
 	std::unique_ptr<DaiEngine::Sprite> jumpGauge_;
 	float* jumpCharge_ = nullptr;
 	float maxCharge_ = 0.0f;
+
+	bool* isSlide_ = nullptr;
 
 };
