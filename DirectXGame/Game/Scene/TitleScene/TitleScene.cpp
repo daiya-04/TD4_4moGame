@@ -155,8 +155,8 @@ void TitleScene::Update() {
 	float angle = sinf(time_ * 2.0f) * 0.15f; //2Hzの揺れ
 
 	titleLogo_->SetRotate(angle);
-	gameStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gStartUISwitch_),0.0f }, { 350.0f,70.0f });
-	gameFinishUI_->SetTextureArea({ 350.0f * static_cast<float>(gFinishUISwitch_),0.0f }, { 350.0f,70.0f });
+	gameStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gStartUISwitch_),0.0f }, { 350.0f,80.0f });
+	gameFinishUI_->SetTextureArea({ 350.0f * static_cast<float>(gFinishUISwitch_),0.0f }, { 350.0f,80.0f });
 
 	titleSceneDirection_->Update();
 	
