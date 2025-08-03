@@ -154,3 +154,8 @@ void BossWeaponRollAttack::UpdateBehavior2()
 		param_->behaviorRequest_ = 0;
 	}
 }
+
+void BossWeaponRollAttack::OffAttackCollider()
+{
+	collider_->ColliderOff();
+}

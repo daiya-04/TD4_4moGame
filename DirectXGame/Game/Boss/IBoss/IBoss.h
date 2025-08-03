@@ -118,6 +118,11 @@ public://**パブリック関数**//
 
 	int GetMaxHP() const { return maxHP_; }
 
+	/// <summary>
+	/// 攻撃コライダーを全部PFF
+	/// </summary>
+	void SetAttackColliderOff();
+
 private://**プライベート関数**//
 
 	/// <summary>

@@ -185,6 +185,13 @@ void IBoss::ClearAllBulletAndZone()
 	bulletManager_->ClearAllBullets();
 }
 
+void IBoss::SetAttackColliderOff()
+{
+	for (auto& be : behaviors_) {
+		be->OffAttackCollider();
+	}
+}
+
 void IBoss::ParameterFlagUpdate() {
 	//向きを変更する処理
 	if (parameters_.isLookAtPlayer_) {

@@ -135,5 +135,9 @@ private:
 	float uiScale_ = 0.7f;
 
 	BossManager* bossManager_ = nullptr;
+
+	float radius_ = 30.0f;
+	float height_ = 1.0f;
+
 };
 

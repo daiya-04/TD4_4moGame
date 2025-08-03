@@ -190,6 +190,11 @@ void Boss2SpinAttack::UpdateBehavior4()
 	}
 }
 
+void Boss2SpinAttack::OffAttackCollider()
+{
+	collider_->ColliderOff();
+}
+
 void Boss2SpinAttack::OnCollision(DaiEngine::Collider* collider)
 {
 	//プレイヤーに当たったらoff
