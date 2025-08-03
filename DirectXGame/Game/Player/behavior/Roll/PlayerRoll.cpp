@@ -161,13 +161,11 @@ void PlayerRoll::Update() {
         currentVelo_ = blendedDir * speed;
     }
 
-    // プレイヤーに速度反映
-    params.velocity += currentVelo_;
-
-    //最大速度にスケーリング
-    if (params.velocity.Length() > maxRollSpeed_) {
-        params.velocity = params.velocity.Normalize() * maxRollSpeed_;
+    if (currentVelo_.Length() > maxRollSpeed_) {
+        currentVelo_ = currentVelo_.Normalize() * maxRollSpeed_;
     }
+
+    params.velocity = currentVelo_;
 
     if (chargeJump_ >= maxCharge_) {
         player_->SetJumpAttackFlag(true);
