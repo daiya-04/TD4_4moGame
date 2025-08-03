@@ -2,11 +2,14 @@
 
 #include "TextureManager.h"
 #include "Easing.h"
+#include "AudioManager.h"
 
 void CrossMark::Init(const Vector2& pos) {
 
 	ui_.reset(DaiEngine::Sprite::Create(DaiEngine::TextureManager::Load("batu.png"), pos));
 	ui_->SetScale(0.0f);
+
+	se_ = DaiEngine::AudioManager::Load("SE/resultBossDead.mp3");
 
 }
 
@@ -32,6 +35,11 @@ void CrossMark::StampUpdate() {
 
 	float scale = Lerp(T, StartScale_, endScale_);
 	ui_->SetScale(scale);
+
+	if (param_ >= 1.0f) {
+		se_->Play();
+		state_ = State::Idle;
+	}
 
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "Sprite.h"
+#include "Audio.h"
 
 #include <memory>
 #include <map>
@@ -39,6 +40,8 @@ private:
 
 	float StartScale_ = 0.0f;
 	float endScale_ = 0.0f;
+
+	DaiEngine::Audio* se_ = nullptr;
 
 private:
 
