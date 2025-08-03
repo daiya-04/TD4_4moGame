@@ -1,5 +1,7 @@
 #include "GingerbreadManDead.h"
 
+#include "EffectManager.h"
+
 GingerbreadManDead::GingerbreadManDead(BossParameters* param)
 {
 	param_ = param;
@@ -15,6 +17,8 @@ void GingerbreadManDead::Init()
 	param_->isLoopAnime_ = false;
 	//再生速度変更
 	param_->animationLeverage_ = animeLeverage_;
+
+	EffectManager::GetInstance()->End("StickAttackEffect");
 
 }
 
