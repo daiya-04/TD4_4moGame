@@ -42,6 +42,10 @@ void GameScene::SetGlobalVariables() {
 	globalVariables->CreateGroup(groupName);
 	globalVariables->AddItem(groupName, "Translation", uis_["Move_Text"]->GetPosition());
 
+	groupName = "Jump_Text";
+	globalVariables->CreateGroup(groupName);
+	globalVariables->AddItem(groupName, "Translation", uis_["Jump_Text"]->GetPosition());
+
 	//ゲーム開始演出の調整項目追加
 	groupName = "AttackButton";
 	globalVariables->CreateGroup(groupName);
@@ -57,6 +61,13 @@ void GameScene::SetGlobalVariables() {
 	globalVariables->CreateGroup(groupName);
 	globalVariables->AddItem(groupName, "Translation", uis_["MoveButton"]->GetPosition());
 
+	groupName = "JumpButton";
+	globalVariables->CreateGroup(groupName);
+	globalVariables->AddItem(groupName, "Translation", uis_["JumpButton"]->GetPosition());
+
+	groupName = "UIScale";
+	globalVariables->CreateGroup(groupName);
+	globalVariables->AddItem(groupName, "Scale", uiScale_);
 
 }
 
@@ -75,6 +86,9 @@ void GameScene::ApplyGlobalVariables() {
 	groupName = "Move_Text";
 	uis_["Move_Text"]->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
 
+	groupName = "Jump_Text";
+	uis_["Jump_Text"]->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
+
 	//ゲーム開始演出のパラメータ設定
 	groupName = "AttackButton";
 	uis_["AttackButton"]->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
@@ -86,6 +100,15 @@ void GameScene::ApplyGlobalVariables() {
 	//ゲーム開始演出のパラメータ設定
 	groupName = "MoveButton";
 	uis_["MoveButton"]->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
+
+	groupName = "JumpButton";
+	uis_["JumpButton"]->SetPosition(globalVariables->GetVec2Value(groupName, "Translation"));
+
+	groupName = "UIScale";
+	uiScale_ = globalVariables->GetFloatValue(groupName, "Scale");
+	for (auto& [tag, ui] : uis_) {
+		ui->SetScale(uiScale_);
+	}
 
 }
 
@@ -108,6 +131,8 @@ void GameScene::Init() {
 	uint32_t attackButtonTex = DaiEngine::TextureManager::Load("attackBottom.png");
 	uint32_t avoidButtonTex = DaiEngine::TextureManager::Load("avoidBottom.png");
 	uint32_t moveButtonTex = DaiEngine::TextureManager::Load("moveBottom.png");
+	uint32_t jumpTextTex = DaiEngine::TextureManager::Load("jump.png");
+	uint32_t jumpButtonTex = DaiEngine::TextureManager::Load("jumpBottom.png");
 
 	///
 
@@ -147,10 +172,8 @@ void GameScene::Init() {
 	uis_["AttackButton"].reset(DaiEngine::Sprite::Create(attackButtonTex, {}));
 	uis_["AvoidButton"].reset(DaiEngine::Sprite::Create(avoidButtonTex, {}));
 	uis_["MoveButton"].reset(DaiEngine::Sprite::Create(moveButtonTex, {}));
-
-	for (auto& [tag, ui] : uis_) {
-		ui->SetScale(0.7f);
-	}
+	uis_["Jump_Text"].reset(DaiEngine::Sprite::Create(jumpTextTex, {}));
+	uis_["JumpButton"].reset(DaiEngine::Sprite::Create(jumpButtonTex, {}));
 
 	///
 

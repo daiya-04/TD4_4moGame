@@ -3,6 +3,8 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <map>
+#include <functional>
 
 #include "Sprite.h"
 #include "Object3d.h"
@@ -98,6 +100,16 @@ private:
 		ReStart,
 	};
 
+	std::vector<Select> order_{
+		Select::TitleBack,
+		Select::ReStart,
+	};
+
+	std::map<Select, std::function<void()>> onSelect_ = {
+		{Select::TitleBack, [this]() {ToTitle(); }},
+		{Select::ReStart, [this]() {ToGame(); }},
+	};
+
 	Select select_ = Select::TitleBack;
 
 	enum class UISwitch {
@@ -107,6 +119,13 @@ private:
 
 	UISwitch gTitleBackUISwitch_ = UISwitch::On;
 	UISwitch gReStartUISwitch_ = UISwitch::Off;
+
+private:
+
+	void MenuInput();
+
+	void ToGame();
+	void ToTitle();
 
 };
 

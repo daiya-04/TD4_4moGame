@@ -24,6 +24,8 @@ namespace DaiEngine {
 		//グローバル変数の保存先のファイルパス
 		const std::string kDirectoryPath = "Resources/GlobalVariables/";
 
+		std::string selectedGroup;
+
 
 	public:
 		/// <summary>

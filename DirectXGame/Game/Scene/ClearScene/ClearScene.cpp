@@ -124,38 +124,10 @@ void ClearScene::Update() {
 #endif // _DEBUG
 
 	
-	switch (select_) {
-	case Select::TitleBack:
+	MenuInput();
 
-		if (input->TriggerKey(DIK_DOWN) || input->TriggerButton(DaiEngine::Input::Button::DPAD_DOWN) || input->TriggerLStick(DaiEngine::Input::Stick::Down)) {
-			select_ = Select::ReStart;
-			gTitleBackUISwitch_ = UISwitch::Off;
-			gReStartUISwitch_ = UISwitch::On;
-			choiceSE_->Play();
-		}
-
-		if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
-			doneSE_->Play();
-			DaiEngine::SceneManager::GetInstance()->ChangeScene("Title");
-		}
-
-		break;
-	case Select::ReStart:
-
-		if (input->TriggerKey(DIK_UP) || input->TriggerButton(DaiEngine::Input::Button::DPAD_UP) || input->TriggerLStick(DaiEngine::Input::Stick::Up)) {
-			select_ = Select::TitleBack;
-			gTitleBackUISwitch_ = UISwitch::On;
-			gReStartUISwitch_ = UISwitch::Off;
-			choiceSE_->Play();
-		}
-
-		if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
-			doneSE_->Play();
-			DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
-		}
-
-		break;
-	}
+	gTitleBackUISwitch_ = (select_ == Select::TitleBack) ? UISwitch::On : UISwitch::Off;
+	gReStartUISwitch_ = (select_ == Select::ReStart) ? UISwitch::On : UISwitch::Off;
 
 	titleBackUI_->SetTextureArea({ 350.0f * static_cast<float>(gTitleBackUISwitch_),0.0f }, { 350.0f,80.0f });
 	reStartUI_->SetTextureArea({ 350.0f * static_cast<float>(gReStartUISwitch_),0.0f }, { 350.0f,80.0f });
@@ -218,4 +190,40 @@ void ClearScene::DebugGUI() {
 
 
 #endif // _DEBUG
+}
+
+void ClearScene::MenuInput() {
+
+	int currentIndex = static_cast<int>(std::distance(order_.begin(), std::find(order_.begin(), order_.end(), select_)));
+
+	auto* input = DaiEngine::Input::GetInstance();
+
+	if (input->TriggerKey(DIK_UP) || input->TriggerButton(DaiEngine::Input::Button::DPAD_UP) || input->TriggerLStick(DaiEngine::Input::Stick::Up)) {
+		if (currentIndex > 0) {
+			select_ = order_[currentIndex - 1];
+			choiceSE_->Play();
+		}
+	}
+
+	if (input->TriggerKey(DIK_DOWN) || input->TriggerButton(DaiEngine::Input::Button::DPAD_DOWN) || input->TriggerLStick(DaiEngine::Input::Stick::Down)) {
+		if (currentIndex < order_.size() - 1) {
+			select_ = order_[currentIndex + 1];
+			choiceSE_->Play();
+		}
+	}
+
+	if (input->TriggerKey(DIK_SPACE) || input->TriggerButton(DaiEngine::Input::Button::A)) {
+		onSelect_[select_]();
+	}
+
+}
+
+void ClearScene::ToTitle() {
+	doneSE_->Play();
+	DaiEngine::SceneManager::GetInstance()->ChangeScene("Title");
+}
+
+void ClearScene::ToGame() {
+	doneSE_->Play();
+	DaiEngine::SceneManager::GetInstance()->ChangeScene("Game");
 }
