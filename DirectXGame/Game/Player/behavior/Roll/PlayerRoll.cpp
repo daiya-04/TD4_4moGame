@@ -147,11 +147,7 @@ void PlayerRoll::Update() {
         }
     }
     else {
-        // 減衰を入れる、いきなり0にしない
-        chargeJump_ -= 2.0f;
-        if (chargeJump_ < 0.0f) {
-            chargeJump_ = 0.0f;
-        }
+        chargeJump_ = 0.0f;
     }
 
     // 入力取得（方向制御に使う）
