@@ -1,6 +1,8 @@
 #pragma once
 #include"Player/behavior/Attacks/IPlayerAttack.h"
 #include"SphereCollider.h"
+#include "Audio.h"
+
 #include<memory>
 
 class SpinAttack : public IPlayerAttack {
@@ -43,5 +45,7 @@ private:
 
 	//攻撃をやめるボスとの距離
 	float stopDistance_ = 0.1f; // ボスとの距離がこの値以下になったら攻撃をやめる
+
+	DaiEngine::Audio* se_ = nullptr;
 
 };

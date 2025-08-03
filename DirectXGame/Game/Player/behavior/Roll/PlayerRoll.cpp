@@ -150,12 +150,14 @@ void PlayerRoll::Update() {
         chargeJump_ += 1.0f;
         if (chargeJump_ > maxCharge_) {
             chargeJump_ = maxCharge_;
+            player_->SetJumpAttackFlag(true);
         }
     }
     else {
         if (chargeJump_ < 0.0f) {
             chargeJump_ = 0.0f;
         }
+        player_->SetJumpAttackFlag(false);
     }
 
     // 最後に位置を更新
@@ -180,17 +182,11 @@ void PlayerRoll::Update() {
 
     params.velocity = currentVelo_;
 
-    if (chargeJump_ >= maxCharge_) {
-        player_->SetJumpAttackFlag(true);
-    }
-    else {
-        player_->SetJumpAttackFlag(false);
-    }
-
     // チャージ完了時スピン
     if ((DaiEngine::Input::GetInstance()->TriggerKey(DIK_SPACE)|| DaiEngine::Input::GetInstance()->TriggerButton(DaiEngine::Input::Button::A)) && chargeJump_ >= maxCharge_) {
         player_->behaviorRequest_ = Player::Behavior::SpinAttack;
         EffectManager::GetInstance()->End("PlayerMoveEffect");
         chargeJump_ = 0.0f;
+        player_->SetJumpAttackFlag(false);
     }
 }

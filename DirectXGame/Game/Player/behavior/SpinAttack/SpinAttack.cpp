@@ -1,6 +1,8 @@
 #include "SpinAttack.h"
 #include"Player/Player.h"
 #include"ColliderManager.h"
+#include "AudioManager.h"
+#include "EffectManager.h"
 
 SpinAttack::SpinAttack()
 {
@@ -15,7 +17,15 @@ SpinAttack::SpinAttack()
 	collider_->Init("playerSpin", *player_->world_, radius_);
 	collider_->ColliderOff();
 	DaiEngine::ColliderManager::GetInstance()->AddCollider(collider_.get());
-	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {if (collider->GetTag() == "boss")collider_->ColliderOff(); });
+	collider_->SetStayCallback([this](DaiEngine::Collider* collider) {
+		if (collider->GetTag() == "boss") { 
+			collider_->ColliderOff(); 
+			se_->Play();
+			EffectManager::GetInstance()->Trigger("BiteHitEffect", collider_->GetWorldPos());
+		}
+	});
+
+	se_ = DaiEngine::AudioManager::Load("SE/Attack.mp3");
 
 }
 
@@ -62,6 +72,7 @@ void SpinAttack::UpdateAction()
 		player_->behaviorRequest_ = Player::Behavior::Move; // 通常状態に戻るリクエスト
 		//攻撃コライダーを無効化
 		collider_->ColliderOff();
+		EffectManager::GetInstance()->Trigger("BiteEffect", collider_->GetWorldPos());
 	}
 	collider_->Update();
 }
