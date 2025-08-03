@@ -256,7 +256,7 @@
                     "arriveCount": 60,
                     "parabolaHeight": 5.0
                 },
-                "spawnHeight": 10.0
+                "spawnHeight": 20.0
             },
             "ColliderColor": [
                 1.0,

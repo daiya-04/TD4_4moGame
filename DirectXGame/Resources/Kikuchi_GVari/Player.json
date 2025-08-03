@@ -59,7 +59,7 @@
             "decelRate": 0.009999999776482582,
             "downhillAccel": 1.100000023841858,
             "flatThreshold": 0.004999999888241291,
-            "maxCharge": 120.0,
+            "maxCharge": 360.0,
             "maxRollSpeed": 0.4000000059604645,
             "slopeGravity": 0.15000000596046448,
             "turnInfluence": 0.30000001192092896,
@@ -67,11 +67,11 @@
         },
         "SpinAttack": {
             "AnimationFactor": 1.0,
-            "Attack": 60.0,
-            "EndAttack": 60.0,
+            "Attack": 120.0,
+            "EndAttack": 120.0,
             "PreAttack": 30.0,
-            "downSpeed": 0.4000000059604645,
-            "stopDistance": 0.10000000149011612,
+            "downSpeed": 0.20000000298023224,
+            "stopDistance": 1.0,
             "upSpeed": 0.5
         },
         "colliderColor": [
