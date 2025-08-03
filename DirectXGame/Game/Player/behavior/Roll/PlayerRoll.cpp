@@ -78,6 +78,7 @@ void PlayerRoll::Update() {
         player_->behaviorRequest_ = Player::Behavior::Move;
         player_->parameters_.currentRollCount = cooldownCount_;
         EffectManager::GetInstance()->End("PlayerMoveEffect");
+        player_->SetJumpAttackFlag(false);
         return;
     }
 
