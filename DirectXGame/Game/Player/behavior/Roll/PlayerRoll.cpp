@@ -147,8 +147,12 @@ void PlayerRoll::Update() {
         }
     }
     else {
-        chargeJump_ = 0.0f;
+        if (chargeJump_ < 0.0f) {
+            chargeJump_ = 0.0f;
+        }
     }
+
+    player_->GetUI()->SetCharge(&chargeJump_, maxCharge_);
 
     // 入力取得（方向制御に使う）
     Vector3 move = player_->SetBody2Input();
